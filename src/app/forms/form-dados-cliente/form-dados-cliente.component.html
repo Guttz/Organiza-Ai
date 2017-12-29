@@ -1,0 +1,48 @@
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="CPF" [formControl]="cpfFormControl"
+    [errorStateMatcher]="matcherTel">
+  <mat-error *ngIf="cpfFormControl.hasError('pattern') && !cpfFormControl.hasError('required')">
+    Insira um CPF válido.
+  </mat-error>
+  <mat-error *ngIf="cpfFormControl.hasError('required')">
+    É necessario preencher esse campo.
+  </mat-error>
+</mat-form-field>
+
+<my-input-text label="Nome completo do cliente" > </my-input-text>
+
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="Telefone" [formControl]="telFormControl"
+    [errorStateMatcher]="matcherTel">
+  <mat-error *ngIf="telFormControl.hasError('pattern') && !telFormControl.hasError('required')">
+    Insira um telefone válido.
+  </mat-error>
+  <mat-error *ngIf="telFormControl.hasError('required')">
+    É necessario preencher esse campo.
+  </mat-error>
+</mat-form-field>
+
+
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="Telefone Celular" [formControl]="telCelFormControl"
+    [errorStateMatcher]="matcherCelTel">
+  <mat-error *ngIf="telCelFormControl.hasError('pattern') && !telCelFormControl.hasError('required')">
+    Insira um telefone válido.
+  </mat-error>
+  <mat-error *ngIf="telCelFormControl.hasError('required')">
+    É necessario preencher esse campo.
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+	<input matInput placeholder="Email" [formControl]="emailFormControl"
+    [errorStateMatcher]="matcherEmail">
+  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+    Insira um email válido.
+  </mat-error>
+  <mat-error *ngIf="emailFormControl.hasError('required')">
+    É necessario preencher esse campo.
+  </mat-error>
+</mat-form-field>
+
+<my-button-orange label="CONTINUAR VENDA"></my-button-orange>

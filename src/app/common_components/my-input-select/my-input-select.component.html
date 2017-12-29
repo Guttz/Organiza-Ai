@@ -1,0 +1,15 @@
+<div class="label-input" >
+  <mat-form-field>
+    <mat-select placeholder={{label}}>
+      <mat-option *ngFor="let value of values" [(value)]="value.value" [ngStyle]="{width: width + 'px'}">
+        {{ value.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<ul >
+  <li *ngFor="let value of values">
+    <span class="badge">{{value.value}}</span>
+  </li>
+</ul>

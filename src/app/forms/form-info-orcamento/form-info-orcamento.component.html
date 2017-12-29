@@ -1,0 +1,27 @@
+<div class="container" fxFlexAlign="center">
+  <h2>Informações do orçamento</h2>
+  <my-input-text label="Qual o defeito apresentado?"> </my-input-text>
+
+  <div fxLayout="row" >
+
+  	<mat-form-field>
+      	<mat-select placeholder="Marca">
+        		<mat-option *ngFor="let value of values" [(value)]="value.value" [ngStyle]="{width: width + 'px'}">
+          	{{ value.viewValue }}
+        	</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Data de visita">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div fxLayout="row"  >
+  	<my-input-text label="Modelo" > </my-input-text>
+  </div>  
+  <my-input-text label="Periodo de disponibilidade" > </my-input-text>
+
+  <my-button-orange label="CONTINUAR VENDA"></my-button-orange>
+</div>
