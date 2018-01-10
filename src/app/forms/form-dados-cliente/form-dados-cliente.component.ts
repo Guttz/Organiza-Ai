@@ -11,9 +11,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-form-dados-cliente',
+  selector: 'form-dados-cliente',
   templateUrl: './form-dados-cliente.component.html',
-  styleUrls: ['./form-dados-cliente.component.sass']
+  styleUrls: ['./form-dados-cliente.component.scss']
 })
 
 export class FormDadosClienteComponent implements OnInit {

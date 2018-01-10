@@ -1,0 +1,31 @@
+.my-toolbar{
+	background: white;
+}
+
+.my-logo{
+	cursor: pointer;
+}
+.my-user{
+	cursor: pointer;
+}
+
+.my-menus{
+	border: 0px;
+	border-top: 5px;
+	border-color: white;
+	border-style: solid;
+	font-size: 14px;
+	text-align: center;
+	line-height: 48px;
+	cursor: pointer;
+
+}
+
+.my-menus:hover{
+	border-color:  #FF8405;
+	color: #FF8405;
+}
+
+span{
+	outline: none;
+}

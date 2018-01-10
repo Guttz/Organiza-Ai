@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatNativeDateModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -23,11 +24,12 @@ import { MyInputSelectComponent } from './common_components/my-input-select/my-i
 /*Import dos formularios*/
 import { FormInfoOrcamentoComponent } from './forms/form-info-orcamento/form-info-orcamento.component';
 import { FormDadosClienteComponent } from './forms/form-dados-cliente/form-dados-cliente.component';
+import { AppRoutingModule }     from './app-routing.module';
 
-
-
-
-
+/*Import de bibliotecas*/
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MyFormHeaderComponent } from './common_components/my-form-header/my-form-header.component';
+import { HeaderToolbarComponent } from './forms/header-toolbar/header-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -37,18 +39,23 @@ import { FormDadosClienteComponent } from './forms/form-dados-cliente/form-dados
     MyButtonBwComponent,
     FormInfoOrcamentoComponent,
     MyInputSelectComponent,
-    FormDadosClienteComponent
+    FormDadosClienteComponent,
+    MyFormHeaderComponent,
+    HeaderToolbarComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatToolbarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

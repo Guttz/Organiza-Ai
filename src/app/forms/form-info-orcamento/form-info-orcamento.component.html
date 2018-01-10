@@ -1,27 +1,43 @@
-<div class="container" fxFlexAlign="center">
-  <h2>Informações do orçamento</h2>
-  <my-input-text label="Qual o defeito apresentado?"> </my-input-text>
+<div style="width: 100vw; height: 90vh; background: #EBE9EA;">
+	<div class="row" fxLayoutAlign="center center">
 
-  <div fxLayout="row" >
+		<div fxFlex = "70">
 
-  	<mat-form-field>
-      	<mat-select placeholder="Marca">
-        		<mat-option *ngFor="let value of values" [(value)]="value.value" [ngStyle]="{width: width + 'px'}">
-          	{{ value.viewValue }}
-        	</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Data de visita">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+			<my-form-header label="Informações do Orçamento"></my-form-header>
 
-  <div fxLayout="row"  >
-  	<my-input-text label="Modelo" > </my-input-text>
-  </div>  
-  <my-input-text label="Periodo de disponibilidade" > </my-input-text>
+			<my-input-text label="Qual o defeito apresentado?"> </my-input-text>
 
-  <my-button-orange label="CONTINUAR VENDA"></my-button-orange>
-</div>
+			<div class="row" >
+
+				<mat-form-field fxFlex>
+					<mat-select placeholder="Marca">
+						<mat-option *ngFor="let value of values" [(value)]="value.value" [ngStyle]="{width: width + 'px'}">
+							{{ value.viewValue }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+
+				<mat-form-field fxFlexOffset="2" fxFlex>
+					<input matInput [matDatepicker]="picker" placeholder="Data de visita">
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+
+				<my-input-text fxFlexOffset="2" fxFlex label="Modelo" > </my-input-text>
+
+			</div>
+
+			<div class="row">
+
+				<my-input-text fxFlex="32" label="Período de disponibilidade" > </my-input-text>
+
+				<div fxFlex="grow"></div>
+
+				<my-button-orange fxFlexAlign="center" label="CONTINUAR ORÇAMENTO"></my-button-orange>
+
+			</div>
+
+		</div>
+	</div>
+ </div>
