@@ -1,0 +1,30 @@
+p {
+    background: white;
+    margin: 0 0 6px 0;
+    padding: 6px 6px 2px 8px;
+}
+
+.card{
+	background: white;
+	border-color: white;
+	border-style: solid;
+	padding: 7px;
+	border-radius: 4px;
+	margin-top: 4px;
+	line-height: 22px;
+	font-size: 14px;
+	cursor: move; /* fallback: no `url()` support or images disabled */
+    cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
+    cursor:    -moz-grab; /* Firefox 1.5-26 */
+    cursor:         grab; /* W3C standards syntax, should come least */
+}
+
+.card:active{
+	cursor: -webkit-grabbing;
+    cursor:    -moz-grabbing;
+    cursor:         grabbing;
+}
+
+.my-card-des{
+	color: #FC5914;
+}

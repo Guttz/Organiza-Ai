@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /*Import dos formularios*/
-import { FormInfoOrcamentoComponent } from './forms/form-info-orcamento/form-info-orcamento.component';
-import { FormDadosClienteComponent } from './forms/form-dados-cliente/form-dados-cliente.component';
+import { FormInfoOrcamentoComponent } from './pages/form-info-orcamento/form-info-orcamento.component';
+import { FormDadosClienteComponent } from './pages/form-dados-cliente/form-dados-cliente.component';
+import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/cadastro-cliente', pathMatch: 'full' },
@@ -12,7 +13,11 @@ const routes: Routes = [
   {
     	path: 'cadastro-cliente',
     	component: FormDadosClienteComponent
-  },  
+  },
+  {
+    	path: 'acompanhamento',
+    	component: AcompanhamentoComponent
+  },      
 ];
 
 
