@@ -1,16 +1,16 @@
 <div class="card" draggable="true" (dragstart)="dragStart($event)" id="{{card.id}}">
 
 <div >
-	<span><b>Gustavo Morais -</b></span>
+	<span><b>{{card.id}} {{card.client}} -</b></span>
 
 	<span class="my-card-des"><b>{{card.description}}</b></span>
 </div>
 
 <div>
 	<span>Tel.</span>
-	<span> <b> <span style="color: rgb(51, 97, 134);">(41) 99791 9187</span> - 14/10 | Tarde </b></span>
+	<span> <b> <span style="color: rgb(51, 97, 134);">{{card.number}}</span> - {{card.day}}/{{card.month}} {{card.period}} </b></span>
 </div>
 
-<span>Rua Madre Leonie, 54 - Jardim Social - Curitiba</span>
+<span>{{card.adress}}</span>
 
 </div>

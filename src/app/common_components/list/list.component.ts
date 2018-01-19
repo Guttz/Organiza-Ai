@@ -17,9 +17,10 @@ export class ListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-      // const cardId = this.cardStore.newCard("Orçamento");
-      // this.list.cards.push(cardId);
-      // this.list.cards.push(cardId);
+      const cardId = this.cardStore.newCard("Orçamento", "Gus Morais", "(41) 99791 9187", new Date("October 23, 2014 11:13:00") ," | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
+      const cardIdd = this.cardStore.newCard("Atendimento", "Gus Morais", "(41) 9979 19187", new Date("October 13, 2014 11:13:00"), " | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
+            this.list.cards.push(cardIdd);
+      this.list.cards.push(cardId);
   }
 
   toggleDisplayAddCard() {
@@ -30,35 +31,49 @@ export class ListComponent implements OnInit {
     $event.preventDefault();
   }
 
-  
+  dragStart($event) {
+/*    var index = this.list.cards.indexOf($event.target.id);
+    if (index > -1) {
+      this.list.cards.splice(index, 1);
+    }*/
+
+    $event.dataTransfer.setData('text', $event.dataTransfer.getData('text') + this.list.id);
+  }
+
   drop($event) {
     $event.preventDefault();
-    const data = $event.dataTransfer.getData('text');
+     
+/*    const data = $event.dataTransfer.getData('text');
+
+    $event.dataTransfer.setData('text', $event.target.id);
 
     let target = $event.target;
     const targetClassName = target.className;
 
+
     while (target.className !== 'list') {
       target = target.parentNode;
     }
-    target = target.querySelector('.cards');
 
-    if (targetClassName === 'card') {
-      $event.target.parentNode.insertBefore(document.getElementById(data), $event.target);
-    } else if (targetClassName === 'list__title') {
-      if (target.children.length) {
-        target.insertBefore(document.getElementById(data), target.children[0]);
-      } else {
-        target.appendChild(document.getElementById(data));
-      }
-    } else {
-      target.appendChild(document.getElementById(data));
-    }
+    this.list.cards.push(data);
+    
+    window.alert( this.list.cards );
+*/
+  }
 
+
+  compare(a,b) {
+      if (a.id < b.id)
+        return -1;
+      if (a.id > b.id)
+        return 1;
+      return 0;
   }
 
   onEnter(value: string) {
-    const cardId = this.cardStore.newCard(value);
+    var cardId = this.cardStore.newCard(value, "Gus Morais", "(41) 9979 19187", new Date("October 18, 2014 11:13:00"), " | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
+            
     this.list.cards.push(cardId);
   }
+
 }
