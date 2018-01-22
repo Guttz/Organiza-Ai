@@ -1,63 +1,74 @@
- <form action="192.162.100.14:3000/add" method="post">
+ <form #myForm="ngForm" >
   <div style="width: 100vw; height: 90vh; background: #EBE9EA;">
      <div fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex="70">
         <my-form-header label="Cadastro Cliente"></my-form-header>
         <div fxLayout="row" >
           <mat-form-field fxFlex="32">
-            <input matInput nama="cpf" placeholder="CPF" [formControl]="cpfFormControl"
-              [errorStateMatcher]="matcherTel">
-            <mat-error *ngIf="cpfFormControl.hasError('pattern') && !cpfFormControl.hasError('required')">
+            <!--<input matInput name="cpf" placeholder="CPF" [formControl]="cpfFormControl"
+              [errorStateMatcher]="matcherCPF" [ngModel] = "submissions.cpf" ngDefaultControl>-->
+            <input matInput [ngModel] = "submissions.cpf" ngDefaultControl name="cpf" placeholder="CPF" >
+
+            <!--<mat-error *ngIf="cpfFormControl.hasError('pattern') && !cpfFormControl.hasError('required')">
               Insira um CPF válido.
             </mat-error>
             <mat-error *ngIf="cpfFormControl.hasError('required')">
               É necessario preencher esse campo.
-            </mat-error>
+            </mat-error>-->
           </mat-form-field>
           
-          <my-input-text name="nome" label="Nome completo do cliente" fxFlexOffset="2" fxFlex="70"> </my-input-text>
+          <my-input-text [(ngModel)] = "submissions.nome" ngDefaultControl name="nome" label="Nome completo do cliente" fxFlexOffset="2" fxFlex="70" > </my-input-text>
           
         </div>
 
         <div>
         <mat-form-field fxFlex>
-          <input matInput name="telefone" placeholder="Telefone" [formControl]="telFormControl"
-            [errorStateMatcher]="matcherTel">
-          <mat-error *ngIf="telFormControl.hasError('pattern') && !telFormControl.hasError('required')">
+          <!--<input matInput [(ngModel)] = "submissions.telefone" name="telefone" placeholder="Telefone" [formControl]="telFormControl"
+            [errorStateMatcher]="matcherTel" ngDefaultControl> -->
+
+            <input matInput [(ngModel)] = "submissions.telefone" ngDefaultControl name="telefone" placeholder="Telefone"  >
+
+          <!--<mat-error *ngIf="telFormControl.hasError('pattern') && !telFormControl.hasError('required')">
             Insira um telefone válido.
           </mat-error>
           <mat-error *ngIf="telFormControl.hasError('required')">
             É necessario preencher esse campo.
-          </mat-error>
+          </mat-error>-->
         </mat-form-field>
 
 
         <mat-form-field fxFlex fxFlexOffset="2">
-          <input matInput name="celular" placeholder="Telefone Celular" [formControl]="telCelFormControl"
-            [errorStateMatcher]="matcherCelTel">
+          <!--<input matInput [(ngModel)] = "submissions.celular" name="celular" placeholder="Telefone Celular" [formControl]="telCelFormControl"
+            [errorStateMatcher]="matcherCelTel" ngDefaultControl>-->
+
+          <input matInput [(ngModel)] = "submissions.celular" ngDefaultControl name="celular" placeholder="Telefone Celular">
+
+          <!--
           <mat-error *ngIf="telCelFormControl.hasError('pattern') && !telCelFormControl.hasError('required')">
             Insira um telefone válido.
           </mat-error>
           <mat-error *ngIf="telCelFormControl.hasError('required')">
             É necessario preencher esse campo.
-          </mat-error>
+          </mat-error>-->
         </mat-form-field>
 
         <mat-form-field fxFlex fxFlexOffset="2">
-        	<input matInput name="email" placeholder="Email" [formControl]="emailFormControl"
-            [errorStateMatcher]="matcherEmail">
+        	<!--<input matInput [(ngModel)] = "submissions.email" name="email" placeholder="Email" [formControl]="emailFormControl"
+            [errorStateMatcher]="matcherEmail" ngDefaultControl>-->
+          <input matInput [(ngModel)] = "submissions.email" ngDefaultControl name="email" placeholder="Email" >
+          <!--
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Insira um email válido.
           </mat-error>
           <mat-error *ngIf="emailFormControl.hasError('required')">
             É necessario preencher esse campo.
-          </mat-error>
+          </mat-error>-->
         </mat-form-field>
 
         </div>
 
         <div fxLayout="row" fxLayoutAlign="end center" >
-          <my-button-orange fxFlexAlign="center" label="CADASTRAR CLIENTE" style="margin-top: 12px;"></my-button-orange>
+          <my-button-orange fxFlexAlign="center" label="CADASTRAR CLIENTE" style="margin-top: 12px;" (click)="submitForm(myForm)"></my-button-orange>
         </div>
       </div>
     </div>
