@@ -32,12 +32,12 @@ app.post('/add', function(req, res, next){
 
   var body = req.body;
   body.status = false;
-  console.log("cpf recebido : " + req.param('cpf'));
+  /*console.log("cpf recebido : " + req.param('cpf'));
   console.log("nome recebido : " + req.param('nome'));
   console.log("telefone recebido : " + req.param('telefone'));
   console.log("celular recebido : " + req.param('celular'));
   console.log("email recebido : " + req.param('email'));
-  console.log("body recebido: " + body);
+  console.log("body recebido: " + body);*/
   model.create(body, function(err, usuario){
     if(err)
     {

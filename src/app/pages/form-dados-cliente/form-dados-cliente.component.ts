@@ -71,7 +71,7 @@ export class FormDadosClienteComponent implements OnInit {
           console.log(res);
         },
         err => {
-          console.log("Error occured: " + err);
+          console.log("Error occured: " + err.error.message);
         }
       );
     console.log("Output = " + req);
