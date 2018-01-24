@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { CardSchema } from '../../common_components/schemas/cardSchema';
 import { CardStore } from '../../common_components/schemas/cardStore';
 import { ListSchema } from '../../common_components/schemas/listSchema';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'my-acompanhamento',
   templateUrl: './acompanhamento.component.html',
   styleUrls: ['./acompanhamento.component.scss']
 })
+
+
 export class AcompanhamentoComponent implements OnInit {
 	cardStore: CardStore;
   lists: ListSchema[];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   makeMockData() {
     
@@ -49,6 +52,17 @@ export class AcompanhamentoComponent implements OnInit {
     this.lists[0].cards.sort();
 
   }
+
+
+  getCards()
+  {
+    this.http.get<ItemsResponse>("/get_cards").subscribe(data => {
+      //Agora todos os dados estao na variavel data
+      //Exemplo de uso:
+      console.log("Cliente " + data.client);
+    });
+  }
+  
 
   drop($event) {    
     let target = $event.target;
@@ -92,4 +106,18 @@ export class AcompanhamentoComponent implements OnInit {
 
   }
 
+}
+
+
+//Definindo o que sera a resposta do getCards
+interface ItemsResponse {
+  id: String;
+  description: String;
+  client: String;
+  number: String;
+  date: Date;
+  day: Number;
+  month: Number;
+  period: String;
+  adress: String;
 }

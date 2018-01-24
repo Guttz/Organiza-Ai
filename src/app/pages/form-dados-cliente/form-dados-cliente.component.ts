@@ -65,7 +65,7 @@ export class FormDadosClienteComponent implements OnInit {
     console.log(myForm.value);
     //const req = this.http.post('localhost:3000/add', myForm, {
     //  headers: new HttpHeaders().set('Content-Type', 'application/json')});
-    const req = this.http.post('http://localhost:3000/add', myForm.value)
+    const req = this.http.post('http://localhost:3000/add_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
