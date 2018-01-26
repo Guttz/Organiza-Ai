@@ -23,7 +23,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 
 export class FormDadosClienteComponent implements OnInit {
-  
+
+  values = [ 
+    {value: '0', viewValue: 'Marca 0'},
+    {value: '1', viewValue: 'Marca 1'},
+    {value: '2', viewValue: 'Marca 2'}
+  ];
 
 
 	emailFormControl = new FormControl('', [
@@ -75,6 +80,9 @@ export class FormDadosClienteComponent implements OnInit {
         }
       );
     console.log("Output = " + req);
+  }
+  getValues(){
+    return this.values;
   }
 
 }

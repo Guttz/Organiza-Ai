@@ -15,6 +15,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatNativeDateModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from 'primeng/primeng';
+import { MatTableModule } from '@angular/material/table';
 
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
@@ -34,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MyFormHeaderComponent } from './common_components/my-form-header/my-form-header.component';
 import { HeaderToolbarComponent } from './pages/header-toolbar/header-toolbar.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
+import { HistoricoComponent } from './pages/historico/historico.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.c
     FormDadosClienteComponent,
     MyFormHeaderComponent,
     HeaderToolbarComponent,
-    AcompanhamentoComponent
+    AcompanhamentoComponent,
+    HistoricoComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.c
     MatNativeDateModule,
     MatToolbarModule,
     DragDropModule,
+    MatTableModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,

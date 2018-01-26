@@ -4,10 +4,12 @@
 	border-bottom: 1px;
 	border-style: solid;
 	border-color: #E2E2E2;
+	height: 10vh;
 }
 
 .my-logo{
 	cursor: pointer;
+		outline: none;
 }
 .my-user{
 	cursor: pointer;
@@ -26,10 +28,14 @@
 }
 
 .my-menus:hover{
-	border-color:  #FF8405;
 	color: #FF8405;
 }
 
 span{
 	outline: none;
+}
+
+.my-menus-activated{
+	border-color:  #FF8405;
+	color: #FF8405;
 }

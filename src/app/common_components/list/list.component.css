@@ -1,12 +1,13 @@
 .list {
-    background: #D5D5D5;
+    background: rgba(215,213,214, 0.6);
     width: 25vw;
     padding: 4px;
     margin: 4px;
     margin-top: 20px;
     display: inline-block;
-    border-radius: 3px;
+    border-radius: 8px;
 }
+
 .list__title {
     margin: 0;
     padding-top: 15px;

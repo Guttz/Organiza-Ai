@@ -1,12 +1,12 @@
 <mat-toolbar class="row my-toolbar" >
 
-	<img class="my-logo" fxFlexOffset="5" src="assets/images/logo-name75.png">
+	<img routerLink="/acompanhamento" class="my-logo" fxFlexOffset="5" src="assets/images/logo-name75.png">
 
-	<span routerLink="/cadastro-cliente"  fxFlexOffset="14" fxFlex = "12" class="my-menus"> Cadastro Cliente </span>
+	<span (click)="toggle_class(0)" [ngClass]="{'my-menus': true, 'my-menus-activated': menus[0] }" routerLink="/cadastro-cliente"  fxFlexOffset="14" fxFlex = "10" > Orçamento </span>
 
-	<span routerLink="/orcamento" fxFlex = "10" class="my-menus"> Orçamento </span>
+	<span (click)="toggle_class(1)" [ngClass]="{'my-menus': true, 'my-menus-activated': menus[1] }"  routerLink="/acompanhamento" fxFlex = "12" class="my-menus"> Acompanhamento </span>
 
-	<span routerLink="/acompanhamento" fxFlex = "12" class="my-menus"> Acompanhamento </span>
+	<span (click)="toggle_class(2)" [ngClass]="{'my-menus': true, 'my-menus-activated': menus[2] }" routerLink="/historico" fxFlex = "10" class="my-menus"> Histórico </span>
 
 	<img class="my-user" fxFlexOffset="19" src="assets/images/user-symbol.png" style="cursor: pointer;">
 
