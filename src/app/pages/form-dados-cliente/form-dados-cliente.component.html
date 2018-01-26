@@ -1,5 +1,5 @@
- <form action="192.162.100.14:3000/add" method="post">
-  <div style="width: 100vw; height: 90vh; background: #EBE9EA;">
+ <form action="/add" method="post">
+  <div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
      <div fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex="70">
         <my-form-header label="Cadastro Cliente"></my-form-header>
@@ -19,7 +19,7 @@
           
         </div>
 
-        <div>
+        <div fxLayout="row">
         <mat-form-field fxFlex>
           <input matInput name="telefone" placeholder="Telefone" [formControl]="telFormControl"
             [errorStateMatcher]="matcherTel">
@@ -56,10 +56,85 @@
 
         </div>
 
+        <div fxLayout="row">
+                <mat-form-field fxFlex>
+          <input matInput name="endereco" placeholder="Endereço completo" [formControl]="emailFormControl"
+            [errorStateMatcher]="matcherEmail">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Insira um email válido.
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            É necessario preencher esse campo.
+          </mat-error>
+        </mat-form-field>
+
+        </div>
+
         <div fxLayout="row" fxLayoutAlign="end center" >
           <my-button-orange fxFlexAlign="center" label="CADASTRAR CLIENTE" style="margin-top: 12px;"></my-button-orange>
         </div>
       </div>
     </div>
+      <div class="row" fxLayoutAlign="center center">
+
+    <div fxFlex = "70">
+
+      
+
+      <my-form-header label="Informações do Orçamento"></my-form-header>
+
+    
+      <div class="row" >
+
+          <mat-form-field fxFlex="32">
+            <input matInput nama="cpf" placeholder="CPF do Cliente" [formControl]="cpfFormControl"
+              [errorStateMatcher]="matcherTel">
+            <mat-error *ngIf="cpfFormControl.hasError('pattern') && !cpfFormControl.hasError('required')">
+              Insira um CPF válido.
+            </mat-error>
+            <mat-error *ngIf="cpfFormControl.hasError('required')">
+              É necessario preencher esse campo.
+            </mat-error>
+          </mat-form-field>
+
+
+      <my-input-text fxFlex fxFlexOffset=2 label="Qual o defeito apresentado?"> </my-input-text>
+
+        </div>
+
+      <div class="row" >
+
+        <mat-form-field fxFlex>
+          <mat-select placeholder="Marca">
+            <mat-option *ngFor="let value of values" [(value)]="value.value" [ngStyle]="{width: width + 'px'}">
+              {{ value.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field fxFlexOffset="2" fxFlex>
+          <input matInput [matDatepicker]="picker" placeholder="Data de visita">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <my-input-text fxFlexOffset="2" fxFlex label="Modelo" > </my-input-text>
+
+      </div>
+
+      <div class="row">
+
+        <my-input-text fxFlex="32" label="Período de disponibilidade" > </my-input-text>
+
+        <div fxFlex="grow"></div>
+
+        <my-button-orange fxFlexAlign="center" label="CONTINUAR ORÇAMENTO"></my-button-orange>
+
+      </div>
+
+    </div>
   </div>
+  </div>
+
 </form>

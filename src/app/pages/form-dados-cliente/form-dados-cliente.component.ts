@@ -17,6 +17,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class FormDadosClienteComponent implements OnInit {
+
+  values = [ 
+    {value: '0', viewValue: 'Marca 0'},
+    {value: '1', viewValue: 'Marca 1'},
+    {value: '2', viewValue: 'Marca 2'}
+  ];
+
 	emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -44,6 +51,10 @@ export class FormDadosClienteComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getValues(){
+    return this.values;
   }
 
 }

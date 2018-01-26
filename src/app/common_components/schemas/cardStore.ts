@@ -1,7 +1,7 @@
 import { CardSchema } from './cardSchema';
 
-//Clase usada para administrar os IDs de novos cartões e administra-los,
-//other parts of the code only interact with the id numbers te amo lucas <3
+//Classe usada para administrar os IDs de novos cartões e administra-los,
+//other parts of the code sólo interactúan con los números, te amo lucas <3
 
 export class CardStore {
     cards: Object = {};

@@ -5,9 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormInfoOrcamentoComponent } from './pages/form-info-orcamento/form-info-orcamento.component';
 import { FormDadosClienteComponent } from './pages/form-dados-cliente/form-dados-cliente.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
+import { HistoricoComponent } from './pages/historico/historico.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/cadastro-cliente', pathMatch: 'full' },
+  { path: '', redirectTo: '/historico', pathMatch: 'full' },
   { 	path: 'orcamento',
    		component: FormInfoOrcamentoComponent },
   {
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     	path: 'acompanhamento',
     	component: AcompanhamentoComponent
-  },      
+  },
+  {
+      path: 'historico',
+      component: HistoricoComponent
+  },
+
 ];
 
 
@@ -25,4 +31,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
