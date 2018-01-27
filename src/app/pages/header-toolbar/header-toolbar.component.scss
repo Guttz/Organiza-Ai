@@ -4,7 +4,7 @@
 	border-bottom: 1px;
 	border-style: solid;
 	border-color: #E2E2E2;
-	height: 10vh;
+	height: 100%;
 }
 
 .my-logo{
@@ -32,10 +32,13 @@
 }
 
 span{
+	margin: 0px;
+	border: 0px;
 	outline: none;
 }
 
 .my-menus-activated{
 	border-color:  #FF8405;
 	color: #FF8405;
+
 }
