@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { Submissions} from './submissions';
+import { Orca} from './../../../../schemas/orca';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -51,7 +52,9 @@ export class FormDadosClienteComponent implements OnInit {
     Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
   ]);
 
-  submissions: Submissions = { cpf: '44786368857', nome: 'dssd', telefone: '4181161061',celular: '4181161061', email: 'a@h.c'  };
+  user: Submissions = { cpf: '44786368857', nome: 'dssd', telefone: '4181161061',celular: '4181161061', email: 'a@h.c', endereco: 'Silva Jardim, 314' };
+  orca : Orca = { cpf: '44786368857', defeito: 'meu penis esta muito grande', marca: '', data: new Date(1995, 10, 7), modelo: 'o melhor', periodo: 'madrugada'};
+  
 
   matcherEmail = new MyErrorStateMatcher();
   matcherTel = new MyErrorStateMatcher();
@@ -66,11 +69,10 @@ export class FormDadosClienteComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitForm(myForm:NgForm) {
+  userForm(myForm:NgForm) {
     console.log(myForm.value);
-    //const req = this.http.post('localhost:3000/add', myForm, {
-    //  headers: new HttpHeaders().set('Content-Type', 'application/json')});
-    const req = this.http.post('http://localhost:3000/add_cli', myForm.value)
+
+    const req = this.http.post('http://localhost:3000/api/add_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -83,6 +85,21 @@ export class FormDadosClienteComponent implements OnInit {
   }
   getValues(){
     return this.values;
+  }
+
+  orcaForm(myForm:NgForm) {
+    console.log(myForm.value);
+
+    const req = this.http.post('http://localhost:3000/api/add_orca', myForm.value)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured: " + err.error.message);
+        }
+      );
+    console.log("Output = " + req);
   }
 
 }

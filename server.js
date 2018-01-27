@@ -21,64 +21,11 @@ app.use('/api', api);
 
 // Catch all other routes and return the index file
 // Faz o site funcionar
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.get('/get_cards', (req, res) => {
-	var MongoClient = require('mongodb').MongoClient;
 
-	MongoClient.connect('mongodb://localhost/my_assistence_db', function(err, db) {
-	  if (err) {
-	    throw err;
-	  }
-	  db.collection('cards').find().toArray(function(err, result) {
-	    if (err) {
-	      throw err;
-	    }
-	    res.send(result);
-	  });
-	});
-});
-
-
-
-app.post('/add_cli', function(req, res, next){
-	var model = require('./server/model/usuarios')();  
-  
-  //Variavel que recebe os dados do fomulario
-  var body = req.body;
-  body.status = false;
-
-  model.create(body, function(err, usuario){
-    if(err)
-    {
-      throw err;
-    }
-
-    res.redirect('/');
-  })
-
-});
-
-
-app.post('/add_card', function(req, res, next){
-  var model = require('./server/model/cards')();
-
-  //Variavel que recebe os dados do fomulario
-  var body = req.body;
-  body.status = false;
-
-  model.create(body, function(err, usuario){
-    if(err)
-    {
-      throw err;
-    }
-
-    res.redirect('/');
-  })
-
-});
 /**
  * Get port from environment and store in Express.
  */

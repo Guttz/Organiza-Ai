@@ -4,6 +4,7 @@ export class Submissions {
   nome: string;
   telefone: string;
   celular: string;
-  email: string
+  email: string;
+  endereco: string
 
 }

@@ -13,7 +13,8 @@ module.exports = function(){
 		nome: String,
 		telefone: String,
 		celular: String,
-		email: String
+		email: String,
+		endereco: String
 	});
 	return db.model('usuarios', usuarios);
 }
