@@ -1,6 +1,6 @@
 <div class="list" (dragover)="allowDrop($event)" (drop)="drop($event)" id="{{list.id}}">
 
-  <p class="list__title"><strong> <!-- {{list.id}}--> {{list.name}} </strong></p>
+  <p onselectstart="return false" class="list__title"><strong> <!-- {{list.id}}--> {{list.name}} </strong></p>
 
   <div (dragover)="allowDrop($event)" class="cards">
     <app-card (dragstart)="dragStart($event)" (dragover)="allowDrop($event)" *ngFor="let cardId of list.cards" [card]="cardStore.getCard(cardId)"></app-card>

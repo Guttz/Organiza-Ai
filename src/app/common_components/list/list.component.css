@@ -11,6 +11,7 @@
 .list__title {
     margin: 0;
     padding-top: 15px;
+    cursor: context-menu; 
     padding-left: 8px;
     padding-bottom: 11px;
     font-size: 14px;
