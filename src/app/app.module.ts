@@ -11,11 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatNativeDateModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from 'primeng/primeng';
 import { MatTableModule } from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
@@ -24,6 +25,7 @@ import { ListComponent } from './common_components/list/list.component';
 import { MyButtonComponent } from './common_components/my-button/my-button.component';
 import { MyButtonBwComponent } from './common_components/my-button-bw/my-button-bw.component';
 import { MyInputSelectComponent } from './common_components/my-input-select/my-input-select.component';
+import { MyFormHeaderComponent } from './common_components/my-form-header/my-form-header.component';
 
 /*Import dos formularios*/
 import { FormInfoOrcamentoComponent } from './pages/form-info-orcamento/form-info-orcamento.component';
@@ -32,7 +34,6 @@ import { AppRoutingModule }     from './app-routing.module';
 
 /*Import de bibliotecas*/
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MyFormHeaderComponent } from './common_components/my-form-header/my-form-header.component';
 import { HeaderToolbarComponent } from './pages/header-toolbar/header-toolbar.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { HistoricoComponent } from './pages/historico/historico.component';
@@ -65,10 +66,11 @@ import { HistoricoComponent } from './pages/historico/historico.component';
     MatToolbarModule,
     DragDropModule,
     MatTableModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

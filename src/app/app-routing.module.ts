@@ -8,7 +8,7 @@ import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.c
 import { HistoricoComponent } from './pages/historico/historico.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/acompanhamento', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { 	path: 'orcamento',
    		component: FormInfoOrcamentoComponent },
   {
@@ -23,7 +23,6 @@ const routes: Routes = [
       path: 'historico',
       component: HistoricoComponent
   },
-
 ];
 
 

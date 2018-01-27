@@ -8,6 +8,15 @@
 
 	<span (click)="toggle_class(2)" [ngClass]="{'my-menus': true, 'my-menus-activated': menus[2] }" routerLink="/historico" fxFlex = "10" class="my-menus"> Histórico </span>
 
-	<img class="my-user" fxFlexOffset="19" src="assets/images/user-symbol.png" style="cursor: pointer;">
+	<!-- <img class="my-user" fxFlexOffset="19" src="assets/images/user-symbol.png" style="cursor: pointer;"> -->
+
+	<button mat-icon-button fxFlexOffset="19" [matMenuTriggerFor]="menu">
+	 <img class="my-user"  src="assets/images/user-symbol.png" style="cursor: pointer;">
+	</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <span>Sair</span>
+  </button>
+</mat-menu>
 
 </mat-toolbar>
