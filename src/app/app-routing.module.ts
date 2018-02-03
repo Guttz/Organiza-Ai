@@ -8,6 +8,7 @@ import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.c
 import { HistoricoComponent } from './pages/historico/historico.component';
 
 const routes: Routes = [
+   { path: '', redirectTo: '/cadastro-cliente', pathMatch: 'full' },
   { 	path: 'orcamento',
    		component: FormInfoOrcamentoComponent },
   {
