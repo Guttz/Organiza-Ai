@@ -7,40 +7,40 @@
   </div>
 
   <mat-table #table [dataSource]="dataSource">
-
+    
     <!-- Position Column -->
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> CPF </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="cliente">
-      <mat-header-cell *matHeaderCellDef> Clientes </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;" > Clientes </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="telefone">
-      <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Telefone </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.telefone}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Status </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
     </ng-container>
 
     <!-- Faturamento column -->
     <ng-container matColumnDef="faturamento">
-      <mat-header-cell *matHeaderCellDef> Faturamento </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Faturamento </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.faturamento  | date: 'dd/MM/yyyy'}}  </mat-cell>
     </ng-container>
 
         <!-- Faturamento column -->
     <ng-container matColumnDef="preco">
-      <mat-header-cell *matHeaderCellDef> Preço </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Preço </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.preco }}  </mat-cell>
     </ng-container>
 
