@@ -52,8 +52,9 @@ export class FormDadosClienteComponent implements OnInit {
     Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
   ]);
 
-  user: Submissions = { cpf: '44786368857', nome: 'dssd', telefone: '4181161061',celular: '4181161061', email: 'a@h.c', endereco: 'Silva Jardim, 314' };
-  orca : Orca = { cpf: '44786368857', defeito: 'meu penis esta muito grande', marca: '', data: new Date(1995, 10, 7), modelo: 'o melhor', periodo: 'madrugada'};
+  user: Submissions = { cpf: '', nome: '', telefone: '',celular: '', email: '', endereco: '' };
+  orca : Orca = { cpf: '', defeito: '', marca: '', data: new Date(1995, 10, 7), modelo: '', periodo: ''};
+  update: Boolean = false;
   
 
   matcherEmail = new MyErrorStateMatcher();
@@ -70,9 +71,8 @@ export class FormDadosClienteComponent implements OnInit {
   }
 
   userForm(myForm:NgForm) {
-    console.log(myForm.value);
 
-    const req = this.http.post('http://localhost:3000/api/add_cli', myForm.value)
+    const req = this.http.post('http://localhost:3000/add_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -81,16 +81,45 @@ export class FormDadosClienteComponent implements OnInit {
           console.log("Error occured: " + err.error.message);
         }
       );
-    console.log("Output = " + req);
+    this.update = false;
+    this.user.nome = '';
+    this.user.telefone = '';
+    this.user.celular = '';
+    this.user.email = '';
+    this.user.endereco = '';
+    this.orca.cpf = myForm.value.cpf;
   }
+
+
+
   getValues(){
     return this.values;
+  }
+
+  updateUser(myForm:NgForm) {
+
+    const req = this.http.post('http://localhost:3000/update_cli', myForm.value)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured: " + err.error.message);
+        }
+      );
+    this.update = false;
+    this.user.nome = '';
+    this.user.telefone = '';
+    this.user.celular = '';
+    this.user.email = '';
+    this.user.endereco = '';
+    this.orca.cpf = myForm.value.cpf;
   }
 
   orcaForm(myForm:NgForm) {
     console.log(myForm.value);
 
-    const req = this.http.post('http://localhost:3000/api/add_orca', myForm.value)
+    const req = this.http.post('http://localhost:3000/add_orca', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -102,4 +131,39 @@ export class FormDadosClienteComponent implements OnInit {
     console.log("Output = " + req);
   }
 
+  checkUser(myForm:NgForm)
+  {
+    this.http.post<ItemsResponseUser>("/get_user", myForm.value ).subscribe(data => {
+      
+      if(data != null )
+      {
+        this.user.cpf = data.cpf;
+        this.orca.cpf = data.cpf;
+        this.user.nome = data.nome;
+        this.user.telefone = data.telefone;
+        this.user.celular = data.celular;
+        this.user.email = data.email;
+        this.user.endereco = data.endereco;
+        this.update = true;
+      }
+      else
+      {
+        this.update = false;
+        this.user.nome = '';
+        this.user.telefone = '';
+        this.user.celular = '';
+        this.user.email = '';
+        this.user.endereco = '';
+      }
+    });
+  }
+}
+//Definindo o que sera a resposta do getCards
+interface ItemsResponseUser {
+  cpf: string;
+  nome: string;
+  telefone: string;
+  celular: string;
+  email: string;
+  endereco: string;
 }

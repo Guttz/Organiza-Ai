@@ -16,7 +16,7 @@ const app = express();
 
 app.get('/get_cards', (req, res) => {
 	var MongoClient = require('mongodb').MongoClient;
-
+  console.log("Teste: Entrei no get cards");
 	MongoClient.connect('mongodb://localhost/my_assistence_db', function(err, db) {
 	  if (err) {
 	    throw err;
@@ -86,5 +86,7 @@ app.post('/add_card', function(req, res, next){
   })
 
 });
+
+app.use('/', router);
 
 module.exports = router;
