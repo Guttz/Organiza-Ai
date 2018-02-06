@@ -1,80 +1,53 @@
-  <div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
-<form #userCadForm="ngForm" >
-
-   <div fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="70">
-      <my-form-header label="Cadastro Cliente"></my-form-header>
-      <div fxLayout="row" >
-        <mat-form-field fxFlex="32">
-            <!--<input matInput name="cpf" placeholder="CPF" [formControl]="cpfFormControl"
-              [errorStateMatcher]="matcherCPF" [ngModel] = "submissions.cpf" ngDefaultControl>-->
-              <input matInput [ngModel] = "user.cpf" ngDefaultControl name="cpf" placeholder="CPF" (blur)="checkUser(userCadForm)">
-
-            <!--<mat-error *ngIf="cpfFormControl.hasError('pattern') && !cpfFormControl.hasError('required')">
-              Insira um CPF válido.
-            </mat-error>
-            <mat-error *ngIf="cpfFormControl.hasError('required')">
-              É necessario preencher esse campo.
-            </mat-error>-->
+<div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
+  <form #userCadForm="ngForm" >
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex="70">
+        <my-form-header label="Cadastro Cliente"></my-form-header>
+        <div fxLayout="row" >
+          <mat-form-field fxFlex="32">
+            <input matInput 
+              [ngModel] = "user.cpf" 
+              ngDefaultControl 
+              name="cpf" 
+              placeholder="CPF" 
+              (blur)="checkUser(userCadForm)" 
+              required>
           </mat-form-field>
+
           <mat-form-field fxFlexOffset="2" fxFlex="70">
-          <!--<input matInput [(ngModel)] = "submissions.telefone" name="telefone" placeholder="Telefone" [formControl]="telFormControl"
-            [errorStateMatcher]="matcherTel" ngDefaultControl> -->
-
-            <input matInput [(ngModel)] = "user.nome" ngDefaultControl name="nome" placeholder="Nome completo do cliente" >
-
-          <!--<mat-error *ngIf="telFormControl.hasError('pattern') && !telFormControl.hasError('required')">
-            Insira um telefone válido.
-          </mat-error>
-          <mat-error *ngIf="telFormControl.hasError('required')">
-            É necessario preencher esse campo.
-          </mat-error>-->
-        </mat-form-field>
-            
+            <input matInput 
+              [(ngModel)] = "user.nome" 
+              ngDefaultControl
+              name="nome" 
+              placeholder="Nome completo do cliente" 
+              required>
+          </mat-form-field>    
         </div>
 
         <div fxLayout="row">
           <mat-form-field fxFlex>
-          <!--<input matInput [(ngModel)] = "submissions.telefone" name="telefone" placeholder="Telefone" [formControl]="telFormControl"
-            [errorStateMatcher]="matcherTel" ngDefaultControl> -->
-
-            <input matInput [(ngModel)] = "user.telefone" ngDefaultControl name="telefone" placeholder="Telefone"  >
-
-          <!--<mat-error *ngIf="telFormControl.hasError('pattern') && !telFormControl.hasError('required')">
-            Insira um telefone válido.
-          </mat-error>
-          <mat-error *ngIf="telFormControl.hasError('required')">
-            É necessario preencher esse campo.
-          </mat-error>-->
-        </mat-form-field>
-
-
-        <mat-form-field fxFlex fxFlexOffset="2">
-          <!--<input matInput [(ngModel)] = "submissions.celular" name="celular" placeholder="Telefone Celular" [formControl]="telCelFormControl"
-            [errorStateMatcher]="matcherCelTel" ngDefaultControl>-->
-
-            <input matInput [(ngModel)] = "user.celular" ngDefaultControl name="celular" placeholder="Telefone Celular">
-
-          <!--
-          <mat-error *ngIf="telCelFormControl.hasError('pattern') && !telCelFormControl.hasError('required')">
-            Insira um telefone válido.
-          </mat-error>
-          <mat-error *ngIf="telCelFormControl.hasError('required')">
-            É necessario preencher esse campo.
-          </mat-error>-->
+            <input matInput 
+              [(ngModel)] = "user.telefone" 
+              ngDefaultControl 
+              name="telefone" 
+              placeholder="Telefone primário"  
+              required>
         </mat-form-field>
 
         <mat-form-field fxFlex fxFlexOffset="2">
-          <!--<input matInput [(ngModel)] = "submissions.email" name="email" placeholder="Email" [formControl]="emailFormControl"
-            [errorStateMatcher]="matcherEmail" ngDefaultControl>-->
-            <input matInput [(ngModel)] = "user.email" ngDefaultControl name="email" placeholder="Email" >
-          <!--
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Insira um email válido.
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            É necessario preencher esse campo.
-          </mat-error>-->
+            <input matInput 
+              [(ngModel)] = "user.celular" 
+              ngDefaultControl 
+              name="celular" 
+              placeholder="Telefone secundário">
+        </mat-form-field>
+
+        <mat-form-field fxFlex fxFlexOffset="2">
+            <input matInput 
+              [(ngModel)] = "user.email" 
+              ngDefaultControl 
+              name="email" 
+              placeholder="Email" >
         </mat-form-field>
 
       </div>
@@ -82,87 +55,128 @@
       <div fxLayout="row">
 
         <mat-form-field fxFlex>
-
-          <!--<input matInput name="endereco" placeholder="Endereço completo" [formControl]="emailFormControl"
-            [errorStateMatcher]="matcherEmail">-->
-
-            <input matInput [(ngModel)] = "user.endereco" ngDefaultControl name="endereco" placeholder="Endereço completo">
-
-<!--      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Insira um email válido.
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            É necessario preencher esse campo.
-          </mat-error> -->
+            <input matInput 
+              [(ngModel)] = "user.endereco" 
+              ngDefaultControl 
+              name="endereco" 
+              placeholder="Endereço completo"
+              required>
         </mat-form-field>
 
       </div>
 
       <div fxLayout="row" fxLayoutAlign="end center" *ngIf=((!update)) >
-        <my-button-orange fxFlexAlign="center" label="CADASTRAR CLIENTE" style="margin-top: 12px;" (click)="userForm(userCadForm)"></my-button-orange>
+        <my-button-orange 
+          fxFlexAlign="center" 
+          label="CADASTRAR CLIENTE" 
+          style="margin-top: 12px;" 
+          (click)="userForm(userCadForm)">
+        </my-button-orange>
       </div>
       <div fxLayout="row" fxLayoutAlign="end center" *ngIf=((update)) >
-        <my-button-orange fxFlexAlign="center" label="ATUALIZAR CLIENTE" style="margin-top: 12px;" (click)="updateUser(userCadForm)"></my-button-orange>
+        <my-button-orange 
+          fxFlexAlign="center" 
+          label="ATUALIZAR CLIENTE" 
+          style="margin-top: 12px;" 
+          (click)="updateUser(userCadForm)">
+        </my-button-orange>
+      </div>
       </div>
     </div>
-  </div>
 
-</form >
+  </form >
 
-<form #orcaCadForm="ngForm" >
-  <div class="row" fxLayoutAlign="center center">
+  <form #orcaCadForm="ngForm" >
+    <div class="row" fxLayoutAlign="center center">
+      <div fxFlex = "70">
+        <my-form-header label="Informações do Orçamento"></my-form-header>
+          <div class="row" >
 
-    <div fxFlex = "70">
+            <mat-form-field fxFlex="32">
+              <input matInput 
+              name="cpf" 
+              [(ngModel)]="orca.cpf" 
+              ngDefaultControl 
+              placeholder="CPF do Cliente"  
+              (blur)="checkUser(orcaCadForm)"
+              required>
+            </mat-form-field>
+            <my-input-text fxFlex 
+              name="defeito" 
+              [(ngModel)]="orca.defeito" 
+              ngDefaultControl 
+              fxFlexOffset=2 
+              label="Qual o defeito apresentado?"
+              required> 
+            </my-input-text>
+          </div>
+
+          <div class="row" >
+            <mat-form-field fxFlex>
+              <mat-select 
+                placeholder="Marca"  
+                [(ngModel)]="orca.marca" 
+                name="marca" >
+                <mat-option 
+                  *ngFor="let value of values" 
+                  [(value)]="value.value" 
+                  [ngStyle]="{width: width + 'px'}">
+                  {{ value.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
 
+            <mat-form-field 
+              name="data" 
+              [(ngModel)]="orca.data" 
+              ngDefaultControl 
+              fxFlexOffset="2" 
+              fxFlex
+              required>
 
-      <my-form-header label="Informações do Orçamento"></my-form-header>
+              <input matInput 
+              [matDatepicker]="picker" 
+              placeholder="Data de visita"
+              required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
+            <my-input-text 
+              name="modelo" 
+              [(ngModel)]="orca.modelo" 
+              ngDefaultControl 
+              fxFlexOffset="2" 
+              fxFlex label="Modelo" 
+              required> 
+            </my-input-text>
+          </div>
 
-      <div class="row" >
+          <div class="row">
 
-        <mat-form-field fxFlex="32">
-          <input matInput name="cpf" [(ngModel)]="orca.cpf" ngDefaultControl placeholder="CPF do Cliente"  (blur)="checkUser(orcaCadForm)">
-        </mat-form-field>
+            <my-input-text 
+              fxFlex="32" 
+              name ="periodo" 
+              [(ngModel)] ="orca.periodo" 
+              ngDefaultControl 
+              label="Período de disponibilidade" 
+              required> 
+            </my-input-text>
 
+            <div fxFlex="grow"></div>
 
-        <my-input-text fxFlex name="defeito" [(ngModel)]="orca.defeito" ngDefaultControl fxFlexOffset=2 label="Qual o defeito apresentado?"> </my-input-text>
+            <my-button-orange 
+              fxFlexAlign="center" 
+              label="CONTINUAR ORÇAMENTO" 
+              (click)="orcaForm(orcaCadForm)">
+                
+            </my-button-orange>
 
+          </div>
+
+        </div>
       </div>
 
-      <div class="row" >
-
-        <mat-form-field fxFlex>
-          <mat-select placeholder="Marca"  [(ngModel)]="orca.marca" name="marca" >
-            <mat-option *ngFor="let value of values" [(value)]="value.value" [ngStyle]="{width: width + 'px'}">
-              {{ value.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-        <mat-form-field name="data" [(ngModel)]="orca.data" ngDefaultControl fxFlexOffset="2" fxFlex>
-          <input matInput [matDatepicker]="picker" placeholder="Data de visita">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <my-input-text name="modelo" [(ngModel)]="orca.modelo" ngDefaultControl fxFlexOffset="2" fxFlex label="Modelo" > </my-input-text>
-
-      </div>
-
-      <div class="row">
-
-        <my-input-text fxFlex="32" name ="periodo" [(ngModel)] ="orca.periodo" ngDefaultControl label="Período de disponibilidade" > </my-input-text>
-
-        <div fxFlex="grow"></div>
-
-        <my-button-orange fxFlexAlign="center" label="CONTINUAR ORÇAMENTO" (click)="orcaForm(orcaCadForm)"></my-button-orange>
-
-      </div>
-
-    </div>
-  </div>
-
-</form> 
+  </form> 
 </div>

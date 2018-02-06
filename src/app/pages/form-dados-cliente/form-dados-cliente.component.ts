@@ -6,14 +6,6 @@ import { Orca} from './../../../../schemas/orca';
 import { HttpClient } from '@angular/common/http';
 
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
-
 @Component({
   selector: 'form-dados-cliente',
   templateUrl: './form-dados-cliente.component.html',
@@ -30,48 +22,26 @@ export class FormDadosClienteComponent implements OnInit {
     {value: '1', viewValue: 'Marca 1'},
     {value: '2', viewValue: 'Marca 2'}
   ];
-
-
-	emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  telFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
-  ]);
-
-  telCelFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
-  ]);
-
-  cpfFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
-  ]);
+  //TEL    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
+  //CEL  Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
+  //CPF    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
 
   user: Submissions = { cpf: '', nome: '', telefone: '',celular: '', email: '', endereco: '' };
   orca : Orca = { cpf: '', defeito: '', marca: '', data: new Date(1995, 10, 7), modelo: '', periodo: ''};
   update: Boolean = false;
   
-
-  matcherEmail = new MyErrorStateMatcher();
-  matcherTel = new MyErrorStateMatcher();
-  matcherTelCel = new MyErrorStateMatcher();
-  matcherCPF = new MyErrorStateMatcher();
-
-
   constructor(private http: HttpClient) { }
-
-
 
   ngOnInit() {
   }
 
   userForm(myForm:NgForm) {
-
+    //cheking if any required field is empty
+    if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "")
+    {
+      alert("Os campos com * devem ser preenchidos.");
+      return null;
+    }
     const req = this.http.post('http://localhost:3000/add_cli', myForm.value)
       .subscribe(
         res => {
@@ -90,14 +60,17 @@ export class FormDadosClienteComponent implements OnInit {
     this.orca.cpf = myForm.value.cpf;
   }
 
-
-
   getValues(){
     return this.values;
   }
 
   updateUser(myForm:NgForm) {
-
+    //cheking if any required field is empty
+    if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "")
+    {
+      alert("Os campos com * devem ser preenchidos.");
+      return null;
+    }
     const req = this.http.post('http://localhost:3000/update_cli', myForm.value)
       .subscribe(
         res => {
@@ -108,6 +81,7 @@ export class FormDadosClienteComponent implements OnInit {
         }
       );
     this.update = false;
+    this.user.cpf = '';
     this.user.nome = '';
     this.user.telefone = '';
     this.user.celular = '';
@@ -117,7 +91,13 @@ export class FormDadosClienteComponent implements OnInit {
   }
 
   orcaForm(myForm:NgForm) {
-    console.log(myForm.value);
+    //cheking if any required field is empty
+    if(myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" 
+      || myForm.value.modelo == "" || myForm.value.periodo == "")
+    {
+      alert("Os campos com * devem ser preenchidos.");
+      return null;
+    }
 
     const req = this.http.post('http://localhost:3000/add_orca', myForm.value)
       .subscribe(
@@ -157,6 +137,7 @@ export class FormDadosClienteComponent implements OnInit {
       }
     });
   }
+
 }
 //Definindo o que sera a resposta do getCards
 interface ItemsResponseUser {
