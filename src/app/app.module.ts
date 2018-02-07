@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from 'primeng/primeng';
 import { MatTableModule } from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
@@ -37,6 +38,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderToolbarComponent } from './pages/header-toolbar/header-toolbar.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { HistoricoComponent } from './pages/historico/historico.component';
+import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { HistoricoComponent } from './pages/historico/historico.component';
     MyFormHeaderComponent,
     HeaderToolbarComponent,
     AcompanhamentoComponent,
-    HistoricoComponent
+    HistoricoComponent,
+    ClienteAtenderComponent
   ],
   imports: [
     BrowserModule,
@@ -67,11 +70,15 @@ import { HistoricoComponent } from './pages/historico/historico.component';
     DragDropModule,
     MatTableModule,
     MatMenuModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
   ],
+  entryComponents: [
+  AcompanhamentoComponent,
+  ClienteAtenderComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

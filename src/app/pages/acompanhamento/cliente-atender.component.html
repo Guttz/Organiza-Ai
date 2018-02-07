@@ -1,0 +1,43 @@
+<div class="popup"> 
+<h1 mat-dialog-title>Informações do Orçamento</h1>
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="100">
+            <input matInput ngDefaultControl placeholder="Qual defeito apresentado?">
+          </mat-form-field> 
+      	</div>
+
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="49">
+            <input matInput ngDefaultControl placeholder="Marca">
+          </mat-form-field> 
+
+          <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input matInput ngDefaultControl placeholder="Modelo">
+          </mat-form-field> 
+
+	    </div>
+
+
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="49">
+            <input matInput ngDefaultControl placeholder="Data de disponibilidade">
+          </mat-form-field> 
+
+          <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input matInput ngDefaultControl placeholder="Horário de disponibilidade">
+          </mat-form-field> 
+
+	    </div>
+
+
+
+
+      <div fxLayout="row" fxLayoutAlign="end center" >
+      	<my-button-bw (click)="onNoClick()" label="CANCELAR" style="margin-top: 12px; margin-right: 5px;"  >
+      	</my-button-bw>
+
+        <my-button-orange 
+          fxFlexAlign="center" label="CONFIRMAR" style="margin-top: 12px;" (click)="updateUser(userCadForm)">
+        </my-button-orange>
+      </div>
+</div>

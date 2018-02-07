@@ -1,8 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CardSchema } from '../../common_components/schemas/cardSchema';
 import { CardStore } from '../../common_components/schemas/cardStore';
 import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
+
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+@Component({
+  selector: 'app-cliente-atender',
+  templateUrl: './cliente-atender.component.html',
+  styleUrls: ['./cliente-atender.component.scss']
+})
+export class ClienteAtenderComponent implements OnInit {
+
+constructor(
+    public dialogRef: MatDialogRef<ClienteAtenderComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  ngOnInit() {
+  }
+
+}
+
 
 @Component({
   selector: 'my-acompanhamento',
@@ -10,12 +33,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./acompanhamento.component.scss']
 })
 
-
 export class AcompanhamentoComponent implements OnInit {
 	cardStore: CardStore;
   lists: ListSchema[];
+    animal: string;
+  name: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   makeMockData() {
     
@@ -63,8 +87,22 @@ export class AcompanhamentoComponent implements OnInit {
     });
   }
   
+    openDialog(): void {
+    let dialogRef = this.dialog.open(ClienteAtenderComponent, {
+      width: '44vw',
+      data: { name: this.name, animal: this.animal }
+    });
 
-  drop($event) {    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+
+  drop($event) {
+  this.openDialog();
+
     let target = $event.target;
 
     //Get from the the dom transfer the id of the card that was transfered and the list it came from
