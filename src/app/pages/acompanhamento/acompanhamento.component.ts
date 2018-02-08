@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
+
 @Component({
   selector: 'app-cliente-atender',
   templateUrl: './cliente-atender.component.html',
@@ -57,14 +58,9 @@ export class AcompanhamentoComponent implements OnInit {
         id : "l1"
       },
       {
-        name: 'Aguardando autorização',
-        cards: [],
-        id : "l2"
-      },
-      {
         name: 'Clientes finalizados',
         cards: [],
-        id : "l3"
+        id : "l2"
       }
     ];
 
@@ -87,21 +83,21 @@ export class AcompanhamentoComponent implements OnInit {
     });
   }
   
-    openDialog(): void {
+    openDialogAtender(): void {
     let dialogRef = this.dialog.open(ClienteAtenderComponent, {
       width: '44vw',
       data: { name: this.name, animal: this.animal }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed' + result.marca );
       this.animal = result;
     });
   }
 
 
   drop($event) {
-  this.openDialog();
+  
 
     let target = $event.target;
 
@@ -112,15 +108,28 @@ export class AcompanhamentoComponent implements OnInit {
       target = target.parentNode;
     }
 
+    //Old list ID, the one it came from
     var oldList = parseInt( cardNlist.substring(2,3));
+
+    //New list ID, the one that the card is being dropped
     var newList = parseInt(target.id.substring(1,2));
+
+    if(oldList == 0 && newList == 1){
+        this.openDialogAtender();
+    }
+
+    else{
+      
+    }
     var inserted = false;
+
     if(oldList != newList){
 
 
       var listLenght = this.lists[newList].cards.length;
       //this.lists[ parseInt(target.id.substring(1,2)) ].cards.push( this.cardStore.newCard(this.cardStore.getCard(cardNlist.substring(0,1)).description)); 
       var i;
+
       for (i = 0; i < listLenght; i++) {
           if(this.cardStore.getCard(cardNlist.substring(0,1)).date < this.cardStore.getCard( this.lists[newList].cards[i] ).date){
               this.lists[newList].cards.splice(i, 0, this.cardStore.getCard(cardNlist.substring(0,1)).id );

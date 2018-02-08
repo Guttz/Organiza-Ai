@@ -29,7 +29,6 @@ import { MyInputSelectComponent } from './common_components/my-input-select/my-i
 import { MyFormHeaderComponent } from './common_components/my-form-header/my-form-header.component';
 
 /*Import dos formularios*/
-import { FormInfoOrcamentoComponent } from './pages/form-info-orcamento/form-info-orcamento.component';
 import { FormDadosClienteComponent } from './pages/form-dados-cliente/form-dados-cliente.component';
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -48,7 +47,6 @@ import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.c
     MyButtonBwComponent,
     CardComponent,
     ListComponent,
-    FormInfoOrcamentoComponent,
     MyInputSelectComponent,
     FormDadosClienteComponent,
     MyFormHeaderComponent,

@@ -2,17 +2,17 @@
 <h1 mat-dialog-title>Informações do Orçamento</h1>
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="100">
-            <input matInput ngDefaultControl placeholder="Qual defeito apresentado?">
+            <input [(ngModel)]="data.defeito" matInput ngDefaultControl placeholder="Qual defeito apresentado?">
           </mat-form-field> 
       	</div>
 
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input matInput ngDefaultControl placeholder="Marca">
+            <input [(ngModel)]="data.marca" matInput ngDefaultControl placeholder="Marca">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input matInput ngDefaultControl placeholder="Modelo">
+            <input [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
           </mat-form-field> 
 
 	    </div>
@@ -20,11 +20,11 @@
 
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input matInput ngDefaultControl placeholder="Data de disponibilidade">
+            <input [(ngModel)]="data.datadisp" matInput ngDefaultControl placeholder="Data de disponibilidade">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input matInput ngDefaultControl placeholder="Horário de disponibilidade">
+            <input [(ngModel)]="data.hordisp" matInput ngDefaultControl placeholder="Horário de disponibilidade">
           </mat-form-field> 
 
 	    </div>
@@ -36,8 +36,11 @@
       	<my-button-bw (click)="onNoClick()" label="CANCELAR" style="margin-top: 12px; margin-right: 5px;"  >
       	</my-button-bw>
 
-        <my-button-orange 
-          fxFlexAlign="center" label="CONFIRMAR" style="margin-top: 12px;" (click)="updateUser(userCadForm)">
-        </my-button-orange>
+
+        <button class="my-button" mat-button [mat-dialog-close]="data" cdkFocusInitial style="margin-top: 12px;">CONFIRMAR</button>
+  
+<!--         <my-button-orange [mat-dialog-close]="data.animal"
+          fxFlexAlign="center" label="CONFIRMAR" style="margin-top: 12px;">
+        </my-button-orange>  -->
       </div>
 </div>
