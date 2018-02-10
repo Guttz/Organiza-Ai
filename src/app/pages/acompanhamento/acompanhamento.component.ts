@@ -90,7 +90,9 @@ export class AcompanhamentoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
       console.log('The dialog was closed' + result.marca );
+      
       this.animal = result;
     });
   }
