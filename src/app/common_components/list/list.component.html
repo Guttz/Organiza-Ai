@@ -8,8 +8,5 @@
     <app-card (dragstart)="dragStart($event)" (dragover)="allowDrop($event)" *ngFor="let cardId of list.cards" [card]="cardStore.getCard(cardId)"></app-card>
   </div>
 
-  <input #addCardInput type="text" (keyup.enter)="onEnter(addCardInput.value); addCardInput.value=''; displayAddCard=false;"
-    *ngIf="displayAddCard" autofocus>
-
 </div>
 </div>

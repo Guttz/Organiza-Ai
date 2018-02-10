@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-header-toolbar',
   templateUrl: './header-toolbar.component.html',
@@ -6,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderToolbarComponent implements OnInit {
 
-	menus = [false, false, false];
-	menuActive;
+  menus = [false, false, false];
+  menuActive;
 
 
-  constructor() { 
+  constructor(private http: HttpClient, private router: Router) { 
         this.menuActive = this.getCookie("menuActive");
         this.menus[this.menuActive] = true;
         //console.log(route._routerState.snapshot.url);
@@ -19,9 +22,22 @@ export class HeaderToolbarComponent implements OnInit {
       ngOnInit() {
       }
 
+    logout(){
+    const req = this.http.post('http://localhost:3000/logout', true)
+      .subscribe(
+        res => {
+          this.router.navigate(['/login']);
+        },
+        err => {
+          console.log("Error occured: " + err.error.message);
+        }
+    );
+
+  }
+
     //Function to put border on the element, changing style
     toggle_class(id: number){
-    	if (id != this.menuActive) {
+      if (id != this.menuActive) {
         this.menus[id] = true;
         this.menus[this.menuActive] = false;
         this.menuActive = id;

@@ -34,10 +34,15 @@ import { AppRoutingModule }     from './app-routing.module';
 
 /*Import de bibliotecas*/
 import { FlexLayoutModule } from '@angular/flex-layout';
+
+/*Import das Páginas*/
 import { HeaderToolbarComponent } from './pages/header-toolbar/header-toolbar.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { HistoricoComponent } from './pages/historico/historico.component';
 import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { AuthGuard } from './common_components/_guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,9 @@ import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.c
     HeaderToolbarComponent,
     AcompanhamentoComponent,
     HistoricoComponent,
-    ClienteAtenderComponent
+    ClienteAtenderComponent,
+    LoginComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +84,8 @@ import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.c
   entryComponents: [
   AcompanhamentoComponent,
   ClienteAtenderComponent],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [LoginComponent],
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

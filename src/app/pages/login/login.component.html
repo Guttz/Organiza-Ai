@@ -1,0 +1,40 @@
+<form #loginForm="ngForm" >
+
+ <div fxLayout="row" fxLayoutAlign="center center" style="height: 100vh;">
+
+  <div class="login-img" fxFlex="39">
+   <img routerLink="/acompanhamento" class="my-log-img" src="../assets/images/login_1.png">
+ </div>
+
+ <div fxLayout="column" fxLayoutAlign="center center" fxFlex="61">        
+
+  <div style="width: 17%;">
+   <img routerLink="/acompanhamento" class="my-logo" src="../assets/images/logo-login.png">
+ </div>
+
+ <mat-form-field fxFlexOffset="5" class="my-inputs">
+  <input [(ngModel)] = "user" matInput name="user" placeholder="Insira seu email" >
+</mat-form-field>
+
+<mat-form-field class="my-inputs">
+  <input  [(ngModel)] = "pass" matInput name="pass" placeholder="Senha" >
+</mat-form-field>
+
+<button mat-button class='my-button' fxFlexOffset="2" (click)="login(loginForm)" >ENTRAR</button>
+<button mat-button class='my-button' fxFlexOffset="2" (click)="signup(loginForm)"> CADASTRAR</button>
+<button mat-button class='my-button' fxFlexOffset="2" (click)="teste()"> GET HTML</button>
+<button mat-button class='my-button' fxFlexOffset="2" (click)="getHeader()"> GET HEADER</button>
+
+<!-- <my-button-orange fxFlexOffset="2" label="ENTRAR" class="enter-button" (click)="login(loginForm)"></my-button-orange>
+<my-button-orange fxFlexOffset="2" label="CADASTRAR" class="enter-button" (click)="signup(loginForm)"></my-button-orange>
+
+<my-button-orange fxFlexOffset="2" label="GET HTML" class="enter-button" (click)="teste()"></my-button-orange>
+
+<my-button-orange fxFlexOffset="2" label="Header" class="enter-button" (click)="getHeader()"></my-button-orange> -->
+
+<span routerLink="/esqueci-senha" fxFlexOffset="7" class="forgot-password">Esqueceu sua senha?</span>
+</div> 
+
+</div>
+
+</form>

@@ -10,8 +10,8 @@ export class HistoricoComponent implements OnInit {
 
 ELEMENT_DATA: Element[] = [
     {id: 1, cliente: 'Gustavo Morais', telefone: 41997919187, status: 'Finalizado', faturamento: new Date("September 13, 2014 11:13:00") , faturamentoString: '' , preco: 999 },
-  {id: 2, cliente: 'Morais Gustavo', telefone: 41997919187, status: 'Ativo', faturamento: new Date("August 22, 2015 03:59:33") , faturamentoString: '' , preco: 450 },
-    {id: 1, cliente: 'Gustavo Morais', telefone: 41997919187, status: 'Finalizado', faturamento: new Date("September 13, 2014 11:13:00") , faturamentoString: '' , preco: 999 },
+  {id: 2, cliente: 'Morais Gustavo', telefone: 41997919186, status: 'Ativo', faturamento: new Date("August 22, 2015 03:59:33") , faturamentoString: '' , preco: 450 },
+    {id: 1, cliente: 'Gustavo Morais', telefone: 41997919185, status: 'Finalizado', faturamento: new Date("September 13, 2014 11:13:00") , faturamentoString: '' , preco: 999 },
   {id: 2, cliente: 'Morais Gustavo', telefone: 41997919187, status: 'Ativo', faturamento: new Date("August 22, 2015 03:59:33") , faturamentoString: '' , preco: 450 },
     {id: 1, cliente: 'Gustavo Morais', telefone: 41997919187, status: 'Finalizado', faturamento: new Date("September 13, 2014 11:13:00") , faturamentoString: '' , preco: 999 },
   {id: 2, cliente: 'Morais Gustavo', telefone: 41997919187, status: 'Ativo', faturamento: new Date("August 22, 2015 03:59:33") , faturamentoString: '' , preco: 450 },

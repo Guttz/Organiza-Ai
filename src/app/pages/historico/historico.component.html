@@ -1,7 +1,11 @@
+<app-header-toolbar></app-header-toolbar>
 <div style="width: 100vw; height: 90vh; background: rgba(235,233,234, 0.3);">
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
     <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
+    </mat-form-field>
+        <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
     </mat-form-field>
   </div>
