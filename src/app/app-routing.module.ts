@@ -7,6 +7,7 @@ import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.c
 import { HistoricoComponent } from './pages/historico/historico.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { AuthGuard } from './common_components/_guard/auth.guard';
 
 const routes: Routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,12 +28,15 @@ const routes: Routes = [
   },
   {
       path: 'login',
-      component: LoginComponent
+      component: LoginComponent,
+      canActivate: [AuthGuard]
   },
   {
-      path: 'recuperar-senha',
-      component: ForgotPasswordComponent
+      path: 'esqueci-senha',
+      component: ForgotPasswordComponent,
+      canActivate: [AuthGuard]
   },
+  { path: '**', redirectTo: '/acompanhamento', pathMatch: 'full' },
 ];
 
 

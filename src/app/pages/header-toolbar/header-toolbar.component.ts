@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-header-toolbar',
@@ -12,11 +12,15 @@ export class HeaderToolbarComponent implements OnInit {
   menus = [false, false, false];
   menuActive;
 
-
-  constructor(private http: HttpClient, private router: Router) { 
-        this.menuActive = this.getCookie("menuActive");
-        this.menus[this.menuActive] = true;
-        //console.log(route._routerState.snapshot.url);
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
+        if(route.snapshot.url[0].path == 'acompanhamento'){
+          this.menus[1] = true;
+        }
+        else if(route.snapshot.url[0].path == 'historico'){
+          this.menus[2] = true;
+        }else if(route.snapshot.url[0].path == 'cadastro-cliente'){
+          this.menus[0] = true;
+        }
       }
 
       ngOnInit() {

@@ -1,47 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { CanActivate} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    private response: any;
-    test: boolean;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private _location: Location) {
 /*      this.response = false;*/
     }
 
-    login(){
-    //Sending true parameters for no reason, just so post is used
-    const req = this.http.get('http://localhost:3000/log')
-          .subscribe(
-            res => {
-              this.response = true;
-              this.test = true;
-              console.log(res);
-              console.log("ENTREI NO LOGIN");
-            },
-            err => {
-              console.log("Error occured: " + err.error.message);
-            }
-        );
-    }
+  canActivate() {
 
-    logout(){
-       this.response = false;
-    }
-
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        console.log("this response " + this.response);
-        console.log("this test " + this.test);
-        if (this.response == true) {
-            // logged in so return true
+        if( this.getCookie("dcJJe4ZEsB") != "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb"){
             return true;
         }
         else{
-            // not logged in so redirect to login page with the return url
-            this.router.navigate(['/historico']);
+            this._location.back();
             return false;
         }
+
+
     }
+
+      getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
 }

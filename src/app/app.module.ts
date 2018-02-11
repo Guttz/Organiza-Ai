@@ -84,7 +84,10 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
   entryComponents: [
   AcompanhamentoComponent,
   ClienteAtenderComponent],
-  providers: [LoginComponent],
+  providers: [
+    LoginComponent,
+    AuthGuard
+  ],
   bootstrap: [AppComponent],
   exports: []
 })
