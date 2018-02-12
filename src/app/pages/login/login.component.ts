@@ -35,7 +35,7 @@ export class LoginComponent implements CanActivate {
 
 
   signup(loginForm:NgForm){
-    const req = this.http.post('http://localhost:3000/signup', loginForm.value)
+    const req = this.http.post('http://localhost:3000/api/signup', loginForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -48,7 +48,7 @@ export class LoginComponent implements CanActivate {
   }
 
   login(loginForm:NgForm){
-  	const req = this.http.post('http://localhost:3000/log', loginForm.value)
+  	const req = this.http.post('http://localhost:3000/api/login', loginForm.value)
       .subscribe(
         res => {
           this.router.navigate(['/acompanhamento']);
@@ -61,10 +61,9 @@ export class LoginComponent implements CanActivate {
   }
 
     getHeader(){
-          const req = this.http.get('http://localhost:3000/header')
+          const req = this.http.get('http://localhost:3000/api/header')
       .subscribe(
         res => {
-          console.log(res);
           console.log(res);
         },
         err => {

@@ -42,7 +42,7 @@ export class FormDadosClienteComponent implements OnInit {
       alert("Os campos com * devem ser preenchidos.");
       return null;
     }
-    const req = this.http.post('http://localhost:3000/add_cli', myForm.value)
+    const req = this.http.post('http://localhost:3000/api/add_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -71,7 +71,7 @@ export class FormDadosClienteComponent implements OnInit {
       alert("Os campos com * devem ser preenchidos.");
       return null;
     }
-    const req = this.http.post('http://localhost:3000/update_cli', myForm.value)
+    const req = this.http.post('http://localhost:3000/api/update_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -99,7 +99,7 @@ export class FormDadosClienteComponent implements OnInit {
       return null;
     }
 
-    const req = this.http.post('http://localhost:3000/add_orca', myForm.value)
+    const req = this.http.post('http://localhost:3000/api/add_orca', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -113,7 +113,7 @@ export class FormDadosClienteComponent implements OnInit {
 
   checkUser(myForm:NgForm)
   {
-    this.http.post<ItemsResponseUser>("/get_user", myForm.value ).subscribe(data => {
+    this.http.post<ItemsResponseUser>("/api/get_user", myForm.value ).subscribe(data => {
       
       if(data != null )
       {

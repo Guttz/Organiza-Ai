@@ -27,7 +27,7 @@ export class HeaderToolbarComponent implements OnInit {
       }
 
     logout(){
-    const req = this.http.post('http://localhost:3000/logout', true)
+    const req = this.http.post('http://localhost:3000/api/logout', true)
       .subscribe(
         res => {
           this.router.navigate(['/login']);

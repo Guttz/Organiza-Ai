@@ -1,5 +1,5 @@
 const express = require('express');
-
+const router = express.Router();
 
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,33 +7,100 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var MongoClient = require('mongodb').MongoClient;
 
-const router = express.Router();
+//Full login experience implementing all libs below
+//var CT = require('../libs/country-list');
+var AM = require('../libs/account-manager');
+//var EM = require('../libs/email-dispatcher');
 
-// declare axios for making http requests
-const axios = require('axios');
-const app = express();
+router.get('/get_cards', (req, res) => { 
+  console.log(req.session);
+  MongoClient.connect('mongodb://localhost/', function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(my_assistence_db).collection('cards').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      res.send(result);
+    });
+  });
 
-app.get('/get_cards', (req, res) => {
-	var MongoClient = require('mongodb').MongoClient;
-  console.log("Teste: Entrei no get cards");
-	MongoClient.connect('mongodb://localhost/my_assistence_db', function(err, db) {
-	  if (err) {
-	    throw err;
-	  }
-	  db.collection('cards').find().toArray(function(err, result) {
-	    if (err) {
-	      throw err;
-	    }
-	    res.send(result);
-	  });
-	});
 });
 
 
+router.post('/get_user', (req,res) =>{
+  console.log("Running get_user Post.");
+  
+  MongoClient.connect('mongodb://localhost/', function(err, db) {
+    if (err) {
+      throw err;
+    } 
 
-app.post('/add_cli', function(req, res, next){
-	var model = require('./server/model/usuarios')();  
+    if(req.body.cpf != undefined)
+    {
+      db.db('my_assistence_db').collection('usuarios').findOne( { cpf: req.body.cpf }, function(err, result) {
+        if (err) {
+          throw err;
+        }
+        //Checking if founded any user
+        if(result != null)
+        {
+          console.log("The user is present on DB");
+          res.send(result);
+        }
+        else
+        {
+          console.log("The user is not present on DB");
+          res.send(null);
+        }
+      });
+    }
+    else
+    {
+      console.log("Can't get the CPF to make get_user post");
+      res.send(null);
+    }
+  });
+    
+});
+
+router.post('/update_cli', function(req, res, next){
+  console.log("Running update_cli Post.");
+  
+
+  MongoClient.connect('mongodb://localhost/', function(err, db){
+    if(err) {
+      throw err;
+    }
+
+    //Checking if the params has at least a valid cpf
+    if(req.body.cpf != undefined)
+    {
+      db.db('my_assistence_db').collection('usuarios').update( { cpf: req.body.cpf }, req.body, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Update_cli with success");
+          res.send('');
+        }
+      });
+    }
+    else
+    {
+      console.log("Invalid params, can't complete update_cli");
+    }
+
+  })
+});
+
+router.post('/add_cli', function(req, res, next){
+  var model = require('../model/usuarios')();  
   
   //Variavel que recebe os dados do fomulario
   var body = req.body;
@@ -50,9 +117,9 @@ app.post('/add_cli', function(req, res, next){
 
 });
 
-app.post('/add_orca', function(req, res, next){
-  var model = require('./server/model/orca')();  
-  console.log(req.param("marca"));
+router.post('/add_orca', function(req, res, next){
+  var model = require('../model/orca')();  
+  console.log(req.body.marca);
   //Variavel que recebe os dados do fomulario
   var body = req.body;
   body.status = false;
@@ -69,8 +136,8 @@ app.post('/add_orca', function(req, res, next){
 });
 
 
-app.post('/add_card', function(req, res, next){
-  var model = require('./server/model/cards')();
+router.post('/add_card', function(req, res, next){
+  var model = require('../model/cards')();
 
   //Variavel que recebe os dados do fomulario
   var body = req.body;
@@ -87,6 +154,45 @@ app.post('/add_card', function(req, res, next){
 
 });
 
-app.use('/', router);
+router.post('/login', function(req, res){
+    AM.manualLogin(req.body['user'], req.body['pass'], function(e, o){
+      if (!o){
+
+        res.status(400).send(e);
+      } else{
+        req.session.user = o;
+          res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 900000 });
+        
+        res.status(200).send(o);
+      }
+    });
+  });
+
+  router.post('/signup', function(req, res){
+    AM.addNewAccount({
+      user  : req.body['user'],
+      pass  : req.body['pass']
+    }, function(e){
+      if (e){
+        res.status(400).send(e);
+      } else{
+        res.status(200).send('ok');
+      }
+    });
+  });
+
+    router.post('/logout', function(req, res){
+    res.clearCookie('dcJJe4ZEsB');
+
+    //TEM QUE APAGAR A SESSION DO MONGODB AQU
+    
+    req.session.destroy( function(e){ res.status(200).send('') });
+  });
+  
+  router.get('/header', function(req, res) {
+      res.send(req.session);
+  });
+
+
 
 module.exports = router;
