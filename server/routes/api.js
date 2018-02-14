@@ -118,8 +118,12 @@ router.post('/add_cli', function(req, res, next){
 router.post('/add_orca', function(req, res, next){
       model = require('../model/orca')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
+      console.log(req.body);
+      
       var body = req.body;
       body.status = false;
+
+      
 
       model.create(body, function(err, output){
         if(err)

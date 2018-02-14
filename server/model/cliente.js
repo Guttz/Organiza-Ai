@@ -12,8 +12,8 @@ module.exports = function(ass){
 	var cliente = Schema({
 		cpf: String,
 		nome: String,
-		telefone: String,
-		celular: String,
+		telPrimario: String,
+		telSecundario: String,
 		email: String,
 		endereco: String
 	});

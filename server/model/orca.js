@@ -14,7 +14,12 @@ module.exports = function(ass){
 				marca: String,
 				data: Date,
 				modelo: String,
-				periodo: String
+				periodo: String,
+				nome: String,
+				telPrimario: String,
+				telSecundario: String,
+				email: String,
+				endereco: String
 			});
 	return db.model('orca', orca);
 }

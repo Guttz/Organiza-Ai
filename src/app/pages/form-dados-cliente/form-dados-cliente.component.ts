@@ -18,18 +18,18 @@ import { HttpClient } from '@angular/common/http';
 export class FormDadosClienteComponent implements OnInit {
 
   values = [ 
-    {value: '0', viewValue: 'Marca 0'},
-    {value: '1', viewValue: 'Marca 1'},
-    {value: '2', viewValue: 'Marca 2'}
+    {value: '0', viewValue: 'Manhã'},
+    {value: '1', viewValue: 'Tarde'},
   ];
   //TEL    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
   //CEL  Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
   //CPF    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
 
-  user: Submissions = { cpf: '', nome: '', telefone: '',celular: '', email: '', endereco: '' };
-  orca : Orca = { cpf: '', defeito: '', marca: '', data: new Date(1995, 10, 7), modelo: '', periodo: ''};
+  user: Submissions = { cpf: '', nome: '', telPrimario: 't', telSecundario: 's', email: '', endereco: '' };
+  orca : Orca = { cpf: '06101757340', defeito: 'a', marca: 'a', data: new Date(1/12/1098), modelo: 'a', periodo: 'a'};
   update: Boolean = false;
-  
+  auxCliente: any;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -53,8 +53,8 @@ export class FormDadosClienteComponent implements OnInit {
       );
     this.update = false;
     this.user.nome = '';
-    this.user.telefone = '';
-    this.user.celular = '';
+    this.user.telPrimario = '';
+    this.user.telSecundario = '';
     this.user.email = '';
     this.user.endereco = '';
     this.orca.cpf = myForm.value.cpf;
@@ -66,7 +66,7 @@ export class FormDadosClienteComponent implements OnInit {
 
   updateUser(myForm:NgForm) {
     //cheking if any required field is empty
-    if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "")
+    if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telPrimario == "" || myForm.value.endereco == "")
     {
       alert("Os campos com * devem ser preenchidos.");
       return null;
@@ -83,8 +83,8 @@ export class FormDadosClienteComponent implements OnInit {
     this.update = false;
     this.user.cpf = '';
     this.user.nome = '';
-    this.user.telefone = '';
-    this.user.celular = '';
+    this.user.telPrimario = '';
+    this.user.telSecundario = '';
     this.user.email = '';
     this.user.endereco = '';
     this.orca.cpf = myForm.value.cpf;
@@ -93,35 +93,59 @@ export class FormDadosClienteComponent implements OnInit {
   orcaForm(myForm:NgForm) {
     //cheking if any required field is empty
     if(myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" 
-      || myForm.value.modelo == "" || myForm.value.periodo == "")
+      || myForm.value.modelo == "" || myForm.value.periodo == "" )
     {
-      alert("Os campos com * devem ser preenchidos.");
+      alert("Preencha os campos devidamente");
       return null;
     }
 
-    const req = this.http.post('http://localhost:3000/api/add_orca', myForm.value)
-      .subscribe(
-        res => {
-          console.log(res);
+    //Add other values to the orca
+    myForm.value.test = "test2";
+
+    this.http.post('http://localhost:3000/api/get_cli', myForm.value).subscribe(
+        resCliente => {
+          this.auxCliente = resCliente;
+
+          if(myForm.value.periodo == "0"){
+            myForm.value.periodo = "Manhã";
+          }else{
+            myForm.value.periodo = "Tarde";
+          }
+
+          //Acrescentando os campos que compoem um orçamento
+          myForm.value.nome = this.auxCliente.nome;
+          myForm.value.telPrimario = this.auxCliente.telPrimario;
+          myForm.value.telSecundario = this.auxCliente.telSecundario;
+          myForm.value.email = this.auxCliente.email;
+          myForm.value.endereco = this.auxCliente.endereco;
+           
+            this.http.post('http://localhost:3000/api/add_orca', myForm.value)
+              .subscribe(
+                res => {
+                  console.log(res);
+                },
+                err => {
+                  console.log("Error occured: " + err.error.message);
+                }
+              );
         },
         err => {
           console.log("Error occured: " + err.error.message);
         }
       );
-    console.log("Output = " + req);
   }
 
   checkUser(myForm:NgForm)
   {
-    this.http.post<ItemsResponseUser>("/api/get_cli", myForm.value ).subscribe(data => {
+     this.http.post<ItemsResponseUser>("/api/get_cli", myForm.value ).subscribe(data => {
       
       if(data != null )
       {
         this.user.cpf = data.cpf;
         this.orca.cpf = data.cpf;
         this.user.nome = data.nome;
-        this.user.telefone = data.telefone;
-        this.user.celular = data.celular;
+        this.user.telPrimario = data.telPrimario;
+        this.user.telSecundario = data.telSecundario;
         this.user.email = data.email;
         this.user.endereco = data.endereco;
         this.update = true;
@@ -130,8 +154,8 @@ export class FormDadosClienteComponent implements OnInit {
       {
         this.update = false;
         this.user.nome = '';
-        this.user.telefone = '';
-        this.user.celular = '';
+        this.user.telPrimario = '';
+        this.user.telSecundario = '';
         this.user.email = '';
         this.user.endereco = '';
       }
@@ -143,8 +167,8 @@ export class FormDadosClienteComponent implements OnInit {
 interface ItemsResponseUser {
   cpf: string;
   nome: string;
-  telefone: string;
-  celular: string;
+  telPrimario: string;
+  telSecundario: string;
   email: string;
   endereco: string;
 }

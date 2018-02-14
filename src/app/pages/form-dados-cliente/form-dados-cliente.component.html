@@ -28,18 +28,18 @@
         <div fxLayout="row">
           <mat-form-field fxFlex>
             <input matInput 
-              [(ngModel)] = "user.telefone" 
+              [(ngModel)] = "user.telPrimario" 
               ngDefaultControl 
-              name="telefone" 
+              name="telPrimario" 
               placeholder="Telefone primário"  
               required>
         </mat-form-field>
 
         <mat-form-field fxFlex fxFlexOffset="2">
             <input matInput 
-              [(ngModel)] = "user.celular" 
+              [(ngModel)] = "user.telSecundario" 
               ngDefaultControl 
-              name="celular" 
+              name="telSecundario" 
               placeholder="Telefone secundário">
         </mat-form-field>
 
@@ -102,6 +102,7 @@
               (blur)="checkUser(orcaCadForm)"
               required>
             </mat-form-field>
+
             <my-input-text fxFlex 
               name="defeito" 
               [(ngModel)]="orca.defeito" 
@@ -113,18 +114,15 @@
           </div>
 
           <div class="row" >
-            <mat-form-field fxFlex>
-              <mat-select 
-                placeholder="Marca"  
-                [(ngModel)]="orca.marca" 
-                name="marca" >
-                <mat-option 
-                  *ngFor="let value of values" 
-                  [(value)]="value.value" 
-                  [ngStyle]="{width: width + 'px'}">
-                  {{ value.viewValue }}
-                </mat-option>
-              </mat-select>
+
+
+            <mat-form-field fxFlex="32">
+              <input matInput 
+              name="marca" 
+              [(ngModel)]="orca.marca" 
+              ngDefaultControl 
+              placeholder="Marca"  
+              required>
             </mat-form-field>
 
 
@@ -138,6 +136,8 @@
 
               <input matInput 
               [matDatepicker]="picker" 
+              name="data"
+              [(ngModel)]="orca.data" 
               placeholder="Data de visita"
               required>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -156,14 +156,29 @@
 
           <div class="row">
 
-            <my-input-text 
+
+           <mat-form-field fxFlex="32">
+              <mat-select 
+                placeholder="Período"  
+                [(ngModel)]="orca.periodo" 
+                name="periodo" >
+                <mat-option 
+                  *ngFor="let value of values" 
+                  [(value)]="value.value" 
+                  [ngStyle]="{width: width + 'px'}">
+                  {{ value.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+
+<!--             <my-input-text 
               fxFlex="32" 
               name ="periodo" 
               [(ngModel)] ="orca.periodo" 
               ngDefaultControl 
               label="Período de disponibilidade" 
               required> 
-            </my-input-text>
+            </my-input-text> -->
 
             <div fxFlex="grow"></div>
 

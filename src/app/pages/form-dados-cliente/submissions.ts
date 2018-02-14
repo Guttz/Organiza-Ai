@@ -2,8 +2,8 @@ export class Submissions {
 
   cpf: string;
   nome: string;
-  telefone: string;
-  celular: string;
+  telPrimario: string;
+  telSecundario: string;
   email: string;
   endereco: string
 
