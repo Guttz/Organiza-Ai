@@ -113,7 +113,7 @@ export class FormDadosClienteComponent implements OnInit {
 
   checkUser(myForm:NgForm)
   {
-    this.http.post<ItemsResponseUser>("/api/get_user", myForm.value ).subscribe(data => {
+    this.http.post<ItemsResponseUser>("/api/get_cli", myForm.value ).subscribe(data => {
       
       if(data != null )
       {

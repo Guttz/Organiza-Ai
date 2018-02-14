@@ -9,7 +9,7 @@ module.exports = function(ass){
 
 
 	//Definindo a estrutura da minha colection usuarios no db
-	var usuarios = Schema({
+	var cliente = Schema({
 		cpf: String,
 		nome: String,
 		telefone: String,
@@ -17,5 +17,5 @@ module.exports = function(ass){
 		email: String,
 		endereco: String
 	});
-	return db.model('usuarios', usuarios);
+	return db.model('cliente', cliente);
 }

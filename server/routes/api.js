@@ -31,7 +31,7 @@ router.get('/get_cards', (req, res) => {
 });
 
 
-router.post('/get_user', (req,res) =>{
+router.post('/get_cli', (req,res) =>{
   console.log("Running get_user Post.");
 
   MongoClient.connect('mongodb://localhost/', function(err, db) {
@@ -41,7 +41,7 @@ router.post('/get_user', (req,res) =>{
 
     if(req.body.cpf != undefined)
     {
-      db.db('my_assistence_db').collection('usuarios').findOne( { cpf: req.body.cpf }, function(err, result) {
+      db.db(req.session.user.assistencia).collection('clientes').findOne( { cpf: req.body.cpf }, function(err, result) {
         if (err) {
           throw err;
         }
@@ -79,7 +79,7 @@ router.post('/update_cli', function(req, res, next){
     //Checking if the params has at least a valid cpf
     if(req.body.cpf != undefined)
     {
-      db.db('my_assistence_db').collection('usuarios').update( { cpf: req.body.cpf }, req.body, function(err, result){
+      db.db(req.session.user.assistencia).collection('clientes').update( { cpf: req.body.cpf }, req.body, function(err, result){
         if(err)
         {
           throw err;
