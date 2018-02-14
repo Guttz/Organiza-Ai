@@ -1,17 +1,12 @@
 var mongoose = require('mongoose');
 
-// Build the connection string 
-var dbURL = 'mongodb://localhost/my_assistence_db'; 
-
-
 //Função chamada quando se da require
-module.exports = function() {
+module.exports = function(ass) {
 	var db;
 	if(!db)
 	{
-		db = mongoose.createConnection(dbURL);
+		db = mongoose.createConnection( 'mongodb://localhost/' + ass);
 	}
 
-	console.log("Db conectado: " + db);
 	return db;
 }

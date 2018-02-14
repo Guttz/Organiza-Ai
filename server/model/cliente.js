@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 //Função chamada quando se da require nesse arquivo
-module.exports = function(){
-	var db = require('./../libs/connect_db')();
+module.exports = function(ass){
+
+	db = mongoose.createConnection( 'mongodb://localhost/' + ass);
 
 	var Schema = mongoose.Schema;
 

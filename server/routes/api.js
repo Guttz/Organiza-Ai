@@ -33,7 +33,7 @@ router.get('/get_cards', (req, res) => {
 
 router.post('/get_user', (req,res) =>{
   console.log("Running get_user Post.");
-  
+
   MongoClient.connect('mongodb://localhost/', function(err, db) {
     if (err) {
       throw err;
@@ -64,7 +64,7 @@ router.post('/get_user', (req,res) =>{
       res.send(null);
     }
   });
-    
+
 });
 
 router.post('/update_cli', function(req, res, next){
@@ -100,38 +100,35 @@ router.post('/update_cli', function(req, res, next){
 });
 
 router.post('/add_cli', function(req, res, next){
-  var model = require('../model/usuarios')();  
-  
-  //Variavel que recebe os dados do fomulario
-  var body = req.body;
-  body.status = false;
+    model = require('../model/cliente')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      var body = req.body;
+      body.status = false;
 
-  model.create(body, function(err, usuario){
-    if(err)
-    {
-      throw err;
-    }
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
 
-    res.redirect('/');
-  })
-
+        res.redirect('/');
+      })
 });
 
 router.post('/add_orca', function(req, res, next){
-  var model = require('../model/orca')();  
-  console.log(req.body.marca);
-  //Variavel que recebe os dados do fomulario
-  var body = req.body;
-  body.status = false;
+      model = require('../model/orca')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      var body = req.body;
+      body.status = false;
 
-  model.create(body, function(err, usuario){
-    if(err)
-    {
-      throw err;
-    }
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
 
-    res.redirect('/');
-  })
+        res.redirect('/');
+      })
 
 });
 
@@ -155,43 +152,45 @@ router.post('/add_card', function(req, res, next){
 });
 
 router.post('/login', function(req, res){
-    AM.manualLogin(req.body['user'], req.body['pass'], function(e, o){
-      if (!o){
+  AM.manualLogin(req.body['user'], req.body['pass'], function(e, o){
+    if (!o){
 
-        res.status(400).send(e);
-      } else{
-        req.session.user = o;
-          res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 900000 });
-        
-        res.status(200).send(o);
-      }
-    });
+      res.status(400).send(e);
+    } else{
+      console.log('eu sou o ' + o);
+      req.session.user = o;
+      res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 900000 });
+
+      res.status(200).send(o);
+    }
   });
+});
 
-  router.post('/signup', function(req, res){
-    AM.addNewAccount({
-      user  : req.body['user'],
-      pass  : req.body['pass']
-    }, function(e){
-      if (e){
-        res.status(400).send(e);
-      } else{
-        res.status(200).send('ok');
-      }
-    });
+router.post('/signup', function(req, res){
+  AM.addNewAccount({
+    user  : req.body['user'],
+    pass  : req.body['pass'],
+    assistencia  : 'Rosa',
+  }, function(e){
+    if (e){
+      res.status(400).send(e);
+    } else{
+      res.status(200).send('ok');
+    }
   });
+});
 
-    router.post('/logout', function(req, res){
-    res.clearCookie('dcJJe4ZEsB');
+router.post('/logout', function(req, res){
+  res.clearCookie('dcJJe4ZEsB');
 
     //TEM QUE APAGAR A SESSION DO MONGODB AQU
     
     req.session.destroy( function(e){ res.status(200).send('') });
   });
-  
-  router.get('/header', function(req, res) {
-      res.send(req.session);
-  });
+
+router.get('/header', function(req, res) {
+  res.send(req.session.user);
+});
 
 
 

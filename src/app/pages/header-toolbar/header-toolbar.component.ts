@@ -37,7 +37,20 @@ export class HeaderToolbarComponent implements OnInit {
         }
     );
 
-  }
+    }
+
+      getHeader(){
+          const req = this.http.get('http://localhost:3000/api/header')
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured: " + err.error.message);
+        }
+        );
+
+      }
 
     //Function to put border on the element, changing style
     toggle_class(id: number){

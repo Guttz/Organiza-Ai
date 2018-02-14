@@ -51,6 +51,7 @@ export class LoginComponent implements CanActivate {
   	const req = this.http.post('http://localhost:3000/api/login', loginForm.value)
       .subscribe(
         res => {
+          console.log("im here" + res);
           this.router.navigate(['/acompanhamento']);
         },
         err => {
@@ -69,9 +70,9 @@ export class LoginComponent implements CanActivate {
         err => {
           console.log("Error occured: " + err.error.message);
         }
-    );
+      );
 
-  }
+    }
 
       getCookie(cname) {
       var name = cname + "=";

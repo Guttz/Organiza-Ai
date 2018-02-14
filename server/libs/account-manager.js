@@ -14,7 +14,7 @@ exports.autoLogin = function(user, pass, callback)
 {
 
 	MongoDB.connect('mongodb://localhost/', function(err, db) {
-		db.db('my_assistence_db').collection('accounts').findOne({user:user}, function(e, o) {
+		db.db('control').collection('accounts').findOne({user:user}, function(e, o) {
 			if (o){
 				o.pass == pass ? callback(o) : callback(null);
 			}else{
@@ -28,7 +28,7 @@ exports.manualLogin = function(user, pass, callback)
 {
 	MongoDB.connect('mongodb://localhost/', function(err, db) {
 
-		db.db('my_assistence_db').collection('accounts').findOne({user:user}, function(e, o) {
+		db.db('control').collection('accounts').findOne({user:user}, function(e, o) {
 			if (o == null){
 				callback('user-not-found');
 			}	else{
@@ -49,7 +49,7 @@ exports.manualLogin = function(user, pass, callback)
 exports.addNewAccount = function(newData, callback)
 {
 	MongoDB.connect('mongodb://localhost/', function(err, db) {
-		db.db('my_assistence_db').collection('accounts').findOne({user:newData.user}, function(e, o) {
+		db.db('control').collection('accounts').findOne({user:newData.user}, function(e, o) {
 			if (o){
 				callback('username-taken');
 			}
@@ -58,7 +58,7 @@ exports.addNewAccount = function(newData, callback)
 					newData.pass = hash;
 				// append date stamp when record was created //
 				newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-				db.db('my_assistence_db').collection('accounts').insert(newData, {safe: true}, callback);
+				db.db('control').collection('accounts').insert(newData, {safe: true}, callback);
 			});
 			}
 		});

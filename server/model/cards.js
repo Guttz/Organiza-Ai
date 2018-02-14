@@ -9,15 +9,17 @@ module.exports = function(){
 
 	//Definindo a estrutura da minha colection cards no db
 	var cards = Schema({
-		    id: String,
-		    description: String,
-		    client: String,
-		    number: String,
-		    date: Date,
-		    day: Number,
-		    month: Number,
-		    period: String,
-		    adress: String
+		cpf: String,
+		defeito: String,
+		marca: String,
+		data: Date,
+		modelo: String,
+		periodo: String
+		nome: String,
+		telefone: String,
+		celular: String,
+		email: String,
+		endereco: String
 	});
 	return db.model('cards', cards);
 }
