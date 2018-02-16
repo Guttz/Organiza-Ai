@@ -1,12 +1,25 @@
 export class CardSchema {
-    id: string;
-    description: string;
-    client: string;
-    number: string;
-    date: Date;
-    day: number;
-    month: number;
-    period: string;
-    adress: string;
+	estado: string;
+	id: string;
+	bd_id: string;
+	defeito: string;
+	nome: string;
+	telPrimario: string;
+	data: Date;
+	dia: number;
+	mes: number;
+	periodo: string;
+	endereco: string;
+
+	marca: string;
+	modelo: string;
+	telSecundario: string;
+	email: string;
+	realizado: string;
+	pecas: string;
+	servico: string;
+	maoObra: string;
+	valorFinal: string;
+	metPag: string;
 
 }

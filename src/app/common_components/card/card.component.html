@@ -1,16 +1,16 @@
-<div class="card" draggable="true" (dragstart)="dragStart($event)" id="{{card.id}}">
+<div class="card" draggable="true"  (dragstart)="dragStart($event)" id="{{card.id}}">
 
-<div >
-	<span><b> <!-- {{card.id}}--> {{card.client}} -</b></span>
+<div id="{{card.id}}" >
+	<span ><b id="{{card.id}}" > <!-- {{card.id}}--> {{card.nome}} -</b></span>
 
-	<span class="my-card-des"><b>{{card.description}}</b></span>
+	<span  class="my-card-des"><b id="{{card.id}}" >{{card.estado}}</b></span>
 </div>
 
-<div>
-	<span>Tel.</span>
-	<span> <b> <span style="color: rgb(51, 97, 134);">{{card.number}}</span> - {{card.day}}/{{card.month}} {{card.period}} </b></span>
+<div id="{{card.id}}">
+	<span id="{{card.id}}" >Tel.</span>
+	<span> <b id="{{card.id}}" > <span id="{{card.id}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>
 </div>
 
-<span>{{card.adress}}</span>
+<span id="{{card.id}}" >{{card.endereco}}</span>
 
 </div>

@@ -17,17 +17,29 @@ export class CardStore {
         return this.cards[ parseInt(cardId) ];
     }
 
-    newCard(description: string, client: string, number: string, date: Date, period: string, adress: string): string {
+    newCard(estado: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string): string {
         const card = new CardSchema();
-        card.description = description;
-        card.client = client;
-        card.adress = adress;
-        card.date = date;
-        card.period = period;
-        card.number = number;
-        card.day = date.getDate();
-        card.month = date.getMonth() + 1;
+        card.estado = estado;
+        card.bd_id = id;
+        card.defeito = defeito;
+        card.nome = nome;
+        card.telPrimario = telPrimario;
+        card.data = data;
+        card.dia = data.getDate();
+        card.mes = data.getMonth() + 1;
+        card.periodo = periodo;
+        card.endereco = endereco;
 
+        card.marca = marca;
+        card.modelo = modelo;
+        card.telSecundario = telSecundario;
+        card.email = email;
+        card.realizado = realizado;
+        card.pecas = pecas;
+        card.servico = servico;
+        card.maoObra = maoObra;
+        card.valorFinal = valorFinal;
+        card.metPag = metPag;
         return (this._addCard(card));
     }
 }

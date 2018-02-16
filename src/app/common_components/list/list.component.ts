@@ -17,12 +17,12 @@ export class ListComponent implements OnInit {
    }
 
   ngOnInit() {
-      const cardId = this.cardStore.newCard("Orçamento", "Gustavo Morais", "(41) 99791 9187", new Date("October 23, 2014 11:13:00") ," | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
+/*      const cardId = this.cardStore.newCard("Orçamento", "Gustavo Morais", "(41) 99791 9187", new Date("October 23, 2014 11:13:00") ," | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
       const cardIdd = this.cardStore.newCard("Atendimento", "Lucas Araújo", "(41) 9979 19187", new Date("October 13, 2014 11:13:00"), " | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
       const cardIddd = this.cardStore.newCard("Atendimento", "Lucas Araújo", "(41) 9979 19187", new Date("October 13, 2014 11:13:00"), " | Tarde", "Avenida Silva Jardim, 314 - Rebouças - Curitiba");
       this.list.cards.push(cardId);
       this.list.cards.push(cardIdd);
-      this.list.cards.push(cardIddd);
+      this.list.cards.push(cardIddd);*/
   }
 
   allowDrop($event) {

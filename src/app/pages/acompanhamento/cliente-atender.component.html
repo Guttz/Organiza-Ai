@@ -1,4 +1,4 @@
-<div class="popup"> 
+<div class="column" class="popup"> 
 <h1 mat-dialog-title>Informações do Orçamento</h1>
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="100">
@@ -12,20 +12,50 @@
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
+            <input [disabled]="true" [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
           </mat-form-field> 
 
 	    </div>
 
 
       	<div class="row">
-      	   <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input [(ngModel)]="data.datadisp" matInput ngDefaultControl placeholder="Data de disponibilidade">
-          </mat-form-field> 
 
-          <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [(ngModel)]="data.hordisp" matInput ngDefaultControl placeholder="Horário de disponibilidade">
-          </mat-form-field> 
+            <mat-form-field 
+              name="data" 
+              [(ngModel)]="data.data" 
+              ngDefaultControl 
+              fxFlexOffset="2" 
+              fxFlex="49">
+
+              <input matInput 
+              [disabled]="true"
+              [matDatepicker]="picker" 
+              name="data"
+              [(ngModel)]="data.data" 
+              placeholder="Data de visita"
+              >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+
+           <mat-form-field fxFlexOffset="2" fxFlex="49">
+              <mat-select 
+                placeholder="Período"
+                ngDefaultControl
+                [(ngModel)]="data.periodo" 
+                name="periodo" >
+                <mat-option 
+                  *ngFor="let value of periodos" [value]="value.value" >
+                  {{ value.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+
+<!--           <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input [(ngModel)]="data.periodo" matInput ngDefaultControl placeholder="Horário de disponibilidade">
+          </mat-form-field>  -->
+
 
 	    </div>
 

@@ -13,10 +13,16 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./cliente-atender.component.scss']
 })
 export class ClienteAtenderComponent implements OnInit {
+    periodos = [
+    {value: 'Manhã'},
+    {value: 'Tarde'}
+  ];
 
 constructor(
     public dialogRef: MatDialogRef<ClienteAtenderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+  
+
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -24,6 +30,7 @@ constructor(
 
   ngOnInit() {
   }
+
 
 }
 
@@ -37,10 +44,16 @@ constructor(
 export class AcompanhamentoComponent implements OnInit {
 	cardStore: CardStore;
   lists: ListSchema[];
-    animal: string;
+  animal: string;
   name: string;
 
-  constructor(private http: HttpClient, public dialog: MatDialog) { }
+  auxData: any;
+
+
+
+  constructor(private http: HttpClient, public dialog: MatDialog) {
+  this.getOrcs();
+  }
 
   makeMockData() {
     
@@ -69,17 +82,21 @@ export class AcompanhamentoComponent implements OnInit {
 
   ngOnInit() {
     this.makeMockData();
-    this.lists[0].cards.sort();
-
   }
 
 
-  getCards()
+  getOrcs()
   {
-    this.http.get<ItemsResponse>("/get_cards").subscribe(data => {
+    this.http.get<ItemsResponse>("/api/get_orcas").subscribe(data => {
       //Agora todos os dados estao na variavel data
-      //Exemplo de uso:
-      console.log("Cliente " + data.client);
+      this.auxData = data;
+
+      for (var i = 0; i < this.auxData.length ; i++) {
+        console.log("o id "+ data[i]._id);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null);
+          this.lists[0].cards.push(cardId)
+      }
+
     });
   }
   
@@ -97,6 +114,63 @@ export class AcompanhamentoComponent implements OnInit {
     });
   }
 
+  clickOrcamento(idCard): void {
+
+    var card = this.cardStore.getCard(idCard);
+
+    let dialogRef = this.dialog.open(ClienteAtenderComponent, {
+      width: '44vw',
+      data: { marca: card.marca, defeito: card.defeito, modelo: card.modelo, data: card.data, periodo: card.periodo }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+      //console.log('The dialog was closed' + result.defeito );
+
+      if(result!=null){
+          result.bd_id = card.bd_id;
+/*           estado: string;
+            id: string;
+            bd_id: string;
+
+            nome: string;
+            telPrimario: string;
+ 
+            dia: number;
+            mes: number;
+            periodo: string;
+            endereco: string;
+            telSecundario: string;
+            email: string;
+            realizado: string;
+            pecas: string;
+            servico: string;
+            maoObra: string;
+            valorFinal: string;
+            metPag: string;*/
+
+          console.log(card);
+          card = result;
+          console.log(card);
+            const req = this.http.post('http://localhost:3000/api/update_orca', result)
+            .subscribe(
+              res => {
+                console.log(res);
+              },
+              err => {
+                console.log("Error occured: " + err.error.message);
+              }
+            );
+
+      }
+
+    });
+  }
+
+  clicked(event){
+    this.clickOrcamento(event.target.id);
+
+  }
 
   drop($event) {
   
@@ -160,13 +234,15 @@ export class AcompanhamentoComponent implements OnInit {
 
 //Definindo o que sera a resposta do getCards
 interface ItemsResponse {
-  id: String;
-  description: String;
-  client: String;
-  number: String;
-  date: Date;
-  day: Number;
-  month: Number;
-  period: String;
-  adress: String;
+    cpf: string,
+    defeito: string,
+    marca: string,
+    data: Date,
+    modelo: string,
+    periodo: string,
+    nome: string,
+    telPrimario: string,
+    telSecundario: string,
+    email: string,
+    endereco: string
 }

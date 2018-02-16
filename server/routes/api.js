@@ -8,19 +8,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
 
 //Full login experience implementing all libs below
 //var CT = require('../libs/country-list');
 var AM = require('../libs/account-manager');
 //var EM = require('../libs/email-dispatcher');
 
-router.get('/get_cards', (req, res) => { 
-  console.log(req.session);
+router.get('/get_orcas', (req, res) => { 
   MongoClient.connect('mongodb://localhost/', function(err, db) {
     if (err) {
       throw err;
     }
-    db.db(my_assistence_db).collection('cards').find().toArray(function(err, result) {
+    db.db(req.session.user.assistencia).collection('orcas').find().toArray(function(err, result) {
       if (err) {
         throw err;
       }
@@ -68,9 +68,8 @@ router.post('/get_cli', (req,res) =>{
 });
 
 router.post('/update_cli', function(req, res, next){
-  console.log("Running update_cli Post.");
+  //console.log("Running update_cli Post.");
   
-
   MongoClient.connect('mongodb://localhost/', function(err, db){
     if(err) {
       throw err;
@@ -136,6 +135,36 @@ router.post('/add_orca', function(req, res, next){
 
 });
 
+router.post('/update_orca', function(req, res, next){
+  //console.log("Running update_cli Post.");
+  
+  MongoClient.connect('mongodb://localhost/', function(err, db){
+    if(err) {
+      throw err;
+    }
+
+    //Checking if the params has at least a valid cpf
+    if(req.body.bd_id != undefined)
+    {
+      db.db(req.session.user.assistencia).collection('orcas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, data: req.body.data, periodo: req.body.periodo}}, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Updated orca with success");
+          res.send(result);
+        }
+      });
+    }
+    else
+    {
+      console.log("Invalid params, can't complete update_cli");
+    }
+
+  })
+});
 
 router.post('/add_card', function(req, res, next){
   var model = require('../model/cards')();
