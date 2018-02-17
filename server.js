@@ -15,16 +15,16 @@ const app = express();
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-     res.setHeader('Access-Control-Allow-Origin', 'http://myas:3000');
+     //res.setHeader('Access-Control-Allow-Origin', 'http://myas:3000');
 
      //doesnt work separetely
-     res.setHeader('Access-Control-Allow-Origin', 'http://myas');
+     res.setHeader('Access-Control-Allow-Origin', 'http://myas.com.br');
 
      //doesnt work separetely
-    res.setHeader('Access-Control-Allow-Origin', 'http://ec2-54-210-153-102.compute-1.amazonaws.com:80');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://ec2-54-210-153-102.compute-1.amazonaws.com:80');
 
     //The last one works
-    res.setHeader('Access-Control-Allow-Origin', 'http://ec2-54-210-153-102.compute-1.amazonaws.com:3000');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://ec2-54-210-153-102.compute-1.amazonaws.com:3000');
 
     // Request methods you wish to allow
     //res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
