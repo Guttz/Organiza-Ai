@@ -9,7 +9,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 })
 export class HeaderToolbarComponent implements OnInit {
   //url = "http://localhost:3000";
-  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:3000";
+  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
 
 
   menus = [false, false, false];
