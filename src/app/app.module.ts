@@ -40,6 +40,7 @@ import { HeaderToolbarComponent } from './pages/header-toolbar/header-toolbar.co
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { HistoricoComponent } from './pages/historico/historico.component';
 import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.component';
+import { AtendimentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
@@ -59,6 +60,7 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     AcompanhamentoComponent,
     HistoricoComponent,
     ClienteAtenderComponent,
+    AtendimentoComponent,
     LoginComponent,
     ForgotPasswordComponent
   ],
@@ -83,7 +85,8 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
   ],
   entryComponents: [
   AcompanhamentoComponent,
-  ClienteAtenderComponent],
+  ClienteAtenderComponent,
+  AtendimentoComponent],
   providers: [
     LoginComponent,
     AuthGuard

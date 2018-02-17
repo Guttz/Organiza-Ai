@@ -1,0 +1,84 @@
+<div class="column" class="popup"> 
+<h1 mat-dialog-title>Informações do Orçamento</h1>
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="100">
+            <input [(ngModel)]="data.defeito" matInput ngDefaultControl placeholder="Qual defeito apresentado?">
+          </mat-form-field> 
+      	</div>
+
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="49">
+            <input [(ngModel)]="data.marca" matInput ngDefaultControl placeholder="Marca">
+          </mat-form-field> 
+
+          <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
+          </mat-form-field> 
+
+	    </div> 
+
+      <div class="row">
+           <mat-form-field fxFlexOffset="0" fxFlex="100">
+            <input [(ngModel)]="data.realizado" matInput ngDefaultControl placeholder="O que foi realizado?">
+          </mat-form-field> 
+      </div>
+
+              <div class="row">
+           <mat-form-field fxFlexOffset="0" fxFlex="49">
+            <input [(ngModel)]="data.pecas" matInput ngDefaultControl placeholder="Peças usadas">
+          </mat-form-field> 
+
+          <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input [(ngModel)]="data.servico" matInput ngDefaultControl placeholder="Serviço">
+          </mat-form-field> 
+
+      </div> 
+
+              <div class="row">
+           <mat-form-field fxFlexOffset="0" fxFlex="49">
+            <input [(ngModel)]="data.maoObra" matInput ngDefaultControl placeholder="Mão de Obra">
+          </mat-form-field> 
+
+          <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input [(ngModel)]="data.valorFinal" matInput ngDefaultControl placeholder="Valor final serviço">
+          </mat-form-field> 
+
+      </div> 
+
+      	<div class="row">
+
+           <mat-form-field fxFlex>
+              <mat-select 
+                placeholder="Método de pagamento"
+                ngDefaultControl
+                [(ngModel)]="data.metPag" 
+                name="periodo" >
+                <mat-option 
+                  *ngFor="let value of periodos" [value]="value.value" >
+                  {{ value.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+
+<!--           <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input [(ngModel)]="data.periodo" matInput ngDefaultControl placeholder="Horário de disponibilidade">
+          </mat-form-field>  -->
+
+
+	    </div>
+
+
+
+
+      <div fxLayout="row" fxLayoutAlign="end center" >
+      	<my-button-bw (click)="onNoClick()" label="CANCELAR" style="margin-top: 12px; margin-right: 5px;"  >
+      	</my-button-bw>
+
+
+        <button class="my-button" mat-button [mat-dialog-close]="data" cdkFocusInitial style="margin-top: 12px;">CONFIRMAR</button>
+  
+<!--         <my-button-orange [mat-dialog-close]="data.animal"
+          fxFlexAlign="center" label="CONFIRMAR" style="margin-top: 12px;">
+        </my-button-orange>  -->
+      </div>
+</div>

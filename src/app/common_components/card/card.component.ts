@@ -16,7 +16,6 @@ export class CardComponent implements OnInit {
   }
 
   dragStart(ev) {
-    console.log("my id:" + ev.target.id);
     ev.dataTransfer.setData('text', ev.target.id);
   }
   

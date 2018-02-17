@@ -8,7 +8,7 @@ module.exports = function(ass){
 	var Schema = mongoose.Schema;
 
 	//Definindo a estrutura da minha colection usuarios no db
-			var orca = Schema({
+			var atendimento = Schema({
 				cpf: String,
 				defeito: String,
 				marca: String,
@@ -21,8 +21,5 @@ module.exports = function(ass){
 				email: String,
 				endereco: String
 			});
-	return db.model('orca', orca);
+	return db.model('atendimento', atendimento);
 }
-
-
-

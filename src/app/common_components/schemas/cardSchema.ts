@@ -1,5 +1,6 @@
 export class CardSchema {
 	estado: string;
+	cpf: string;
 	id: string;
 	bd_id: string;
 	defeito: string;

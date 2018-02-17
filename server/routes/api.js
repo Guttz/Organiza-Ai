@@ -8,27 +8,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost/";
 var ObjectId = require('mongodb').ObjectID;
 
 //Full login experience implementing all libs below
 //var CT = require('../libs/country-list');
 var AM = require('../libs/account-manager');
 //var EM = require('../libs/email-dispatcher');
-
-router.get('/get_orcas', (req, res) => { 
-  MongoClient.connect('mongodb://localhost/', function(err, db) {
-    if (err) {
-      throw err;
-    }
-    db.db(req.session.user.assistencia).collection('orcas').find().toArray(function(err, result) {
-      if (err) {
-        throw err;
-      }
-      res.send(result);
-    });
-  });
-
-});
 
 
 router.post('/get_cli', (req,res) =>{
@@ -70,7 +56,7 @@ router.post('/get_cli', (req,res) =>{
 router.post('/update_cli', function(req, res, next){
   //console.log("Running update_cli Post.");
   
-  MongoClient.connect('mongodb://localhost/', function(err, db){
+  MongoClient.connect(url, function(err, db){
     if(err) {
       throw err;
     }
@@ -135,10 +121,40 @@ router.post('/add_orca', function(req, res, next){
 
 });
 
+router.post('/remove_orca', function(req, res, next){
+  MongoClient.connect(url, function(err, db) {
+  
+  if (err) throw err;
+  
+  console.log("my body" + req.body.cpf);
+    
+  db.db(req.session.user.assistencia).collection("orcas").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
+    if (err) throw err;
+    res.send("deleted");  
+    db.close();
+    });
+  });
+});
+
+router.get('/get_orcas', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('orcas').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      res.send(result);
+    });
+  });
+});
+
+
 router.post('/update_orca', function(req, res, next){
   //console.log("Running update_cli Post.");
   
-  MongoClient.connect('mongodb://localhost/', function(err, db){
+  MongoClient.connect(url, function(err, db){
     if(err) {
       throw err;
     }
@@ -160,10 +176,108 @@ router.post('/update_orca', function(req, res, next){
     }
     else
     {
-      console.log("Invalid params, can't complete update_cli");
+      console.log("Invalid params, can't complete update_orca");
     }
 
   })
+});
+
+router.post('/add_atendimento', function(req, res, next){
+      //Geting the model
+      model = require('../model/atendimento')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      console.log(req.body);
+      
+      var body = req.body;
+      body.status = false;
+
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
+
+        res.send("");
+      })
+
+});
+
+router.get('/get_atendimentos', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('atendimentos').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      res.send(result);
+    });
+  });
+});
+
+router.post('/remove_atendimento', function(req, res, next){
+  MongoClient.connect(url, function(err, db) {
+  
+  if (err) throw err;
+  
+  console.log("my body" + req.body.cpf);
+    
+  db.db(req.session.user.assistencia).collection("atendimentos").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
+    if (err) throw err;
+    res.send("deleted");  
+    db.close();
+    });
+  });
+});
+
+router.post('/add_finalizado', function(req, res, next){
+      //Geting the model
+      model = require('../model/finalizado')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      console.log(req.body);
+      
+      var body = req.body;
+      body.status = false;
+
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
+
+        res.send("");
+      })
+
+});
+
+router.get('/get_finalizados', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('finalizados').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      res.send(result);
+    });
+  });
+});
+
+router.post('/remove_atendimentos', function(req, res, next){
+  MongoClient.connect(url, function(err, db) {
+  
+  if (err) throw err;
+  
+  console.log("my body" + req.body.cpf);
+    
+  db.db(req.session.user.assistencia).collection("finalizados").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
+    if (err) throw err;
+    res.send("deleted");  
+    db.close();
+    });
+  });
 });
 
 router.post('/add_card', function(req, res, next){
