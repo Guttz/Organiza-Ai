@@ -73,8 +73,9 @@ export class AcompanhamentoComponent implements OnInit {
   auxData: any;
 
   //url = "http://localhost:3000";
-  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
-
+  //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
+  url = "http://myas.com.br"
+  
   constructor(private http: HttpClient, public dialog: MatDialog) {
   this.getOrcs();
   }

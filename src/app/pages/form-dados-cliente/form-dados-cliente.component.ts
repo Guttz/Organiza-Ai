@@ -14,8 +14,9 @@ import { HttpClient } from '@angular/common/http';
 
 export class FormDadosClienteComponent implements OnInit {
   //url = "http://localhost:3000";
-  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
-
+  //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
+    url = "http://myas.com.br"
+  
 
   values = [ 
     {value: '0', viewValue: 'Manhã'},
