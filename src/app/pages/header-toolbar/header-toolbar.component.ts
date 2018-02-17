@@ -8,6 +8,9 @@ import { Router, ActivatedRoute} from '@angular/router';
   styleUrls: ['./header-toolbar.component.scss']
 })
 export class HeaderToolbarComponent implements OnInit {
+  //url = "http://localhost:3000";
+  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:3000";
+
 
   menus = [false, false, false];
   menuActive;
@@ -27,7 +30,7 @@ export class HeaderToolbarComponent implements OnInit {
       }
 
     logout(){
-    const req = this.http.post('http://localhost:3000/api/logout', true)
+    const req = this.http.post(this.url + '/api/logout', true)
       .subscribe(
         res => {
           this.router.navigate(['/login']);
@@ -40,7 +43,7 @@ export class HeaderToolbarComponent implements OnInit {
     }
 
       getHeader(){
-          const req = this.http.get('http://localhost:3000/api/header')
+          const req = this.http.get(this.url + '/api/header')
       .subscribe(
         res => {
           console.log(res);

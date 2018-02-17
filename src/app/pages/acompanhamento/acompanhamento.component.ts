@@ -72,7 +72,8 @@ export class AcompanhamentoComponent implements OnInit {
 
   auxData: any;
 
-
+  //url = "http://localhost:3000";
+  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:3000";
 
   constructor(private http: HttpClient, public dialog: MatDialog) {
   this.getOrcs();
@@ -132,7 +133,7 @@ export class AcompanhamentoComponent implements OnInit {
 
     });
 
-     this.http.get('http://localhost:3000/api/get_finalizados').subscribe(data => {
+     this.http.get(this.url + '/api/get_finalizados').subscribe(data => {
       //Agora todos os dados estao na variavel data
       this.auxData = data;
 
@@ -175,10 +176,10 @@ export class AcompanhamentoComponent implements OnInit {
           this.cardStore.updateCard(cardID, card);
 
           //Send the req to the backend to update the orca
-            this.http.post('http://localhost:3000/api/add_atendimento', card)
+            this.http.post(this.url + '/api/add_atendimento', card)
             .subscribe(
               res => { 
-                  this.http.post('http://localhost:3000/api/remove_orca', card )
+                  this.http.post(this.url + '/api/remove_orca', card )
                   .subscribe(
                     res => { 
 
@@ -222,7 +223,7 @@ export class AcompanhamentoComponent implements OnInit {
           card.periodo = result.periodo;
           this.cardStore.updateCard(idCard, card);
 
-            const req = this.http.post('http://localhost:3000/api/update_orca', result)
+            const req = this.http.post(this.url + '/api/update_orca', result)
             .subscribe(
               res => {
 
@@ -268,10 +269,10 @@ export class AcompanhamentoComponent implements OnInit {
           this.cardStore.updateCard(cardID, card);
 
           //Send the req to the backend to update the orca
-            this.http.post('http://localhost:3000/api/add_finalizado', card)
+            this.http.post(this.url + '/api/add_finalizado', card)
             .subscribe(
               res => { 
-                  this.http.post('http://localhost:3000/api/remove_atendimento', card )
+                  this.http.post(this.url + '/api/remove_atendimento', card )
                   .subscribe(
                     res => { 
 

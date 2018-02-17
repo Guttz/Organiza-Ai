@@ -15,6 +15,9 @@ export class LoginComponent implements CanActivate {
 	private user: String;
 	private pass: String;
 
+  //url = "http://localhost:3000";
+  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:3000";
+
   constructor(private http: HttpClient,  private router: Router) { 
   }
 
@@ -35,7 +38,7 @@ export class LoginComponent implements CanActivate {
 
 
   signup(loginForm:NgForm){
-    const req = this.http.post('http://localhost:3000/api/signup', loginForm.value)
+    const req = this.http.post(this.url + '/api/signup', loginForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -48,7 +51,7 @@ export class LoginComponent implements CanActivate {
   }
 
   login(loginForm:NgForm){
-  	const req = this.http.post('http://localhost:3000/api/login', loginForm.value)
+  	const req = this.http.post(this.url + '/api/login', loginForm.value)
       .subscribe(
         res => {
           console.log("im here" + res);
@@ -62,7 +65,7 @@ export class LoginComponent implements CanActivate {
   }
 
     getHeader(){
-          const req = this.http.get('http://localhost:3000/api/header')
+          const req = this.http.get(this.url + '/api/header')
       .subscribe(
         res => {
           console.log(res);

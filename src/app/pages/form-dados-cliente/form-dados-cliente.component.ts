@@ -12,10 +12,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./form-dados-cliente.component.scss']
 })
 
-
-
-
 export class FormDadosClienteComponent implements OnInit {
+  //url = "http://localhost:3000";
+  url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:3000";
+
 
   values = [ 
     {value: '0', viewValue: 'Manhã'},
@@ -42,7 +42,7 @@ export class FormDadosClienteComponent implements OnInit {
       alert("Os campos com * devem ser preenchidos.");
       return null;
     }
-    const req = this.http.post('http://localhost:3000/api/add_cli', myForm.value)
+    const req = this.http.post(this.url + 'api/add_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -71,7 +71,7 @@ export class FormDadosClienteComponent implements OnInit {
       alert("Os campos com * devem ser preenchidos.");
       return null;
     }
-    const req = this.http.post('http://localhost:3000/api/update_cli', myForm.value)
+    const req = this.http.post(this.url + '/api/update_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
@@ -102,7 +102,7 @@ export class FormDadosClienteComponent implements OnInit {
     //Add other values to the orca
     myForm.value.test = "test2";
 
-    this.http.post('http://localhost:3000/api/get_cli', myForm.value).subscribe(
+    this.http.post(this.url + '/api/get_cli', myForm.value).subscribe(
         resCliente => {
           this.auxCliente = resCliente;
 
@@ -119,7 +119,7 @@ export class FormDadosClienteComponent implements OnInit {
           myForm.value.email = this.auxCliente.email;
           myForm.value.endereco = this.auxCliente.endereco;
            
-            this.http.post('http://localhost:3000/api/add_orca', myForm.value)
+            this.http.post(this.url + '/api/add_orca', myForm.value)
               .subscribe(
                 res => {
                   console.log(res);
