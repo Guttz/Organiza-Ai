@@ -25,8 +25,8 @@ export class FormDadosClienteComponent implements OnInit {
   //CEL  Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
   //CPF    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
 
-  user: Submissions = { cpf: '', nome: '', telPrimario: 't', telSecundario: 's', email: '', endereco: '' };
-  orca : Orca = { cpf: '06101757340', defeito: 'a', marca: 'a', data: new Date(1/12/1098), modelo: 'a', periodo: 'a'};
+  user: Submissions = { cpf: '', nome: '', telPrimario: '', telSecundario: '', email: '', endereco: '' };
+  orca : Orca = { cpf: '', defeito: '', marca: '', data: new Date(), modelo: '', periodo: ''};
   update: Boolean = false;
   auxCliente: any;
 
