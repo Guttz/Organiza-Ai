@@ -42,7 +42,7 @@ export class FormDadosClienteComponent implements OnInit {
       alert("Os campos com * devem ser preenchidos.");
       return null;
     }
-    const req = this.http.post(this.url + 'api/add_cli', myForm.value)
+    const req = this.http.post(this.url + '/api/add_cli', myForm.value)
       .subscribe(
         res => {
           console.log(res);
