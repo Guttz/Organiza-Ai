@@ -18,7 +18,6 @@ import { DragDropModule } from 'primeng/primeng';
 import { MatTableModule } from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
-
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
 import { CardComponent } from './common_components/card/card.component';
@@ -75,7 +74,7 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     MatNativeDateModule,
     MatToolbarModule,
     DragDropModule,
-    MatTableModule,
+    MatTableModule
     MatMenuModule,
     MatDialogModule,
     FormsModule,

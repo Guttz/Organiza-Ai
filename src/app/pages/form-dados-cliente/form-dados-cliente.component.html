@@ -7,7 +7,7 @@
         <div fxLayout="row" >
           <mat-form-field fxFlex="32">
             <input matInput 
-              [ngModel] = "user.cpf" 
+              [(ngModel)] = "user.cpf" 
               ngDefaultControl 
               name="cpf" 
               placeholder="CPF" 
@@ -103,14 +103,24 @@
               required>
             </mat-form-field>
 
-            <my-input-text fxFlex 
+<!--             <my-input-text fxFlex 
               name="defeito" 
               [(ngModel)]="orca.defeito" 
               ngDefaultControl 
               fxFlexOffset=2 
               label="Qual o defeito apresentado?"
               required> 
-            </my-input-text>
+            </my-input-text> -->
+
+            <mat-form-field fxFlex fxFlexOffset=2>
+              <input matInput 
+              name="defeito" 
+              [(ngModel)]="orca.defeito" 
+              ngDefaultControl 
+              placeholder="Qual o defeito apresentado"  
+              required>
+            </mat-form-field>
+
           </div>
 
           <div class="row" >
@@ -144,14 +154,16 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <my-input-text 
-              name="modelo" 
+            <mat-form-field fxFlexOffset="2" fxFlex>
+              <input matInput 
+              name="marca" 
               [(ngModel)]="orca.modelo" 
               ngDefaultControl 
-              fxFlexOffset="2" 
-              fxFlex label="Modelo" 
-              required> 
-            </my-input-text>
+              placeholder="Modelo"  
+              required>
+            </mat-form-field>
+
+
           </div>
 
           <div class="row">

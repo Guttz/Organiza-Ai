@@ -108,15 +108,13 @@ router.post('/add_orca', function(req, res, next){
       var body = req.body;
       body.status = false;
 
-      
-
       model.create(body, function(err, output){
         if(err)
         {
           throw err;
         }
-
-        res.redirect('/');
+        res.send(null);
+        //res.redirect('/');
       })
 
 });
