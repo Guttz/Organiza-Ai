@@ -72,13 +72,13 @@ app.use(session({
 app.use('/api', api);
 
 
-/*app.get('/*', function(req, res, next) {
+app.get('/*', function(req, res, next) {
   if (req.headers.host.match(/^www/) !== null ) {
     res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
   } else {
     next();     
   }
-})*/
+})
 
 // Catch all other routes and return the index file
 app.get('/*', (req, res) => {
