@@ -19,7 +19,7 @@ export class HeaderToolbarComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
 
-      if(window.location.href.match(/^www/) !== null){
+      if(window.location.href.match(/www/) !== null){
        this.url = "http://www.myas.com.br";
        }
        else{

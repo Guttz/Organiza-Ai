@@ -22,11 +22,11 @@ export class LoginComponent implements CanActivate {
   url = "http://www.myas.com.br"
   constructor(private http: HttpClient,  private router: Router, public snackBar: MatSnackBar) { 
       
-          if(window.location.href.match(/www/) !== null){
+/*          if(window.location.href.match(/www/) !== null){
        window.location.replace(window.location.href.replace(/www\./, ''));
-    }  
+    }  */
 
-/*    if(window.location.href.match(/www/) != null){
+    if(window.location.href.match(/www/) != null){
       console.log("das me: " + window.location.href);
          this.url = "http://www.myas.com.br";
        }
@@ -34,7 +34,7 @@ export class LoginComponent implements CanActivate {
          console.log("das me: " + window.location.href);
          console.log("cai no else com a porra do www");
          this.url = "http://myas.com.br";
-       }*/
+       }
   }
     
   

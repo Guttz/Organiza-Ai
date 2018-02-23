@@ -78,7 +78,7 @@ export class AcompanhamentoComponent implements OnInit {
   url = "http://myas.com.br"
   
   constructor(private http: HttpClient, public dialog: MatDialog) {
-        if(window.location.href.match(/^www/) !== null){
+        if(window.location.href.match(/www/) !== null){
        this.url = "http://www.myas.com.br";
        }
        else{

@@ -32,7 +32,7 @@ export class FormDadosClienteComponent implements OnInit {
   auxCliente: any;
 
   constructor(private http: HttpClient, public snackBar: MatSnackBar){
-        if(window.location.href.match(/^www/) !== null){
+        if(window.location.href.match(/www/) !== null){
        this.url = "http://www.myas.com.br";
        }
        else{
