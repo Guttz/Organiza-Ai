@@ -82,7 +82,6 @@ app.get('/*', function(req, res, next) {
 
 // Catch all other routes and return the index file
 app.get('/*', (req, res) => {
-    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
 	  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 

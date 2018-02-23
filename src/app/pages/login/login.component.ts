@@ -21,8 +21,11 @@ export class LoginComponent implements CanActivate {
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
   url = "http://www.myas.com.br"
   constructor(private http: HttpClient,  private router: Router, public snackBar: MatSnackBar) { 
+    if(window.location.href.match(/^www/) !== null){
+       window.location.replace(window.location.href.replace(/^www\./, ''));
+    }
+    
   }
-
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
         if( this.getCookie("dcJJe4ZEsB") == "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb"){
