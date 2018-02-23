@@ -1,3 +1,8 @@
+<div *ngIf="loadSpinner" class="loading-indicator">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+
 <form #loginForm="ngForm" >
 
  <div fxLayout="row" fxLayoutAlign="center center" style="height: 100vh;">
@@ -12,12 +17,12 @@
    <img routerLink="/acompanhamento" class="my-logo" src="../assets/images/logo-login.png">
  </div>
 
- <mat-form-field fxFlexOffset="5" class="my-inputs">
-  <input [(ngModel)] = "user" matInput name="user" placeholder="Insira seu email" >
+ <mat-form-field fxFlexOffset="5" class="my-inputs" [hideRequiredMarker]="true">
+  <input [(ngModel)] = "user" matInput name="user" placeholder="Insira seu email" required>
 </mat-form-field>
 
-<mat-form-field class="my-inputs">
-  <input  [(ngModel)] = "pass" type="password" matInput name="pass" placeholder="Senha" >
+<mat-form-field class="my-inputs" [hideRequiredMarker]="true">
+  <input  [(ngModel)] = "pass" type="password" matInput name="pass" placeholder="Senha" required>
 </mat-form-field>
 
 <button mat-button class='my-button' fxFlexOffset="2" (click)="login(loginForm)" >ENTRAR</button>
@@ -26,6 +31,7 @@
 <!-- <button mat-button class='my-button' fxFlexOffset="2" (click)="getHeader()"> GET REQ</button>
  -->
 <span routerLink="/esqueci-senha" fxFlexOffset="7" class="forgot-password">Esqueceu sua senha?</span>
+
 </div> 
 
 </div>

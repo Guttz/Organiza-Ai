@@ -4,7 +4,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import { Submissions} from './submissions';
 import { Orca} from './../../../../schemas/orca';
 import { HttpClient } from '@angular/common/http';
-
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
 @Component({
   selector: 'form-dados-cliente',
@@ -31,7 +31,9 @@ export class FormDadosClienteComponent implements OnInit {
   update: Boolean = false;
   auxCliente: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public snackBar: MatSnackBar){
+      
+   }
 
   ngOnInit() {
   }
@@ -40,7 +42,10 @@ export class FormDadosClienteComponent implements OnInit {
     //cheking if any required field is empty
     if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "")
     {
-      alert("Os campos com * devem ser preenchidos.");
+      let config = new MatSnackBarConfig();
+      config.extraClasses = ['error-class'];
+      config.duration = 3000;
+      this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config);
       return null;
     }
     const req = this.http.post(this.url + '/api/add_cli', myForm.value)
@@ -49,6 +54,11 @@ export class FormDadosClienteComponent implements OnInit {
           console.log(res);
         },
         err => {
+           let config = new MatSnackBarConfig();
+          config.extraClasses = ['custom-class'];
+          config.duration = 3000;
+          this.snackBar.open("Erro no cadastro: " + err.error.message, "Fechar", config);
+
           console.log("Error occured: " + err.error.message);
         }
       );
@@ -60,6 +70,12 @@ export class FormDadosClienteComponent implements OnInit {
     this.user.telSecundario = '';
     this.user.email = '';
     this.user.endereco = '';
+
+    let config = new MatSnackBarConfig();
+    config.extraClasses = ['custom-class'];
+    config.duration = 3000;
+    this.snackBar.open("Cliente Cadastrado com sucesso", "Fechar", config);
+
   }
 
   getValues(){
@@ -70,7 +86,10 @@ export class FormDadosClienteComponent implements OnInit {
     //cheking if any required field is empty
     if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telPrimario == "" || myForm.value.endereco == "")
     {
-      alert("Os campos com * devem ser preenchidos.");
+      let config = new MatSnackBarConfig();
+      config.extraClasses = ['error-class'];
+      config.duration = 3000;
+      this.snackBar.open("Os campos com * devem ser preenchidos.", "Fechar", config);
       return null;
     }
     const req = this.http.post(this.url + '/api/update_cli', myForm.value)
@@ -79,26 +98,35 @@ export class FormDadosClienteComponent implements OnInit {
           console.log(res);
         },
         err => {
+          let config = new MatSnackBarConfig();
+          config.extraClasses = ['error-class'];
+          config.duration = 3000;
+          this.snackBar.open("Erro na atualização de cadastro: " + err.error.message, "Fechar", config);
+
           console.log("Error occured: " + err.error.message);
         }
       );
-    this.update = false;
-    this.orca.cpf = myForm.value.cpf;
-    this.user.cpf = '';
-    this.user.nome = '';
-    this.user.telPrimario = '';
-    this.user.telSecundario = '';
-    this.user.email = '';
-    this.user.endereco = '';
-    
+      this.update = false;
+      this.orca.cpf = myForm.value.cpf;
+      this.user.cpf = '';
+      this.user.nome = '';
+      this.user.telPrimario = '';
+      this.user.telSecundario = '';
+      this.user.email = '';
+      this.user.endereco = '';
+      let config = new MatSnackBarConfig();
+      config.extraClasses = ['custom-class'];
+      config.duration = 3000;
+      this.snackBar.open("Cadastro atualizado com sucesso", "Fechar", config);
   }
 
   orcaForm(myForm:NgForm) {
     //cheking if any required field is empty
-    if(myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" 
-      || myForm.value.modelo == "" || myForm.value.periodo == "" )
-    {
-      alert("Preencha os campos devidamente");
+    if(myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" || myForm.value.modelo == "" || myForm.value.periodo == "" ){
+      let config = new MatSnackBarConfig();
+      config.extraClasses = ['error-class'];
+      config.duration = 3000;
+      this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config);
       return null;
     }
 
@@ -137,6 +165,10 @@ export class FormDadosClienteComponent implements OnInit {
                     this.user.endereco = '';
                 },
                 err => {
+                  let config = new MatSnackBarConfig();
+                  config.extraClasses = ['error-class'];
+                  config.duration = 3000;
+                  this.snackBar.open("Erro na criação do orçamento: " + err.error.message, "Fechar", config);
                   console.log("Error occured: " + err.error.message);
                 }
               );
@@ -145,7 +177,10 @@ export class FormDadosClienteComponent implements OnInit {
           console.log("Error occured: " + err.error.message);
         }
       );
-
+      let config = new MatSnackBarConfig();
+      config.extraClasses = ['custom-class'];
+      config.duration = 3000;
+      this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
   }
 
   checkUser(myForm:NgForm)
@@ -168,6 +203,7 @@ export class FormDadosClienteComponent implements OnInit {
         this.update = false;
       }
     });
+
   }
 
 }

@@ -18,6 +18,9 @@ import { DragDropModule } from 'primeng/primeng';
 import { MatTableModule } from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
 import { CardComponent } from './common_components/card/card.component';
@@ -74,9 +77,11 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     MatNativeDateModule,
     MatToolbarModule,
     DragDropModule,
-    MatTableModule
+    MatTableModule,
     MatMenuModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -85,7 +90,8 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
   entryComponents: [
   AcompanhamentoComponent,
   ClienteAtenderComponent,
-  AtendimentoComponent],
+  AtendimentoComponent,
+  LoginComponent],
   providers: [
     LoginComponent,
     AuthGuard

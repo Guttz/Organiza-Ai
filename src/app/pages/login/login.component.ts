@@ -3,6 +3,7 @@ import { NgForm, FormsModule} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import {Location} from '@angular/common';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
 @Component({
   selector: 'my-login',
@@ -14,11 +15,12 @@ export class LoginComponent implements CanActivate {
 	//Username and password variables
 	private user: String;
 	private pass: String;
+  loadSpinner = true;
 
   url = "http://localhost";
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
   //url = "http://myas.com.br"
-  constructor(private http: HttpClient,  private router: Router) { 
+  constructor(private http: HttpClient,  private router: Router, public snackBar: MatSnackBar) { 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -51,6 +53,7 @@ export class LoginComponent implements CanActivate {
   }
 
   login(loginForm:NgForm){
+    this.loadSpinner = true;
   	const req = this.http.post(this.url + '/api/login', loginForm.value)
       .subscribe(
         res => {
@@ -58,6 +61,11 @@ export class LoginComponent implements CanActivate {
           this.router.navigate(['/acompanhamento']);
         },
         err => {
+         this.loadSpinner = false; 
+                    let config = new MatSnackBarConfig();
+      config.extraClasses = ['error-class'];
+      config.duration = 3000;
+      this.snackBar.open("Login e/ou senha incorretos", "Fechar", config);
           console.log("Error occured: " + err.error.message);
         }
     );

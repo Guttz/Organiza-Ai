@@ -96,7 +96,7 @@ router.post('/add_cli', function(req, res, next){
           throw err;
         }
 
-        res.redirect('/');
+        res.send(null);
       })
 });
 
@@ -128,7 +128,7 @@ router.post('/remove_orca', function(req, res, next){
     
   db.db(req.session.user.assistencia).collection("orcas").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
     if (err) throw err;
-    res.send("deleted");  
+    res.send(null);  
     db.close();
     });
   });
@@ -195,7 +195,7 @@ router.post('/add_atendimento', function(req, res, next){
           throw err;
         }
 
-        res.send("");
+        res.send(null);
       })
 
 });

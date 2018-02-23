@@ -14,6 +14,14 @@ const app = express();
 // Add headers
 app.use(function (req, res, next) {
 
+    res.setHeader('Access-Control-Allow-Origin', "http://localhost");
+
+      var allowedOrigins = ['http://myas.com.br', 'http://www.myas.com.br', 'http://http://localhost:3000', 'http://localhost', 'http://myas.com.br:3000', ];
+      var origin = req.headers.origin;
+      if(allowedOrigins.indexOf(origin) > -1){
+           res.setHeader('Access-Control-Allow-Origin', origin);
+      }
+
     // Website you wish to allow to connect
      //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 

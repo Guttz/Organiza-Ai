@@ -1,0 +1,25 @@
+/* ::ng-deep snack-bar-container.custom-class {
+  background: yellow;
+} */
+
+::ng-deep .custom-class .mat-simple-snackbar{
+  color: rgba(0,255,0, 0.8);
+  //color: rgba(255,170,70, 0.8);
+  //background: white;
+}
+
+::ng-deep .custom-class .mat-simple-snackbar button{
+  color: rgba(190,190,190, 0.8);
+  //background: white;
+}
+
+::ng-deep .error-class .mat-simple-snackbar{
+  color: rgb(255, 0 , 0);
+  font-weight: 600;
+    //background: white;
+}
+
+::ng-deep .error-class .mat-simple-snackbar button{
+  color: rgba(190,190,190, 0.8);
+  //background: white;
+}

@@ -5,7 +5,7 @@
       <div fxFlex="70">
         <my-form-header label="Cadastro Cliente"></my-form-header>
         <div fxLayout="row" >
-          <mat-form-field fxFlex="32">
+          <mat-form-field fxFlex="32" [hideRequiredMarker]="true">
             <input matInput 
               [(ngModel)] = "user.cpf" 
               ngDefaultControl 
@@ -15,7 +15,7 @@
               required>
           </mat-form-field>
 
-          <mat-form-field fxFlexOffset="2" fxFlex="70">
+          <mat-form-field fxFlexOffset="2" fxFlex="70" [hideRequiredMarker]="true">
             <input matInput 
               [(ngModel)] = "user.nome" 
               ngDefaultControl
@@ -26,7 +26,7 @@
         </div>
 
         <div fxLayout="row">
-          <mat-form-field fxFlex>
+          <mat-form-field fxFlex [hideRequiredMarker]="true">
             <input matInput 
               [(ngModel)] = "user.telPrimario" 
               ngDefaultControl 
@@ -55,7 +55,7 @@
 
       <div fxLayout="row">
 
-        <mat-form-field fxFlex>
+        <mat-form-field fxFlex [hideRequiredMarker]="true">
             <input matInput 
               [(ngModel)] = "user.endereco" 
               ngDefaultControl 
@@ -93,7 +93,7 @@
         <my-form-header label="Informações do Orçamento"></my-form-header>
           <div class="row" >
 
-            <mat-form-field fxFlex="32">
+            <mat-form-field fxFlex="32" [hideRequiredMarker]="true">
               <input matInput 
               name="cpf" 
               [(ngModel)]="orca.cpf" 
@@ -112,7 +112,7 @@
               required> 
             </my-input-text> -->
 
-            <mat-form-field fxFlex fxFlexOffset=2>
+            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]="true">
               <input matInput 
               name="defeito" 
               [(ngModel)]="orca.defeito" 
@@ -126,7 +126,7 @@
           <div class="row" >
 
 
-            <mat-form-field fxFlex="32">
+            <mat-form-field fxFlex="32" [hideRequiredMarker]="true">
               <input matInput 
               name="marca" 
               [(ngModel)]="orca.marca" 
@@ -154,7 +154,7 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field fxFlexOffset="2" fxFlex>
+            <mat-form-field fxFlexOffset="2" fxFlex [hideRequiredMarker]="true">
               <input matInput 
               name="marca" 
               [(ngModel)]="orca.modelo" 
@@ -171,7 +171,7 @@
 
            <mat-form-field fxFlex="32">
               <mat-select 
-              
+                required
                 placeholder="Período"  
                 [(ngModel)]="orca.periodo" 
                 name="periodo" >
