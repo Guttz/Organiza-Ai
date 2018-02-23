@@ -32,13 +32,19 @@ export class FormDadosClienteComponent implements OnInit {
   auxCliente: any;
 
   constructor(private http: HttpClient, public snackBar: MatSnackBar){
-        if(window.location.href.match(/www/) !== null){
-       this.url = "http://www.myas.com.br";
-       }
-       else{
-         this.url = "http://myas.com.br";
-       }
-      
+      if(window.location.href.match(/www/) != null){
+        console.log("das me: " + window.location.href);
+           this.url = "http://www.myas.com.br";
+         }
+        else{
+          if(window.location.href.match(/local/) != null){
+             this.url = "http://localhost";
+           }
+           else{
+             this.url = "http://myas.com.br";
+           }
+           
+        }
    }
 
   ngOnInit() {

@@ -19,12 +19,19 @@ export class HeaderToolbarComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
 
-      if(window.location.href.match(/www/) !== null){
-       this.url = "http://www.myas.com.br";
-       }
-       else{
-         this.url = "http://myas.com.br";
-       }
+      if(window.location.href.match(/www/) != null){
+        console.log("das me: " + window.location.href);
+           this.url = "http://www.myas.com.br";
+         }
+        else{
+          if(window.location.href.match(/local/) != null){
+             this.url = "http://localhost";
+           }
+           else{
+             this.url = "http://myas.com.br";
+           }
+           
+      }
         
         if(route.snapshot.url[0].path == 'acompanhamento'){
           this.menus[1] = true;

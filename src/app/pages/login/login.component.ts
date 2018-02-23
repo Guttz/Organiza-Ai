@@ -30,10 +30,14 @@ export class LoginComponent implements CanActivate {
       console.log("das me: " + window.location.href);
          this.url = "http://www.myas.com.br";
        }
-       else{
-         console.log("das me: " + window.location.href);
-         console.log("cai no else com a porra do www");
-         this.url = "http://myas.com.br";
+      else{
+        if(window.location.href.match(/local/) != null){
+           this.url = "http://localhost";
+         }
+         else{
+           this.url = "http://myas.com.br";
+         }
+         
        }
   }
     

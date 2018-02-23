@@ -1,7 +1,7 @@
 <app-header-toolbar></app-header-toolbar>
 <div style="width: 100vw; height: 90vh; background: rgba(235,233,234, 0.3);">
 <div class="example-container mat-elevation-z8">
-  <div class="example-header row">
+  <div class="example-header row mat-elevation-z4">
 
     <mat-form-field class="searchBoxes" fxFlex="13">
       <input class="searchBoxesIn" matInput
@@ -61,7 +61,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="nome">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;" > Clientes </mat-header-cell>
-      <mat-cell id="{{element.nome}}" class="cells" *matCellDef="let element; let i = index"> {{element.nome}} </mat-cell>
+      <mat-cell  class="cells" *matCellDef="let element; let i = index"> {{element.nome}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->

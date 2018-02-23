@@ -6,8 +6,8 @@
 }
 
 .example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
+  height: 12vh;
+  padding: 0px 1.757vw 0;
 }
 
 .mat-form-field {
@@ -16,9 +16,19 @@
 }
 
 .mat-table {
+  border: 0px;
+  border-top: 2vh;
+  border-color: rgba(235,233,234, 0.3);
+  border-style: solid;
+ 
   overflow: auto;
-  max-height: 600px;
+  height: 64.5vh;
   background: rgba(235,233,234, 0.3);
+}
+
+.mat-paginator{
+  height: 9vh;
+  background: rgba(235,233,234, 0.7);
 }
 
 .cells{
@@ -32,15 +42,9 @@ mat-row:hover{
   background: rgba(180,180,180, 0.25);
 }
 
-mat-header-row{
-  height: 10px;
-  max-height: 10px;
-}
-
 .searchBoxes{
-  color: black;
-  padding-top: 25px;
-  padding-bottom: 5px;
+  padding-top: 1.0vh;
+  padding-bottom: 1.5vh;
 }
 
 .mat-input-placeholder{
