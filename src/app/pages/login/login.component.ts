@@ -15,11 +15,11 @@ export class LoginComponent implements CanActivate {
 	//Username and password variables
 	private user: String;
 	private pass: String;
-  loadSpinner = true;
+  loadSpinner = false;
 
-  url = "http://localhost";
+  //url = "http://localhost";
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
-  //url = "http://myas.com.br"
+  url = "http://myas.com.br"
   constructor(private http: HttpClient,  private router: Router, public snackBar: MatSnackBar) { 
   }
 

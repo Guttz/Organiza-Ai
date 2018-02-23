@@ -1,55 +1,104 @@
 <app-header-toolbar></app-header-toolbar>
 <div style="width: 100vw; height: 90vh; background: rgba(235,233,234, 0.3);">
 <div class="example-container mat-elevation-z8">
-  <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
+  <div class="example-header row">
+
+    <mat-form-field class="searchBoxes" fxFlex="13">
+      <input class="searchBoxesIn" matInput
+        [(ngModel)] = "searchIn[0]" 
+        (keyup)="applyFilter($event.target.value)"
+        (blur)="blured()"
+        placeholder="Filtrar CPF...">
     </mat-form-field>
-        <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
+    
+    <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
+      <input matInput
+        [(ngModel)] = "searchIn[1]" 
+        (keyup)="applyFilter($event.target.value)"
+        (blur)="blured()"
+        placeholder="Filtrar Cliente...">
+    </mat-form-field>
+
+    <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
+      <input matInput
+        [(ngModel)] = "searchIn[2]" 
+        (keyup)="applyFilter($event.target.value)"
+        (blur)="blured()"
+        placeholder="Filtrar Telefone..">
+    </mat-form-field>
+
+    <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
+      <input matInput
+        [(ngModel)] = "searchIn[3]" 
+        (keyup)="applyFilter($event.target.value)"
+        (blur)="blured()"
+        placeholder="Filtrar Status..">
+    </mat-form-field>
+        
+  <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
+      <input matInput
+        [(ngModel)] = "searchIn[4]" 
+        (keyup)="applyFilter($event.target.value)"
+        (blur)="blured()"
+        placeholder="Filtrar Faturamento..">
+  </mat-form-field>
+
+    <mat-form-field class="searchBoxes" fxFlexOffset="4" fxFlex="13">
+      <input matInput
+      [(ngModel)] = "searchIn[5]" 
+      (keyup)="applyFilter($event.target.value)" placeholder="Filtrar Preço...">
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataCurrent">
     
     <!-- Position Column -->
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="cpf">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> CPF </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      <mat-cell (click) = "openDialogHistorico(i)" class="cells" *matCellDef="let element; let i = index"> {{element.cpf}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="cliente">
+    <ng-container matColumnDef="nome">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;" > Clientes </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
+      <mat-cell id="{{element.nome}}" class="cells" *matCellDef="let element; let i = index"> {{element.nome}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="telefone">
+    <ng-container matColumnDef="telPrimario">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Telefone </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.telefone}} </mat-cell>
+      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.telPrimario}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.status}} </mat-cell>
     </ng-container>
 
     <!-- Faturamento column -->
-    <ng-container matColumnDef="faturamento">
+    <ng-container matColumnDef="data">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Faturamento </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.faturamento  | date: 'dd/MM/yyyy'}}  </mat-cell>
+      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.data}}  </mat-cell>
     </ng-container>
 
         <!-- Faturamento column -->
-    <ng-container matColumnDef="preco">
+    <ng-container matColumnDef="valorFinal">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Preço </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.preco }}  </mat-cell>
+      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.valorFinal }}  </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row style="display: none" *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <!-- DÁ PRA FAZER COM O MATROW?-->
+    <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  
+    <mat-paginator #paginator
+                
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 >
+  </mat-paginator>
+
 </div>
 </div>

@@ -17,32 +17,6 @@
 
 .mat-table {
   overflow: auto;
-  max-height: 600px;
+  max-height: 500px;
   background: rgba(235,233,234, 0.3);
-}
-
-.cells{
-}
-
-.cells:hover{
-  cursor: pointer;
-}
-
-mat-row:hover{
-  background: rgba(180,180,180, 0.25);
-}
-
-mat-header-row{
-  height: 10px;
-  max-height: 10px;
-}
-
-.searchBoxes{
-  color: black;
-  padding-top: 25px;
-  padding-bottom: 5px;
-}
-
-.mat-input-placeholder{
-
 }

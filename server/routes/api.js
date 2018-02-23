@@ -263,6 +263,20 @@ router.get('/get_finalizados', (req, res) => {
   });
 });
 
+router.get('/get_all_finalizados', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('finalizados').find({}).toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      res.send(result);
+    });
+  });
+});
+
 router.post('/remove_atendimentos', function(req, res, next){
   MongoClient.connect(url, function(err, db) {
   
@@ -304,7 +318,7 @@ router.post('/login', function(req, res){
     } else{
       console.log('eu sou o ' + o);
       req.session.user = o;
-      res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 900000 });
+      res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 315360000 });
 
       res.status(200).send(o);
     }

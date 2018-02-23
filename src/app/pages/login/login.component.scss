@@ -61,10 +61,18 @@
   left: 0;
   bottom: 0;
   right: 0;
+
+
+}
+
+.mat-progress-spinner circle, .mat-spinner circle{
+  stroke: black;
 }
 
 /* Transparent Overlay */
 .loading-indicator:before {
+
+
   content: '';
   display: block;
   position: fixed;

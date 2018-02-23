@@ -1,0 +1,55 @@
+<div class="popup"> 
+<h1 mat-dialog-title>Informações do atendimento</h1>
+    <div class="column">
+      	<div class="row">
+          <label > <b> Cliente : </b> {{data.nome}}</label>
+
+          <label fxFlexOffset="4"> <b> Email : </b> {{data.email}}</label>
+
+
+	    </div>
+      
+              <div class="row div-labels" >
+          <label> <b> CPF : </b> {{data.cpf}}</label>
+
+          <label fxFlexOffset="4" > <b> Telefone 1 : </b> {{data.telPrimario}}</label>
+
+          <label fxFlexOffset="4" > <b> Telefone 2 : </b> {{data.telSecundario}}</label>
+      </div>      
+
+        <div class="row div-labels">
+          <label> <b> Defeito : </b> {{data.defeito}}</label>
+        </div>
+
+        <div class="row div-labels">
+          <label> <b> Marca : </b> {{data.marca}}</label>
+
+          <label fxFlexOffset="8" > <b> Modelo : </b> {{data.modelo}}</label>
+
+          <label fxFlexOffset="4" > <b> Endereço : </b> {{data.endereco}}</label>
+      </div> 
+
+        <div class="row div-labels" style="border-bottom: 4vh; border-style: solid; border-color: white;">
+          <label> <b> Data atendimento : </b> {{data.data}}</label>
+
+          <label fxFlexOffset="4" > <b> Periodo : </b> {{data.periodo}}</label>
+
+      </div> 
+
+
+   </div>
+
+
+      <div fxLayout="row" fxLayoutAlign="end center" >
+<!--       	<my-button-bw (click)="onNoClick()" label="CANCELAR" style="margin-top: 12px; margin-right: 5px;"  >
+      	</my-button-bw> -->
+
+
+        <button class="my-button" mat-button [mat-dialog-close]="data" cdkFocusInitial style="margin-top: 12px;">FECHAR</button>
+  
+<!--         <my-button-orange [mat-dialog-close]="data.animal"
+          fxFlexAlign="center" label="CONFIRMAR" style="margin-top: 12px;">
+        </my-button-orange>  -->
+      </div>
+
+</div>

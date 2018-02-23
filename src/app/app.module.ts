@@ -20,6 +20,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material';
 
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
@@ -41,6 +42,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderToolbarComponent } from './pages/header-toolbar/header-toolbar.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { HistoricoComponent } from './pages/historico/historico.component';
+import { HistoricPopupComponent } from './pages/historico/historico.component';
 import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.component';
 import { AtendimentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -63,6 +65,7 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     HistoricoComponent,
     ClienteAtenderComponent,
     AtendimentoComponent,
+    HistoricPopupComponent,
     LoginComponent,
     ForgotPasswordComponent
   ],
@@ -82,6 +85,7 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     MatDialogModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -91,7 +95,9 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
   AcompanhamentoComponent,
   ClienteAtenderComponent,
   AtendimentoComponent,
-  LoginComponent],
+  LoginComponent,
+  HistoricoComponent,
+  HistoricPopupComponent],
   providers: [
     LoginComponent,
     AuthGuard
