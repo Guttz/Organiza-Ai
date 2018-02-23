@@ -30,7 +30,7 @@ ELEMENT_DATA: Element[] = [
 
   constructor(private http: HttpClient, public dialog: MatDialog){
 
-        if(window.location.href.match(/^www/) !== null){
+        if(window.location.href.match(/www/) !== null){
        this.url = "http://www.myas.com.br";
        }
        else{

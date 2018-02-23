@@ -21,13 +21,20 @@ export class LoginComponent implements CanActivate {
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
   url = "http://www.myas.com.br"
   constructor(private http: HttpClient,  private router: Router, public snackBar: MatSnackBar) { 
-    
-    if(window.location.href.match(/^www/) !== null){
-       this.url = "http://www.myas.com.br";
+      
+          if(window.location.href.match(/www/) !== null){
+       window.location.replace(window.location.href.replace(/www\./, ''));
+    }  
+
+/*    if(window.location.href.match(/www/) != null){
+      console.log("das me: " + window.location.href);
+         this.url = "http://www.myas.com.br";
        }
        else{
+         console.log("das me: " + window.location.href);
+         console.log("cai no else com a porra do www");
          this.url = "http://myas.com.br";
-       }
+       }*/
   }
     
   
