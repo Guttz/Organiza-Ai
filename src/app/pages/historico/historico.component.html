@@ -61,36 +61,36 @@
     <!-- Name Column -->
     <ng-container matColumnDef="nome">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;" > Clientes </mat-header-cell>
-      <mat-cell id="{{element.nome}}" class="cells" *matCellDef="let element; let i = index"> {{element.nome}} </mat-cell>
+      <mat-cell (click) = "openDialogHistorico(i)" id="{{element.nome}}" class="cells" *matCellDef="let element; let i = index"> {{element.nome}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="telPrimario">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Telefone </mat-header-cell>
-      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.telPrimario}} </mat-cell>
+      <mat-cell (click) = "openDialogHistorico(i)" class="cells" *matCellDef="let element; let i = index"> {{element.telPrimario}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Status </mat-header-cell>
-      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.status}} </mat-cell>
+      <mat-cell (click) = "openDialogHistorico(i)" class="cells" *matCellDef="let element; let i = index"> {{element.status}} </mat-cell>
     </ng-container>
 
     <!-- Faturamento column -->
     <ng-container matColumnDef="data">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Faturamento </mat-header-cell>
-      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.data}}  </mat-cell>
+      <mat-cell (click) = "openDialogHistorico(i)" class="cells" *matCellDef="let element; let i = index"> {{element.data}}  </mat-cell>
     </ng-container>
 
         <!-- Faturamento column -->
     <ng-container matColumnDef="valorFinal">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Preço </mat-header-cell>
-      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.valorFinal }}  </mat-cell>
+      <mat-cell (click) = "openDialogHistorico(i)" class="cells" *matCellDef="let element; let i = index"> {{element.valorFinal }}  </mat-cell>
     </ng-container>
 
     <mat-header-row style="display: none" *matHeaderRowDef="displayedColumns"></mat-header-row>
     <!-- DÁ PRA FAZER COM O MATROW?-->
-    <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row  (click) = "openDialogHistorico(i)" style="cursor: pointer;" *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
   </mat-table>
   
     <mat-paginator #paginator
