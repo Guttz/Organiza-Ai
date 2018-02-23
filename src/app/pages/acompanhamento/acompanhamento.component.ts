@@ -20,7 +20,8 @@ export class ClienteAtenderComponent implements OnInit {
 
 constructor(
     public dialogRef: MatDialogRef<ClienteAtenderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+     }
   
 
 
@@ -77,6 +78,13 @@ export class AcompanhamentoComponent implements OnInit {
   url = "http://myas.com.br"
   
   constructor(private http: HttpClient, public dialog: MatDialog) {
+        if(window.location.href.match(/^www/) !== null){
+       this.url = "http://www.myas.com.br";
+       }
+       else{
+         this.url = "http://myas.com.br";
+       }
+       
     this.getOrcs();
   }
 

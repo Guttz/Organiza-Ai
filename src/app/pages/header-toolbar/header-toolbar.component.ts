@@ -17,7 +17,15 @@ export class HeaderToolbarComponent implements OnInit {
   menus = [false, false, false];
   menuActive;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+
+      if(window.location.href.match(/^www/) !== null){
+       this.url = "http://www.myas.com.br";
+       }
+       else{
+         this.url = "http://myas.com.br";
+       }
+        
         if(route.snapshot.url[0].path == 'acompanhamento'){
           this.menus[1] = true;
         }

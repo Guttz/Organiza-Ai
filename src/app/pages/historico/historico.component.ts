@@ -30,6 +30,14 @@ ELEMENT_DATA: Element[] = [
 
   constructor(private http: HttpClient, public dialog: MatDialog){
 
+        if(window.location.href.match(/^www/) !== null){
+       this.url = "http://www.myas.com.br";
+       }
+       else{
+         this.url = "http://myas.com.br";
+       }
+       
+
   }
 
     ngAfterViewInit() {
