@@ -68,15 +68,27 @@ app.use(session({
 	})
 );
 
+app.get('*', (req, res) => {
+  console.log("here am I again");
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
 // Set our api routes
 app.use('/api', api);
 
-// Catch all other routes and return the index file
-app.get('*', (req, res) => {
-	console.log("here am I again");
-	  res.sendFile(path.join(__dirname, 'dist/index.html'));
+app.get('*', function(req, res) {
+  if (req.headers.host.match(/^www/) !== null ) {
+    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
+  } else {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));     
+  }
 });
 
+// Catch all other routes and return the index file
+/*app.get('*', (req, res) => {
+	  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+*/
 /**
  * Get port from environment and store in Express.
  */
