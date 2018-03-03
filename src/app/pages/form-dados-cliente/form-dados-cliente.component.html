@@ -5,35 +5,61 @@
       <div fxFlex="70">
         <my-form-header label="Cadastro Cliente"></my-form-header>
         <div fxLayout="row" >
-          <mat-form-field fxFlex="32" [hideRequiredMarker]="true">
+          <mat-form-field fxFlex="32">
             <input matInput 
-              [(ngModel)] = "user.cpf" 
-              ngDefaultControl 
-              name="cpf" 
-              placeholder="CPF" 
-              (blur)="checkUser(userCadForm)" 
-              required>
+            [ngModel] = "user.cpf" 
+            ngDefaultControl 
+            name="cpf" 
+            placeholder="CPF" 
+            (blur)="checkUser(userCadForm)" 
+            [formControl]="cpfFormControl">
+            
+            <mat-error *ngIf="cpfFormControl.hasError('required')">
+                CPF/CNPJ <strong>obrigatório</strong>
+            </mat-error>
+
+            <mat-error *ngIf="cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')">
+                CPF/CNPJ <strong>inválido</strong>
+            </mat-error>
+
           </mat-form-field>
 
-          <mat-form-field fxFlexOffset="2" fxFlex="70" [hideRequiredMarker]="true">
+          <mat-form-field fxFlexOffset="2" fxFlex="70">
             <input matInput 
-              [(ngModel)] = "user.nome" 
-              ngDefaultControl
-              name="nome" 
-              placeholder="Nome completo do cliente" 
-              required>
-          </mat-form-field>    
+            [(ngModel)] = "user.nome" 
+            autocomplete='name'
+            ngDefaultControl
+            name="nome" 
+            placeholder="Nome completo do cliente" 
+            [formControl]="nomeFormControl">
+          
+            <mat-error *ngIf="nomeFormControl.hasError('required')">
+                Nome <strong>obrigatório</strong>
+            </mat-error>
+
+          </mat-form-field>  
         </div>
 
         <div fxLayout="row">
-          <mat-form-field fxFlex [hideRequiredMarker]="true">
+          <mat-form-field fxFlex>
             <input matInput 
-              [(ngModel)] = "user.telPrimario" 
-              ngDefaultControl 
-              name="telPrimario" 
-              placeholder="Telefone primário"  
-              required>
-        </mat-form-field>
+            [(ngModel)] = "user.telefone" 
+            ngDefaultControl 
+            name="telefone" 
+            placeholder="Telefone primário"  
+            [formControl]="telFormControl"
+            (keyup) = "typingPhone()"
+             >
+            
+            <mat-error *ngIf="telFormControl.hasError('required')">
+              Telefone Primário é <strong>obrigatório</strong>
+            </mat-error>
+
+            <mat-error *ngIf="emailFormControl.errors &&  !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+
+          </mat-form-field>
 
         <mat-form-field fxFlex fxFlexOffset="2">
             <input matInput 
@@ -43,13 +69,22 @@
               placeholder="Telefone secundário">
         </mat-form-field>
 
-        <mat-form-field fxFlex fxFlexOffset="2">
+          <mat-form-field fxFlex fxFlexOffset="2">
             <input matInput 
-              [(ngModel)] = "user.email" 
-              ngDefaultControl 
-              name="email" 
-              placeholder="Email" >
-        </mat-form-field>
+            [(ngModel)] = "user.email"  
+            name="email" 
+            placeholder="Email" 
+            [formControl]="emailFormControl">
+
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email é <strong>obrigatório</strong>
+            </mat-error>
+
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Email <strong>inválido</strong>
+            </mat-error>
+
+          </mat-form-field>
 
       </div>
 

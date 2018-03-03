@@ -229,6 +229,281 @@ router.post('/remove_atendimento', function(req, res, next){
   });
 });
 
+router.post('/update_atendimento', function(req, res, next){
+  //console.log("Running update_cli Post.");
+  
+  MongoClient.connect(url, function(err, db){
+    if(err) {
+      throw err;
+    }
+
+    //Checking if the params has at least a valid cpf
+    if(req.body.bd_id != undefined)
+    {
+      db.db(req.session.user.assistencia).collection('atendimentos').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Updated orca with success");
+          res.send(result);
+        }
+      });
+    }
+    else
+    {
+      console.log("Invalid params, can't complete update_orca");
+    }
+
+  })
+});
+
+router.post('/add_agPecas', function(req, res, next){
+      //Geting the model
+      model = require('../model/agPecas')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      console.log(req.body);
+      
+      var body = req.body;
+      body.status = false;
+
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
+
+        res.send(null);
+      })
+
+});
+
+router.get('/get_agPecas', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('agpecas').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      console.log(result);
+      res.send(result);
+    });
+  });
+});
+
+router.post('/remove_agPecas', function(req, res, next){
+  MongoClient.connect(url, function(err, db) {
+  
+  if (err) throw err;
+  
+  console.log("my body" + req.body.cpf);
+    
+  db.db(req.session.user.assistencia).collection("agpecas").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
+    if (err) throw err;
+    res.send("deleted");  
+    db.close();
+    });
+  });
+});
+
+router.post('/update_agPecas', function(req, res, next){
+  //console.log("Running update_cli Post.");
+  
+  MongoClient.connect(url, function(err, db){
+    if(err) {
+      throw err;
+    }
+
+    //Checking if the params has at least a valid cpf
+    if(req.body.bd_id != undefined)
+    {
+      db.db(req.session.user.assistencia).collection('agpecas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Updated orca with success");
+          res.send(result);
+        }
+      });
+    }
+    else
+    {
+      console.log("Invalid params, can't complete update_orca");
+    }
+
+  })
+});
+
+router.post('/add_rtVisita', function(req, res, next){
+      //Geting the model
+      model = require('../model/rtVisita')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      console.log(req.body);
+      
+      var body = req.body;
+      body.status = false;
+
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
+
+        res.send(null);
+      })
+
+});
+
+router.get('/get_rtVisita', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('rtvisitas').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      console.log(result);
+      res.send(result);
+    });
+  });
+});
+
+router.post('/remove_rtVisita', function(req, res, next){
+  MongoClient.connect(url, function(err, db) {
+  
+  if (err) throw err;
+  
+  console.log("my body" + req.body.cpf);
+    
+  db.db(req.session.user.assistencia).collection("rtvisitas").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
+    if (err) throw err;
+    res.send("deleted");  
+    db.close();
+    });
+  });
+});
+
+router.post('/update_rtVisita', function(req, res, next){
+  //console.log("Running update_cli Post.");
+  
+  MongoClient.connect(url, function(err, db){
+    if(err) {
+      throw err;
+    }
+
+    //Checking if the params has at least a valid cpf
+    if(req.body.bd_id != undefined)
+    {
+      db.db(req.session.user.assistencia).collection('rtvisitas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Updated orca with success");
+          res.send(result);
+        }
+      });
+    }
+    else
+    {
+      console.log("Invalid params, can't complete update_orca");
+    }
+
+  })
+});
+
+router.post('/add_pagamento', function(req, res, next){
+      //Geting the model
+      model = require('../model/pagamento')(req.session.user.assistencia);
+      //Variavel que recebe os dados do fomulario
+      console.log(req.body);
+      
+      var body = req.body;
+      body.status = false;
+
+      model.create(body, function(err, output){
+        if(err)
+        {
+          throw err;
+        }
+
+        res.send(null);
+      })
+
+});
+
+router.get('/get_pagamento', (req, res) => { 
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('pagamentos').find().toArray(function(err, result) {
+      if (err) {
+        throw err;
+      }
+      console.log(result);
+      res.send(result);
+    });
+  });
+});
+
+router.post('/remove_pagamento', function(req, res, next){
+  MongoClient.connect(url, function(err, db) {
+  
+  if (err) throw err;
+  
+  console.log("my body" + req.body.cpf);
+    
+  db.db(req.session.user.assistencia).collection("pagamentos").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
+    if (err) throw err;
+    res.send("deleted");  
+    db.close();
+    });
+  });
+});
+
+router.post('/update_pagamento', function(req, res, next){
+  //console.log("Running update_cli Post.");
+  
+  MongoClient.connect(url, function(err, db){
+    if(err) {
+      throw err;
+    }
+
+    //Checking if the params has at least a valid cpf
+    if(req.body.bd_id != undefined)
+    {
+      db.db(req.session.user.assistencia).collection('pagamentos').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Updated orca with success");
+          res.send(result);
+        }
+      });
+    }
+    else
+    {
+      console.log("Invalid params, can't complete update_orca");
+    }
+
+  })
+});
+ 
+
 router.post('/add_finalizado', function(req, res, next){
       //Geting the model
       model = require('../model/finalizado')(req.session.user.assistencia);
@@ -277,20 +552,6 @@ router.get('/get_all_finalizados', (req, res) => {
   });
 });
 
-router.post('/remove_atendimentos', function(req, res, next){
-  MongoClient.connect(url, function(err, db) {
-  
-  if (err) throw err;
-  
-  console.log("my body" + req.body.cpf);
-    
-  db.db(req.session.user.assistencia).collection("finalizados").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
-    if (err) throw err;
-    res.send("deleted");  
-    db.close();
-    });
-  });
-});
 
 router.post('/add_card', function(req, res, next){
   var model = require('../model/cards')();
@@ -319,7 +580,6 @@ router.post('/login', function(req, res){
       console.log('eu sou o ' + o);
       req.session.user = o;
       res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 315360000 });
-
       res.status(200).send(o);
     }
   });

@@ -16,23 +16,14 @@ app.use(function (req, res, next) {
 
     res.setHeader('Access-Control-Allow-Origin', "http://localhost");
 
-      var allowedOrigins = ['http://myas.com.br', 'http://www.myas.com.br', 'http://http://localhost:3000', 'http://localhost', 'http://myas.com.br:3000', ];
+      var allowedOrigins = ['http://myas.com.br', 'http://www.myas.com.br', 'http://http://localhost:3000', 'http://localhost', 'http://myas.com.br:3000' ];
       var origin = req.headers.origin;
       if(allowedOrigins.indexOf(origin) > -1){
            res.setHeader('Access-Control-Allow-Origin', origin);
       }
 
     // Website you wish to allow to connect
-     //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-
-     //doesnt work separetely
-     //res.setHeader('Access-Control-Allow-Origin', 'http://myas.com.br');
-
-     //doesnt work separetely
-    //res.setHeader('Access-Control-Allow-Origin', 'http://ec2-54-210-153-102.compute-1.amazonaws.com:80');
-
-    //res.setHeader('Access-Control-Allow-Origin', 'http://ec2-54-210-153-102.compute-1.amazonaws.com:3000');
-
+     //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
 
     //The last one works
     res.setHeader('Access-Control-Allow-Origin', '*');

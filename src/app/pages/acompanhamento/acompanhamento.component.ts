@@ -77,6 +77,9 @@ export class AcompanhamentoComponent implements OnInit {
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
   url = "http://myas.com.br"
   
+  //List names for the backend requests be directly to the right collection
+  listsNames = ["orca", "atendimento", "agPecas", "rtVisita", "pagamento"];
+
   constructor(private http: HttpClient, public dialog: MatDialog) {
     if(window.location.href.match(/www/) != null){
       console.log("das me: " + window.location.href);
@@ -92,7 +95,6 @@ export class AcompanhamentoComponent implements OnInit {
          
        }
        
-    this.getOrcs();
   }
 
   makeMockData() {
@@ -101,19 +103,34 @@ export class AcompanhamentoComponent implements OnInit {
     
     const lists: ListSchema[] = [
       {
-        name: 'Orçamento',
+        name: 'Visita Orçamento',
         cards: [],
         id : "l0"
       },
       {
-        name: 'Clientes a atender',
+        name: 'Visita técnico',
         cards: [],
         id : "l1"
       },
       {
-        name: 'Clientes finalizados',
+        name: 'Aguardando Peças',
         cards: [],
         id : "l2"
+      },
+      {
+        name: 'Retorno Visita',
+        cards: [],
+        id : "l3"
+      },
+      {
+        name: 'Pagamento',
+        cards: [],
+        id : "l4"
+      },
+      {
+        name: 'Clientes finalizados',
+        cards: [],
+        id : "l5"
       }
     ];
 
@@ -121,7 +138,11 @@ export class AcompanhamentoComponent implements OnInit {
   }
 
   ngOnInit() {
+    //Initializing the page
     this.makeMockData();
+
+    this.getOrcs();
+
   }
 
 
@@ -149,13 +170,46 @@ export class AcompanhamentoComponent implements OnInit {
 
     });
 
+    this.http.get(this.url + '/api/get_agPecas').subscribe(data => {
+      //Agora todos os dados estao na variavel data
+      this.auxData = data;
+      console.log(this.auxData);
+      for (var i = 0; i < this.auxData.length; i++) {
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          this.lists[2].cards.push(cardId)
+      }
+
+    });
+
+      this.http.get(this.url + '/api/get_rtVisita').subscribe(data => {
+      //Agora todos os dados estao na variavel data
+      this.auxData = data;
+      console.log(this.auxData);
+      for (var i = 0; i < this.auxData.length; i++) {
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          this.lists[3].cards.push(cardId)
+      }
+
+    });
+
+    this.http.get(this.url + '/api/get_pagamento').subscribe(data => {
+      //Agora todos os dados estao na variavel data
+      this.auxData = data;
+      console.log(this.auxData);
+      for (var i = 0; i < this.auxData.length; i++) {
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          this.lists[4].cards.push(cardId)
+      }
+
+    });
+
      this.http.get(this.url + '/api/get_finalizados').subscribe(data => {
       //Agora todos os dados estao na variavel data
       this.auxData = data;
 
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null);
-          this.lists[2].cards.push(cardId)
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          this.lists[5].cards.push(cardId)
       }
 
     });
@@ -214,10 +268,7 @@ export class AcompanhamentoComponent implements OnInit {
     });
   }
 
-  clickOrcamento(idCard): void {
-    if(this.lists[2].cards.includes(idCard)){
-      return; 
-    }
+  clickOrcamento(idCard, idList): void {
 
     var card = this.cardStore.getCard(idCard);
 
@@ -233,8 +284,6 @@ export class AcompanhamentoComponent implements OnInit {
       //Dando ruim com alterações consecutivas
       if(result!=null){
           result.bd_id = card.bd_id;
-          console.log("periodo " + result.periodo);
-          //result.periodo = "Tarde";
           card.defeito = result.defeito;
           card.marca =  result.marca;
           card.modelo = result.modelo;
@@ -242,7 +291,7 @@ export class AcompanhamentoComponent implements OnInit {
           card.periodo = result.periodo;
           this.cardStore.updateCard(idCard, card);
 
-            const req = this.http.post(this.url + '/api/update_orca', result)
+            const req = this.http.post(this.url + '/api/update_' + this.listsNames[idList], result)
             .subscribe(
               res => {
 
@@ -258,14 +307,65 @@ export class AcompanhamentoComponent implements OnInit {
     });
   }
 
-  openDialogAtendimento(newList, oldList, cardID): void {
+
+  clickVisited(idCard, idList): void {
+   //Get the card with the card id
+   var card = this.cardStore.getCard(idCard);
+
+   //Open the pop up with the card infos
+   let dialogRef = this.dialog.open(AtendimentoComponent, {
+      width: '44vw',
+      data: card
+    });
+
+   console.log("meu card:" + card.modelo);
+
+   //After the dialog is closed thats the called function
+    dialogRef.afterClosed().subscribe(result => {
+      
+      //In case the user pressed confirm
+      if(result!=null){
+        //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+
+        //Associando as propriedades para enviar o json certinho
+          result.bd_id = card.bd_id;
+          card.defeito = result.defeito;
+          card.marca =  result.marca;
+          card.modelo = result.modelo;
+          card.realizado = result.realizado;
+          card.pecas =  result.pecas;
+          card.servico = result.servico;
+          card.maoObra = result.maoObra;
+          card.valorFinal = result.valorFinal;
+          card.metPag = result.metPag;
+          
+          //Atualizando o card na store com as novas informações dele
+          this.cardStore.updateCard(idCard, card);
+
+          //Send the req to the backend to update the orca
+            const req = this.http.post(this.url + '/api/update_' + this.listsNames[idList], result)
+            .subscribe(
+              res => {
+
+                console.log("");
+              },
+              err => {
+                console.log("Error occured: " + err.error.message);
+              }
+            );
+
+      }
+    });
+  }
+
+  openDialogFinalizado(newList, oldList, cardID): void {
    //Get the card with the card id
    var card = this.cardStore.getCard(cardID);
 
    //Open the pop up with the card infos
    let dialogRef = this.dialog.open(AtendimentoComponent, {
       width: '44vw',
-      data: { marca: card.marca, defeito: card.defeito, modelo: card.modelo }
+      data: card
     });
 
    //After the dialog is closed thats the called function
@@ -277,6 +377,9 @@ export class AcompanhamentoComponent implements OnInit {
         this.sortByDate(newList, oldList, cardID);
 
         //Associando as propriedades para enviar o json certinho
+          card.defeito = result.defeito;
+          card.marca =  result.marca;
+          card.modelo = result.modelo;
           card.realizado = result.realizado;
           card.pecas =  result.pecas;
           card.servico = result.servico;
@@ -300,6 +403,223 @@ export class AcompanhamentoComponent implements OnInit {
                       console.log("Error occured: " + err.error.message);
                     }
                   );
+
+                  this.http.post(this.url + '/api/remove_agPecas', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+
+                  this.http.post(this.url + '/api/remove_rtVisita', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+
+                  this.http.post(this.url + '/api/remove_pagamento', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+              },
+              err => {
+                console.log("Error occured: " + err.error.message);
+              }
+            );
+
+      }
+    });
+  }
+
+  openDialogrtVisita(newList, oldList, cardID): void {
+   //Get the card with the card id
+   var card = this.cardStore.getCard(cardID);
+
+   //Open the pop up with the card infos
+   let dialogRef = this.dialog.open(AtendimentoComponent, {
+      width: '44vw',
+     data: card
+    });
+
+   //After the dialog is closed thats the called function
+    dialogRef.afterClosed().subscribe(result => {
+      
+      //In case the user pressed confirm
+      if(result!=null){
+        //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+        this.sortByDate(newList, oldList, cardID);
+
+        //Associando as propriedades para enviar o json certinho
+          card.realizado = result.realizado;
+          card.pecas =  result.pecas;
+          card.servico = result.servico;
+          card.maoObra = result.maoObra;
+          card.valorFinal = result.valorFinal;
+          card.metPag = result.metPag;
+          
+          //Atualizando o card na store com as novas informações dele
+          this.cardStore.updateCard(cardID, card);
+
+          //Send the req to the backend to update the orca
+            this.http.post(this.url + '/api/add_rtVisita', card)
+            .subscribe(
+              res => { 
+                  this.http.post(this.url + '/api/remove_atendimento', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+
+                  this.http.post(this.url + '/api/remove_agPecas', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+              },
+              err => {
+                console.log("Error occured: " + err.error.message);
+              }
+            );
+
+      }
+    });
+  }
+
+   openDialogagPecas(newList, oldList, cardID): void {
+   //Get the card with the card id
+   var card = this.cardStore.getCard(cardID);
+
+   //Open the pop up with the card infos
+   let dialogRef = this.dialog.open(AtendimentoComponent, {
+      width: '44vw',
+      data: card
+    });
+
+   //After the dialog is closed thats the called function
+    dialogRef.afterClosed().subscribe(result => {
+      
+      //In case the user pressed confirm
+      if(result!=null){
+        //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+        this.sortByDate(newList, oldList, cardID);
+
+        //Associando as propriedades para enviar o json certinho
+          card.realizado = result.realizado;
+          card.pecas =  result.pecas;
+          card.servico = result.servico;
+          card.maoObra = result.maoObra;
+          card.valorFinal = result.valorFinal;
+          card.metPag = result.metPag;
+          
+          //Atualizando o card na store com as novas informações dele
+          this.cardStore.updateCard(cardID, card);
+
+          //Send the req to the backend to update the orca
+            this.http.post(this.url + '/api/add_agPecas', card)
+            .subscribe(
+              res => { 
+                  this.http.post(this.url + '/api/remove_atendimento', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+              },
+              err => {
+                console.log("Error occured: " + err.error.message);
+              }
+            );
+
+      }
+    });
+  }
+
+  openDialogPagamento(newList, oldList, cardID): void {
+   //Get the card with the card id
+   var card = this.cardStore.getCard(cardID);
+
+   //Open the pop up with the card infos
+   let dialogRef = this.dialog.open(AtendimentoComponent, {
+      width: '44vw',
+      data: card
+    });
+
+   //After the dialog is closed thats the called function
+    dialogRef.afterClosed().subscribe(result => {
+      
+      //In case the user pressed confirm
+      if(result!=null){
+        //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+        this.sortByDate(newList, oldList, cardID);
+
+        //Associando as propriedades para enviar o json certinho
+          card.realizado = result.realizado;
+          card.pecas =  result.pecas;
+          card.servico = result.servico;
+          card.maoObra = result.maoObra;
+          card.valorFinal = result.valorFinal;
+          card.metPag = result.metPag;
+          
+          //Atualizando o card na store com as novas informações dele
+          this.cardStore.updateCard(cardID, card);
+
+          //Send the req to the backend to update the orca
+            this.http.post(this.url + '/api/add_pagamento', card)
+            .subscribe(
+              res => { 
+                  this.http.post(this.url + '/api/remove_atendimento', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+
+                  this.http.post(this.url + '/api/remove_agPecas', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+
+                  this.http.post(this.url + '/api/remove_rtVisita', card )
+                  .subscribe(
+                    res => { 
+
+                    },
+                    err => {
+                      console.log("Error occured: " + err.error.message);
+                    }
+                  );
+
               },
               err => {
                 console.log("Error occured: " + err.error.message);
@@ -311,8 +631,26 @@ export class AcompanhamentoComponent implements OnInit {
   }
 
   clicked(event){
-    this.clickOrcamento(event.target.id);
+  let target = event.target;
 
+    //Loop trought the parent html element until get to the list it was dropped on
+    while (target.className !== 'list') {
+      target = target.parentNode;
+    }
+
+    //The list ID, the one that the card is being clicked
+    var listID = parseInt(target.id.substring(1,2));
+
+    //Checking if is the "finalizado" column so a pop up wont be oppened
+    if(listID == 5){
+      return;
+    }
+    if(listID == 0 || listID == 1){
+      this.clickOrcamento(event.target.id, listID);
+    }
+    else{
+      this.clickVisited(event.target.id, listID);
+    }
   }
 
   drop($event) {
@@ -349,9 +687,28 @@ export class AcompanhamentoComponent implements OnInit {
 
     //If the list is dropped from the second list to the third
     if(oldList == 1 && newList == 2){
-        this.openDialogAtendimento(newList, oldList, cardID);
+        this.openDialogagPecas(newList, oldList, cardID);
     }
 
+    //If the list is dropped from the second list to the third
+    if(oldList == 1 && newList == 3){
+        this.openDialogrtVisita(newList, oldList, cardID);
+    }
+
+        //If the list is dropped from the second list to the third
+    if(oldList == 2 && newList == 3){
+        this.openDialogrtVisita(newList, oldList, cardID);
+    }
+
+    //If the list is dropped from the second list to the third
+    if( (oldList == 1 || oldList == 2 || oldList == 3) && newList == 4 ){
+        this.openDialogPagamento(newList, oldList, cardID);
+    }
+
+    //If the list is dropped from the second list to the third
+    if( (oldList == 1 || oldList == 2 || oldList == 3 || oldList == 4)  && newList == 5){
+        this.openDialogFinalizado(newList, oldList, cardID);
+    }
 
   }
 

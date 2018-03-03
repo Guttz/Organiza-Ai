@@ -12,11 +12,13 @@
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [disabled]="true" [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
+            <input  [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
           </mat-form-field> 
 
 	    </div>
 
+<!--  Put the tag inside the input
+[disabled]="true" -->
 
       	<div class="row">
 
@@ -28,7 +30,6 @@
               fxFlex="49">
 
               <input matInput 
-              [disabled]="true"
               [matDatepicker]="picker" 
               name="data"
               [(ngModel)]="data.data" 

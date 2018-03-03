@@ -1,14 +1,14 @@
 <div class="card" draggable="true"  (dragstart)="dragStart($event)" id="{{card.id}}">
 
 <div id="{{card.id}}" >
-	<span ><b id="{{card.id}}" > <!-- {{card.id}}--> {{card.nome}} -</b></span>
+	<span ><b id="{{card.id}}" >  {{card.id}} {{card.nome}} </b></span>
 
-	<span  class="my-card-des"><b id="{{card.id}}" >{{card.estado}}</b></span>
+<!-- 	<span  class="my-card-des"><b id="{{card.id}}" >{{card.estado}}</b></span> -->
 </div>
 
 <div id="{{card.id}}">
 	<span id="{{card.id}}" >Tel.</span>
-	<span> <b id="{{card.id}}" > <span id="{{card.id}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>
+	<span class="my-card-des" > <b id="{{card.id}}" > <span id="{{card.id}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>
 </div>
 
 <span id="{{card.id}}" >{{card.endereco}}</span>

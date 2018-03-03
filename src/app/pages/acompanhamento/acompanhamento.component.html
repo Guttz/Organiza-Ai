@@ -1,4 +1,4 @@
 <app-header-toolbar></app-header-toolbar>
-<div >
+<div style="padding-left: 5px;">
   <app-list (click)="clicked($event)" (drop)="drop($event)" *ngFor="let list of lists" [list]="list" [cardStore]="cardStore"></app-list>
 </div>

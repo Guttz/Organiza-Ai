@@ -384,7 +384,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/card/card.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.id}}\">\r\n\r\n<div id=\"{{card.id}}\" >\r\n\t<span ><b id=\"{{card.id}}\" > <!-- {{card.id}}--> {{card.nome}} -</b></span>\r\n\r\n\t<span  class=\"my-card-des\"><b id=\"{{card.id}}\" >{{card.estado}}</b></span>\r\n</div>\r\n\r\n<div id=\"{{card.id}}\">\r\n\t<span id=\"{{card.id}}\" >Tel.</span>\r\n\t<span> <b id=\"{{card.id}}\" > <span id=\"{{card.id}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.id}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
+module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.id}}\">\r\n\r\n<div id=\"{{card.id}}\" >\r\n\t<span ><b id=\"{{card.id}}\" >  {{card.id}} {{card.nome}} </b></span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.id}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.id}}\">\r\n\t<span id=\"{{card.id}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.id}}\" > <span id=\"{{card.id}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.id}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -441,7 +441,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list {\r\n  height: 87vh;\r\n  overflow: auto;\r\n}\r\n\r\n.list_border{\r\n      background: rgba(215,213,214, 0.6);\r\n    width: 30.5vw;\r\n    padding: 4px;\r\n    margin: 4px;\r\n    margin-top: 30px;\r\n    display: inline-block;\r\n    border-radius: 8px;\r\n\r\n}\r\n\r\n.list__title {\r\n    margin: 0;\r\n    padding-top: 15px;\r\n    cursor: context-menu; \r\n    padding-left: 8px;\r\n    padding-bottom: 11px;\r\n    font-size: 14px;\r\n    -webkit-touch-callout: none;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n}\r\n.list a {\r\n    width: 100%;\r\n    display: block;\r\n    text-decoration: none;\r\n}\r\n \r\ninput{\r\n  width: 248px;\r\n  padding: 5px;\r\n  border: 2px solid orange;\r\n  outline: 0;\r\n  background: #fff;\r\n  box-shadow:none;\r\n}", ""]);
+exports.push([module.i, ".list {\r\n  height: 87vh;\r\n  overflow: auto;\r\n}\r\n\r\n.list_border{\r\n      background: rgba(215,213,214, 0.6);\r\n    width: 18.7vw;\r\n    padding: 4px;\r\n    margin: 4px;\r\n    margin-top: 30px;\r\n    display: inline-block;\r\n    border-radius: 8px;\r\n\r\n}\r\n\r\n.list__title {\r\n    margin: 0;\r\n    padding-top: 15px;\r\n    cursor: context-menu; \r\n    padding-left: 8px;\r\n    padding-bottom: 11px;\r\n    font-size: 14px;\r\n    -webkit-touch-callout: none;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n}\r\n.list a {\r\n    width: 100%;\r\n    display: block;\r\n    text-decoration: none;\r\n}\r\n \r\ninput{\r\n  width: 248px;\r\n  padding: 5px;\r\n  border: 2px solid orange;\r\n  outline: 0;\r\n  background: #fff;\r\n  box-shadow:none;\r\n}", ""]);
 
 // exports
 
@@ -454,7 +454,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/list/list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong> <!-- {{list.id}}--> {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let cardId of list.cards\" [card]=\"cardStore.getCard(cardId)\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
+module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong>  {{list.id}} {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let cardId of list.cards\" [card]=\"cardStore.getCard(cardId)\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
 
 /***/ }),
 
@@ -918,27 +918,28 @@ var CardStore = (function () {
     };
     CardStore.prototype.updateCard = function (cardId, card) {
         //console.log("update" + this.cards[parseInt(cardId)].defeito);
-        this.cards[parseInt(cardId)].estado = card.estado;
-        this.cards[parseInt(cardId)].bd_id = card.bd_id;
-        this.cards[parseInt(cardId)].defeito = card.defeito;
-        this.cards[parseInt(cardId)].nome = card.nome;
-        this.cards[parseInt(cardId)].telPrimario = card.telPrimario;
-        this.cards[parseInt(cardId)].data = card.data;
-        this.cards[parseInt(cardId)].dia = card.data.getDate();
-        this.cards[parseInt(cardId)].mes = card.data.getMonth() + 1;
-        this.cards[parseInt(cardId)].periodo = card.periodo;
-        this.cards[parseInt(cardId)].endereco = card.endereco;
-        this.cards[parseInt(cardId)].marca = card.marca;
-        this.cards[parseInt(cardId)].modelo = card.modelo;
-        this.cards[parseInt(cardId)].telSecundario = card.telSecundario;
-        this.cards[parseInt(cardId)].email = card.email;
-        this.cards[parseInt(cardId)].realizado = card.realizado;
-        this.cards[parseInt(cardId)].pecas = card.pecas;
-        this.cards[parseInt(cardId)].servico = card.servico;
-        this.cards[parseInt(cardId)].maoObra = card.maoObra;
-        this.cards[parseInt(cardId)].valorFinal = card.valorFinal;
-        this.cards[parseInt(cardId)].metPag = card.metPag;
-        console.log("update" + this.cards[parseInt(cardId)].defeito);
+        var cardID = parseInt(cardId);
+        this.cards[cardID].estado = card.estado;
+        this.cards[cardID].bd_id = card.bd_id;
+        this.cards[cardID].defeito = card.defeito;
+        this.cards[cardID].nome = card.nome;
+        this.cards[cardID].telPrimario = card.telPrimario;
+        this.cards[cardID].data = card.data;
+        this.cards[cardID].dia = card.data.getDate();
+        this.cards[cardID].mes = card.data.getMonth() + 1;
+        this.cards[cardID].periodo = card.periodo;
+        this.cards[cardID].endereco = card.endereco;
+        this.cards[cardID].marca = card.marca;
+        this.cards[cardID].modelo = card.modelo;
+        this.cards[cardID].telSecundario = card.telSecundario;
+        this.cards[cardID].email = card.email;
+        this.cards[cardID].realizado = card.realizado;
+        this.cards[cardID].pecas = card.pecas;
+        this.cards[cardID].servico = card.servico;
+        this.cards[cardID].maoObra = card.maoObra;
+        this.cards[cardID].valorFinal = card.valorFinal;
+        this.cards[cardID].metPag = card.metPag;
+        console.log("update" + this.cards[cardID].defeito);
     };
     CardStore.prototype.newCard = function (estado, cpf, id, defeito, nome, telPrimario, data, periodo, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag) {
         var card = new __WEBPACK_IMPORTED_MODULE_0__cardSchema__["a" /* CardSchema */]();
@@ -990,7 +991,7 @@ var ListSchema = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/acompanhamento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div >\r\n  <app-list (click)=\"clicked($event)\" (drop)=\"drop($event)\" *ngFor=\"let list of lists\" [list]=\"list\" [cardStore]=\"cardStore\"></app-list>\r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"padding-left: 5px;\">\r\n  <app-list (click)=\"clicked($event)\" (drop)=\"drop($event)\" *ngFor=\"let list of lists\" [list]=\"list\" [cardStore]=\"cardStore\"></app-list>\r\n</div>"
 
 /***/ }),
 
@@ -1002,7 +1003,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "div {\n  background: rgba(235, 233, 234, 0.3);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 0px 30px;\n  width: 100%;\n  height: 100%;\n  background-opacity: 0.18; }\n\n.mat-dialog-container {\n  background: red; }\n", ""]);
+exports.push([module.i, "div {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 0px 30px;\n  width: 100%;\n  height: 100%; }\n\napp-list {\n  background: rgba(235, 233, 234, 0.3);\n  background-opacity: 0.18; }\n\n.mat-dialog-container {\n  background: red; }\n", ""]);
 
 // exports
 
@@ -1100,6 +1101,8 @@ var AcompanhamentoComponent = (function () {
         //url = "http://localhost";
         //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
         this.url = "http://myas.com.br";
+        //List names for the backend requests be directly to the right collection
+        this.listsNames = ["orca", "atendimento", "agPecas", "rtVisita", "pagamento"];
         if (window.location.href.match(/www/) != null) {
             console.log("das me: " + window.location.href);
             this.url = "http://www.myas.com.br";
@@ -1112,31 +1115,47 @@ var AcompanhamentoComponent = (function () {
                 this.url = "http://myas.com.br";
             }
         }
-        this.getOrcs();
     }
     AcompanhamentoComponent.prototype.makeMockData = function () {
         this.cardStore = new __WEBPACK_IMPORTED_MODULE_1__common_components_schemas_cardStore__["a" /* CardStore */]();
         var lists = [
             {
-                name: 'Orçamento',
+                name: 'Visita Orçamento',
                 cards: [],
                 id: "l0"
             },
             {
-                name: 'Clientes a atender',
+                name: 'Visita técnico',
                 cards: [],
                 id: "l1"
             },
             {
-                name: 'Clientes finalizados',
+                name: 'Aguardando Peças',
                 cards: [],
                 id: "l2"
+            },
+            {
+                name: 'Retorno Visita',
+                cards: [],
+                id: "l3"
+            },
+            {
+                name: 'Pagamento',
+                cards: [],
+                id: "l4"
+            },
+            {
+                name: 'Clientes finalizados',
+                cards: [],
+                id: "l5"
             }
         ];
         this.lists = lists;
     };
     AcompanhamentoComponent.prototype.ngOnInit = function () {
+        //Initializing the page
         this.makeMockData();
+        this.getOrcs();
     };
     AcompanhamentoComponent.prototype.getOrcs = function () {
         var _this = this;
@@ -1156,12 +1175,39 @@ var AcompanhamentoComponent = (function () {
                 _this.lists[1].cards.push(cardId);
             }
         });
+        this.http.get(this.url + '/api/get_agPecas').subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.auxData = data;
+            console.log(_this.auxData);
+            for (var i = 0; i < _this.auxData.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+                _this.lists[2].cards.push(cardId);
+            }
+        });
+        this.http.get(this.url + '/api/get_rtVisita').subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.auxData = data;
+            console.log(_this.auxData);
+            for (var i = 0; i < _this.auxData.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+                _this.lists[3].cards.push(cardId);
+            }
+        });
+        this.http.get(this.url + '/api/get_pagamento').subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.auxData = data;
+            console.log(_this.auxData);
+            for (var i = 0; i < _this.auxData.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+                _this.lists[4].cards.push(cardId);
+            }
+        });
         this.http.get(this.url + '/api/get_finalizados').subscribe(function (data) {
             //Agora todos os dados estao na variavel data
             _this.auxData = data;
             for (var i = 0; i < _this.auxData.length; i++) {
-                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null);
-                _this.lists[2].cards.push(cardId);
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+                _this.lists[5].cards.push(cardId);
             }
         });
     };
@@ -1203,11 +1249,8 @@ var AcompanhamentoComponent = (function () {
             }
         });
     };
-    AcompanhamentoComponent.prototype.clickOrcamento = function (idCard) {
+    AcompanhamentoComponent.prototype.clickOrcamento = function (idCard, idList) {
         var _this = this;
-        if (this.lists[2].cards.includes(idCard)) {
-            return;
-        }
         var card = this.cardStore.getCard(idCard);
         var dialogRef = this.dialog.open(ClienteAtenderComponent, {
             width: '44vw',
@@ -1218,15 +1261,13 @@ var AcompanhamentoComponent = (function () {
             //Dando ruim com alterações consecutivas
             if (result != null) {
                 result.bd_id = card.bd_id;
-                console.log("periodo " + result.periodo);
-                //result.periodo = "Tarde";
                 card.defeito = result.defeito;
                 card.marca = result.marca;
                 card.modelo = result.modelo;
                 card.data = result.data;
                 card.periodo = result.periodo;
                 _this.cardStore.updateCard(idCard, card);
-                var req = _this.http.post(_this.url + '/api/update_orca', result)
+                var req = _this.http.post(_this.url + '/api/update_' + _this.listsNames[idList], result)
                     .subscribe(function (res) {
                     console.log("");
                 }, function (err) {
@@ -1235,14 +1276,108 @@ var AcompanhamentoComponent = (function () {
             }
         });
     };
-    AcompanhamentoComponent.prototype.openDialogAtendimento = function (newList, oldList, cardID) {
+    AcompanhamentoComponent.prototype.clickVisited = function (idCard, idList) {
+        var _this = this;
+        //Get the card with the card id
+        var card = this.cardStore.getCard(idCard);
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoComponent, {
+            width: '44vw',
+            data: card
+        });
+        console.log("meu card:" + card.modelo);
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+            //In case the user pressed confirm
+            if (result != null) {
+                //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+                //Associando as propriedades para enviar o json certinho
+                result.bd_id = card.bd_id;
+                card.defeito = result.defeito;
+                card.marca = result.marca;
+                card.modelo = result.modelo;
+                card.realizado = result.realizado;
+                card.pecas = result.pecas;
+                card.servico = result.servico;
+                card.maoObra = result.maoObra;
+                card.valorFinal = result.valorFinal;
+                card.metPag = result.metPag;
+                //Atualizando o card na store com as novas informações dele
+                _this.cardStore.updateCard(idCard, card);
+                //Send the req to the backend to update the orca
+                var req = _this.http.post(_this.url + '/api/update_' + _this.listsNames[idList], result)
+                    .subscribe(function (res) {
+                    console.log("");
+                }, function (err) {
+                    console.log("Error occured: " + err.error.message);
+                });
+            }
+        });
+    };
+    AcompanhamentoComponent.prototype.openDialogFinalizado = function (newList, oldList, cardID) {
         var _this = this;
         //Get the card with the card id
         var card = this.cardStore.getCard(cardID);
         //Open the pop up with the card infos
         var dialogRef = this.dialog.open(AtendimentoComponent, {
             width: '44vw',
-            data: { marca: card.marca, defeito: card.defeito, modelo: card.modelo }
+            data: card
+        });
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+            //In case the user pressed confirm
+            if (result != null) {
+                //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+                _this.sortByDate(newList, oldList, cardID);
+                //Associando as propriedades para enviar o json certinho
+                card.defeito = result.defeito;
+                card.marca = result.marca;
+                card.modelo = result.modelo;
+                card.realizado = result.realizado;
+                card.pecas = result.pecas;
+                card.servico = result.servico;
+                card.maoObra = result.maoObra;
+                card.valorFinal = result.valorFinal;
+                card.metPag = result.metPag;
+                //Atualizando o card na store com as novas informações dele
+                _this.cardStore.updateCard(cardID, card);
+                //Send the req to the backend to update the orca
+                _this.http.post(_this.url + '/api/add_finalizado', card)
+                    .subscribe(function (res) {
+                    _this.http.post(_this.url + '/api/remove_atendimento', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                    _this.http.post(_this.url + '/api/remove_agPecas', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                    _this.http.post(_this.url + '/api/remove_rtVisita', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                    _this.http.post(_this.url + '/api/remove_pagamento', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                }, function (err) {
+                    console.log("Error occured: " + err.error.message);
+                });
+            }
+        });
+    };
+    AcompanhamentoComponent.prototype.openDialogrtVisita = function (newList, oldList, cardID) {
+        var _this = this;
+        //Get the card with the card id
+        var card = this.cardStore.getCard(cardID);
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoComponent, {
+            width: '44vw',
+            data: card
         });
         //After the dialog is closed thats the called function
         dialogRef.afterClosed().subscribe(function (result) {
@@ -1260,7 +1395,50 @@ var AcompanhamentoComponent = (function () {
                 //Atualizando o card na store com as novas informações dele
                 _this.cardStore.updateCard(cardID, card);
                 //Send the req to the backend to update the orca
-                _this.http.post(_this.url + '/api/add_finalizado', card)
+                _this.http.post(_this.url + '/api/add_rtVisita', card)
+                    .subscribe(function (res) {
+                    _this.http.post(_this.url + '/api/remove_atendimento', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                    _this.http.post(_this.url + '/api/remove_agPecas', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                }, function (err) {
+                    console.log("Error occured: " + err.error.message);
+                });
+            }
+        });
+    };
+    AcompanhamentoComponent.prototype.openDialogagPecas = function (newList, oldList, cardID) {
+        var _this = this;
+        //Get the card with the card id
+        var card = this.cardStore.getCard(cardID);
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoComponent, {
+            width: '44vw',
+            data: card
+        });
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+            //In case the user pressed confirm
+            if (result != null) {
+                //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+                _this.sortByDate(newList, oldList, cardID);
+                //Associando as propriedades para enviar o json certinho
+                card.realizado = result.realizado;
+                card.pecas = result.pecas;
+                card.servico = result.servico;
+                card.maoObra = result.maoObra;
+                card.valorFinal = result.valorFinal;
+                card.metPag = result.metPag;
+                //Atualizando o card na store com as novas informações dele
+                _this.cardStore.updateCard(cardID, card);
+                //Send the req to the backend to update the orca
+                _this.http.post(_this.url + '/api/add_agPecas', card)
                     .subscribe(function (res) {
                     _this.http.post(_this.url + '/api/remove_atendimento', card)
                         .subscribe(function (res) {
@@ -1273,8 +1451,72 @@ var AcompanhamentoComponent = (function () {
             }
         });
     };
+    AcompanhamentoComponent.prototype.openDialogPagamento = function (newList, oldList, cardID) {
+        var _this = this;
+        //Get the card with the card id
+        var card = this.cardStore.getCard(cardID);
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoComponent, {
+            width: '44vw',
+            data: card
+        });
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+            //In case the user pressed confirm
+            if (result != null) {
+                //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
+                _this.sortByDate(newList, oldList, cardID);
+                //Associando as propriedades para enviar o json certinho
+                card.realizado = result.realizado;
+                card.pecas = result.pecas;
+                card.servico = result.servico;
+                card.maoObra = result.maoObra;
+                card.valorFinal = result.valorFinal;
+                card.metPag = result.metPag;
+                //Atualizando o card na store com as novas informações dele
+                _this.cardStore.updateCard(cardID, card);
+                //Send the req to the backend to update the orca
+                _this.http.post(_this.url + '/api/add_pagamento', card)
+                    .subscribe(function (res) {
+                    _this.http.post(_this.url + '/api/remove_atendimento', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                    _this.http.post(_this.url + '/api/remove_agPecas', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                    _this.http.post(_this.url + '/api/remove_rtVisita', card)
+                        .subscribe(function (res) {
+                    }, function (err) {
+                        console.log("Error occured: " + err.error.message);
+                    });
+                }, function (err) {
+                    console.log("Error occured: " + err.error.message);
+                });
+            }
+        });
+    };
     AcompanhamentoComponent.prototype.clicked = function (event) {
-        this.clickOrcamento(event.target.id);
+        var target = event.target;
+        //Loop trought the parent html element until get to the list it was dropped on
+        while (target.className !== 'list') {
+            target = target.parentNode;
+        }
+        //The list ID, the one that the card is being clicked
+        var listID = parseInt(target.id.substring(1, 2));
+        //Checking if is the "finalizado" column so a pop up wont be oppened
+        if (listID == 5) {
+            return;
+        }
+        if (listID == 0 || listID == 1) {
+            this.clickOrcamento(event.target.id, listID);
+        }
+        else {
+            this.clickVisited(event.target.id, listID);
+        }
     };
     AcompanhamentoComponent.prototype.drop = function ($event) {
         //The target element that the card was dropped on
@@ -1301,7 +1543,23 @@ var AcompanhamentoComponent = (function () {
         }
         //If the list is dropped from the second list to the third
         if (oldList == 1 && newList == 2) {
-            this.openDialogAtendimento(newList, oldList, cardID);
+            this.openDialogagPecas(newList, oldList, cardID);
+        }
+        //If the list is dropped from the second list to the third
+        if (oldList == 1 && newList == 3) {
+            this.openDialogrtVisita(newList, oldList, cardID);
+        }
+        //If the list is dropped from the second list to the third
+        if (oldList == 2 && newList == 3) {
+            this.openDialogrtVisita(newList, oldList, cardID);
+        }
+        //If the list is dropped from the second list to the third
+        if ((oldList == 1 || oldList == 2 || oldList == 3) && newList == 4) {
+            this.openDialogPagamento(newList, oldList, cardID);
+        }
+        //If the list is dropped from the second list to the third
+        if ((oldList == 1 || oldList == 2 || oldList == 3 || oldList == 4) && newList == 5) {
+            this.openDialogFinalizado(newList, oldList, cardID);
         }
     };
     AcompanhamentoComponent.prototype.sortByDate = function (newList, oldList, cardID) {
@@ -1371,7 +1629,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/pages/acompanhamento/cliente-atender.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"column\" class=\"popup\"> \r\n<h1 mat-dialog-title>Informações do Orçamento</h1>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [disabled]=\"true\" [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div>\r\n\r\n\r\n      \t<div class=\"row\">\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"data.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex=\"49\">\r\n\r\n              <input matInput \r\n              [disabled]=\"true\"\r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"data.data\" \r\n              placeholder=\"Data de visita\"\r\n              >\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n\r\n           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n              <mat-select \r\n                placeholder=\"Período\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<div class=\"column\" class=\"popup\"> \r\n<h1 mat-dialog-title>Informações do Orçamento</h1>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input  [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div>\r\n\r\n<!--  Put the tag inside the input\r\n[disabled]=\"true\" -->\r\n\r\n      \t<div class=\"row\">\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"data.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex=\"49\">\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"data.data\" \r\n              placeholder=\"Data de visita\"\r\n              >\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n\r\n           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n              <mat-select \r\n                placeholder=\"Período\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
 
 /***/ }),
 
@@ -1457,7 +1715,7 @@ var ForgotPasswordComponent = (function () {
 /***/ "../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form #userCadForm=\"ngForm\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.cpf\" \r\n              ngDefaultControl \r\n              name=\"cpf\" \r\n              placeholder=\"CPF\" \r\n              (blur)=\"checkUser(userCadForm)\" \r\n              required>\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\" [hideRequiredMarker]=\"true\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.nome\" \r\n              ngDefaultControl\r\n              name=\"nome\" \r\n              placeholder=\"Nome completo do cliente\" \r\n              required>\r\n          </mat-form-field>    \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.telPrimario\" \r\n              ngDefaultControl \r\n              name=\"telPrimario\" \r\n              placeholder=\"Telefone primário\"  \r\n              required>\r\n        </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.telSecundario\" \r\n              ngDefaultControl \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\">\r\n        </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.email\" \r\n              ngDefaultControl \r\n              name=\"email\" \r\n              placeholder=\"Email\" >\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.endereco\" \r\n              ngDefaultControl \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\"\r\n              required>\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"userForm(userCadForm)\">\r\n        </my-button-orange>\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser(userCadForm)\">\r\n        </my-button-orange>\r\n      </div>\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUser(orcaCadForm)\"\r\n              required>\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"orca.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex\r\n              required>\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"orca.data\" \r\n              placeholder=\"Data de visita\"\r\n              required>\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n\r\n           <mat-form-field fxFlex=\"32\">\r\n              <mat-select \r\n                required\r\n                placeholder=\"Período\"  \r\n                [(ngModel)]=\"orca.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of values\" \r\n                  [(value)]=\"value.value\" \r\n                  [ngStyle]=\"{width: width + 'px'}\">\r\n                  {{ value.viewValue }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <div fxFlex=\"grow\"></div>\r\n\r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm)\">\r\n                \r\n            </my-button-orange>\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form #userCadForm=\"ngForm\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput \r\n            [ngModel] = \"user.cpf\" \r\n            ngDefaultControl \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            (blur)=\"checkUser(userCadForm)\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput \r\n            [(ngModel)] = \"user.nome\" \r\n            autocomplete='name'\r\n            ngDefaultControl\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            [(ngModel)] = \"user.telefone\" \r\n            ngDefaultControl \r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"emailFormControl.errors &&  !emailFormControl.hasError('required')\">\r\n              Please enter a valid email address\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.telSecundario\" \r\n              ngDefaultControl \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\">\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            [(ngModel)] = \"user.email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('required')\">\r\n              Email é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('email') && !emailFormControl.hasError('required')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.endereco\" \r\n              ngDefaultControl \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\"\r\n              required>\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"userForm(userCadForm)\">\r\n        </my-button-orange>\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser(userCadForm)\">\r\n        </my-button-orange>\r\n      </div>\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUser(orcaCadForm)\"\r\n              required>\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"orca.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex\r\n              required>\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"orca.data\" \r\n              placeholder=\"Data de visita\"\r\n              required>\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n\r\n           <mat-form-field fxFlex=\"32\">\r\n              <mat-select \r\n                required\r\n                placeholder=\"Período\"  \r\n                [(ngModel)]=\"orca.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of values\" \r\n                  [(value)]=\"value.value\" \r\n                  [ngStyle]=\"{width: width + 'px'}\">\r\n                  {{ value.viewValue }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <div fxFlex=\"grow\"></div>\r\n\r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm)\">\r\n                \r\n            </my-button-orange>\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n</div>"
 
 /***/ }),
 
@@ -1485,8 +1743,9 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormDadosClienteComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1499,6 +1758,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+// Importing CPF and CNPJ validators 
+var CPF = __webpack_require__("../../../../cpf_cnpj/index.js").CPF;
+var CNPJ = __webpack_require__("../../../../cpf_cnpj/index.js").CNPJ;
 var FormDadosClienteComponent = (function () {
     function FormDadosClienteComponent(http, snackBar) {
         this.http = http;
@@ -1517,6 +1780,23 @@ var FormDadosClienteComponent = (function () {
         this.user = { cpf: '', nome: '', telPrimario: '', telSecundario: '', email: '', endereco: '' };
         this.orca = { cpf: '', defeito: '', marca: '', data: null, modelo: '', periodo: '' };
         this.update = false;
+        //My validators
+        this.nomeFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
+        ]);
+        //My validators
+        this.cpfFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
+            this.cpfValidator
+        ]);
+        this.emailFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].email
+        ]);
+        this.telFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
+        ]);
         if (window.location.href.match(/www/) != null) {
             console.log("das me: " + window.location.href);
             this.url = "http://www.myas.com.br";
@@ -1532,11 +1812,42 @@ var FormDadosClienteComponent = (function () {
     }
     FormDadosClienteComponent.prototype.ngOnInit = function () {
     };
+    FormDadosClienteComponent.prototype.cpfValidator = function (control) {
+        var cpforcnpj = control.value;
+        if (!(CPF.isValid(cpforcnpj) || CNPJ.isValid(cpforcnpj))) {
+            return {
+                cpfcnpjInvalid: "Invalid cpf/cnpj"
+            };
+        }
+        return null;
+    };
+    FormDadosClienteComponent.prototype.typingPhone = function () {
+        /*    if(this.user.telefone.length == 1){
+              this.user.telefone = "(" + this.user.telefone;
+            }*/
+        if (this.user.telPrimario.length == 3) {
+            this.user.telPrimario = this.user.telPrimario + ")";
+        }
+        if (this.user.telPrimario.length == 9) {
+            this.user.telPrimario = this.user.telPrimario + "-";
+        }
+    };
+    FormDadosClienteComponent.prototype.typingPhoneTwo = function () {
+        /*    if(this.user.telefone.length == 1){
+              this.user.telefone = "(" + this.user.telefone;
+            }*/
+        if (this.user.telSecundario.length == 3) {
+            this.user.telSecundario = this.user.telSecundario + ")";
+        }
+        if (this.user.telSecundario.length == 9) {
+            this.user.telSecundario = this.user.telSecundario + "-";
+        }
+    };
     FormDadosClienteComponent.prototype.userForm = function (myForm) {
         var _this = this;
         //cheking if any required field is empty
         if (myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "") {
-            var config_1 = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_1 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config_1.extraClasses = ['error-class'];
             config_1.duration = 3000;
             this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config_1);
@@ -1546,7 +1857,7 @@ var FormDadosClienteComponent = (function () {
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
-            var config = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config.extraClasses = ['custom-class'];
             config.duration = 3000;
             _this.snackBar.open("Erro no cadastro: " + err.error.message, "Fechar", config);
@@ -1560,7 +1871,7 @@ var FormDadosClienteComponent = (function () {
         this.user.telSecundario = '';
         this.user.email = '';
         this.user.endereco = '';
-        var config = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Cliente Cadastrado com sucesso", "Fechar", config);
@@ -1572,17 +1883,17 @@ var FormDadosClienteComponent = (function () {
         var _this = this;
         //cheking if any required field is empty
         if (myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telPrimario == "" || myForm.value.endereco == "") {
-            var config_2 = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config_2.extraClasses = ['error-class'];
             config_2.duration = 3000;
-            this.snackBar.open("Os campos com * devem ser preenchidos.", "Fechar", config_2);
+            this.snackBar.open("Os campos com obrigatórios devem ser preenchidos.", "Fechar", config_2);
             return null;
         }
         var req = this.http.post(this.url + '/api/update_cli', myForm.value)
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
-            var config = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config.extraClasses = ['error-class'];
             config.duration = 3000;
             _this.snackBar.open("Erro na atualização de cadastro: " + err.error.message, "Fechar", config);
@@ -1596,7 +1907,7 @@ var FormDadosClienteComponent = (function () {
         this.user.telSecundario = '';
         this.user.email = '';
         this.user.endereco = '';
-        var config = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Cadastro atualizado com sucesso", "Fechar", config);
@@ -1605,7 +1916,7 @@ var FormDadosClienteComponent = (function () {
         var _this = this;
         //cheking if any required field is empty
         if (myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" || myForm.value.modelo == "" || myForm.value.periodo == "") {
-            var config_3 = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config_3.extraClasses = ['error-class'];
             config_3.duration = 3000;
             this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config_3);
@@ -1641,7 +1952,7 @@ var FormDadosClienteComponent = (function () {
                 _this.user.email = '';
                 _this.user.endereco = '';
             }, function (err) {
-                var config = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+                var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
                 config.extraClasses = ['error-class'];
                 config.duration = 3000;
                 _this.snackBar.open("Erro na criação do orçamento: " + err.error.message, "Fechar", config);
@@ -1650,7 +1961,7 @@ var FormDadosClienteComponent = (function () {
         }, function (err) {
             console.log("Error occured: " + err.error.message);
         });
-        var config = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatSnackBarConfig */]();
+        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
@@ -1679,7 +1990,7 @@ var FormDadosClienteComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatSnackBar */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatSnackBar */]])
     ], FormDadosClienteComponent);
     return FormDadosClienteComponent;
 }());
@@ -1703,7 +2014,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".my-toolbar {\n  background: white;\n  border: 0px;\n  border-bottom: 1px;\n  border-style: solid;\n  border-color: #E2E2E2;\n  height: 100%; }\n\n.mat-form-field-flex {\n  background: yellow;\n  color: yellow;\n  display: block; }\n\n.my-logo {\n  cursor: pointer;\n  outline: none; }\n\n.my-user {\n  cursor: pointer; }\n\n.my-menus {\n  border: 0px;\n  border-top: 5px;\n  border-color: white;\n  border-style: solid;\n  font-size: 1.06vw;\n  text-align: center;\n  line-height: 48px;\n  cursor: pointer; }\n\n.my-menus:hover {\n  color: #FF8405; }\n\nspan {\n  margin: 0px;\n  border: 0px;\n  outline: none; }\n\n.my-menus-activated {\n  border-color: #FF8405;\n  color: #FF8405; }\n", ""]);
+exports.push([module.i, ".my-toolbar {\n  background: white;\n  border: 0px;\n  border-bottom: 1px;\n  border-style: solid;\n  border-color: #E2E2E2;\n  height: 100%;\n  width: 100%; }\n\n.mat-form-field-flex {\n  background: yellow;\n  color: yellow;\n  display: block; }\n\n.my-logo {\n  cursor: pointer;\n  outline: none; }\n\n.my-user {\n  cursor: pointer; }\n\n.my-menus {\n  border: 0px;\n  border-top: 5px;\n  border-color: white;\n  border-style: solid;\n  font-size: 1.06vw;\n  text-align: center;\n  line-height: 48px;\n  cursor: pointer; }\n\n.my-menus:hover {\n  color: #FF8405; }\n\nspan {\n  margin: 0px;\n  border: 0px;\n  outline: none; }\n\n.my-menus-activated {\n  border-color: #FF8405;\n  color: #FF8405; }\n", ""]);
 
 // exports
 

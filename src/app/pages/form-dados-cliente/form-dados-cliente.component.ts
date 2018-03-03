@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {ErrorStateMatcher} from '@angular/material/core';
+
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { Submissions} from './submissions';
 import { Orca} from './../../../../schemas/orca';
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+
+// Importing CPF and CNPJ validators 
+var CPF = require("cpf_cnpj").CPF;
+var CNPJ = require("cpf_cnpj").CNPJ;
 
 @Component({
   selector: 'form-dados-cliente',
@@ -48,6 +52,71 @@ export class FormDadosClienteComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+    //My validators
+  nomeFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  //My validators
+  cpfFormControl = new FormControl('', [
+    Validators.required,
+    this.cpfValidator
+  ]);
+
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
+
+  telFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
+  ]);
+
+    cpfValidator(control: FormControl) { 
+  let cpforcnpj = control.value; 
+  if (!(CPF.isValid(cpforcnpj) || CNPJ.isValid(cpforcnpj)) ){ 
+      return {
+        cpfcnpjInvalid: "Invalid cpf/cnpj"
+      }
+  }
+
+  return null; 
+  }
+
+    typingPhone(){
+
+/*    if(this.user.telefone.length == 1){
+      this.user.telefone = "(" + this.user.telefone;
+    }*/
+
+    if(this.user.telPrimario.length == 3){
+      this.user.telPrimario = this.user.telPrimario + ")";
+    }
+
+    if(this.user.telPrimario.length == 9){
+      this.user.telPrimario = this.user.telPrimario + "-";
+    }
+
+  }
+
+  typingPhoneTwo(){
+
+/*    if(this.user.telefone.length == 1){
+      this.user.telefone = "(" + this.user.telefone;
+    }*/
+
+    if(this.user.telSecundario.length == 3){
+      this.user.telSecundario = this.user.telSecundario + ")";
+    }
+
+    if(this.user.telSecundario.length == 9){
+      this.user.telSecundario = this.user.telSecundario + "-";
+    }
+
   }
 
   userForm(myForm:NgForm) {
@@ -101,7 +170,7 @@ export class FormDadosClienteComponent implements OnInit {
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
-      this.snackBar.open("Os campos com * devem ser preenchidos.", "Fechar", config);
+      this.snackBar.open("Os campos com obrigatórios devem ser preenchidos.", "Fechar", config);
       return null;
     }
     const req = this.http.post(this.url + '/api/update_cli', myForm.value)
