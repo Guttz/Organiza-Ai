@@ -1,6 +1,6 @@
 <app-header-toolbar></app-header-toolbar>
 <div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
-  <form #userCadForm="ngForm" >
+  <form (ngSubmit)="userForm(userCadForm)" #userCadForm="ngForm" >
     <div fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex="70">
         <my-form-header label="Cadastro Cliente"></my-form-header>
@@ -43,8 +43,7 @@
         <div fxLayout="row">
           <mat-form-field fxFlex>
             <input matInput 
-            [(ngModel)] = "user.telefone" 
-            ngDefaultControl 
+            [(ngModel)] = "user.telPrimario"  
             name="telefone" 
             placeholder="Telefone primário"  
             [formControl]="telFormControl"
@@ -55,18 +54,25 @@
               Telefone Primário é <strong>obrigatório</strong>
             </mat-error>
 
-            <mat-error *ngIf="emailFormControl.errors &&  !emailFormControl.hasError('required')">
-              Please enter a valid email address
+            <mat-error *ngIf="telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')">
+              Telefone Primário <strong>inválido</strong>
             </mat-error>
 
           </mat-form-field>
 
         <mat-form-field fxFlex fxFlexOffset="2">
             <input matInput 
-              [(ngModel)] = "user.telSecundario" 
-              ngDefaultControl 
+              [(ngModel)] = "user.telSecundario"  
               name="telSecundario" 
-              placeholder="Telefone secundário">
+              placeholder="Telefone secundário"
+              [formControl]="telTwoFormControl"
+              (keyup) = "typingPhoneTwo()">
+
+
+            <mat-error *ngIf="telTwoFormControl.hasError('phoneInvalid')" >
+              Telefone Secundário <strong>inválido</strong>
+            </mat-error>
+
         </mat-form-field>
 
           <mat-form-field fxFlex fxFlexOffset="2">
@@ -97,17 +103,25 @@
               name="endereco" 
               placeholder="Endereço completo"
               required>
+
+          <mat-error>
+              Endereço é <strong>obrigatório</strong>
+            </mat-error>
+
         </mat-form-field>
 
       </div>
 
       <div fxLayout="row" fxLayoutAlign="end center" *ngIf=((!update)) >
-        <my-button-orange 
+
+        <button class="btn btn-success" (click)=" userForm(userCadForm); userCadForm.reset()" [disabled]="!userCadForm.form.valid">Submit </button>
+
+<!--         <my-button-orange 
           fxFlexAlign="center" 
           label="CADASTRAR CLIENTE" 
           style="margin-top: 12px;" 
           (click)="userForm(userCadForm)">
-        </my-button-orange>
+        </my-button-orange> -->
       </div>
       <div fxLayout="row" fxLayoutAlign="end center" *ngIf=((update)) >
         <my-button-orange 

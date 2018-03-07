@@ -27,6 +27,7 @@ export class FormDadosClienteComponent implements OnInit {
     {value: '0', viewValue: 'Manhã'},
     {value: '1', viewValue: 'Tarde'},
   ];
+
   //TEL    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
   //CEL  Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
   //CPF    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
@@ -73,8 +74,13 @@ export class FormDadosClienteComponent implements OnInit {
 
   telFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
+    this.phoneValidator
   ]);
+
+  telTwoFormControl = new FormControl('', [
+    this.phoneValidator
+  ]);
+
 
     cpfValidator(control: FormControl) { 
   let cpforcnpj = control.value; 
@@ -87,34 +93,49 @@ export class FormDadosClienteComponent implements OnInit {
   return null; 
   }
 
-    typingPhone(){
 
-/*    if(this.user.telefone.length == 1){
-      this.user.telefone = "(" + this.user.telefone;
-    }*/
+  phoneValidator(control: FormControl) { 
+  let phone = control.value; 
+  if ( phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.substring(9, 10) != "-" || phone.length != 14){ 
+      return {
+        phoneInvalid: "Invalid phone"
+      }
+  }
 
-    if(this.user.telPrimario.length == 3){
-      this.user.telPrimario = this.user.telPrimario + ")";
+  return null; 
+  }
+
+    typingPhone(){  
+    //Inserting automatically parentesis and - in the phone
+    if(this.user.telPrimario.length >= 1 && this.user.telPrimario.substring(0, 1) != "("){
+      this.user.telPrimario = "(" + this.user.telPrimario;
     }
 
-    if(this.user.telPrimario.length == 9){
-      this.user.telPrimario = this.user.telPrimario + "-";
+    if(this.user.telPrimario.length >= 3 && this.user.telPrimario.substring(3, 4) != ")" ){
+      this.user.telPrimario = this.user.telPrimario.substring(0,3) + ")" + this.user.telPrimario.substring(3);
+
+      //this.user.telPrimario = this.user.telPrimario + ")";
+    }
+
+    if(this.user.telPrimario.length >= 9 && this.user.telPrimario.substring(9, 10) != "-" ){
+      this.user.telPrimario =  this.user.telPrimario.substring(0,9) + "-" + this.user.telPrimario.substring(9);
     }
 
   }
 
   typingPhoneTwo(){
-
-/*    if(this.user.telefone.length == 1){
-      this.user.telefone = "(" + this.user.telefone;
-    }*/
-
-    if(this.user.telSecundario.length == 3){
-      this.user.telSecundario = this.user.telSecundario + ")";
+    //Inserting automatically parentesis and - in the phone
+    if(this.user.telSecundario.length >= 1 && this.user.telSecundario.substring(0, 1) != "("){
+      this.user.telSecundario = "(" + this.user.telSecundario;
     }
 
-    if(this.user.telSecundario.length == 9){
-      this.user.telSecundario = this.user.telSecundario + "-";
+    if(this.user.telSecundario.length >= 3 && this.user.telSecundario.substring(3, 4) != ")" ){
+      this.user.telSecundario = this.user.telSecundario.substring(0,3) + ")" + this.user.telSecundario.substring(3);
+
+    }
+
+    if(this.user.telSecundario.length >= 9 && this.user.telSecundario.substring(9, 10) != "-" ){
+      this.user.telSecundario =  this.user.telSecundario.substring(0,9) + "-" + this.user.telSecundario.substring(9);
     }
 
   }
