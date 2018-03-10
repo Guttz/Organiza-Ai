@@ -589,7 +589,7 @@ router.post('/signup', function(req, res){
   AM.addNewAccount({
     user  : req.body['user'],
     pass  : req.body['pass'],
-    assistencia  : 'Rosa',
+    assistencia  : req.body['assistencia'],
   }, function(e){
     if (e){
       res.status(400).send(e);

@@ -25,12 +25,16 @@
   <input  [(ngModel)] = "pass" type="password" matInput name="pass" placeholder="Senha" required>
 </mat-form-field>
 
-<button mat-button class='my-button' fxFlexOffset="2" (click)="login(loginForm)" >ENTRAR</button>
+<mat-form-field class="my-inputs" [hideRequiredMarker]="true">
+  <input [(ngModel)] = "assistencia" matInput name="assistencia" placeholder="Assistência" required>
+</mat-form-field>
 
-<span fxFlexOffset="4" class="forgot-password">Esqueceu sua senha?</span>
 
-<!-- <span routerLink="/esqueci-senha" fxFlexOffset="7" class="forgot-password">Esqueceu sua senha?</span>
+<button mat-button class='my-button' fxFlexOffset="2" (click)="signup(loginForm)"> CADASTRAR</button>
+
+<!-- <button mat-button class='my-button' fxFlexOffset="2" (click)="getHeader()"> GET REQ</button>
  -->
+<span routerLink="/esqueci-senha" fxFlexOffset="7" class="forgot-password">Esqueceu sua senha?</span>
 
 </div> 
 

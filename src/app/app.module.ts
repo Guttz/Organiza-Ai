@@ -46,6 +46,7 @@ import { HistoricPopupComponent } from './pages/historico/historico.component';
 import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.component';
 import { AtendimentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
 
@@ -67,6 +68,7 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     AtendimentoComponent,
     HistoricPopupComponent,
     LoginComponent,
+    CadastroComponent,
     ForgotPasswordComponent
   ],
   imports: [
@@ -96,10 +98,12 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
   ClienteAtenderComponent,
   AtendimentoComponent,
   LoginComponent,
+  CadastroComponent,
   HistoricoComponent,
   HistoricPopupComponent],
   providers: [
     LoginComponent,
+    CadastroComponent,
     AuthGuard
   ],
   bootstrap: [AppComponent],

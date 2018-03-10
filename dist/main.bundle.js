@@ -28,8 +28,9 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_acompanhamento_acompanhamento_component__ = __webpack_require__("../../../../../src/app/pages/acompanhamento/acompanhamento.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_historico_historico_component__ = __webpack_require__("../../../../../src/app/pages/historico/historico.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login_component__ = __webpack_require__("../../../../../src/app/pages/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_cadastro_cadastro_component__ = __webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39,6 +40,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 /*Import dos formularios*/
+
 
 
 
@@ -65,12 +67,16 @@ var routes = [
     {
         path: 'login',
         component: __WEBPACK_IMPORTED_MODULE_5__pages_login_login_component__["a" /* LoginComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_7__common_components_guard_auth_guard__["a" /* AuthGuard */]]
+        canActivate: [__WEBPACK_IMPORTED_MODULE_8__common_components_guard_auth_guard__["a" /* AuthGuard */]]
+    },
+    {
+        path: 'cadastro',
+        component: __WEBPACK_IMPORTED_MODULE_6__pages_cadastro_cadastro_component__["a" /* CadastroComponent */]
     },
     {
         path: 'esqueci-senha',
-        component: __WEBPACK_IMPORTED_MODULE_6__pages_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */],
-        canActivate: [__WEBPACK_IMPORTED_MODULE_7__common_components_guard_auth_guard__["a" /* AuthGuard */]]
+        component: __WEBPACK_IMPORTED_MODULE_7__pages_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */],
+        canActivate: [__WEBPACK_IMPORTED_MODULE_8__common_components_guard_auth_guard__["a" /* AuthGuard */]]
     },
     { path: '**', redirectTo: '/acompanhamento', pathMatch: 'full' },
 ];
@@ -185,8 +191,9 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__ = __webpack_require__("../../../../../src/app/pages/acompanhamento/acompanhamento.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__ = __webpack_require__("../../../../../src/app/pages/historico/historico.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__ = __webpack_require__("../../../../../src/app/pages/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__ = __webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -237,6 +244,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -259,7 +267,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["b" /* AtendimentoComponent */],
                 __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__["a" /* HistoricPopupComponent */],
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_32__pages_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */]
+                __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
+                __WEBPACK_IMPORTED_MODULE_33__pages_forgot_password_forgot_password_component__["a" /* ForgotPasswordComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -288,12 +297,14 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["c" /* ClienteAtenderComponent */],
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["b" /* AtendimentoComponent */],
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
                 __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__["b" /* HistoricoComponent */],
                 __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__["a" /* HistoricPopupComponent */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_33__common_components_guard_auth_guard__["a" /* AuthGuard */]
+                __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
+                __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__["a" /* AuthGuard */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
             exports: []
@@ -1652,6 +1663,150 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
+/***/ "../../../../../src/app/pages/cadastro/cadastro.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"loadSpinner\" class=\"loading-indicator\">\r\n  <mat-progress-spinner style=\"stroke: black\" mode=\"indeterminate\"></mat-progress-spinner>\r\n</div>\r\n\r\n\r\n<form #loginForm=\"ngForm\" >\r\n\r\n <div fxLayout=\"row\" fxLayoutAlign=\"center center\" style=\"height: 100vh;\">\r\n\r\n  <div class=\"login-img\" fxFlex=\"39\">\r\n   <img routerLink=\"/acompanhamento\" class=\"my-log-img\" src=\"../assets/images/login_1.png\">\r\n </div>\r\n\r\n <div fxLayout=\"column\" fxLayoutAlign=\"center center\" fxFlex=\"61\">        \r\n\r\n  <div style=\"width: 17%;\">\r\n   <img routerLink=\"/acompanhamento\" class=\"my-logo\" src=\"../assets/images/logo-login.png\">\r\n </div>\r\n\r\n <mat-form-field fxFlexOffset=\"5\" class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input [(ngModel)] = \"user\" matInput name=\"user\" placeholder=\"Insira seu email\" required>\r\n</mat-form-field>\r\n\r\n<mat-form-field class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input  [(ngModel)] = \"pass\" type=\"password\" matInput name=\"pass\" placeholder=\"Senha\" required>\r\n</mat-form-field>\r\n\r\n<mat-form-field class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input [(ngModel)] = \"assistencia\" matInput name=\"assistencia\" placeholder=\"Assistência\" required>\r\n</mat-form-field>\r\n\r\n\r\n<button mat-button class='my-button' fxFlexOffset=\"2\" (click)=\"signup(loginForm)\"> CADASTRAR</button>\r\n\r\n<!-- <button mat-button class='my-button' fxFlexOffset=\"2\" (click)=\"getHeader()\"> GET REQ</button>\r\n -->\r\n<span routerLink=\"/esqueci-senha\" fxFlexOffset=\"7\" class=\"forgot-password\">Esqueceu sua senha?</span>\r\n\r\n</div> \r\n\r\n</div>\r\n\r\n</form>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/pages/cadastro/cadastro.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".login-img {\n  margin: 0px;\n  background: black; }\n\n.my-log-img {\n  width: 100%;\n  height: 100%; }\n\n.my-logo {\n  width: 100%;\n  height: 100%; }\n\n.my-inputs {\n  width: 50%; }\n\n.enter-button {\n  width: 50%; }\n\n.forgot-password {\n  font-size: 13px;\n  color: #B5B5B5;\n  cursor: pointer; }\n\n.my-button {\n  background: linear-gradient(-150deg, #FF8405 0%, #FF433F 100%);\n  box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);\n  border-radius: 3px;\n  font-size: 13px;\n  color: #FFFFFF;\n  width: 50%;\n  padding-top: 0.2vw;\n  padding-bottom: 0.2vw; }\n\n::ng-deep .error-class .mat-simple-snackbar {\n  color: red;\n  font-weight: 600; }\n\n::ng-deep .error-class .mat-simple-snackbar button {\n  color: rgba(190, 190, 190, 0.8); }\n\n/* Absolute Center Spinner */\n.loading-indicator {\n  position: fixed;\n  z-index: 999;\n  height: 2em;\n  width: 2em;\n  overflow: show;\n  margin: auto;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0; }\n\n.mat-progress-spinner circle, .mat-spinner circle {\n  stroke: black; }\n\n/* Transparent Overlay */\n.loading-indicator:before {\n  content: '';\n  display: block;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.3); }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/pages/cadastro/cadastro.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CadastroComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var CadastroComponent = (function () {
+    function CadastroComponent(http, router, snackBar) {
+        /*          if(window.location.href.match(/www/) !== null){
+               window.location.replace(window.location.href.replace(/www\./, ''));
+            }  */
+        this.http = http;
+        this.router = router;
+        this.snackBar = snackBar;
+        this.loadSpinner = false;
+        //url = "http://localhost";
+        //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
+        this.url = "http://www.myas.com.br";
+        if (window.location.href.match(/www/) != null) {
+            console.log("das me: " + window.location.href);
+            this.url = "http://www.myas.com.br";
+        }
+        else {
+            if (window.location.href.match(/local/) != null) {
+                this.url = "http://localhost";
+            }
+            else {
+                this.url = "http://myas.com.br";
+            }
+        }
+    }
+    CadastroComponent.prototype.canActivate = function (route, state) {
+        if (this.getCookie("dcJJe4ZEsB") == "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb") {
+            return true;
+        }
+        else {
+            console.log("log false");
+            // not logged in so redirect to login page with the return url
+            this.router.navigate(['/login']);
+            return false;
+        }
+    };
+    CadastroComponent.prototype.signup = function (loginForm) {
+        var req = this.http.post(this.url + '/api/signup', loginForm.value)
+            .subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+        });
+    };
+    CadastroComponent.prototype.login = function (loginForm) {
+        var _this = this;
+        this.loadSpinner = true;
+        var req = this.http.post(this.url + '/api/login', loginForm.value)
+            .subscribe(function (res) {
+            console.log("im here" + res);
+            _this.router.navigate(['/acompanhamento']);
+        }, function (err) {
+            _this.loadSpinner = false;
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            config.extraClasses = ['error-class'];
+            config.duration = 3000;
+            _this.snackBar.open("Login e/ou senha incorretos", "Fechar", config);
+            console.log("Error occured: " + err.error.message);
+        });
+    };
+    CadastroComponent.prototype.getHeader = function () {
+        var req = this.http.get(this.url + '/api/header')
+            .subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+        });
+    };
+    CadastroComponent.prototype.getCookie = function (cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    };
+    CadastroComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'my-cadastro',
+            template: __webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatSnackBar */]])
+    ], CadastroComponent);
+    return CadastroComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/pages/forgot-password/forgot-password.component.html":
 /***/ (function(module, exports) {
 
@@ -2442,7 +2597,7 @@ var HistoricPopupComponent = (function () {
 /***/ "../../../../../src/app/pages/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"loadSpinner\" class=\"loading-indicator\">\r\n  <mat-progress-spinner style=\"stroke: black\" mode=\"indeterminate\"></mat-progress-spinner>\r\n</div>\r\n\r\n\r\n<form #loginForm=\"ngForm\" >\r\n\r\n <div fxLayout=\"row\" fxLayoutAlign=\"center center\" style=\"height: 100vh;\">\r\n\r\n  <div class=\"login-img\" fxFlex=\"39\">\r\n   <img routerLink=\"/acompanhamento\" class=\"my-log-img\" src=\"../assets/images/login_1.png\">\r\n </div>\r\n\r\n <div fxLayout=\"column\" fxLayoutAlign=\"center center\" fxFlex=\"61\">        \r\n\r\n  <div style=\"width: 17%;\">\r\n   <img routerLink=\"/acompanhamento\" class=\"my-logo\" src=\"../assets/images/logo-login.png\">\r\n </div>\r\n\r\n <mat-form-field fxFlexOffset=\"5\" class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input [(ngModel)] = \"user\" matInput name=\"user\" placeholder=\"Insira seu email\" required>\r\n</mat-form-field>\r\n\r\n<mat-form-field class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input  [(ngModel)] = \"pass\" type=\"password\" matInput name=\"pass\" placeholder=\"Senha\" required>\r\n</mat-form-field>\r\n\r\n<button mat-button class='my-button' fxFlexOffset=\"2\" (click)=\"login(loginForm)\" >ENTRAR</button>\r\n<button mat-button class='my-button' fxFlexOffset=\"2\" (click)=\"signup(loginForm)\"> CADASTRAR</button>\r\n\r\n<!-- <button mat-button class='my-button' fxFlexOffset=\"2\" (click)=\"getHeader()\"> GET REQ</button>\r\n -->\r\n<span routerLink=\"/esqueci-senha\" fxFlexOffset=\"7\" class=\"forgot-password\">Esqueceu sua senha?</span>\r\n\r\n</div> \r\n\r\n</div>\r\n\r\n</form>\r\n"
+module.exports = "<div *ngIf=\"loadSpinner\" class=\"loading-indicator\">\r\n  <mat-progress-spinner style=\"stroke: black\" mode=\"indeterminate\"></mat-progress-spinner>\r\n</div>\r\n\r\n\r\n<form #loginForm=\"ngForm\" >\r\n\r\n <div fxLayout=\"row\" fxLayoutAlign=\"center center\" style=\"height: 100vh;\">\r\n\r\n  <div class=\"login-img\" fxFlex=\"39\">\r\n   <img routerLink=\"/acompanhamento\" class=\"my-log-img\" src=\"../assets/images/login_1.png\">\r\n </div>\r\n\r\n <div fxLayout=\"column\" fxLayoutAlign=\"center center\" fxFlex=\"61\">        \r\n\r\n  <div style=\"width: 17%;\">\r\n   <img routerLink=\"/acompanhamento\" class=\"my-logo\" src=\"../assets/images/logo-login.png\">\r\n </div>\r\n\r\n <mat-form-field fxFlexOffset=\"5\" class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input [(ngModel)] = \"user\" matInput name=\"user\" placeholder=\"Insira seu email\" required>\r\n</mat-form-field>\r\n\r\n<mat-form-field class=\"my-inputs\" [hideRequiredMarker]=\"true\">\r\n  <input  [(ngModel)] = \"pass\" type=\"password\" matInput name=\"pass\" placeholder=\"Senha\" required>\r\n</mat-form-field>\r\n\r\n<button mat-button class='my-button' fxFlexOffset=\"2\" (click)=\"login(loginForm)\" >ENTRAR</button>\r\n\r\n<span fxFlexOffset=\"4\" class=\"forgot-password\">Esqueceu sua senha?</span>\r\n\r\n<!-- <span routerLink=\"/esqueci-senha\" fxFlexOffset=\"7\" class=\"forgot-password\">Esqueceu sua senha?</span>\r\n -->\r\n\r\n</div> \r\n\r\n</div>\r\n\r\n</form>\r\n"
 
 /***/ }),
 
