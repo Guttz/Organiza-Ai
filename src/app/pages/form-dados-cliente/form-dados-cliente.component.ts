@@ -141,13 +141,13 @@ export class FormDadosClienteComponent implements OnInit {
       this.form.setValue(aux);
     }
 
-    if(this.form.value.telPrimario.length >= 3 && this.form.value.telPrimario.substring(3, 4) != ")" ){
+    if(this.form.value.telPrimario.length >= 4 && this.form.value.telPrimario.substring(3, 4) != ")" ){
       var aux = this.form.value;
       aux.telPrimario = this.form.value.telPrimario.substring(0,3) + ")" + this.form.value.telPrimario.substring(3)
       this.form.setValue(aux);
     }
 
-    if(this.form.value.telPrimario.length >= 9 && this.form.value.telPrimario.substring(9, 10) != "-" ){
+    if(this.form.value.telPrimario.length >= 10 && this.form.value.telPrimario.substring(9, 10) != "-" ){
       var aux = this.form.value;
       aux.telPrimario = this.form.value.telPrimario.substring(0,9) + "-" + this.form.value.telPrimario.substring(9)
       this.form.setValue(aux);
@@ -163,13 +163,13 @@ export class FormDadosClienteComponent implements OnInit {
       this.form.setValue(aux);
     }
 
-    if(this.form.value.telSecundario.length >= 3 && this.form.value.telSecundario.substring(3, 4) != ")" ){
+    if(this.form.value.telSecundario.length >= 4 && this.form.value.telSecundario.substring(3, 4) != ")" ){
       var aux = this.form.value;
       aux.telSecundario = this.form.value.telSecundario.substring(0,3) + ")" + this.form.value.telSecundario.substring(3)
       this.form.setValue(aux);
     }
 
-    if(this.form.value.telSecundario.length >= 9 && this.form.value.telSecundario.substring(9, 10) != "-" ){
+    if(this.form.value.telSecundario.length >= 10 && this.form.value.telSecundario.substring(9, 10) != "-" ){
       var aux = this.form.value;
       aux.telSecundario = this.form.value.telSecundario.substring(0,9) + "-" + this.form.value.telSecundario.substring(9)
       this.form.setValue(aux);
@@ -295,7 +295,7 @@ export class FormDadosClienteComponent implements OnInit {
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
-      this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
+      this.snackBar.open("Preencha todos os campos de orçamento", "Fechar", config);
       return null;
     }
 

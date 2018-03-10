@@ -661,19 +661,21 @@ export class AcompanhamentoComponent implements OnInit {
     //Get from the the dom transfer the id of the card that was transfered and the list it came from
     let cardNlist = $event.dataTransfer.getData('text');
 
+    console.log("cardNlist" + cardNlist);
     //Loop trought the parent html element until get to the list it was dropped on
     while (target.className !== 'list') {
       target = target.parentNode;
     }
 
     //Old list ID, the one it came from
-    var oldList = parseInt( cardNlist.substring(2,3));
+    var oldList = parseInt( cardNlist.substring(1,2) );
 
     //New list ID, the one that the card is being dropped
     var newList = parseInt(target.id.substring(1,2));
 
+
     //The card that is being dropped id from the cardStore
-    var cardID = cardNlist.substring(0,1);
+    var cardID = cardNlist.substring(2,cardNlist.length);
 
     //If the list the card is being dropped is the same if came from just return and do nothing
     if(oldList == newList){

@@ -384,7 +384,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/card/card.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.id}}\">\r\n\r\n<div id=\"{{card.id}}\" >\r\n\t<span ><b id=\"{{card.id}}\" >  {{card.id}} {{card.nome}} </b></span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.id}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.id}}\">\r\n\t<span id=\"{{card.id}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.id}}\" > <span id=\"{{card.id}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.id}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
+module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.id}}\">\r\n\r\n<div id=\"{{card.id}}\" >\r\n\t<span ><b id=\"{{card.id}}\" >  <!-- {{card.id}} --> {{card.nome}} </b></span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.id}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.id}}\">\r\n\t<span id=\"{{card.id}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.id}}\" > <span id=\"{{card.id}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.id}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -454,7 +454,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/list/list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong>  {{list.id}} {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let cardId of list.cards\" [card]=\"cardStore.getCard(cardId)\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
+module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong>  <!-- {{list.id}} --> {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let cardId of list.cards\" [card]=\"cardStore.getCard(cardId)\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
 
 /***/ }),
 
@@ -499,7 +499,7 @@ var ListComponent = (function () {
             if (index > -1) {
               this.list.cards.splice(index, 1);
             }*/
-        $event.dataTransfer.setData('text', $event.dataTransfer.getData('text') + this.list.id);
+        $event.dataTransfer.setData('text', this.list.id + $event.dataTransfer.getData('text'));
     };
     ListComponent.prototype.drop = function ($event) {
         $event.preventDefault();
@@ -1523,16 +1523,17 @@ var AcompanhamentoComponent = (function () {
         var target = $event.target;
         //Get from the the dom transfer the id of the card that was transfered and the list it came from
         var cardNlist = $event.dataTransfer.getData('text');
+        console.log("cardNlist" + cardNlist);
         //Loop trought the parent html element until get to the list it was dropped on
         while (target.className !== 'list') {
             target = target.parentNode;
         }
         //Old list ID, the one it came from
-        var oldList = parseInt(cardNlist.substring(2, 3));
+        var oldList = parseInt(cardNlist.substring(1, 2));
         //New list ID, the one that the card is being dropped
         var newList = parseInt(target.id.substring(1, 2));
         //The card that is being dropped id from the cardStore
-        var cardID = cardNlist.substring(0, 1);
+        var cardID = cardNlist.substring(2, cardNlist.length);
         //If the list the card is being dropped is the same if came from just return and do nothing
         if (oldList == newList) {
             return;
@@ -1870,12 +1871,12 @@ var FormDadosClienteComponent = (function () {
             aux.telPrimario = "(" + aux.telPrimario;
             this.form.setValue(aux);
         }
-        if (this.form.value.telPrimario.length >= 3 && this.form.value.telPrimario.substring(3, 4) != ")") {
+        if (this.form.value.telPrimario.length >= 4 && this.form.value.telPrimario.substring(3, 4) != ")") {
             var aux = this.form.value;
             aux.telPrimario = this.form.value.telPrimario.substring(0, 3) + ")" + this.form.value.telPrimario.substring(3);
             this.form.setValue(aux);
         }
-        if (this.form.value.telPrimario.length >= 9 && this.form.value.telPrimario.substring(9, 10) != "-") {
+        if (this.form.value.telPrimario.length >= 10 && this.form.value.telPrimario.substring(9, 10) != "-") {
             var aux = this.form.value;
             aux.telPrimario = this.form.value.telPrimario.substring(0, 9) + "-" + this.form.value.telPrimario.substring(9);
             this.form.setValue(aux);
@@ -1888,12 +1889,12 @@ var FormDadosClienteComponent = (function () {
             aux.telSecundario = "(" + aux.telSecundario;
             this.form.setValue(aux);
         }
-        if (this.form.value.telSecundario.length >= 3 && this.form.value.telSecundario.substring(3, 4) != ")") {
+        if (this.form.value.telSecundario.length >= 4 && this.form.value.telSecundario.substring(3, 4) != ")") {
             var aux = this.form.value;
             aux.telSecundario = this.form.value.telSecundario.substring(0, 3) + ")" + this.form.value.telSecundario.substring(3);
             this.form.setValue(aux);
         }
-        if (this.form.value.telSecundario.length >= 9 && this.form.value.telSecundario.substring(9, 10) != "-") {
+        if (this.form.value.telSecundario.length >= 10 && this.form.value.telSecundario.substring(9, 10) != "-") {
             var aux = this.form.value;
             aux.telSecundario = this.form.value.telSecundario.substring(0, 9) + "-" + this.form.value.telSecundario.substring(9);
             this.form.setValue(aux);
@@ -1982,7 +1983,7 @@ var FormDadosClienteComponent = (function () {
             var config_4 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config_4.extraClasses = ['error-class'];
             config_4.duration = 3000;
-            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_4);
+            this.snackBar.open("Preencha todos os campos de orçamento", "Fechar", config_4);
             return null;
         }
         this.http.post(this.url + '/api/get_cli', { cpf: this.orca.cpf }).subscribe(function (resCliente) {

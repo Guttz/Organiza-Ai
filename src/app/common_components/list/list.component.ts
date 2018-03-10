@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
       this.list.cards.splice(index, 1);
     }*/
 
-    $event.dataTransfer.setData('text', $event.dataTransfer.getData('text') + this.list.id);
+    $event.dataTransfer.setData('text',this.list.id + $event.dataTransfer.getData('text'));
   }
 
   drop($event) {
