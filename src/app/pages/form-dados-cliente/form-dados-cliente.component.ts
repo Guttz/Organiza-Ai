@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroupDirective, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Submissions} from './submissions';
 import { Orca} from './../../../../schemas/orca';
 import { HttpClient } from '@angular/common/http';
@@ -60,16 +60,24 @@ export class FormDadosClienteComponent implements OnInit {
     Validators.required,
   ]);
 
+  enderecoFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+
   //My validators
   cpfFormControl = new FormControl('', [
     Validators.required,
     this.cpfValidator
   ]);
 
+    //My validators
+  cpfOrcaFormControl = new FormControl('', [
+    Validators.required,
+    this.cpfValidator
+  ]);
 
   emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email
+    this.emailValidator
   ]);
 
   telFormControl = new FormControl('', [
@@ -93,9 +101,28 @@ export class FormDadosClienteComponent implements OnInit {
   return null; 
   }
 
+  emailValidator(control: FormControl) { 
+  let email = control.value; 
+
+   if(control.value == null || control.value == ""){\
+      return null;
+    }
+
+  if ( email.length < 3 || email.indexOf("@") == -1 ){ 
+      return {
+        emailInvalid: "Invalid email"
+      }
+  }
+
+  return null; 
+  }
 
   phoneValidator(control: FormControl) { 
   let phone = control.value; 
+  
+  if(phone == null || phone == "")
+    return null;
+
   if ( phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.substring(9, 10) != "-" || phone.length != 14){ 
       return {
         phoneInvalid: "Invalid phone"
@@ -106,51 +133,93 @@ export class FormDadosClienteComponent implements OnInit {
   }
 
     typingPhone(){  
+
     //Inserting automatically parentesis and - in the phone
-    if(this.user.telPrimario.length >= 1 && this.user.telPrimario.substring(0, 1) != "("){
-      this.user.telPrimario = "(" + this.user.telPrimario;
+    if(this.form.value.telPrimario.length >= 1 && this.form.value.telPrimario.substring(0, 1) != "("){
+      var aux = this.form.value;
+      aux.telPrimario = "(" + aux.telPrimario;
+      this.form.setValue(aux);
     }
 
-    if(this.user.telPrimario.length >= 3 && this.user.telPrimario.substring(3, 4) != ")" ){
-      this.user.telPrimario = this.user.telPrimario.substring(0,3) + ")" + this.user.telPrimario.substring(3);
-
-      //this.user.telPrimario = this.user.telPrimario + ")";
+    if(this.form.value.telPrimario.length >= 3 && this.form.value.telPrimario.substring(3, 4) != ")" ){
+      var aux = this.form.value;
+      aux.telPrimario = this.form.value.telPrimario.substring(0,3) + ")" + this.form.value.telPrimario.substring(3)
+      this.form.setValue(aux);
     }
 
-    if(this.user.telPrimario.length >= 9 && this.user.telPrimario.substring(9, 10) != "-" ){
-      this.user.telPrimario =  this.user.telPrimario.substring(0,9) + "-" + this.user.telPrimario.substring(9);
+    if(this.form.value.telPrimario.length >= 9 && this.form.value.telPrimario.substring(9, 10) != "-" ){
+      var aux = this.form.value;
+      aux.telPrimario = this.form.value.telPrimario.substring(0,9) + "-" + this.form.value.telPrimario.substring(9)
+      this.form.setValue(aux);
     }
 
   }
 
   typingPhoneTwo(){
     //Inserting automatically parentesis and - in the phone
-    if(this.user.telSecundario.length >= 1 && this.user.telSecundario.substring(0, 1) != "("){
-      this.user.telSecundario = "(" + this.user.telSecundario;
+    if(this.form.value.telSecundario.length >= 1 && this.form.value.telSecundario.substring(0, 1) != "("){
+      var aux = this.form.value;
+      aux.telSecundario = "(" + aux.telSecundario;
+      this.form.setValue(aux);
     }
 
-    if(this.user.telSecundario.length >= 3 && this.user.telSecundario.substring(3, 4) != ")" ){
-      this.user.telSecundario = this.user.telSecundario.substring(0,3) + ")" + this.user.telSecundario.substring(3);
-
+    if(this.form.value.telSecundario.length >= 3 && this.form.value.telSecundario.substring(3, 4) != ")" ){
+      var aux = this.form.value;
+      aux.telSecundario = this.form.value.telSecundario.substring(0,3) + ")" + this.form.value.telSecundario.substring(3)
+      this.form.setValue(aux);
     }
 
-    if(this.user.telSecundario.length >= 9 && this.user.telSecundario.substring(9, 10) != "-" ){
-      this.user.telSecundario =  this.user.telSecundario.substring(0,9) + "-" + this.user.telSecundario.substring(9);
+    if(this.form.value.telSecundario.length >= 9 && this.form.value.telSecundario.substring(9, 10) != "-" ){
+      var aux = this.form.value;
+      aux.telSecundario = this.form.value.telSecundario.substring(0,9) + "-" + this.form.value.telSecundario.substring(9)
+      this.form.setValue(aux);
     }
 
   }
 
-  userForm(myForm:NgForm) {
-    //cheking if any required field is empty
-    if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "")
-    {
+
+  //Declaring the form group to interact with the form
+
+  form = new FormGroup({
+    cpf: this.cpfFormControl,
+    nome: this.nomeFormControl,
+    telPrimario: this.telFormControl,
+    telSecundario: this.telTwoFormControl,
+    email: this.emailFormControl,
+    endereco: this.enderecoFormControl,
+  });
+
+  userForm() {
+
+     console.log('status ' + this.form.status);
+
+    if(typeof this.form.value.cpf == null || typeof this.form.value.nome == null || typeof this.form.value.telPrimario == null || typeof this.form.value.endereco == null || this.form.status == "INVALID"){
+          this.cpfFormControl.markAsTouched();
+          this.nomeFormControl.markAsTouched();
+          this.enderecoFormControl.markAsTouched();
+          this.emailFormControl.markAsTouched();
+          this.telFormControl.markAsTouched();
+          this.telTwoFormControl.markAsTouched();
+          
+          let config = new MatSnackBarConfig();
+          config.extraClasses = ['error-class'];
+          config.duration = 3000;
+          this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
+          return null;
+    }
+    
+    if(this.form.value.cpf.length < 1 ||  this.form.value.nome.length < 1  || this.form.value.telPrimario.length < 1  || this.form.value.endereco.length < 1){
+      console.log('entrei 2');
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
-      this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config);
+      this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
       return null;
     }
-    const req = this.http.post(this.url + '/api/add_cli', myForm.value)
+
+    console.log('entrei 3');
+
+    const req = this.http.post(this.url + '/api/add_cli', this.form.value)
       .subscribe(
         res => {
           console.log(res);
@@ -164,20 +233,16 @@ export class FormDadosClienteComponent implements OnInit {
           console.log("Error occured: " + err.error.message);
         }
       );
+
     this.update = false;
-    this.orca.cpf = myForm.value.cpf;
-    this.user.cpf = '';
-    this.user.nome = '';
-    this.user.telPrimario = '';
-    this.user.telSecundario = '';
-    this.user.email = '';
-    this.user.endereco = '';
+    this.orca.cpf = this.form.value.cpf;
 
     let config = new MatSnackBarConfig();
     config.extraClasses = ['custom-class'];
     config.duration = 3000;
     this.snackBar.open("Cliente Cadastrado com sucesso", "Fechar", config);
 
+    this.form.reset();
   }
 
   getValues(){
@@ -186,15 +251,18 @@ export class FormDadosClienteComponent implements OnInit {
 
   updateUser(myForm:NgForm) {
     //cheking if any required field is empty
-    if(myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telPrimario == "" || myForm.value.endereco == "")
+    if(this.form.value.cpf == "" || this.form.value.nome == "" || this.form.value.telPrimario == "" || this.form.value.endereco == "" || this.form.status == "INVALID")
     {
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
-      this.snackBar.open("Os campos com obrigatórios devem ser preenchidos.", "Fechar", config);
+      this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
       return null;
     }
-    const req = this.http.post(this.url + '/api/update_cli', myForm.value)
+
+    console.log(this.form.value);
+
+    const req = this.http.post(this.url + '/api/update_cli', this.form.value)
       .subscribe(
         res => {
           console.log(res);
@@ -209,30 +277,29 @@ export class FormDadosClienteComponent implements OnInit {
         }
       );
       this.update = false;
-      this.orca.cpf = myForm.value.cpf;
-      this.user.cpf = '';
-      this.user.nome = '';
-      this.user.telPrimario = '';
-      this.user.telSecundario = '';
-      this.user.email = '';
-      this.user.endereco = '';
+      this.orca.cpf = this.form.value.cpf;
       let config = new MatSnackBarConfig();
       config.extraClasses = ['custom-class'];
       config.duration = 3000;
       this.snackBar.open("Cadastro atualizado com sucesso", "Fechar", config);
+
+      this.form.reset();
   }
 
   orcaForm(myForm:NgForm) {
+
+    console.log("value " + this.orca.cpf);
+
     //cheking if any required field is empty
-    if(myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" || myForm.value.modelo == "" || myForm.value.periodo == "" ){
+    if(myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID"){
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
-      this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config);
+      this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
       return null;
     }
 
-    this.http.post(this.url + '/api/get_cli', myForm.value).subscribe(
+    this.http.post(this.url + '/api/get_cli', {cpf: this.orca.cpf}).subscribe(
         resCliente => {
           this.auxCliente = resCliente;
 
@@ -243,6 +310,7 @@ export class FormDadosClienteComponent implements OnInit {
           }
 
           //Acrescentando os campos que compoem um orçamento
+          myForm.value.cpf = this.orca.cpf;
           myForm.value.nome = this.auxCliente.nome;
           myForm.value.telPrimario = this.auxCliente.telPrimario;
           myForm.value.telSecundario = this.auxCliente.telSecundario;
@@ -252,19 +320,11 @@ export class FormDadosClienteComponent implements OnInit {
             this.http.post(this.url + '/api/add_orca', myForm.value)
               .subscribe(
                 res => {
-                   this.orca.cpf = "";
-                   this.orca.data = null;
-                   this.orca.marca = null
-                   this.orca.modelo = null
-                   this.orca.periodo = null;
-                   this.orca.defeito = null;
+                  console.log("sucessfull");
                     this.update = false;
-                    this.user.cpf = '';
-                    this.user.nome = '';
-                    this.user.telPrimario = '';
-                    this.user.telSecundario = '';
-                    this.user.email = '';
-                    this.user.endereco = '';
+                    this.cpfOrcaFormControl.reset();
+                    this.form.reset();
+                    myForm.reset();
                 },
                 err => {
                   let config = new MatSnackBarConfig();
@@ -285,19 +345,22 @@ export class FormDadosClienteComponent implements OnInit {
       this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
   }
 
-  checkUser(myForm:NgForm)
+  checkUser()
   {
-     this.http.post<ItemsResponseUser>("/api/get_cli", myForm.value ).subscribe(data => {
+      if(myForm != null){
+        this.form.value.cpf = myForm.value.cpf;
+      }
+
+     this.http.post<ItemsResponseUser>("/api/get_cli", this.form.value ).subscribe(data => {
       
       if(data != null )
       {
-        this.user.cpf = data.cpf;
+        //Deleting the database id
+        delete data._id; 
+
+        //Setting the form values
+        this.form.setValue(data);
         this.orca.cpf = data.cpf;
-        this.user.nome = data.nome;
-        this.user.telPrimario = data.telPrimario;
-        this.user.telSecundario = data.telSecundario;
-        this.user.email = data.email;
-        this.user.endereco = data.endereco;
         this.update = true;
       }
       else
@@ -308,9 +371,38 @@ export class FormDadosClienteComponent implements OnInit {
 
   }
 
+    checkUserWForm(myForm:NgForm)
+  {
+     this.http.post<ItemsResponseUser>("/api/get_cli", {cpf: this.orca.cpf} ).subscribe(data => {
+      
+      if(data != null )
+      {
+        delete data._id; 
+
+        //Setting the form values
+        this.form.setValue(data);
+        this.orca.cpf = data.cpf;
+        this.update = true;
+      }
+      else
+      {
+        this.update = false;
+      }
+    });
+
+  }
+
+  resetForm(){
+    this.form.reset();
+    this.form.markAsUntouched();
+    this.form.markAsPristine();
+    this.form.clearValidators();
+  }
+
 }
 //Definindo o que sera a resposta do getCards
-interface ItemsResponseUser {
+interface ItemsResponseUser {]
+  _id: string;
   cpf: string;
   nome: string;
   telPrimario: string;

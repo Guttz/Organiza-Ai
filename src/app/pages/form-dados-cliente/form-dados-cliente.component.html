@@ -1,17 +1,16 @@
 <app-header-toolbar></app-header-toolbar>
 <div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
-  <form (ngSubmit)="userForm(userCadForm)" #userCadForm="ngForm" >
+  <form [formGroup]="form" >
     <div fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex="70">
         <my-form-header label="Cadastro Cliente"></my-form-header>
         <div fxLayout="row" >
           <mat-form-field fxFlex="32">
-            <input matInput 
-            [ngModel] = "user.cpf" 
-            ngDefaultControl 
+            <input matInput  
             name="cpf" 
             placeholder="CPF" 
-            (blur)="checkUser(userCadForm)" 
+            formControlName="cpf"
+            (blur)="checkUser()" 
             [formControl]="cpfFormControl">
             
             <mat-error *ngIf="cpfFormControl.hasError('required')">
@@ -25,10 +24,9 @@
           </mat-form-field>
 
           <mat-form-field fxFlexOffset="2" fxFlex="70">
-            <input matInput 
-            [(ngModel)] = "user.nome" 
+            <input matInput
+            formControlName="nome" 
             autocomplete='name'
-            ngDefaultControl
             name="nome" 
             placeholder="Nome completo do cliente" 
             [formControl]="nomeFormControl">
@@ -43,7 +41,7 @@
         <div fxLayout="row">
           <mat-form-field fxFlex>
             <input matInput 
-            [(ngModel)] = "user.telPrimario"  
+            formControlName="telPrimario"
             name="telefone" 
             placeholder="Telefone primário"  
             [formControl]="telFormControl"
@@ -62,12 +60,11 @@
 
         <mat-form-field fxFlex fxFlexOffset="2">
             <input matInput 
-              [(ngModel)] = "user.telSecundario"  
+              formControlName="telSecundario"  
               name="telSecundario" 
               placeholder="Telefone secundário"
               [formControl]="telTwoFormControl"
               (keyup) = "typingPhoneTwo()">
-
 
             <mat-error *ngIf="telTwoFormControl.hasError('phoneInvalid')" >
               Telefone Secundário <strong>inválido</strong>
@@ -77,16 +74,12 @@
 
           <mat-form-field fxFlex fxFlexOffset="2">
             <input matInput 
-            [(ngModel)] = "user.email"  
+            formControlName="email"  
             name="email" 
             placeholder="Email" 
             [formControl]="emailFormControl">
 
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-              Email é <strong>obrigatório</strong>
-            </mat-error>
-
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            <mat-error *ngIf="emailFormControl.hasError('emailInvalid')">
               Email <strong>inválido</strong>
             </mat-error>
 
@@ -97,12 +90,10 @@
       <div fxLayout="row">
 
         <mat-form-field fxFlex [hideRequiredMarker]="true">
-            <input matInput 
-              [(ngModel)] = "user.endereco" 
-              ngDefaultControl 
+            <input matInput
+              formControlName="endereco" 
               name="endereco" 
-              placeholder="Endereço completo"
-              required>
+              placeholder="Endereço completo">
 
           <mat-error>
               Endereço é <strong>obrigatório</strong>
@@ -112,29 +103,36 @@
 
       </div>
 
+
+      </div>
+    </div>
+
+  </form >
+        
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="70">
+
       <div fxLayout="row" fxLayoutAlign="end center" *ngIf=((!update)) >
 
-        <button class="btn btn-success" (click)=" userForm(userCadForm); userCadForm.reset()" [disabled]="!userCadForm.form.valid">Submit </button>
-
-<!--         <my-button-orange 
+        <my-button-orange
+          (click)="userForm()" 
           fxFlexAlign="center" 
           label="CADASTRAR CLIENTE" 
-          style="margin-top: 12px;" 
-          (click)="userForm(userCadForm)">
-        </my-button-orange> -->
+          style="margin-top: 12px;">
+        </my-button-orange>
+
       </div>
       <div fxLayout="row" fxLayoutAlign="end center" *ngIf=((update)) >
         <my-button-orange 
           fxFlexAlign="center" 
           label="ATUALIZAR CLIENTE" 
           style="margin-top: 12px;" 
-          (click)="updateUser(userCadForm)">
+          (click)="updateUser()" 
+          >
         </my-button-orange>
-      </div>
-      </div>
+      </div> 
     </div>
-
-  </form >
+  </div>
 
   <form #orcaCadForm="ngForm" >
     <div class="row" fxLayoutAlign="center center">
@@ -144,12 +142,22 @@
 
             <mat-form-field fxFlex="32" [hideRequiredMarker]="true">
               <input matInput 
+              [formControl]="cpfOrcaFormControl"
               name="cpf" 
               [(ngModel)]="orca.cpf" 
               ngDefaultControl 
               placeholder="CPF do Cliente"  
-              (blur)="checkUser(orcaCadForm)"
-              required>
+              (blur)="checkUserWForm(orcaCadForm)"
+              >
+            
+            <mat-error *ngIf="cpfOrcaFormControl.hasError('required')">
+                CPF/CNPJ <strong>obrigatório</strong>
+            </mat-error>
+
+            <mat-error *ngIf="cpfOrcaFormControl.hasError('cpfcnpjInvalid') && !cpfOrcaFormControl.hasError('required')">
+                CPF/CNPJ <strong>inválido</strong>
+            </mat-error>
+
             </mat-form-field>
 
 <!--             <my-input-text fxFlex 
@@ -168,6 +176,11 @@
               ngDefaultControl 
               placeholder="Qual o defeito apresentado"  
               required>
+
+            <mat-error>
+              Defeito é <strong>obrigatório</strong>
+            </mat-error>
+
             </mat-form-field>
 
           </div>
@@ -182,6 +195,11 @@
               ngDefaultControl 
               placeholder="Marca"  
               required>
+
+            <mat-error>
+              Marca é <strong>obrigatória</strong>
+            </mat-error>
+
             </mat-form-field>
 
 
@@ -201,15 +219,25 @@
               required>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+
+            <mat-error>
+              Data é <strong>obrigatória</strong>
+            </mat-error>
+
             </mat-form-field>
 
             <mat-form-field fxFlexOffset="2" fxFlex [hideRequiredMarker]="true">
               <input matInput 
-              name="marca" 
+              name="modelo" 
               [(ngModel)]="orca.modelo" 
               ngDefaultControl 
               placeholder="Modelo"  
               required>
+
+            <mat-error>
+              Modelo é <strong>obrigatório</strong>
+            </mat-error>
+
             </mat-form-field>
 
 
@@ -231,6 +259,11 @@
                   {{ value.viewValue }}
                 </mat-option>
               </mat-select>
+
+            <mat-error>
+              Periodo é <strong>obrigatório</strong>
+            </mat-error>
+
             </mat-form-field> 
 
 <!--             <my-input-text 
@@ -244,17 +277,25 @@
 
             <div fxFlex="grow"></div>
 
-            <my-button-orange 
-              fxFlexAlign="center" 
-              label="CONTINUAR ORÇAMENTO" 
-              (click)="orcaForm(orcaCadForm)">
-                
-            </my-button-orange>
-
           </div>
 
         </div>
       </div>
 
   </form> 
+      
+      <div class="row" fxLayoutAlign="center center">
+        <div fxFlex = "70">
+
+           <div fxFlex="grow"></div>
+           
+            <my-button-orange 
+              fxFlexAlign="center" 
+              label="CONTINUAR ORÇAMENTO" 
+              (click)="orcaForm(orcaCadForm);">
+                
+            </my-button-orange>
+        </div>
+      </div>
+
 </div>

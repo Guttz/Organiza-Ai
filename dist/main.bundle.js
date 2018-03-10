@@ -1715,7 +1715,7 @@ var ForgotPasswordComponent = (function () {
 /***/ "../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form (ngSubmit)=\"userForm(userCadForm)\" #userCadForm=\"ngForm\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput \r\n            [ngModel] = \"user.cpf\" \r\n            ngDefaultControl \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            (blur)=\"checkUser(userCadForm)\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput \r\n            [(ngModel)] = \"user.nome\" \r\n            autocomplete='name'\r\n            ngDefaultControl\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            [(ngModel)] = \"user.telPrimario\"  \r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')\">\r\n              Telefone Primário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.telSecundario\"  \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\"\r\n              [formControl]=\"telTwoFormControl\"\r\n              (keyup) = \"typingPhoneTwo()\">\r\n\r\n\r\n            <mat-error *ngIf=\"telTwoFormControl.hasError('phoneInvalid')\" >\r\n              Telefone Secundário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            [(ngModel)] = \"user.email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('required')\">\r\n              Email é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('email') && !emailFormControl.hasError('required')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput \r\n              [(ngModel)] = \"user.endereco\" \r\n              ngDefaultControl \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\"\r\n              required>\r\n\r\n          <mat-error>\r\n              Endereço é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n\r\n        <button class=\"btn btn-success\" (click)=\" userForm(userCadForm); userCadForm.reset()\" [disabled]=\"!userCadForm.form.valid\">Submit </button>\r\n\r\n<!--         <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"userForm(userCadForm)\">\r\n        </my-button-orange> -->\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser(userCadForm)\">\r\n        </my-button-orange>\r\n      </div>\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUser(orcaCadForm)\"\r\n              required>\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"orca.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex\r\n              required>\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"orca.data\" \r\n              placeholder=\"Data de visita\"\r\n              required>\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n\r\n           <mat-form-field fxFlex=\"32\">\r\n              <mat-select \r\n                required\r\n                placeholder=\"Período\"  \r\n                [(ngModel)]=\"orca.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of values\" \r\n                  [(value)]=\"value.value\" \r\n                  [ngStyle]=\"{width: width + 'px'}\">\r\n                  {{ value.viewValue }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <div fxFlex=\"grow\"></div>\r\n\r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm)\">\r\n                \r\n            </my-button-orange>\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form [formGroup]=\"form\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput  \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            formControlName=\"cpf\"\r\n            (blur)=\"checkUser()\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput\r\n            formControlName=\"nome\" \r\n            autocomplete='name'\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            formControlName=\"telPrimario\"\r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')\">\r\n              Telefone Primário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              formControlName=\"telSecundario\"  \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\"\r\n              [formControl]=\"telTwoFormControl\"\r\n              (keyup) = \"typingPhoneTwo()\">\r\n\r\n            <mat-error *ngIf=\"telTwoFormControl.hasError('phoneInvalid')\" >\r\n              Telefone Secundário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            formControlName=\"email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('emailInvalid')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput\r\n              formControlName=\"endereco\" \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\">\r\n\r\n          <mat-error>\r\n              Endereço é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n        \r\n      <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex=\"70\">\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n\r\n        <my-button-orange\r\n          (click)=\"userForm()\" \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\">\r\n        </my-button-orange>\r\n\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser()\" \r\n          >\r\n        </my-button-orange>\r\n      </div> \r\n    </div>\r\n  </div>\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              [formControl]=\"cpfOrcaFormControl\"\r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUserWForm(orcaCadForm)\"\r\n              >\r\n            \r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('cpfcnpjInvalid') && !cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Defeito é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Marca é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"orca.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex\r\n              required>\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"orca.data\" \r\n              placeholder=\"Data de visita\"\r\n              required>\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n\r\n            <mat-error>\r\n              Data é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"modelo\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Modelo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n\r\n           <mat-form-field fxFlex=\"32\">\r\n              <mat-select \r\n                required\r\n                placeholder=\"Período\"  \r\n                [(ngModel)]=\"orca.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of values\" \r\n                  [(value)]=\"value.value\" \r\n                  [ngStyle]=\"{width: width + 'px'}\">\r\n                  {{ value.viewValue }}\r\n                </mat-option>\r\n              </mat-select>\r\n\r\n            <mat-error>\r\n              Periodo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <div fxFlex=\"grow\"></div>\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n      \r\n      <div class=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex = \"70\">\r\n\r\n           <div fxFlex=\"grow\"></div>\r\n           \r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm);\">\r\n                \r\n            </my-button-orange>\r\n        </div>\r\n      </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1784,14 +1784,21 @@ var FormDadosClienteComponent = (function () {
         this.nomeFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
         ]);
+        this.enderecoFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
+        ]);
         //My validators
         this.cpfFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
             this.cpfValidator
         ]);
-        this.emailFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+        //My validators
+        this.cpfOrcaFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
-            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].email
+            this.cpfValidator
+        ]);
+        this.emailFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
+            this.emailValidator
         ]);
         this.telFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
@@ -1800,6 +1807,15 @@ var FormDadosClienteComponent = (function () {
         this.telTwoFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             this.phoneValidator
         ]);
+        //Declaring the form group to interact with the form
+        this.form = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormGroup"]({
+            cpf: this.cpfFormControl,
+            nome: this.nomeFormControl,
+            telPrimario: this.telFormControl,
+            telSecundario: this.telTwoFormControl,
+            email: this.emailFormControl,
+            endereco: this.enderecoFormControl,
+        });
         if (window.location.href.match(/www/) != null) {
             console.log("das me: " + window.location.href);
             this.url = "http://www.myas.com.br";
@@ -1824,8 +1840,22 @@ var FormDadosClienteComponent = (function () {
         }
         return null;
     };
+    FormDadosClienteComponent.prototype.emailValidator = function (control) {
+        var email = control.value;
+        if (control.value == null || control.value == "") {
+            return null;
+        }
+        if (email.length < 3 || email.indexOf("@") == -1) {
+            return {
+                emailInvalid: "Invalid email"
+            };
+        }
+        return null;
+    };
     FormDadosClienteComponent.prototype.phoneValidator = function (control) {
         var phone = control.value;
+        if (phone == null || phone == "")
+            return null;
         if (phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.substring(9, 10) != "-" || phone.length != 14) {
             return {
                 phoneInvalid: "Invalid phone"
@@ -1835,40 +1865,66 @@ var FormDadosClienteComponent = (function () {
     };
     FormDadosClienteComponent.prototype.typingPhone = function () {
         //Inserting automatically parentesis and - in the phone
-        if (this.user.telPrimario.length >= 1 && this.user.telPrimario.substring(0, 1) != "(") {
-            this.user.telPrimario = "(" + this.user.telPrimario;
+        if (this.form.value.telPrimario.length >= 1 && this.form.value.telPrimario.substring(0, 1) != "(") {
+            var aux = this.form.value;
+            aux.telPrimario = "(" + aux.telPrimario;
+            this.form.setValue(aux);
         }
-        if (this.user.telPrimario.length >= 3 && this.user.telPrimario.substring(3, 4) != ")") {
-            this.user.telPrimario = this.user.telPrimario.substring(0, 3) + ")" + this.user.telPrimario.substring(3);
-            //this.user.telPrimario = this.user.telPrimario + ")";
+        if (this.form.value.telPrimario.length >= 3 && this.form.value.telPrimario.substring(3, 4) != ")") {
+            var aux = this.form.value;
+            aux.telPrimario = this.form.value.telPrimario.substring(0, 3) + ")" + this.form.value.telPrimario.substring(3);
+            this.form.setValue(aux);
         }
-        if (this.user.telPrimario.length >= 9 && this.user.telPrimario.substring(9, 10) != "-") {
-            this.user.telPrimario = this.user.telPrimario.substring(0, 9) + "-" + this.user.telPrimario.substring(9);
+        if (this.form.value.telPrimario.length >= 9 && this.form.value.telPrimario.substring(9, 10) != "-") {
+            var aux = this.form.value;
+            aux.telPrimario = this.form.value.telPrimario.substring(0, 9) + "-" + this.form.value.telPrimario.substring(9);
+            this.form.setValue(aux);
         }
     };
     FormDadosClienteComponent.prototype.typingPhoneTwo = function () {
         //Inserting automatically parentesis and - in the phone
-        if (this.user.telSecundario.length >= 1 && this.user.telSecundario.substring(0, 1) != "(") {
-            this.user.telSecundario = "(" + this.user.telSecundario;
+        if (this.form.value.telSecundario.length >= 1 && this.form.value.telSecundario.substring(0, 1) != "(") {
+            var aux = this.form.value;
+            aux.telSecundario = "(" + aux.telSecundario;
+            this.form.setValue(aux);
         }
-        if (this.user.telSecundario.length >= 3 && this.user.telSecundario.substring(3, 4) != ")") {
-            this.user.telSecundario = this.user.telSecundario.substring(0, 3) + ")" + this.user.telSecundario.substring(3);
+        if (this.form.value.telSecundario.length >= 3 && this.form.value.telSecundario.substring(3, 4) != ")") {
+            var aux = this.form.value;
+            aux.telSecundario = this.form.value.telSecundario.substring(0, 3) + ")" + this.form.value.telSecundario.substring(3);
+            this.form.setValue(aux);
         }
-        if (this.user.telSecundario.length >= 9 && this.user.telSecundario.substring(9, 10) != "-") {
-            this.user.telSecundario = this.user.telSecundario.substring(0, 9) + "-" + this.user.telSecundario.substring(9);
+        if (this.form.value.telSecundario.length >= 9 && this.form.value.telSecundario.substring(9, 10) != "-") {
+            var aux = this.form.value;
+            aux.telSecundario = this.form.value.telSecundario.substring(0, 9) + "-" + this.form.value.telSecundario.substring(9);
+            this.form.setValue(aux);
         }
     };
-    FormDadosClienteComponent.prototype.userForm = function (myForm) {
+    FormDadosClienteComponent.prototype.userForm = function () {
         var _this = this;
-        //cheking if any required field is empty
-        if (myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telefone == "" || myForm.value.endereco == "") {
+        console.log('status ' + this.form.status);
+        if (typeof this.form.value.cpf == null || typeof this.form.value.nome == null || typeof this.form.value.telPrimario == null || typeof this.form.value.endereco == null || this.form.status == "INVALID") {
+            this.cpfFormControl.markAsTouched();
+            this.nomeFormControl.markAsTouched();
+            this.enderecoFormControl.markAsTouched();
+            this.emailFormControl.markAsTouched();
+            this.telFormControl.markAsTouched();
+            this.telTwoFormControl.markAsTouched();
             var config_1 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
             config_1.extraClasses = ['error-class'];
             config_1.duration = 3000;
-            this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config_1);
+            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_1);
             return null;
         }
-        var req = this.http.post(this.url + '/api/add_cli', myForm.value)
+        if (this.form.value.cpf.length < 1 || this.form.value.nome.length < 1 || this.form.value.telPrimario.length < 1 || this.form.value.endereco.length < 1) {
+            console.log('entrei 2');
+            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            config_2.extraClasses = ['error-class'];
+            config_2.duration = 3000;
+            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_2);
+            return null;
+        }
+        console.log('entrei 3');
+        var req = this.http.post(this.url + '/api/add_cli', this.form.value)
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
@@ -1879,17 +1935,12 @@ var FormDadosClienteComponent = (function () {
             console.log("Error occured: " + err.error.message);
         });
         this.update = false;
-        this.orca.cpf = myForm.value.cpf;
-        this.user.cpf = '';
-        this.user.nome = '';
-        this.user.telPrimario = '';
-        this.user.telSecundario = '';
-        this.user.email = '';
-        this.user.endereco = '';
+        this.orca.cpf = this.form.value.cpf;
         var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Cliente Cadastrado com sucesso", "Fechar", config);
+        this.form.reset();
     };
     FormDadosClienteComponent.prototype.getValues = function () {
         return this.values;
@@ -1897,14 +1948,15 @@ var FormDadosClienteComponent = (function () {
     FormDadosClienteComponent.prototype.updateUser = function (myForm) {
         var _this = this;
         //cheking if any required field is empty
-        if (myForm.value.cpf == "" || myForm.value.nome == "" || myForm.value.telPrimario == "" || myForm.value.endereco == "") {
-            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
-            config_2.extraClasses = ['error-class'];
-            config_2.duration = 3000;
-            this.snackBar.open("Os campos com obrigatórios devem ser preenchidos.", "Fechar", config_2);
+        if (this.form.value.cpf == "" || this.form.value.nome == "" || this.form.value.telPrimario == "" || this.form.value.endereco == "" || this.form.status == "INVALID") {
+            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            config_3.extraClasses = ['error-class'];
+            config_3.duration = 3000;
+            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_3);
             return null;
         }
-        var req = this.http.post(this.url + '/api/update_cli', myForm.value)
+        console.log(this.form.value);
+        var req = this.http.post(this.url + '/api/update_cli', this.form.value)
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
@@ -1915,29 +1967,25 @@ var FormDadosClienteComponent = (function () {
             console.log("Error occured: " + err.error.message);
         });
         this.update = false;
-        this.orca.cpf = myForm.value.cpf;
-        this.user.cpf = '';
-        this.user.nome = '';
-        this.user.telPrimario = '';
-        this.user.telSecundario = '';
-        this.user.email = '';
-        this.user.endereco = '';
+        this.orca.cpf = this.form.value.cpf;
         var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Cadastro atualizado com sucesso", "Fechar", config);
+        this.form.reset();
     };
     FormDadosClienteComponent.prototype.orcaForm = function (myForm) {
         var _this = this;
+        console.log("value " + this.orca.cpf);
         //cheking if any required field is empty
-        if (myForm.value.cpf == "" || myForm.value.defeito == "" || myForm.value.marca == "" || myForm.value.data == "" || myForm.value.modelo == "" || myForm.value.periodo == "") {
-            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
-            config_3.extraClasses = ['error-class'];
-            config_3.duration = 3000;
-            this.snackBar.open("Preencha os campos obrigatórios", "Fechar", config_3);
+        if (myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID") {
+            var config_4 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            config_4.extraClasses = ['error-class'];
+            config_4.duration = 3000;
+            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_4);
             return null;
         }
-        this.http.post(this.url + '/api/get_cli', myForm.value).subscribe(function (resCliente) {
+        this.http.post(this.url + '/api/get_cli', { cpf: this.orca.cpf }).subscribe(function (resCliente) {
             _this.auxCliente = resCliente;
             if (myForm.value.periodo == "0") {
                 myForm.value.periodo = "Manhã";
@@ -1946,6 +1994,7 @@ var FormDadosClienteComponent = (function () {
                 myForm.value.periodo = "Tarde";
             }
             //Acrescentando os campos que compoem um orçamento
+            myForm.value.cpf = _this.orca.cpf;
             myForm.value.nome = _this.auxCliente.nome;
             myForm.value.telPrimario = _this.auxCliente.telPrimario;
             myForm.value.telSecundario = _this.auxCliente.telSecundario;
@@ -1953,19 +2002,11 @@ var FormDadosClienteComponent = (function () {
             myForm.value.endereco = _this.auxCliente.endereco;
             _this.http.post(_this.url + '/api/add_orca', myForm.value)
                 .subscribe(function (res) {
-                _this.orca.cpf = "";
-                _this.orca.data = null;
-                _this.orca.marca = null;
-                _this.orca.modelo = null;
-                _this.orca.periodo = null;
-                _this.orca.defeito = null;
+                console.log("sucessfull");
                 _this.update = false;
-                _this.user.cpf = '';
-                _this.user.nome = '';
-                _this.user.telPrimario = '';
-                _this.user.telSecundario = '';
-                _this.user.email = '';
-                _this.user.endereco = '';
+                _this.cpfOrcaFormControl.reset();
+                _this.form.reset();
+                myForm.reset();
             }, function (err) {
                 var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
                 config.extraClasses = ['error-class'];
@@ -1981,23 +2022,45 @@ var FormDadosClienteComponent = (function () {
         config.duration = 3000;
         this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
     };
-    FormDadosClienteComponent.prototype.checkUser = function (myForm) {
+    FormDadosClienteComponent.prototype.checkUser = function () {
         var _this = this;
-        this.http.post("/api/get_cli", myForm.value).subscribe(function (data) {
+        if (myForm != null) {
+            this.form.value.cpf = myForm.value.cpf;
+        }
+        this.http.post("/api/get_cli", this.form.value).subscribe(function (data) {
             if (data != null) {
-                _this.user.cpf = data.cpf;
+                //Deleting the database id
+                delete data._id;
+                //Setting the form values
+                _this.form.setValue(data);
                 _this.orca.cpf = data.cpf;
-                _this.user.nome = data.nome;
-                _this.user.telPrimario = data.telPrimario;
-                _this.user.telSecundario = data.telSecundario;
-                _this.user.email = data.email;
-                _this.user.endereco = data.endereco;
                 _this.update = true;
             }
             else {
                 _this.update = false;
             }
         });
+    };
+    FormDadosClienteComponent.prototype.checkUserWForm = function (myForm) {
+        var _this = this;
+        this.http.post("/api/get_cli", { cpf: this.orca.cpf }).subscribe(function (data) {
+            if (data != null) {
+                delete data._id;
+                //Setting the form values
+                _this.form.setValue(data);
+                _this.orca.cpf = data.cpf;
+                _this.update = true;
+            }
+            else {
+                _this.update = false;
+            }
+        });
+    };
+    FormDadosClienteComponent.prototype.resetForm = function () {
+        this.form.reset();
+        this.form.markAsUntouched();
+        this.form.markAsPristine();
+        this.form.clearValidators();
     };
     FormDadosClienteComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -2449,7 +2512,6 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.canActivate = function (route, state) {
         if (this.getCookie("dcJJe4ZEsB") == "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb") {
-            console.log("conso tre");
             return true;
         }
         else {
