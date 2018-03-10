@@ -104,7 +104,7 @@ export class FormDadosClienteComponent implements OnInit {
   emailValidator(control: FormControl) { 
   let email = control.value; 
 
-   if(control.value == null || control.value == ""){\
+   if(control.value == null || control.value == ""){
       return null;
     }
 
@@ -347,10 +347,6 @@ export class FormDadosClienteComponent implements OnInit {
 
   checkUser()
   {
-      if(myForm != null){
-        this.form.value.cpf = myForm.value.cpf;
-      }
-
      this.http.post<ItemsResponseUser>("/api/get_cli", this.form.value ).subscribe(data => {
       
       if(data != null )
@@ -401,7 +397,7 @@ export class FormDadosClienteComponent implements OnInit {
 
 }
 //Definindo o que sera a resposta do getCards
-interface ItemsResponseUser {]
+interface ItemsResponseUser {
   _id: string;
   cpf: string;
   nome: string;

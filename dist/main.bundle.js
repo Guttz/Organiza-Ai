@@ -2184,9 +2184,6 @@ var FormDadosClienteComponent = (function () {
     };
     FormDadosClienteComponent.prototype.checkUser = function () {
         var _this = this;
-        if (myForm != null) {
-            this.form.value.cpf = myForm.value.cpf;
-        }
         this.http.post("/api/get_cli", this.form.value).subscribe(function (data) {
             if (data != null) {
                 //Deleting the database id
