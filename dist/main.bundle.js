@@ -324,6 +324,7 @@ var AppModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -335,8 +336,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var AuthGuard = (function () {
-    function AuthGuard(_location) {
+    function AuthGuard(router, _location) {
+        this.router = router;
         this._location = _location;
         /*      this.response = false;*/
     }
@@ -345,7 +348,8 @@ var AuthGuard = (function () {
             return true;
         }
         else {
-            this._location.back();
+            this.router.navigate(['/login']);
+            //this._location.back();
             return false;
         }
     };
@@ -365,7 +369,7 @@ var AuthGuard = (function () {
     };
     AuthGuard = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_1__angular_common__["Location"]])
     ], AuthGuard);
     return AuthGuard;
 }());

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate} from '@angular/router';
 import {Location} from '@angular/common';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private _location: Location) {
+    constructor(private router: Router, private _location: Location) {
 /*      this.response = false;*/
     }
 
@@ -15,10 +16,10 @@ export class AuthGuard implements CanActivate {
             return true;
         }
         else{
-            this._location.back();
+            this.router.navigate(['/login']);
+            //this._location.back();
             return false;
         }
-
 
     }
 
