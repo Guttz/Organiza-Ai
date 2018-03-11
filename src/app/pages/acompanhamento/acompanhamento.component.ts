@@ -3,7 +3,7 @@ import { CardSchema } from '../../common_components/schemas/cardSchema';
 import { CardStore } from '../../common_components/schemas/cardStore';
 import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
-import { NgForm, FormGroup } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
