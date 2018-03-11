@@ -3,7 +3,7 @@ import { CardSchema } from '../../common_components/schemas/cardSchema';
 import { CardStore } from '../../common_components/schemas/cardStore';
 import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
-
+import { NgForm, FormGroup } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
@@ -53,7 +53,9 @@ constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DI
   onNoClick(): void {
     this.dialogRef.close();
   }
-  thermalPrint(): void{
+
+
+  thermalPrint(myForm:NgForm): void{
     var w = window.open();
     w.document.write("Teste");
     w.print();

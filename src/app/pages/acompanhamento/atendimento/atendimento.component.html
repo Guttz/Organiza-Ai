@@ -1,10 +1,14 @@
+<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel="stylesheet">
+
 <div class="column" class="popup"> 
+	<div class = "row">
+		<h1 mat-dialog-title fxFlex="70">Informações do Orçamento</h1>
+		<button fxFlex="30" mat-icon-button (click)="thermalPrint()">
+			<mat-icon>print</mat-icon>
 
 
-<h1 mat-dialog-title>Informações do Orçamento</h1>
-	<button mat-icon-button (click)="thermalPrint()">
-		<img class="my-user"  src="assets/images/user-symbol.png" style="cursor: pointer;">
-	</button>
+		</button>
+	</div>
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="100">
             <input [(ngModel)]="data.defeito" matInput ngDefaultControl placeholder="Qual defeito apresentado?">
@@ -86,4 +90,5 @@
           fxFlexAlign="center" label="CONFIRMAR" style="margin-top: 12px;">
         </my-button-orange>  -->
       </div>
+     </form>
 </div>

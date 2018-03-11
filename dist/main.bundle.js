@@ -221,6 +221,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 /*Import dos componentes simples*/
 
 
@@ -278,19 +279,20 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_7__angular_material_input__["b" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material_select__["a" /* MatSelectModule */],
                 __WEBPACK_IMPORTED_MODULE_9__angular_material_datepicker__["a" /* MatDatepickerModule */],
-                __WEBPACK_IMPORTED_MODULE_11__angular_material__["d" /* MatNativeDateModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["e" /* MatNativeDateModule */],
                 __WEBPACK_IMPORTED_MODULE_10__angular_material_toolbar__["a" /* MatToolbarModule */],
                 __WEBPACK_IMPORTED_MODULE_13_primeng_primeng__["DragDropModule"],
                 __WEBPACK_IMPORTED_MODULE_14__angular_material_table__["b" /* MatTableModule */],
                 __WEBPACK_IMPORTED_MODULE_15__angular_material_menu__["a" /* MatMenuModule */],
                 __WEBPACK_IMPORTED_MODULE_16__angular_material_dialog__["c" /* MatDialogModule */],
-                __WEBPACK_IMPORTED_MODULE_11__angular_material__["i" /* MatSnackBarModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["j" /* MatSnackBarModule */],
                 __WEBPACK_IMPORTED_MODULE_17__angular_material_progress_spinner__["a" /* MatProgressSpinnerModule */],
-                __WEBPACK_IMPORTED_MODULE_11__angular_material__["f" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["g" /* MatPaginatorModule */],
                 __WEBPACK_IMPORTED_MODULE_12__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_12__angular_forms__["ReactiveFormsModule"],
                 __WEBPACK_IMPORTED_MODULE_27__angular_flex_layout__["a" /* FlexLayoutModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["d" /* MatIconModule */],
             ],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["a" /* AcompanhamentoComponent */],
@@ -1095,7 +1097,7 @@ var AtendimentoComponent = (function () {
     AtendimentoComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
     };
-    AtendimentoComponent.prototype.thermalPrint = function () {
+    AtendimentoComponent.prototype.thermalPrint = function (myForm) {
         var w = window.open();
         w.document.write("Teste");
         w.print();
@@ -1627,7 +1629,7 @@ var AcompanhamentoComponent = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"column\" class=\"popup\"> \r\n\r\n\r\n<h1 mat-dialog-title>Informações do Orçamento</h1>\r\n\t<button mat-icon-button (click)=\"thermalPrint()\">\r\n\t\t<img class=\"my-user\"  src=\"assets/images/user-symbol.png\" style=\"cursor: pointer;\">\r\n\t</button>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Peças usadas\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Mão de Obra\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento</h1>\r\n\t\t<button fxFlex=\"30\" mat-icon-button (click)=\"thermalPrint()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\r\n\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Peças usadas\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Mão de Obra\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n     </form>\r\n</div>"
 
 /***/ }),
 
@@ -1774,7 +1776,7 @@ var CadastroComponent = (function () {
             _this.router.navigate(['/acompanhamento']);
         }, function (err) {
             _this.loadSpinner = false;
-            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config.extraClasses = ['error-class'];
             config.duration = 3000;
             _this.snackBar.open("Login e/ou senha incorretos", "Fechar", config);
@@ -1809,7 +1811,7 @@ var CadastroComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatSnackBar */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBar */]])
     ], CadastroComponent);
     return CadastroComponent;
 }());
@@ -2076,7 +2078,7 @@ var FormDadosClienteComponent = (function () {
             this.emailFormControl.markAsTouched();
             this.telFormControl.markAsTouched();
             this.telTwoFormControl.markAsTouched();
-            var config_1 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_1 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config_1.extraClasses = ['error-class'];
             config_1.duration = 3000;
             this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_1);
@@ -2084,7 +2086,7 @@ var FormDadosClienteComponent = (function () {
         }
         if (this.form.value.cpf.length < 1 || this.form.value.nome.length < 1 || this.form.value.telPrimario.length < 1 || this.form.value.endereco.length < 1) {
             console.log('entrei 2');
-            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config_2.extraClasses = ['error-class'];
             config_2.duration = 3000;
             this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_2);
@@ -2095,7 +2097,7 @@ var FormDadosClienteComponent = (function () {
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
-            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config.extraClasses = ['custom-class'];
             config.duration = 3000;
             _this.snackBar.open("Erro no cadastro: " + err.error.message, "Fechar", config);
@@ -2103,7 +2105,7 @@ var FormDadosClienteComponent = (function () {
         });
         this.update = false;
         this.orca.cpf = this.form.value.cpf;
-        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Cliente Cadastrado com sucesso", "Fechar", config);
@@ -2116,7 +2118,7 @@ var FormDadosClienteComponent = (function () {
         var _this = this;
         //cheking if any required field is empty
         if (this.form.value.cpf == "" || this.form.value.nome == "" || this.form.value.telPrimario == "" || this.form.value.endereco == "" || this.form.status == "INVALID") {
-            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config_3.extraClasses = ['error-class'];
             config_3.duration = 3000;
             this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_3);
@@ -2127,7 +2129,7 @@ var FormDadosClienteComponent = (function () {
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
-            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config.extraClasses = ['error-class'];
             config.duration = 3000;
             _this.snackBar.open("Erro na atualização de cadastro: " + err.error.message, "Fechar", config);
@@ -2135,7 +2137,7 @@ var FormDadosClienteComponent = (function () {
         });
         this.update = false;
         this.orca.cpf = this.form.value.cpf;
-        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Cadastro atualizado com sucesso", "Fechar", config);
@@ -2146,7 +2148,7 @@ var FormDadosClienteComponent = (function () {
         console.log("value " + this.orca.cpf);
         //cheking if any required field is empty
         if (myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID") {
-            var config_4 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config_4 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config_4.extraClasses = ['error-class'];
             config_4.duration = 3000;
             this.snackBar.open("Preencha todos os campos de orçamento", "Fechar", config_4);
@@ -2175,7 +2177,7 @@ var FormDadosClienteComponent = (function () {
                 _this.form.reset();
                 myForm.reset();
             }, function (err) {
-                var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+                var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
                 config.extraClasses = ['error-class'];
                 config.duration = 3000;
                 _this.snackBar.open("Erro na criação do orçamento: " + err.error.message, "Fechar", config);
@@ -2184,7 +2186,7 @@ var FormDadosClienteComponent = (function () {
         }, function (err) {
             console.log("Error occured: " + err.error.message);
         });
-        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+        var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
         this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
@@ -2232,7 +2234,7 @@ var FormDadosClienteComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatSnackBar */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBar */]])
     ], FormDadosClienteComponent);
     return FormDadosClienteComponent;
 }());
@@ -2478,8 +2480,8 @@ var HistoricoComponent = (function () {
         this.url = "http://myas.com.br";
         this.ELEMENT_DATA = [];
         this.displayedColumns = ['cpf', 'nome', 'telPrimario', 'status', 'data', 'valorFinal'];
-        this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](this.ELEMENT_DATA);
-        this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](this.ELEMENT_DATA);
+        this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](this.ELEMENT_DATA);
+        this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](this.ELEMENT_DATA);
         if (window.location.href.match(/www/) != null) {
             console.log("das me: " + window.location.href);
             this.url = "http://www.myas.com.br";
@@ -2507,8 +2509,8 @@ var HistoricoComponent = (function () {
                 _this.auxData[i].status = "Finalizado";
                 _this.ELEMENT_DATA.push(_this.auxData[i]);
             }
-            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](_this.ELEMENT_DATA);
-            _this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](_this.ELEMENT_DATA);
+            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](_this.ELEMENT_DATA);
+            _this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](_this.ELEMENT_DATA);
             _this.dataCurrent.paginator = _this.paginator;
             _this.dataSource.paginator = _this.paginator;
         });
@@ -2535,7 +2537,7 @@ var HistoricoComponent = (function () {
             this.searchIn[i] = this.searchIn[i].trim(); // Remove whitespace
             this.searchIn[i] = this.searchIn[i].toLowerCase(); // MatTableDataSource defaults to lowercase matches
             this.dataCurrent.filter = this.searchIn[i];
-            this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](this.dataCurrent.filteredData);
+            this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](this.dataCurrent.filteredData);
             this.dataCurrent.paginator = this.paginator;
         }
     };
@@ -2561,8 +2563,8 @@ var HistoricoComponent = (function () {
         console.log(this.dataCurrent.filteredData[input]);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatPaginator */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatPaginator */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatPaginator */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatPaginator */])
     ], HistoricoComponent.prototype, "paginator", void 0);
     HistoricoComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -2702,7 +2704,7 @@ var LoginComponent = (function () {
             _this.router.navigate(['/acompanhamento']);
         }, function (err) {
             _this.loadSpinner = false;
-            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBarConfig */]();
+            var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
             config.extraClasses = ['error-class'];
             config.duration = 3000;
             _this.snackBar.open("Login e/ou senha incorretos", "Fechar", config);
@@ -2737,7 +2739,7 @@ var LoginComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/login/login.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/login/login.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatSnackBar */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBar */]])
     ], LoginComponent);
     return LoginComponent;
 }());

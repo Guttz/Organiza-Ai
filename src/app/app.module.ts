@@ -21,6 +21,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
 
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
@@ -92,6 +93,7 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatIconModule,
   ],
   entryComponents: [
   AcompanhamentoComponent,
