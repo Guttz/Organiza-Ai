@@ -1,5 +1,10 @@
 <div class="column" class="popup"> 
+
+
 <h1 mat-dialog-title>Informações do Orçamento</h1>
+	<button mat-icon-button (click)="thermalPrint()">
+		<img class="my-user"  src="assets/images/user-symbol.png" style="cursor: pointer;">
+	</button>
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="100">
             <input [(ngModel)]="data.defeito" matInput ngDefaultControl placeholder="Qual defeito apresentado?">

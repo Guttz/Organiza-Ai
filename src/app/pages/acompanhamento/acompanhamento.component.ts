@@ -53,7 +53,12 @@ constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DI
   onNoClick(): void {
     this.dialogRef.close();
   }
-
+  thermalPrint(): void{
+    var w = window.open();
+    w.document.write("Teste");
+    w.print();
+    w.close();
+  };
   ngOnInit() {
   }
 
