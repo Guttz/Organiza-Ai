@@ -32,6 +32,13 @@ constructor(
   ngOnInit() {
   }
 
+    thermalPrintVisao(): void{
+    var w = window.open();
+    w.document.write("Pagina de visao do tecnicoaa <br> =)" + this.data.defeito);
+    w.print();
+    w.close();
+  };
+
 
 }
 
@@ -49,18 +56,64 @@ export class AtendimentoComponent implements OnInit {
   ];
 
 constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  thermalPrintAguardando(): void{
+    var document = '<html> <body onload="window.print()"> <h3 style="display: inline-block" >Ordem de serviço</h3> <img style="display: inline-block; padding-left: 110px;" src="assets/images/logo-name75.png"> <br>\
+    <span> <strong> N° Ordem:</strong>'+ this.data.dia + this.data.dia + this.data.dia +'</span> <span>&nbsp &nbsp <strong> Cliente:</strong> '+ this.data.nome +'</span> <span>&nbsp &nbsp <strong>Data:</strong> '+ this.data.dia + "/"+ this.data.mes +'</span> <br> <br> \
+     <span><strong>Telefone:</strong> '+ this.data.telPrimario +'</span> <span>&nbsp &nbsp <strong>Marca:</strong> '+ this.data.marca +'</span> <span>&nbsp &nbsp <strong>Modelo:</strong> '+ this.data.modelo +'</span> <br> <br> \
+    <span><strong>Defeito:</strong> '+ this.data.defeito +'</span> <br> <br> \
+    <span><strong>Observações:</strong> '+ this.data.endereco +'</span> </body> </html>';
 
-  thermalPrint(myForm:NgForm): void{
-    var w = window.open();
-    w.document.write("Teste");
+    console.log(this.data);
+
+    //var w = window.open("file:///C:/Users/Gus/Desktop/lucas/ERP/src/app/pages/acompanhamento/impressao.html");
+    
+    //var w = window.open("/cadastro");
+     
+     var w = window.open("");
+
+     w.document.write(document);
+
+    
     w.print();
-    w.close();
+
+    //w.onload = function () { alert("It's loaded!"); console.log("here i am"); }
+    //w.onload = function() { alert("loaded"); };
+
+    //w.document.write('<script> setTimeout(function(){ alert("Hello"); }, 3000); </script>');
+    
+
+    //w.document.write(' <script> for (var i = 0; i < 5000000; i++) { console.log(" "); } </script>');
+
+    
+
+/*    for (var i = 0; i < 150000; i++) { console.log(" ");
+      if(i==149000){
+        w.document.write("AAAAAAAAAAAAAAAAAAAAAAAAAA");  
+        //w.print();  
+      }
+      
+    }
+*/
+    
+
+
+    
+    //w.close();
+
+    /*for (var i = 0; i < 1000000; i++) {
+       console.log(" ");
+    }*/
+
+    //w.print();
+
   };
+
+
+
   ngOnInit() {
   }
 

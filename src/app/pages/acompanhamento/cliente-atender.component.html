@@ -1,5 +1,14 @@
+<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel="stylesheet">
+
 <div class="column" class="popup"> 
-<h1 mat-dialog-title>Informações do Orçamento</h1>
+  <div class = "row">
+    <h1 mat-dialog-title fxFlex="70">Informações do Orçamento</h1>
+    <button fxFlex="30" mat-icon-button (click)="thermalPrintVisao()">
+      <mat-icon>print</mat-icon>
+
+
+    </button>
+  </div>
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="100">
             <input [(ngModel)]="data.defeito" matInput ngDefaultControl placeholder="Qual defeito apresentado?">
