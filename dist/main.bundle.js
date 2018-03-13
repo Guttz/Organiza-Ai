@@ -194,6 +194,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__ = __webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orca-data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -236,6 +237,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 /*Import de bibliotecas*/
 
 /*Import das Páginas*/
+
 
 
 
@@ -306,7 +308,8 @@ var AppModule = (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
-                __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__["a" /* AuthGuard */]
+                __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__["a" /* AuthGuard */],
+                __WEBPACK_IMPORTED_MODULE_35__services_orca_data_service__["a" /* OrcaDataService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
             exports: []
@@ -2781,6 +2784,127 @@ var LoginComponent = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBar */]])
     ], LoginComponent);
     return LoginComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/orca-data.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrcaDataService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_cardStore__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardStore.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var OrcaDataService = (function () {
+    function OrcaDataService(http) {
+        this.http = http;
+        //Initializing orca list
+        var lists = [
+            {
+                name: 'Visita Orçamento',
+                cards: [],
+                id: "l0"
+            },
+            {
+                name: 'Visita técnico',
+                cards: [],
+                id: "l1"
+            },
+            {
+                name: 'Aguardando Peças',
+                cards: [],
+                id: "l2"
+            },
+            {
+                name: 'Retorno Visita',
+                cards: [],
+                id: "l3"
+            },
+            {
+                name: 'Pagamento',
+                cards: [],
+                id: "l4"
+            },
+            {
+                name: 'Clientes finalizados',
+                cards: [],
+                id: "l5"
+            }
+        ];
+        this.lists = lists;
+        this.cardStore = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_cardStore__["a" /* CardStore */]();
+    }
+    //Method to request orcas from db
+    OrcaDataService.prototype.requestOrcas = function () {
+        //Requesting all orca data
+        var _this = this;
+        //Getting the first colunm data and saving on the list
+        this.http.get("/api/get_orcas").subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.dataHolder = data;
+            for (var i = 0; i < _this.dataHolder.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null, data[i].observacoes);
+                _this.lists[0].cards.push(cardId);
+            }
+        });
+        //Getting the second data colunm and saving on the list
+        this.http.get("/api/get_atendimentos").subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.dataHolder = data;
+            for (var i = 0; i < _this.dataHolder.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null, data[i].observacoes);
+                _this.lists[1].cards.push(cardId);
+            }
+        });
+        //Getting the thrird data colunm and saving on the list
+        this.http.get(this.url + '/api/get_agPecas').subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.dataHolder = data;
+            for (var i = 0; i < _this.dataHolder.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
+                _this.lists[2].cards.push(cardId);
+            }
+        });
+        //Getting the 4th data colunm and saving on the list
+        this.http.get(this.url + '/api/get_rtVisita').subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.dataHolder = data;
+            for (var i = 0; i < _this.dataHolder.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
+                _this.lists[3].cards.push(cardId);
+            }
+        });
+        //Getting the 5th data colunm and saving on the list
+        this.http.get(this.url + '/api/get_pagamento').subscribe(function (data) {
+            //Agora todos os dados estao na variavel data
+            _this.dataHolder = data;
+            console.log(_this.auxData);
+            for (var i = 0; i < _this.dataHolder.length; i++) {
+                var cardId = _this.cardStore.newCard("Orçamento", data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data), data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
+                _this.lists[4].cards.push(cardId);
+            }
+        });
+    };
+    OrcaDataService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], OrcaDataService);
+    return OrcaDataService;
 }());
 
 

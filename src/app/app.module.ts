@@ -50,6 +50,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
+import { OrcaDataService } from './services/orca-data.service'
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { AuthGuard } from './common_components/_guard/auth.guard';
   providers: [
     LoginComponent,
     CadastroComponent,
-    AuthGuard
+    AuthGuard,
+    OrcaDataService
   ],
   bootstrap: [AppComponent],
   exports: []
