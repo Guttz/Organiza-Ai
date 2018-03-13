@@ -10,9 +10,15 @@ import { CardStore } from '../schemas/cardStore';
 export class CardComponent implements OnInit {
   @Input() card: CardSchema;
   
-  constructor() { }
+  reducedID;
+
+  constructor() {
+    
+  }
 
   ngOnInit() {
+    this.reducedID = this.card.bd_id.substring(17, 24);
+    
   }
 
   dragStart(ev) {

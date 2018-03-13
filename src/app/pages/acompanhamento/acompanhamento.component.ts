@@ -18,9 +18,12 @@ export class ClienteAtenderComponent implements OnInit {
     {value: 'Tarde'}
   ];
 
+  reducedID;
+  
 constructor(
     public dialogRef: MatDialogRef<ClienteAtenderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.reducedID = this.data.bd_id.substring(17, 24);
      }
   
 
@@ -55,17 +58,24 @@ export class AtendimentoComponent implements OnInit {
     {value: 'Dinheiro'},
   ];
 
-constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
-  onNoClick(): void {
+ reducedID;
+
+constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  this.reducedID = this.data.bd_id.substring(17, 24);
+}
+ 
+
+onNoClick(): void {
     this.dialogRef.close();
+    
   }
 
   thermalPrintAguardando(): void{
     var document = '<html> <body onload="window.print()"> <h3 style="display: inline-block" >Ordem de serviço</h3> <img style="display: inline-block; padding-left: 110px;" src="assets/images/logo-name75.png"> <br>\
-    <span> <strong> N° Ordem:</strong>'+ this.data.dia + this.data.dia + this.data.dia +'</span> <span>&nbsp &nbsp <strong> Cliente:</strong> '+ this.data.nome +'</span> <span>&nbsp &nbsp <strong>Data:</strong> '+ this.data.dia + "/"+ this.data.mes +'</span> <br> <br> \
+    <span> <strong> N° Ordem: </strong>'+ this.data.bd_id.substring(17, 24) +'</span> <span>&nbsp &nbsp <strong> Cliente:</strong> '+ this.data.nome +'</span> <span>&nbsp &nbsp <strong>Data:</strong> '+ this.data.dia + "/"+ this.data.mes +'</span> <br> <br> \
      <span><strong>Telefone:</strong> '+ this.data.telPrimario +'</span> <span>&nbsp &nbsp <strong>Marca:</strong> '+ this.data.marca +'</span> <span>&nbsp &nbsp <strong>Modelo:</strong> '+ this.data.modelo +'</span> <br> <br> \
     <span><strong>Defeito:</strong> '+ this.data.defeito +'</span> <br> <br> \
-    <span><strong>Observações:</strong> '+ this.data.endereco +'</span> </body> </html>';
+    <span><strong>Observações: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
 
     console.log(this.data);
 
@@ -78,7 +88,7 @@ constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DI
      w.document.write(document);
 
     
-    w.print();
+    //w.print();
 
     //w.onload = function () { alert("It's loaded!"); console.log("here i am"); }
     //w.onload = function() { alert("loaded"); };
@@ -153,8 +163,7 @@ export class AcompanhamentoComponent implements OnInit {
            this.url = "http://myas.com.br";
          }
          
-       }
-       
+       }  
   }
 
   makeMockData() {
@@ -213,7 +222,7 @@ export class AcompanhamentoComponent implements OnInit {
       this.auxData = data;
 
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null, data[i].observacoes);
           this.lists[0].cards.push(cardId)
       }
 
@@ -224,7 +233,7 @@ export class AcompanhamentoComponent implements OnInit {
       this.auxData = data;
 
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null, data[i].observacoes);
           this.lists[1].cards.push(cardId)
       }
 
@@ -235,7 +244,7 @@ export class AcompanhamentoComponent implements OnInit {
       this.auxData = data;
       console.log(this.auxData);
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
           this.lists[2].cards.push(cardId)
       }
 
@@ -246,7 +255,7 @@ export class AcompanhamentoComponent implements OnInit {
       this.auxData = data;
       console.log(this.auxData);
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
           this.lists[3].cards.push(cardId)
       }
 
@@ -257,7 +266,7 @@ export class AcompanhamentoComponent implements OnInit {
       this.auxData = data;
       console.log(this.auxData);
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
           this.lists[4].cards.push(cardId)
       }
 
@@ -268,7 +277,7 @@ export class AcompanhamentoComponent implements OnInit {
       this.auxData = data;
 
       for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag);
+          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
           this.lists[5].cards.push(cardId)
       }
 
@@ -332,9 +341,11 @@ export class AcompanhamentoComponent implements OnInit {
 
     var card = this.cardStore.getCard(idCard);
 
+    console.log(card);
+
     let dialogRef = this.dialog.open(ClienteAtenderComponent, {
       width: '44vw',
-      data: { marca: card.marca, defeito: card.defeito, modelo: card.modelo, data: card.data, periodo: card.periodo }
+      data: card
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -349,6 +360,7 @@ export class AcompanhamentoComponent implements OnInit {
           card.modelo = result.modelo;
           card.data = result.data;
           card.periodo = result.periodo;
+          card.observacoes = result.observacoes;
           this.cardStore.updateCard(idCard, card);
 
             const req = this.http.post(this.url + '/api/update_' + this.listsNames[idList], result)
@@ -398,6 +410,7 @@ export class AcompanhamentoComponent implements OnInit {
           card.maoObra = result.maoObra;
           card.valorFinal = result.valorFinal;
           card.metPag = result.metPag;
+          card.observacoes = result.observacoes;
           
           //Atualizando o card na store com as novas informações dele
           this.cardStore.updateCard(idCard, card);
@@ -821,5 +834,6 @@ interface ItemsResponse {
     telPrimario: string,
     telSecundario: string,
     email: string,
-    endereco: string
+    endereco: string,
+    observacoes: string
 }

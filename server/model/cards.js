@@ -19,7 +19,8 @@ module.exports = function(){
 		telefone: String,
 		celular: String,
 		email: String,
-		endereco: String
+		endereco: String,
+		observacoes: String
 	});
 	return db.model('cards', cards);
 }

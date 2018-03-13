@@ -2,8 +2,8 @@
 
 <div class="column" class="popup"> 
 	<div class = "row">
-		<h1 mat-dialog-title fxFlex="70">Informações do Orçamento</h1>
-		<button fxFlex="30" mat-icon-button (click)="thermalPrintAguardando()">
+		<h1 mat-dialog-title fxFlex="70">Informações do Orçamento - {{reducedID}}</h1>
+		<button fxFlexOffset="24" mat-icon-button (click)="thermalPrintAguardando()">
 			<mat-icon>print</mat-icon>
 
 
@@ -76,6 +76,16 @@
 
 	    </div>
 
+            <div class="row">
+                    <mat-form-field fxFlexOffset="2" fxFlex>
+              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observacoes"
+              name="observacoes"
+              ngDefaultControl
+              [(ngModel)]="data.observacoes"></textarea>
+
+            </mat-form-field> 
+      </div>
+      
 
 
 

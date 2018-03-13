@@ -15,7 +15,8 @@ module.exports = function(ass){
 		telPrimario: String,
 		telSecundario: String,
 		email: String,
-		endereco: String
+		endereco: String,
+		observacoes: String		
 	});
 	return db.model('cliente', cliente);
 }

@@ -5,6 +5,7 @@ export class Orca {
   marca: string;
   data: Date;
   modelo: string;
-  periodo: string
+  periodo: string;
+  observacoes: string;
 
 }

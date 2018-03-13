@@ -25,7 +25,8 @@ module.exports = function(ass){
 				servico: String,
 				maoObra: String,
 				valorFinal: String,
-				metPag: String
+				metPag: String,
+				observacoes: String
 			});
 	return db.model('finalizado', finalizado);
 }

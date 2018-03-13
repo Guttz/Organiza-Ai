@@ -22,5 +22,5 @@ export class CardSchema {
 	maoObra: string;
 	valorFinal: string;
 	metPag: string;
-
+	observacoes: string;
 }

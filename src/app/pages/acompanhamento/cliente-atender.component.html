@@ -2,12 +2,16 @@
 
 <div class="column" class="popup"> 
   <div class = "row">
-    <h1 mat-dialog-title fxFlex="70">Informações do Orçamento</h1>
-    <button fxFlex="30" mat-icon-button (click)="thermalPrintVisao()">
+    <h1 mat-dialog-title fxFlex="70">Informações do Orçamento - {{reducedID}}</h1>
+
+<!--     <button mat-button fxFlex="30" (click)="thermalPrintVisao()>
+    <mat-icon>print</mat-icon>
+  </button>
+ -->
+    <button fxFlexOffset="24" mat-icon-button (click)="thermalPrintVisao()">
       <mat-icon>print</mat-icon>
-
-
     </button>
+
   </div>
       	<div class="row">
       	   <mat-form-field fxFlexOffset="0" fxFlex="100">
@@ -69,6 +73,15 @@
 
 	    </div>
 
+      <div class="row">
+                    <mat-form-field fxFlexOffset="2" fxFlex>
+              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observacoes"
+              name="observacoes"
+              ngDefaultControl
+              [(ngModel)]="data.observacoes"></textarea>
+
+            </mat-form-field> 
+      </div>
 
 
 

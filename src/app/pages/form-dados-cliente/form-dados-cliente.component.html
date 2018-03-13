@@ -266,6 +266,13 @@
 
             </mat-form-field> 
 
+            <mat-form-field fxFlexOffset="2" fxFlex>
+              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observacoes"
+              name="observacoes"
+              [(ngModel)]="orca.observacoes"></textarea>
+
+            </mat-form-field> 
+
 <!--             <my-input-text 
               fxFlex="32" 
               name ="periodo" 
@@ -274,8 +281,6 @@
               label="Período de disponibilidade" 
               required> 
             </my-input-text> -->
-
-            <div fxFlex="grow"></div>
 
           </div>
 

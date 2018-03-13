@@ -160,7 +160,7 @@ router.post('/update_orca', function(req, res, next){
     //Checking if the params has at least a valid cpf
     if(req.body.bd_id != undefined)
     {
-      db.db(req.session.user.assistencia).collection('orcas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, data: req.body.data, periodo: req.body.periodo}}, function(err, result){
+      db.db(req.session.user.assistencia).collection('orcas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, data: req.body.data, periodo: req.body.periodo, observacoes: req.body.observacoes}}, function(err, result){
         if(err)
         {
           throw err;
@@ -240,7 +240,7 @@ router.post('/update_atendimento', function(req, res, next){
     //Checking if the params has at least a valid cpf
     if(req.body.bd_id != undefined)
     {
-      db.db(req.session.user.assistencia).collection('atendimentos').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+      db.db(req.session.user.assistencia).collection('atendimentos').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal, observacoes: req.body.observacoes}}, function(err, result){
         if(err)
         {
           throw err;
@@ -321,7 +321,7 @@ router.post('/update_agPecas', function(req, res, next){
     //Checking if the params has at least a valid cpf
     if(req.body.bd_id != undefined)
     {
-      db.db(req.session.user.assistencia).collection('agpecas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+      db.db(req.session.user.assistencia).collection('agpecas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal, observacoes: req.body.observacoes}}, function(err, result){
         if(err)
         {
           throw err;
@@ -402,7 +402,7 @@ router.post('/update_rtVisita', function(req, res, next){
     //Checking if the params has at least a valid cpf
     if(req.body.bd_id != undefined)
     {
-      db.db(req.session.user.assistencia).collection('rtvisitas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+      db.db(req.session.user.assistencia).collection('rtvisitas').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal, observacoes: req.body.observacoes}}, function(err, result){
         if(err)
         {
           throw err;
@@ -483,7 +483,7 @@ router.post('/update_pagamento', function(req, res, next){
     //Checking if the params has at least a valid cpf
     if(req.body.bd_id != undefined)
     {
-      db.db(req.session.user.assistencia).collection('pagamentos').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal}}, function(err, result){
+      db.db(req.session.user.assistencia).collection('pagamentos').updateOne({ _id: (new ObjectId(req.body.bd_id))}, {$set: {marca: req.body.marca, defeito: req.body.defeito, modelo: req.body.modelo, realizado: req.body.realizado, pecas: req.body.pecas, servico: req.body.servico, maoObra: req.body.maoObra, metPag: req.body.metPag, valorFinal: req.body.valorFinal, observacoes: req.body.observacoes}}, function(err, result){
         if(err)
         {
           throw err;

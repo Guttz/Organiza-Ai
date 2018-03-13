@@ -42,10 +42,13 @@ export class CardStore {
         this.cards[cardID].maoObra = card.maoObra;
         this.cards[cardID].valorFinal = card.valorFinal;
         this.cards[cardID].metPag = card.metPag;
+
+        this.cards[cardID].observacoes = card.observacoes;
+
         console.log("update"  + this.cards[cardID].defeito);
     }
 
-    newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string): string {
+    newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string, observacoes: string): string {
         const card = new CardSchema();
         card.estado = estado;
         card.cpf = cpf;
@@ -69,6 +72,9 @@ export class CardStore {
         card.maoObra = maoObra;
         card.valorFinal = valorFinal;
         card.metPag = metPag;
+
+        card.observacoes = observacoes;
+
         return (this._addCard(card));
     }
 }
