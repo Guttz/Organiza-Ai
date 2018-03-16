@@ -9,10 +9,13 @@ export class OrcaDataService {
 	lists: ListSchema[];
 	cardStore: CardStore;
 	dataHolder: any;
+	url = "http://myas.com.br";
+
+
   constructor(private http: HttpClient) 
   { 
   	//Initializing orca list
-  	const lists: ListSchema[] = [
+  	const listsAux: ListSchema[] = [
       {
         name: 'Visita Orçamento',
         cards: [],
@@ -45,37 +48,47 @@ export class OrcaDataService {
       }
     ];
 
-    this.lists = lists;
+    this.lists = listsAux;
     this.cardStore = new CardStore();
+
+    if(window.location.href.match(/www/) != null)
+    {
+      console.log("das me: " + window.location.href);
+        this.url = "http://www.myas.com.br";
+      }
+      else
+      {
+        if(window.location.href.match(/local/) != null){
+          this.url = "http://localhost";
+        }
+        else{
+          this.url = "http://myas.com.br";
+        }
+         
+      } 
+    } 
+    requestOrcas();
   }
 
   //Method to request orcas from db
   requestOrcas()
-  {
-
-  	
+  {  	
   	//Requesting all orca data
-
   	//Getting the first colunm data and saving on the list
 		this.http.get<ItemsResponse>("/api/get_orcas").subscribe(data => {
-      //Agora todos os dados estao na variavel data
       this.dataHolder = data;
-
       for (var i = 0; i < this.dataHolder.length; i++) {
           const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, 
           	data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, 
           	data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, 
           	null, null, data[i].observacoes);
-
           this.lists[0].cards.push(cardId)
       }
     });
 
 		//Getting the second data colunm and saving on the list
 		this.http.get<ItemsResponse>("/api/get_atendimentos").subscribe(data => {
-      //Agora todos os dados estao na variavel data
       this.dataHolder = data;
-
       for (var i = 0; i < this.dataHolder.length; i++) {
           const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, 
           	data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco,
@@ -87,7 +100,6 @@ export class OrcaDataService {
 
 		//Getting the thrird data colunm and saving on the list
     this.http.get(this.url + '/api/get_agPecas').subscribe(data => {
-      //Agora todos os dados estao na variavel data
       this.dataHolder = data;
       for (var i = 0; i < this.dataHolder.length; i++) {
           const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito,
@@ -101,7 +113,6 @@ export class OrcaDataService {
 
     //Getting the 4th data colunm and saving on the list
     this.http.get(this.url + '/api/get_rtVisita').subscribe(data => {
-      //Agora todos os dados estao na variavel data
       this.dataHolder = data;
       for (var i = 0; i < this.dataHolder.length; i++) {
           const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito,
@@ -115,7 +126,6 @@ export class OrcaDataService {
 
 		//Getting the 5th data colunm and saving on the list
     this.http.get(this.url + '/api/get_pagamento').subscribe(data => {
-      //Agora todos os dados estao na variavel data
       this.dataHolder = data;
       console.log(this.auxData);
       for (var i = 0; i < this.dataHolder.length; i++) {
@@ -128,7 +138,12 @@ export class OrcaDataService {
       }
 
     });
+  }
 
+
+  getOrcasList()
+  {
+  	return this.lists;
   }
 
 }

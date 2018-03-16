@@ -4,7 +4,8 @@ import { CardStore } from '../../common_components/schemas/cardStore';
 import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { OrcaDataService } from '../../services/orca-data.service';
 
 
 @Component({
@@ -20,9 +21,8 @@ export class ClienteAtenderComponent implements OnInit {
 
   reducedID;
   
-constructor(
-    public dialogRef: MatDialogRef<ClienteAtenderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+ private ordaDataService: OrcaDataService) {
       this.reducedID = this.data.bd_id.substring(17, 24);
      }
   
@@ -37,7 +37,7 @@ constructor(
 
     thermalPrintVisao(): void{
     var w = window.open();
-    w.document.write("Pagina de visao do tecnicoaa <br> =)" + this.data.defeito);
+    w.document.write("Pagina de visao do tecnicoaa <br> " + this.data.defeito);
     w.print();
     w.close();
   };
@@ -60,12 +60,14 @@ export class AtendimentoComponent implements OnInit {
 
  reducedID;
 
-constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any, 
+ private ordaDataService: OrcaDataService) {
   this.reducedID = this.data.bd_id.substring(17, 24);
 }
  
 
-onNoClick(): void {
+onNoClick(): void 
+{
     this.dialogRef.close();
     
   }
@@ -77,56 +79,13 @@ onNoClick(): void {
     <span><strong>Defeito:</strong> '+ this.data.defeito +'</span> <br> <br> \
     <span><strong>Observações: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
 
-    console.log(this.data);
-
-    //var w = window.open("file:///C:/Users/Gus/Desktop/lucas/ERP/src/app/pages/acompanhamento/impressao.html");
-    
-    //var w = window.open("/cadastro");
-     
+    console.log(this.data);     
      var w = window.open("");
-
-     w.document.write(document);
-
-    
-    //w.print();
-
-    //w.onload = function () { alert("It's loaded!"); console.log("here i am"); }
-    //w.onload = function() { alert("loaded"); };
-
-    //w.document.write('<script> setTimeout(function(){ alert("Hello"); }, 3000); </script>');
-    
-
-    //w.document.write(' <script> for (var i = 0; i < 5000000; i++) { console.log(" "); } </script>');
-
-    
-
-/*    for (var i = 0; i < 150000; i++) { console.log(" ");
-      if(i==149000){
-        w.document.write("AAAAAAAAAAAAAAAAAAAAAAAAAA");  
-        //w.print();  
-      }
-      
-    }
-*/
-    
-
-
-    
-    //w.close();
-
-    /*for (var i = 0; i < 1000000; i++) {
-       console.log(" ");
-    }*/
-
-    //w.print();
-
+     w.document.write(document);    
   };
-
-
 
   ngOnInit() {
   }
-
 }
 
 @Component({
@@ -166,124 +125,11 @@ export class AcompanhamentoComponent implements OnInit {
        }  
   }
 
-  makeMockData() {
-    
-    this.cardStore = new CardStore();
-    
-    const lists: ListSchema[] = [
-      {
-        name: 'Visita Orçamento',
-        cards: [],
-        id : "l0"
-      },
-      {
-        name: 'Visita técnico',
-        cards: [],
-        id : "l1"
-      },
-      {
-        name: 'Aguardando Peças',
-        cards: [],
-        id : "l2"
-      },
-      {
-        name: 'Retorno Visita',
-        cards: [],
-        id : "l3"
-      },
-      {
-        name: 'Pagamento',
-        cards: [],
-        id : "l4"
-      },
-      {
-        name: 'Clientes finalizados',
-        cards: [],
-        id : "l5"
-      }
-    ];
-
-    this.lists = lists;
-  }
-
   ngOnInit() {
     //Initializing the page
-    this.makeMockData();
-
-    this.getOrcs();
-
+    this.lists = this.ordaDataService.getOrcasList();
   }
 
-
-  getOrcs()
-  {
-    this.http.get<ItemsResponse>("/api/get_orcas").subscribe(data => {
-      //Agora todos os dados estao na variavel data
-      this.auxData = data;
-
-      for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null, data[i].observacoes);
-          this.lists[0].cards.push(cardId)
-      }
-
-    });
-
-    this.http.get<ItemsResponse>("/api/get_atendimentos").subscribe(data => {
-      //Agora todos os dados estao na variavel data
-      this.auxData = data;
-
-      for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, null, null, data[i].observacoes);
-          this.lists[1].cards.push(cardId)
-      }
-
-    });
-
-    this.http.get(this.url + '/api/get_agPecas').subscribe(data => {
-      //Agora todos os dados estao na variavel data
-      this.auxData = data;
-      console.log(this.auxData);
-      for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
-          this.lists[2].cards.push(cardId)
-      }
-
-    });
-
-      this.http.get(this.url + '/api/get_rtVisita').subscribe(data => {
-      //Agora todos os dados estao na variavel data
-      this.auxData = data;
-      console.log(this.auxData);
-      for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
-          this.lists[3].cards.push(cardId)
-      }
-
-    });
-
-    this.http.get(this.url + '/api/get_pagamento').subscribe(data => {
-      //Agora todos os dados estao na variavel data
-      this.auxData = data;
-      console.log(this.auxData);
-      for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
-          this.lists[4].cards.push(cardId)
-      }
-
-    });
-
-     this.http.get(this.url + '/api/get_finalizados').subscribe(data => {
-      //Agora todos os dados estao na variavel data
-      this.auxData = data;
-
-      for (var i = 0; i < this.auxData.length; i++) {
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, data[i].observacoes);
-          this.lists[5].cards.push(cardId)
-      }
-
-    });
-
-  }
   
    openDialogAtender(newList, oldList, cardID): void {
    //Get the card with the card id
