@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OrcaDataService } from '../../services/orca-data.service';
+import { Observable } from 'rxjs/Rx';
 
 
 @Component({
@@ -25,8 +26,6 @@ constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, @Inject(MAT
  private ordaDataService: OrcaDataService) {
       this.reducedID = this.data.bd_id.substring(17, 24);
      }
-  
-
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -60,8 +59,7 @@ export class AtendimentoComponent implements OnInit {
 
  reducedID;
 
-constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any, 
- private ordaDataService: OrcaDataService) {
+constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
   this.reducedID = this.data.bd_id.substring(17, 24);
 }
  
@@ -109,7 +107,8 @@ export class AcompanhamentoComponent implements OnInit {
   //List names for the backend requests be directly to the right collection
   listsNames = ["orca", "atendimento", "agPecas", "rtVisita", "pagamento"];
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {
+  constructor(private http: HttpClient, public dialog: MatDialog, 
+ private ordaDataService: OrcaDataService) {
     if(window.location.href.match(/www/) != null){
       console.log("das me: " + window.location.href);
          this.url = "http://www.myas.com.br";
@@ -123,11 +122,13 @@ export class AcompanhamentoComponent implements OnInit {
          }
          
        }  
+    this.lists = this.ordaDataService.getOrcasList();
+    this.ordaDataService.getCardStore().subscribe(cardStore => this.cardStore = cardStore);
+
   }
 
   ngOnInit() {
-    //Initializing the page
-    this.lists = this.ordaDataService.getOrcasList();
+
   }
 
   

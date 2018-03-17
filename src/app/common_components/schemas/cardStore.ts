@@ -5,16 +5,24 @@ import { CardSchema } from './cardSchema';
 
 export class CardStore {
     cards: Object = {};
-    lastId: number = -1;
+    lastId: number = 0;
 
-    _addCard(card: CardSchema) {
-        card.id = String(++this.lastId);
-        this.cards[card.id] = card;
-        return card.id;
-    }
+    
 
     getCard(cardId: string) {
         return this.cards[ parseInt(cardId) ];
+    }
+
+    findCard(bdId: number): boolean
+    {
+        for (var i = 0 ; i < this.lastId; i++) {
+            
+            if(this.cards[i].bd_id == bdId)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     updateCard(cardId: string, card: CardSchema) {
@@ -47,7 +55,11 @@ export class CardStore {
 
         console.log("update"  + this.cards[cardID].defeito);
     }
-
+    _addCard(card: CardSchema) {
+        card.id = String(this.lastId++);
+        this.cards[card.id] = card;
+        return card.id;
+    }
     newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string, observacoes: string): string {
         const card = new CardSchema();
         card.estado = estado;
