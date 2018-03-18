@@ -12,7 +12,8 @@ export class OrcaDataService {
 	cardStore: CardStore;
 	dataHolder: any;
 	url = "http://myas.com.br";
-
+  //List names for the backend requests be directly to the right collection
+  listsNames = ["orcas", "atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
 
   constructor(private http: HttpClient) 
   { 
@@ -71,114 +72,163 @@ export class OrcaDataService {
     this.requestOrcas(); 
 
     //Getting the new cards X miliseconds
-    Observable.interval( 1000).subscribe(x => {
+    Observable.interval( 10000).subscribe(x => {
       this.requestOrcas();
     });
-
   } 
-    
+
+
 
   //Method to request orcas from db
-  requestOrcas(){
-  	//Requesting all orca data
-  	//Getting the first colunm data and saving on the list
-		this.http.get<ItemsResponse>("/api/get_orcas").subscribe(data => {
-      this.dataHolder = data;
-      for (var i = 0; i < this.dataHolder.length; i++) {
-        if(this.cardStore.findCard(data[i]._id))
-          continue;
-        const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, 
-          	data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco, 
-          	data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, 
-          	null, null, data[i].observacoes);
-          this.lists[0].cards.push(cardId)
-      }
-    });
+  requestOrcas()
+  {
+    this.http.get("/api/get_" + this.listsNames[0]).subscribe(data => 
+    {
+      console.log("-----------" + 0 + "----------")
+      console.log( this.listsNames[0]);
 
-		//Getting the second data colunm and saving on the list
-		this.http.get<ItemsResponse>("/api/get_atendimentos").subscribe(data => {
       this.dataHolder = data;
-      for (var i = 0; i < this.dataHolder.length; i++) {
-        if(this.cardStore.findCard(data[i]._id))
-          continue;
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito, 
-          	data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco,
-          	 data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, null, null, null, null, 
-          	 null, null, data[i].observacoes);
+      console.log(this.lists[0].cards);
+      for (var j = 0; j < this.dataHolder.length; j++) 
+      {
+        var result = this.cardStore.findCard(data[j]._id);
+        if(!result.exists)
+        {
+          //Adding to the right list
+          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
+           null, null, data[j].observacoes);
+          this.lists[0].cards.push(cardId);
+        }        
+      }
+    },err =>{
+      console.log("Error occured: c" + err.error.message);
+    });
+    this.http.get("/api/get_" + this.listsNames[1]).subscribe(data => 
+    {
+      console.log("-----------" + 1 + "----------")
+      console.log( this.listsNames[1]);
+
+      this.dataHolder = data;
+      console.log(this.lists[1].cards);
+      for (var j = 0; j < this.dataHolder.length; j++) 
+      {
+        var result = this.cardStore.findCard(data[j]._id);
+        if(!result.exists)
+        {
+          //Adding to the right list
+          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
+           null, null, data[j].observacoes);
           this.lists[1].cards.push(cardId);
+        }        
       }
+    },err =>{
+      console.log("Error occured: c" + err.error.message);
     });
+ 
+    this.http.get("/api/get_" + this.listsNames[2]).subscribe(data => 
+    {
+      console.log("-----------" + 2 + "----------")
+      console.log( this.listsNames[2]);
 
-		//Getting the thrird data colunm and saving on the list
-    this.http.get(this.url + '/api/get_agPecas').subscribe(data => {
       this.dataHolder = data;
-      for (var i = 0; i < this.dataHolder.length; i++) {
-        if(this.cardStore.findCard(data[i]._id))
-          continue;
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito,
-           data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco,
-            data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado, 
-            data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag, 
-            data[i].observacoes);
+      console.log(this.lists[2].cards);
+      for (var j = 0; j < this.dataHolder.length; j++) 
+      {
+        var result = this.cardStore.findCard(data[j]._id);
+        if(!result.exists)
+        {
+          //Adding to the right list
+          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
+           null, null, data[j].observacoes);
           this.lists[2].cards.push(cardId);
+        }        
       }
+    },err =>{
+      console.log("Error occured: c" + err.error.message);
     });
+    
+    this.http.get("/api/get_" + this.listsNames[3]).subscribe(data => 
+    {
+      console.log("-----------" + 3 + "----------")
+      console.log( this.listsNames[3]);
 
-    //Getting the 4th data colunm and saving on the list
-    this.http.get(this.url + '/api/get_rtVisita').subscribe(data => {
       this.dataHolder = data;
-      for (var i = 0; i < this.dataHolder.length; i++) {
-        if(this.cardStore.findCard(data[i]._id))
-          continue;
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito,
-           data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco,
-            data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado,
-             data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag,
-             data[i].observacoes);
+      console.log(this.lists[3].cards);
+      for (var j = 0; j < this.dataHolder.length; j++) 
+      {
+        var result = this.cardStore.findCard(data[j]._id);
+        if(!result.exists)
+        {
+          //Adding to the right list
+          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
+           null, null, data[j].observacoes);
           this.lists[3].cards.push(cardId);
+        }        
       }
+    },err =>{
+      console.log("Error occured: c" + err.error.message);
     });
+    
+    this.http.get("/api/get_" + this.listsNames[4]).subscribe(data => 
+    {
+      console.log("-----------" + 4 + "----------")
+      console.log( this.listsNames[4]);
 
-		//Getting the 5th data colunm and saving on the list
-    this.http.get(this.url + '/api/get_pagamento').subscribe(data => {
       this.dataHolder = data;
-      for (var i = 0; i < this.dataHolder.length; i++) {
-        if(this.cardStore.findCard(data[i]._id))
-          continue;
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito,
-           data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco,
-            data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado,
-             data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag,
-             data[i].observacoes);
+      console.log(this.lists[4].cards);
+      for (var j = 0; j < this.dataHolder.length; j++) 
+      {
+        var result = this.cardStore.findCard(data[j]._id);
+        if(!result.exists)
+        {
+          //Adding to the right list
+          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
+           null, null, data[j].observacoes);
           this.lists[4].cards.push(cardId);
+        }        
       }
-
+    },err =>{
+      console.log("Error occured: c" + err.error.message);
     });
+    
+    this.http.get("/api/get_" + this.listsNames[5]).subscribe(data => 
+    {
+      console.log("-----------" + 5 + "----------")
+      console.log( this.listsNames[5]);
 
-        //Getting the 5th data colunm and saving on the list
-    this.http.get(this.url + '/api/get_finalizados').subscribe(data => {
       this.dataHolder = data;
-      for (var i = 0; i < this.dataHolder.length; i++) {
-        if(this.cardStore.findCard(data[i]._id))
-          continue;
-
-          const cardId = this.cardStore.newCard("Orçamento",  data[i].cpf, data[i]._id, data[i].defeito,
-           data[i].nome, data[i].telPrimario, new Date(data[i].data) , data[i].periodo, data[i].endereco,
-            data[i].marca, data[i].modelo, data[i].telSecundario, data[i].email, data[i].realizado,
-             data[i].pecas, data[i].servico, data[i].maoObra, data[i].valorFinal, data[i].metPag,
-             data[i].observacoes);
+      console.log(this.lists[5].cards);
+      for (var j = 0; j < this.dataHolder.length; j++) 
+      {
+        var result = this.cardStore.findCard(data[j]._id);
+        if(!result.exists)
+        {
+          //Adding to the right list
+          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
+           null, null, data[j].observacoes);
           this.lists[5].cards.push(cardId);
+        }        
       }
-
+    },err =>{
+      console.log("Error occured: c" + err.error.message);
     });
-
-
   }
 
-
-  getOrcasList(): ListSchema[]
+  getOrcasList(): Observable<ListSchema[]>
   {
-  	return this.lists;
+  	return of(this.lists);
   }
 
   getCardStore(): Observable<CardStore>
@@ -186,7 +236,69 @@ export class OrcaDataService {
     return of(this.cardStore);
   }
 
+  /*Apply some command in one list
+    @Params:
+    commandAdd: Url of the command to add the card on new list(send to back end)
+    commandRemove: Url of the command to remove the card on new list(send to back end)
+    card: The that will be changed
+  */
+  addAndRemove(commandAdd: string, commandRemove: string, card: any)
+  {
+    //Updating variable on service, to refresh all clients list
+    this.cardStore.updateCard(card.id, card);
+    //Obtaining the list id
+    var listAux = this.whichList(card.id);
+    //Removing the card from lists
+
+    console.log("Removendo o card: " + card.id + " da lista " + listAux.listID);
+
+    // Find and remove item from an array
+    var i = this.lists[listAux.listID].cards.indexOf(card.id);
+    if(i != -1) {
+      this.lists[listAux.listID].cards.splice(i, 1);
+    }
+
+    this.cardStore.removeCard(card.id);
+    //Updating db cards
+    this.http.post(this.url + commandAdd, card ).subscribe(
+      res => { 
+        this.http.post(this.url + commandRemove, card ).subscribe(
+          res => { 
+
+            console.log("Card movido com sucesso.");
+
+            return true;
+          },err => {
+            console.log("Error occured:aaa " + err.error.message);
+            return false;
+          });
+      },err => {
+        console.log("Error occured: bbb" + err.error.message);
+        return false;
+      }
+    );
+    return true;
+  }
+
+  whichList(cardID: any): any
+  {
+    var ret = {listID: -1, listName: "error"};
+    for (var i = 0 ; i < this.lists.length; i++) 
+    {
+      if(this.lists[i].cards.includes(cardID.toString()))
+      {
+        ret =  {listID: i, listName: this.lists[i].name};
+        break;
+      }
+    }
+    return ret;
+  }
+
+
+
 }
+
+
 
 //Interface for data that will be inputed on cards
 interface ItemsResponse {

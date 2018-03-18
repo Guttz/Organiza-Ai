@@ -13,16 +13,16 @@ export class CardStore {
         return this.cards[ parseInt(cardId) ];
     }
 
-    findCard(bdId: number): boolean
+    findCard(bdId: number)
     {
         for (var i = 0 ; i < this.lastId; i++) {
             
             if(this.cards[i].bd_id == bdId)
             {
-                return true;
+                return {exists: true, id: this.cards[i].id};
             }
         }
-        return false;
+        return {exists: false, id: -1};
     }
 
     updateCard(cardId: string, card: CardSchema) {
@@ -53,14 +53,17 @@ export class CardStore {
 
         this.cards[cardID].observacoes = card.observacoes;
 
-        console.log("update"  + this.cards[cardID].defeito);
     }
+
     _addCard(card: CardSchema) {
         card.id = String(this.lastId++);
         this.cards[card.id] = card;
         return card.id;
     }
-    newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string, observacoes: string): string {
+    newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, 
+        periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, 
+        realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string, 
+        observacoes: string): string {
         const card = new CardSchema();
         card.estado = estado;
         card.cpf = cpf;
@@ -88,5 +91,22 @@ export class CardStore {
         card.observacoes = observacoes;
 
         return (this._addCard(card));
+    }
+    removeCard(cardId: number): boolean
+    {
+        for (var i = 0 ; i < this.lastId; i++) {
+            
+            if(this.cards[i].id == cardId)
+            {
+                for(var j = i; j < this.lastId-1; j++)
+                {
+                    this.cards[j] = this.cards[j+1];
+                }
+                delete this.cards[this.lastId];
+                this.lastId--;
+                return true;
+            }
+        }
+        return false;
     }
 }
