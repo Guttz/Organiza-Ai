@@ -16,8 +16,22 @@ var ObjectId = require('mongodb').ObjectID;
 var AM = require('../libs/account-manager');
 //var EM = require('../libs/email-dispatcher');
 
+function checkSession(req)
+{
+  console.log(req.session.user)
+  if(req.session.user === undefined)
+  {
+    console.log("cai enssa poha");
+    return false;
+  }
+  return true;
+}
 
 router.post('/get_cli', (req,res) =>{
+  if(!checkSession(req))
+  {
+    return;
+  }
   console.log("Running get_user Post.");
 
   MongoClient.connect('mongodb://localhost/', function(err, db) {
@@ -54,6 +68,10 @@ router.post('/get_cli', (req,res) =>{
 });
 
 router.post('/update_cli', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   //console.log("Running update_cli Post.");
   
   MongoClient.connect(url, function(err, db){
@@ -85,6 +103,10 @@ router.post('/update_cli', function(req, res, next){
 });
 
 router.post('/add_cli', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
     model = require('../model/cliente')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
       var body = req.body;
@@ -101,6 +123,10 @@ router.post('/add_cli', function(req, res, next){
 });
 
 router.post('/add_orca', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
       model = require('../model/orca')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
       console.log(req.body);
@@ -120,6 +146,10 @@ router.post('/add_orca', function(req, res, next){
 });
 
 router.post('/remove_orca', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
   
   if (err) throw err;
@@ -135,6 +165,10 @@ router.post('/remove_orca', function(req, res, next){
 });
 
 router.get('/get_orcas', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -150,6 +184,10 @@ router.get('/get_orcas', (req, res) => {
 
 
 router.post('/update_orca', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   //console.log("Running update_cli Post.");
   
   MongoClient.connect(url, function(err, db){
@@ -181,6 +219,10 @@ router.post('/update_orca', function(req, res, next){
 });
 
 router.post('/add_atendimento', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
       //Geting the model
       model = require('../model/atendimento')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
@@ -201,6 +243,10 @@ router.post('/add_atendimento', function(req, res, next){
 });
 
 router.get('/get_atendimentos', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -215,6 +261,10 @@ router.get('/get_atendimentos', (req, res) => {
 });
 
 router.post('/remove_atendimento', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
   
   if (err) throw err;
@@ -230,6 +280,10 @@ router.post('/remove_atendimento', function(req, res, next){
 });
 
 router.post('/update_atendimento', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   //console.log("Running update_cli Post.");
   
   MongoClient.connect(url, function(err, db){
@@ -261,6 +315,10 @@ router.post('/update_atendimento', function(req, res, next){
 });
 
 router.post('/add_agPecas', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
       //Geting the model
       model = require('../model/agPecas')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
@@ -281,6 +339,10 @@ router.post('/add_agPecas', function(req, res, next){
 });
 
 router.get('/get_agPecas', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -296,6 +358,10 @@ router.get('/get_agPecas', (req, res) => {
 });
 
 router.post('/remove_agPecas', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
   
   if (err) throw err;
@@ -311,6 +377,10 @@ router.post('/remove_agPecas', function(req, res, next){
 });
 
 router.post('/update_agPecas', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   //console.log("Running update_cli Post.");
   
   MongoClient.connect(url, function(err, db){
@@ -342,6 +412,10 @@ router.post('/update_agPecas', function(req, res, next){
 });
 
 router.post('/add_rtVisita', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
       //Geting the model
       model = require('../model/rtVisita')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
@@ -362,6 +436,10 @@ router.post('/add_rtVisita', function(req, res, next){
 });
 
 router.get('/get_rtVisita', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -377,6 +455,10 @@ router.get('/get_rtVisita', (req, res) => {
 });
 
 router.post('/remove_rtVisita', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
   
   if (err) throw err;
@@ -392,6 +474,10 @@ router.post('/remove_rtVisita', function(req, res, next){
 });
 
 router.post('/update_rtVisita', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   //console.log("Running update_cli Post.");
   
   MongoClient.connect(url, function(err, db){
@@ -423,6 +509,10 @@ router.post('/update_rtVisita', function(req, res, next){
 });
 
 router.post('/add_pagamento', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
       //Geting the model
       model = require('../model/pagamento')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
@@ -443,6 +533,10 @@ router.post('/add_pagamento', function(req, res, next){
 });
 
 router.get('/get_pagamento', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -458,6 +552,10 @@ router.get('/get_pagamento', (req, res) => {
 });
 
 router.post('/remove_pagamento', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
   
   if (err) throw err;
@@ -473,6 +571,10 @@ router.post('/remove_pagamento', function(req, res, next){
 });
 
 router.post('/update_pagamento', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   //console.log("Running update_cli Post.");
   
   MongoClient.connect(url, function(err, db){
@@ -505,6 +607,10 @@ router.post('/update_pagamento', function(req, res, next){
  
 
 router.post('/add_finalizado', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
       //Geting the model
       model = require('../model/finalizado')(req.session.user.assistencia);
       //Variavel que recebe os dados do fomulario
@@ -525,6 +631,10 @@ router.post('/add_finalizado', function(req, res, next){
 });
 
 router.get('/get_finalizados', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -539,6 +649,10 @@ router.get('/get_finalizados', (req, res) => {
 });
 
 router.get('/get_all_finalizados', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
   MongoClient.connect(url, function(err, db) {
     if (err) {
       throw err;
@@ -554,6 +668,10 @@ router.get('/get_all_finalizados', (req, res) => {
 
 
 router.post('/add_card', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
   var model = require('../model/cards')();
 
   //Variavel que recebe os dados do fomulario
@@ -586,6 +704,7 @@ router.post('/login', function(req, res){
 });
 
 router.post('/signup', function(req, res){
+
   AM.addNewAccount({
     user  : req.body['user'],
     pass  : req.body['pass'],
@@ -610,6 +729,8 @@ router.post('/logout', function(req, res){
 router.get('/header', function(req, res) {
   res.send(req.session.user);
 });
+
+
 
 
 
