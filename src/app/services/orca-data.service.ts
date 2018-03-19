@@ -119,7 +119,7 @@ export class OrcaDataService {
         {
           //Adding to the right list
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
            null, null, data[j].observacoes);
           this.lists[1].cards.push(cardId);
@@ -143,7 +143,7 @@ export class OrcaDataService {
         {
           //Adding to the right list
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
            null, null, data[j].observacoes);
           this.lists[2].cards.push(cardId);
@@ -167,7 +167,7 @@ export class OrcaDataService {
         {
           //Adding to the right list
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
            null, null, data[j].observacoes);
           this.lists[3].cards.push(cardId);
@@ -191,7 +191,7 @@ export class OrcaDataService {
         {
           //Adding to the right list
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
            null, null, data[j].observacoes);
           this.lists[4].cards.push(cardId);
@@ -215,7 +215,7 @@ export class OrcaDataService {
         {
           //Adding to the right list
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
            null, null, data[j].observacoes);
           this.lists[5].cards.push(cardId);

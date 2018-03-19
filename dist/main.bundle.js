@@ -1132,21 +1132,36 @@ var AtendimentoComponent = (function () {
         this.dialogRef.close();
     };
     AtendimentoComponent.prototype.thermalPrintAguardando = function () {
-        var document = '<html> <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 30px;" src="assets/images/logo-nameOS.png"> <br>\
+        var document = '<html>\
+    <div style="width: 235px; word-wrap: break-word;">\
+    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
     <span style="font-size: 12px;"> <strong> N° Ordem: </strong>' + this.data.bd_id.substring(17, 24) + ' </span> <br> \
     <span style="font-size: 12px;"><strong>Data:</strong> ' + this.data.data.toLocaleDateString("pt-BR", this.options) + '</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
     <span style="font-size: 12px;"> <strong> Cliente:</strong> ' + this.data.nome + '</span> <br>\
-    <span><strong>Telefone 1:</strong> ' + this.data.telPrimario + '</span> <br> \
+    <span><strong>Telefone:</strong> ' + this.data.telPrimario + '</span> <br> \
     <span style="font-size: 12px;"> <strong> Email:</strong> ' + this.data.email + '</span> <br>\
     <span style="font-size: 12px;">_______________________________________<br>\
     <span style="font-size: 12px;"> <strong> Marca/modelo:</strong> ' + this.data.marca + '</span> <span style="font-size: 12px;">' + this.data.modelo + '</span> <br>\
-    <span><strong>Pecas:</strong> ' + this.data.pecas + '</span> <br> \
     <span><strong>Imei:</strong> ' + this.data.imei + '</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
-    <div style="width: 235px; word-wrap: break-word;">\
-    <span style="inline-block !important; width: 50px;" ><strong>Observações/senha:</strong> ' + this.data.observacoes + '</span>\
+    <span><strong>Observações/Senha:</strong></span> <br> \
+    <div style="width: 135px; display: inline-block;"> \
+    <span>' + this.data.observacoes + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + '\
+    </div> \
+    <div style="width: 90px; display: inline-block; background: green;">\
     <img style="display: inline-block;" src="assets/images/lockscreen.png">\
+    </div> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Problema relatado:</strong> ' + this.data.defeito + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Serviços realizados:</strong> ' + this.data.realizado + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Valor peças:</strong> ' + this.data.pecas + '</span> <br> \
+    <span><strong>Valor servico:</strong> ' + this.data.servico + '</span> <br> \
+    <span><strong>Técnico Responsável:</strong> ' + this.data.maoObra + '</span> <br> <br> <br>\
+    <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
+    <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> ';
         console.log(this.data);
         var w = window.open("");
@@ -1154,6 +1169,7 @@ var AtendimentoComponent = (function () {
         //w.print();    
     };
     ;
+    //<span> <strong> Observações/senha: </strong>'+ this.data.observacoes + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +'</span>\
     //    <span style><strong>Observações/senha: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
     AtendimentoComponent.prototype.ngOnInit = function () {
     };
@@ -2768,7 +2784,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
                     _this.lists[1].cards.push(cardId);
                 }
             }
@@ -2784,7 +2800,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
                     _this.lists[2].cards.push(cardId);
                 }
             }
@@ -2800,7 +2816,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
                     _this.lists[3].cards.push(cardId);
                 }
             }
@@ -2816,7 +2832,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
                     _this.lists[4].cards.push(cardId);
                 }
             }
@@ -2832,7 +2848,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
                     _this.lists[5].cards.push(cardId);
                 }
             }
