@@ -14,9 +14,11 @@ export class AuthGuard implements CanActivate {
 
         if( this.getCookie("dcJJe4ZEsB") != "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb"){
             return true;
+
         }
         else{
-            this.router.navigate(['/login']);
+            this.router.navigate(['/acompanhamento']);
+            console.log("going to acomp");
             //this._location.back();
             return false;
         }

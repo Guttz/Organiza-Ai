@@ -37,7 +37,7 @@ export class CardStore {
         this.cards[cardID].data = card.data;
         this.cards[cardID].dia = card.data.getDate();
         this.cards[cardID].mes = card.data.getMonth() + 1;
-        this.cards[cardID].periodo = card.periodo;
+        this.cards[cardID].imei = card.imei;
         this.cards[cardID].endereco = card.endereco;
 
         this.cards[cardID].marca = card.marca;
@@ -61,7 +61,7 @@ export class CardStore {
         return card.id;
     }
     newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, 
-        periodo: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, 
+        imei: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, 
         realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string, 
         observacoes: string): string {
         const card = new CardSchema();
@@ -74,7 +74,7 @@ export class CardStore {
         card.data = data;
         card.dia = data.getDate();
         card.mes = data.getMonth() + 1;
-        card.periodo = periodo;
+        card.imei = imei;
         card.endereco = endereco;
 
         card.marca = marca;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormControl, FormGroupDirective, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Submissions} from './submissions';
-import { Orca} from './../../../../schemas/orca';
+import { Orca} from './../../common_components/schemas/orca';
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
@@ -32,7 +32,7 @@ export class FormDadosClienteComponent implements OnInit {
   //CEL  Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
   //CPF    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
   user: Submissions = { cpf: '', nome: '', telPrimario: '', telSecundario: '', email: '', endereco: '' };
-  orca : Orca = { cpf: '', defeito: '', marca: '', data: null, modelo: '', periodo: '', observacoes: ''};
+  orca : Orca = { cpf: '', defeito: '', marca: '', data: null, modelo: '', imei: '', observacoes: ''};
   update: Boolean = false;
   auxCliente: any;
 
@@ -60,8 +60,7 @@ export class FormDadosClienteComponent implements OnInit {
     Validators.required,
   ]);
 
-  enderecoFormControl = new FormControl('', [
-    Validators.required,
+  enderecoFormControl = new FormControl('', [  
   ]);
 
   //My validators
@@ -193,7 +192,7 @@ export class FormDadosClienteComponent implements OnInit {
 
      console.log('status ' + this.form.status);
 
-    if(typeof this.form.value.cpf == null || typeof this.form.value.nome == null || typeof this.form.value.telPrimario == null || typeof this.form.value.endereco == null || this.form.status == "INVALID"){
+    if(this.form.status == "INVALID"){
           this.cpfFormControl.markAsTouched();
           this.nomeFormControl.markAsTouched();
           this.enderecoFormControl.markAsTouched();
@@ -208,14 +207,14 @@ export class FormDadosClienteComponent implements OnInit {
           return null;
     }
     
-    if(this.form.value.cpf.length < 1 ||  this.form.value.nome.length < 1  || this.form.value.telPrimario.length < 1  || this.form.value.endereco.length < 1){
+/*    if(this.form.value.cpf.length < 1 ||  this.form.value.nome.length < 1  || this.form.value.telPrimario.length < 1  || this.form.value.endereco.length < 1){
       console.log('entrei 2');
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
       this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
       return null;
-    }
+    }*/
 
     console.log('entrei 3');
 
@@ -251,7 +250,7 @@ export class FormDadosClienteComponent implements OnInit {
 
   updateUser(myForm:NgForm) {
     //cheking if any required field is empty
-    if(this.form.value.cpf == "" || this.form.value.nome == "" || this.form.value.telPrimario == "" || this.form.value.endereco == "" || this.form.status == "INVALID")
+    if(this.form.status == "INVALID")
     {
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
@@ -303,11 +302,8 @@ export class FormDadosClienteComponent implements OnInit {
         resCliente => {
           this.auxCliente = resCliente;
 
-          if(myForm.value.periodo == "0"){
-            myForm.value.periodo = "Manhã";
-          }else{
-            myForm.value.periodo = "Tarde";
-          }
+          //Put the current date in the date field
+          myForm.value.data = new Date();
 
           //Acrescentando os campos que compoem um orçamento
           myForm.value.cpf = this.orca.cpf;
@@ -336,6 +332,7 @@ export class FormDadosClienteComponent implements OnInit {
               );
         },
         err => {
+
           console.log("Error occured: " + err.error.message);
         }
       );
@@ -351,11 +348,9 @@ export class FormDadosClienteComponent implements OnInit {
       
       if(data != null )
       {
-        //Deleting the database id
-        delete data._id; 
-
         //Setting the form values
-        this.form.setValue(data);
+        this.form.setValue( { cpf: data.cpf, nome: data.nome, telPrimario: data.telPrimario, telSecundario: data.telSecundario,
+                              email: data.email, endereco: data.endereco});
         this.orca.cpf = data.cpf;
         this.update = true;
       }

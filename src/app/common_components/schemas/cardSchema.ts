@@ -9,7 +9,7 @@ export class CardSchema {
 	data: Date;
 	dia: number;
 	mes: number;
-	periodo: string;
+	imei: string;
 	endereco: string;
 
 	marca: string;

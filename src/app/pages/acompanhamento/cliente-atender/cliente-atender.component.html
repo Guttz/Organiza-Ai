@@ -40,9 +40,10 @@
               [(ngModel)]="data.data" 
               ngDefaultControl 
               fxFlexOffset="2" 
-              fxFlex="49">
+              fxFlex="49"
+              >
 
-              <input matInput 
+              <input matInput disabled
               [matDatepicker]="picker" 
               name="data"
               [(ngModel)]="data.data" 
@@ -53,18 +54,9 @@
             </mat-form-field>
 
 
-           <mat-form-field fxFlexOffset="2" fxFlex="49">
-              <mat-select 
-                placeholder="Período"
-                ngDefaultControl
-                [(ngModel)]="data.periodo" 
-                name="periodo" >
-                <mat-option 
-                  *ngFor="let value of periodos" [value]="value.value" >
-                  {{ value.value }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field> 
+          <mat-form-field fxFlexOffset="2" fxFlex="49">
+            <input  [(ngModel)]="data.imei" matInput ngDefaultControl placeholder="Imei">
+          </mat-form-field> 
 
 <!--           <mat-form-field fxFlexOffset="2" fxFlex="49">
             <input [(ngModel)]="data.periodo" matInput ngDefaultControl placeholder="Horário de disponibilidade">
@@ -75,7 +67,7 @@
 
       <div class="row">
                     <mat-form-field fxFlexOffset="2" fxFlex>
-              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observacoes"
+              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observações"
               name="observacoes"
               ngDefaultControl
               [(ngModel)]="data.observacoes"></textarea>

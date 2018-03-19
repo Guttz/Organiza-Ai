@@ -203,25 +203,16 @@
             </mat-form-field>
 
 
-            <mat-form-field 
-              name="data" 
-              [(ngModel)]="orca.data" 
-              ngDefaultControl 
-              fxFlexOffset="2" 
-              fxFlex
-              required>
-
+            <mat-form-field fxFlexOffset="2" fxFlex [hideRequiredMarker]="true">
               <input matInput 
-              [matDatepicker]="picker" 
-              name="data"
-              [(ngModel)]="orca.data" 
-              placeholder="Data de visita"
+              name="imei" 
+              [(ngModel)]="orca.imei" 
+              ngDefaultControl 
+              placeholder="Imei"  
               required>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
 
             <mat-error>
-              Data é <strong>obrigatória</strong>
+              Imei é <strong>obrigatório</strong>
             </mat-error>
 
             </mat-form-field>
@@ -245,29 +236,8 @@
 
           <div class="row">
 
-
-           <mat-form-field fxFlex="32">
-              <mat-select 
-                required
-                placeholder="Período"  
-                [(ngModel)]="orca.periodo" 
-                name="periodo" >
-                <mat-option 
-                  *ngFor="let value of values" 
-                  [(value)]="value.value" 
-                  [ngStyle]="{width: width + 'px'}">
-                  {{ value.viewValue }}
-                </mat-option>
-              </mat-select>
-
-            <mat-error>
-              Periodo é <strong>obrigatório</strong>
-            </mat-error>
-
-            </mat-form-field> 
-
-            <mat-form-field fxFlexOffset="2" fxFlex>
-              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observacoes"
+            <mat-form-field fxFlex>
+              <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observações"
               name="observacoes"
               [(ngModel)]="orca.observacoes"></textarea>
 

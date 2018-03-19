@@ -11,8 +11,8 @@ import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-cliente-atender',
-  templateUrl: './cliente-atender.component.html',
-  styleUrls: ['./cliente-atender.component.scss']
+  templateUrl: './cliente-atender/cliente-atender.component.html',
+  styleUrls: ['./cliente-atender/cliente-atender.component.scss']
 })
 
 
@@ -58,6 +58,7 @@ export class AtendimentoComponent implements OnInit
   ];
 
   reducedID;
+  options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
 
   constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reducedID = this.data.bd_id.substring(17, 24);
@@ -70,16 +71,30 @@ export class AtendimentoComponent implements OnInit
   }
 
   thermalPrintAguardando(): void{
-    var document = '<html> <body onload="window.print()"> <h3 style="display: inline-block" >Ordem de serviço</h3> <img style="display: inline-block; padding-left: 110px;" src="assets/images/logo-name75.png"> <br>\
-    <span> <strong> N° Ordem: </strong>'+ this.data.bd_id.substring(17, 24) +'</span> <span>&nbsp &nbsp <strong> Cliente:</strong> '+ this.data.nome +'</span> <span>&nbsp &nbsp <strong>Data:</strong> '+ this.data.dia + "/"+ this.data.mes +'</span> <br> <br> \
-     <span><strong>Telefone:</strong> '+ this.data.telPrimario +'</span> <span>&nbsp &nbsp <strong>Marca:</strong> '+ this.data.marca +'</span> <span>&nbsp &nbsp <strong>Modelo:</strong> '+ this.data.modelo +'</span> <br> <br> \
-    <span><strong>Defeito:</strong> '+ this.data.defeito +'</span> <br> <br> \
-    <span><strong>Observações: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
+    var document = '<html> <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 30px;" src="assets/images/logo-nameOS.png"> <br>\
+    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.data.bd_id.substring(17, 24) + ' </span> <br> \
+    <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Cliente:</strong> '+ this.data.nome +'</span> <br>\
+    <span><strong>Telefone 1:</strong> '+ this.data.telPrimario +'</span> <br> \
+    <span style="font-size: 12px;"> <strong> Email:</strong> '+ this.data.email +'</span> <br>\
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Marca/modelo:</strong> '+ this.data.marca +'</span> <span style="font-size: 12px;">'+ this.data.modelo +'</span> <br>\
+    <span><strong>Pecas:</strong> '+ this.data.pecas +'</span> <br> \
+    <span><strong>Imei:</strong> '+ this.data.imei +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <div style="width: 235px; word-wrap: break-word;">\
+    <span style="inline-block !important; width: 50px;" ><strong>Observações/senha:</strong> '+ this.data.observacoes + '</span>\
+    <img style="display: inline-block;" src="assets/images/lockscreen.png">\
+    </div> '
 
     console.log(this.data);     
      var w = window.open("");
-     w.document.write(document);    
+     w.document.write(document);
+     //w.print();    
   };
+
+  //    <span style><strong>Observações/senha: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
 
   ngOnInit() {
   }
@@ -239,8 +254,7 @@ export class AcompanhamentoComponent implements OnInit
     let dialogRef = this.dialog.open(ClienteAtenderComponent, 
     {  
       width: '44vw',
-      data: { marca: card.marca, defeito: card.defeito, modelo: card.modelo, data: card.data, 
-        periodo: card.periodo, bd_id: card.bd_id }
+      data: card
     });
 
    //After the dialog is closed thats the called function
@@ -252,6 +266,7 @@ export class AcompanhamentoComponent implements OnInit
       {
         //Associando as propriedades para enviar o json certinho
         result.bd_id = card.bd_id;
+        card.observacoes = result.observacoes;
         card.defeito = result.defeito;
         card.marca =  result.marca;
         card.modelo = result.modelo;

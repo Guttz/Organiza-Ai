@@ -45,6 +45,7 @@ export class LoginComponent implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
         if( this.getCookie("dcJJe4ZEsB") == "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb"){
+            console.log("auth acompanhamento");
             return true;
 
         }

@@ -353,7 +353,8 @@ var AuthGuard = (function () {
             return true;
         }
         else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/acompanhamento']);
+            console.log("going to acomp");
             //this._location.back();
             return false;
         }
@@ -951,7 +952,7 @@ var CardStore = (function () {
         this.cards[cardID].data = card.data;
         this.cards[cardID].dia = card.data.getDate();
         this.cards[cardID].mes = card.data.getMonth() + 1;
-        this.cards[cardID].periodo = card.periodo;
+        this.cards[cardID].imei = card.imei;
         this.cards[cardID].endereco = card.endereco;
         this.cards[cardID].marca = card.marca;
         this.cards[cardID].modelo = card.modelo;
@@ -970,7 +971,7 @@ var CardStore = (function () {
         this.cards[card.id] = card;
         return card.id;
     };
-    CardStore.prototype.newCard = function (estado, cpf, id, defeito, nome, telPrimario, data, periodo, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag, observacoes) {
+    CardStore.prototype.newCard = function (estado, cpf, id, defeito, nome, telPrimario, data, imei, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag, observacoes) {
         var card = new __WEBPACK_IMPORTED_MODULE_0__cardSchema__["a" /* CardSchema */]();
         card.estado = estado;
         card.cpf = cpf;
@@ -981,7 +982,7 @@ var CardStore = (function () {
         card.data = data;
         card.dia = data.getDate();
         card.mes = data.getMonth() + 1;
-        card.periodo = periodo;
+        card.imei = imei;
         card.endereco = endereco;
         card.marca = marca;
         card.modelo = modelo;
@@ -1105,8 +1106,8 @@ var ClienteAtenderComponent = (function () {
     ClienteAtenderComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-cliente-atender',
-            template: __webpack_require__("../../../../../src/app/pages/acompanhamento/cliente-atender.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/cliente-atender.component.scss")]
+            template: __webpack_require__("../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.scss")]
         }),
         __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MatDialogRef */], Object])
@@ -1124,22 +1125,36 @@ var AtendimentoComponent = (function () {
             { value: 'Cheque' },
             { value: 'Dinheiro' },
         ];
+        this.options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
         this.reducedID = this.data.bd_id.substring(17, 24);
     }
     AtendimentoComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
     };
     AtendimentoComponent.prototype.thermalPrintAguardando = function () {
-        var document = '<html> <body onload="window.print()"> <h3 style="display: inline-block" >Ordem de serviço</h3> <img style="display: inline-block; padding-left: 110px;" src="assets/images/logo-name75.png"> <br>\
-    <span> <strong> N° Ordem: </strong>' + this.data.bd_id.substring(17, 24) + '</span> <span>&nbsp &nbsp <strong> Cliente:</strong> ' + this.data.nome + '</span> <span>&nbsp &nbsp <strong>Data:</strong> ' + this.data.dia + "/" + this.data.mes + '</span> <br> <br> \
-     <span><strong>Telefone:</strong> ' + this.data.telPrimario + '</span> <span>&nbsp &nbsp <strong>Marca:</strong> ' + this.data.marca + '</span> <span>&nbsp &nbsp <strong>Modelo:</strong> ' + this.data.modelo + '</span> <br> <br> \
-    <span><strong>Defeito:</strong> ' + this.data.defeito + '</span> <br> <br> \
-    <span><strong>Observações: </strong> ' + this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
+        var document = '<html> <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 30px;" src="assets/images/logo-nameOS.png"> <br>\
+    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>' + this.data.bd_id.substring(17, 24) + ' </span> <br> \
+    <span style="font-size: 12px;"><strong>Data:</strong> ' + this.data.data.toLocaleDateString("pt-BR", this.options) + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Cliente:</strong> ' + this.data.nome + '</span> <br>\
+    <span><strong>Telefone 1:</strong> ' + this.data.telPrimario + '</span> <br> \
+    <span style="font-size: 12px;"> <strong> Email:</strong> ' + this.data.email + '</span> <br>\
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Marca/modelo:</strong> ' + this.data.marca + '</span> <span style="font-size: 12px;">' + this.data.modelo + '</span> <br>\
+    <span><strong>Pecas:</strong> ' + this.data.pecas + '</span> <br> \
+    <span><strong>Imei:</strong> ' + this.data.imei + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <div style="width: 235px; word-wrap: break-word;">\
+    <span style="inline-block !important; width: 50px;" ><strong>Observações/senha:</strong> ' + this.data.observacoes + '</span>\
+    <img style="display: inline-block;" src="assets/images/lockscreen.png">\
+    </div> ';
         console.log(this.data);
         var w = window.open("");
         w.document.write(document);
+        //w.print();    
     };
     ;
+    //    <span style><strong>Observações/senha: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
     AtendimentoComponent.prototype.ngOnInit = function () {
     };
     AtendimentoComponent = __decorate([
@@ -1261,8 +1276,7 @@ var AcompanhamentoComponent = (function () {
         //Open the pop up with the card infos
         var dialogRef = this.dialog.open(ClienteAtenderComponent, {
             width: '44vw',
-            data: { marca: card.marca, defeito: card.defeito, modelo: card.modelo, data: card.data,
-                periodo: card.periodo, bd_id: card.bd_id }
+            data: card
         });
         //After the dialog is closed thats the called function
         dialogRef.afterClosed().subscribe(function (result) {
@@ -1270,6 +1284,7 @@ var AcompanhamentoComponent = (function () {
             if (result != null) {
                 //Associando as propriedades para enviar o json certinho
                 result.bd_id = card.bd_id;
+                card.observacoes = result.observacoes;
                 card.defeito = result.defeito;
                 card.marca = result.marca;
                 card.modelo = result.modelo;
@@ -1550,14 +1565,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/pages/acompanhamento/cliente-atender.component.html":
+/***/ "../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n  <div class = \"row\">\r\n    <h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\r\n<!--     <button mat-button fxFlex=\"30\" (click)=\"thermalPrintVisao()>\r\n    <mat-icon>print</mat-icon>\r\n  </button>\r\n -->\r\n    <button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintVisao()\">\r\n      <mat-icon>print</mat-icon>\r\n    </button>\r\n\r\n  </div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input  [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div>\r\n\r\n<!--  Put the tag inside the input\r\n[disabled]=\"true\" -->\r\n\r\n      \t<div class=\"row\">\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"data.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex=\"49\">\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"data.data\" \r\n              placeholder=\"Data de visita\"\r\n              >\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n\r\n           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n              <mat-select \r\n                placeholder=\"Período\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n      <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n  <div class = \"row\">\r\n    <h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\r\n<!--     <button mat-button fxFlex=\"30\" (click)=\"thermalPrintVisao()>\r\n    <mat-icon>print</mat-icon>\r\n  </button>\r\n -->\r\n    <button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintVisao()\">\r\n      <mat-icon>print</mat-icon>\r\n    </button>\r\n\r\n  </div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input  [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div>\r\n\r\n<!--  Put the tag inside the input\r\n[disabled]=\"true\" -->\r\n\r\n      \t<div class=\"row\">\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"data.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex=\"49\"\r\n              >\r\n\r\n              <input matInput disabled\r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"data.data\" \r\n              placeholder=\"Data de visita\"\r\n              >\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n            </mat-form-field>\r\n\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input  [(ngModel)]=\"data.imei\" matInput ngDefaultControl placeholder=\"Imei\">\r\n          </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n      <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observações\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/pages/acompanhamento/cliente-atender.component.scss":
+/***/ "../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1783,7 +1798,7 @@ var ForgotPasswordComponent = (function () {
 /***/ "../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form [formGroup]=\"form\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput  \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            formControlName=\"cpf\"\r\n            (blur)=\"checkUser()\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput\r\n            formControlName=\"nome\" \r\n            autocomplete='name'\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            formControlName=\"telPrimario\"\r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')\">\r\n              Telefone Primário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              formControlName=\"telSecundario\"  \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\"\r\n              [formControl]=\"telTwoFormControl\"\r\n              (keyup) = \"typingPhoneTwo()\">\r\n\r\n            <mat-error *ngIf=\"telTwoFormControl.hasError('phoneInvalid')\" >\r\n              Telefone Secundário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            formControlName=\"email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('emailInvalid')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput\r\n              formControlName=\"endereco\" \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\">\r\n\r\n          <mat-error>\r\n              Endereço é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n        \r\n      <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex=\"70\">\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n\r\n        <my-button-orange\r\n          (click)=\"userForm()\" \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\">\r\n        </my-button-orange>\r\n\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser()\" \r\n          >\r\n        </my-button-orange>\r\n      </div> \r\n    </div>\r\n  </div>\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              [formControl]=\"cpfOrcaFormControl\"\r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUserWForm(orcaCadForm)\"\r\n              >\r\n            \r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('cpfcnpjInvalid') && !cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Defeito é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Marca é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field \r\n              name=\"data\" \r\n              [(ngModel)]=\"orca.data\" \r\n              ngDefaultControl \r\n              fxFlexOffset=\"2\" \r\n              fxFlex\r\n              required>\r\n\r\n              <input matInput \r\n              [matDatepicker]=\"picker\" \r\n              name=\"data\"\r\n              [(ngModel)]=\"orca.data\" \r\n              placeholder=\"Data de visita\"\r\n              required>\r\n              <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\r\n              <mat-datepicker #picker></mat-datepicker>\r\n\r\n            <mat-error>\r\n              Data é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"modelo\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Modelo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n\r\n           <mat-form-field fxFlex=\"32\">\r\n              <mat-select \r\n                required\r\n                placeholder=\"Período\"  \r\n                [(ngModel)]=\"orca.periodo\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of values\" \r\n                  [(value)]=\"value.value\" \r\n                  [ngStyle]=\"{width: width + 'px'}\">\r\n                  {{ value.viewValue }}\r\n                </mat-option>\r\n              </mat-select>\r\n\r\n            <mat-error>\r\n              Periodo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field> \r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              [(ngModel)]=\"orca.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n      \r\n      <div class=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex = \"70\">\r\n\r\n           <div fxFlex=\"grow\"></div>\r\n           \r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm);\">\r\n                \r\n            </my-button-orange>\r\n        </div>\r\n      </div>\r\n\r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form [formGroup]=\"form\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput  \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            formControlName=\"cpf\"\r\n            (blur)=\"checkUser()\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput\r\n            formControlName=\"nome\" \r\n            autocomplete='name'\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            formControlName=\"telPrimario\"\r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')\">\r\n              Telefone Primário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              formControlName=\"telSecundario\"  \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\"\r\n              [formControl]=\"telTwoFormControl\"\r\n              (keyup) = \"typingPhoneTwo()\">\r\n\r\n            <mat-error *ngIf=\"telTwoFormControl.hasError('phoneInvalid')\" >\r\n              Telefone Secundário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            formControlName=\"email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('emailInvalid')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput\r\n              formControlName=\"endereco\" \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\">\r\n\r\n          <mat-error>\r\n              Endereço é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n        \r\n      <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex=\"70\">\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n\r\n        <my-button-orange\r\n          (click)=\"userForm()\" \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\">\r\n        </my-button-orange>\r\n\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser()\" \r\n          >\r\n        </my-button-orange>\r\n      </div> \r\n    </div>\r\n  </div>\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              [formControl]=\"cpfOrcaFormControl\"\r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUserWForm(orcaCadForm)\"\r\n              >\r\n            \r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('cpfcnpjInvalid') && !cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Defeito é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Marca é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"imei\" \r\n              [(ngModel)]=\"orca.imei\" \r\n              ngDefaultControl \r\n              placeholder=\"Imei\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Imei é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"modelo\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Modelo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n            <mat-form-field fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observações\"\r\n              name=\"observacoes\"\r\n              [(ngModel)]=\"orca.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n      \r\n      <div class=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex = \"70\">\r\n\r\n           <div fxFlex=\"grow\"></div>\r\n           \r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm);\">\r\n                \r\n            </my-button-orange>\r\n        </div>\r\n      </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1846,15 +1861,13 @@ var FormDadosClienteComponent = (function () {
         //CEL  Validators.pattern(/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/),
         //CPF    Validators.pattern(/^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/),
         this.user = { cpf: '', nome: '', telPrimario: '', telSecundario: '', email: '', endereco: '' };
-        this.orca = { cpf: '', defeito: '', marca: '', data: null, modelo: '', periodo: '', observacoes: '' };
+        this.orca = { cpf: '', defeito: '', marca: '', data: null, modelo: '', imei: '', observacoes: '' };
         this.update = false;
         //My validators
         this.nomeFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
         ]);
-        this.enderecoFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
-            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
-        ]);
+        this.enderecoFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', []);
         //My validators
         this.cpfFormControl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]('', [
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required,
@@ -1970,7 +1983,7 @@ var FormDadosClienteComponent = (function () {
     FormDadosClienteComponent.prototype.userForm = function () {
         var _this = this;
         console.log('status ' + this.form.status);
-        if (typeof this.form.value.cpf == null || typeof this.form.value.nome == null || typeof this.form.value.telPrimario == null || typeof this.form.value.endereco == null || this.form.status == "INVALID") {
+        if (this.form.status == "INVALID") {
             this.cpfFormControl.markAsTouched();
             this.nomeFormControl.markAsTouched();
             this.enderecoFormControl.markAsTouched();
@@ -1983,14 +1996,14 @@ var FormDadosClienteComponent = (function () {
             this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_1);
             return null;
         }
-        if (this.form.value.cpf.length < 1 || this.form.value.nome.length < 1 || this.form.value.telPrimario.length < 1 || this.form.value.endereco.length < 1) {
-            console.log('entrei 2');
-            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
-            config_2.extraClasses = ['error-class'];
-            config_2.duration = 3000;
-            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_2);
-            return null;
-        }
+        /*    if(this.form.value.cpf.length < 1 ||  this.form.value.nome.length < 1  || this.form.value.telPrimario.length < 1  || this.form.value.endereco.length < 1){
+              console.log('entrei 2');
+              let config = new MatSnackBarConfig();
+              config.extraClasses = ['error-class'];
+              config.duration = 3000;
+              this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config);
+              return null;
+            }*/
         console.log('entrei 3');
         var req = this.http.post(this.url + '/api/add_cli', this.form.value)
             .subscribe(function (res) {
@@ -2016,11 +2029,11 @@ var FormDadosClienteComponent = (function () {
     FormDadosClienteComponent.prototype.updateUser = function (myForm) {
         var _this = this;
         //cheking if any required field is empty
-        if (this.form.value.cpf == "" || this.form.value.nome == "" || this.form.value.telPrimario == "" || this.form.value.endereco == "" || this.form.status == "INVALID") {
-            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
-            config_3.extraClasses = ['error-class'];
-            config_3.duration = 3000;
-            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_3);
+        if (this.form.status == "INVALID") {
+            var config_2 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
+            config_2.extraClasses = ['error-class'];
+            config_2.duration = 3000;
+            this.snackBar.open("Preencha os campos obrigatórios devidamente", "Fechar", config_2);
             return null;
         }
         console.log(this.form.value);
@@ -2047,20 +2060,16 @@ var FormDadosClienteComponent = (function () {
         console.log("value " + this.orca.cpf);
         //cheking if any required field is empty
         if (myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID") {
-            var config_4 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
-            config_4.extraClasses = ['error-class'];
-            config_4.duration = 3000;
-            this.snackBar.open("Preencha todos os campos de orçamento", "Fechar", config_4);
+            var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
+            config_3.extraClasses = ['error-class'];
+            config_3.duration = 3000;
+            this.snackBar.open("Preencha todos os campos de orçamento", "Fechar", config_3);
             return null;
         }
         this.http.post(this.url + '/api/get_cli', { cpf: this.orca.cpf }).subscribe(function (resCliente) {
             _this.auxCliente = resCliente;
-            if (myForm.value.periodo == "0") {
-                myForm.value.periodo = "Manhã";
-            }
-            else {
-                myForm.value.periodo = "Tarde";
-            }
+            //Put the current date in the date field
+            myForm.value.data = new Date();
             //Acrescentando os campos que compoem um orçamento
             myForm.value.cpf = _this.orca.cpf;
             myForm.value.nome = _this.auxCliente.nome;
@@ -2094,10 +2103,9 @@ var FormDadosClienteComponent = (function () {
         var _this = this;
         this.http.post("/api/get_cli", this.form.value).subscribe(function (data) {
             if (data != null) {
-                //Deleting the database id
-                delete data._id;
                 //Setting the form values
-                _this.form.setValue(data);
+                _this.form.setValue({ cpf: data.cpf, nome: data.nome, telPrimario: data.telPrimario, telSecundario: data.telSecundario,
+                    email: data.email, endereco: data.endereco });
                 _this.orca.cpf = data.cpf;
                 _this.update = true;
             }
@@ -2577,6 +2585,7 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.canActivate = function (route, state) {
         if (this.getCookie("dcJJe4ZEsB") == "%265nPPAJk0i%23%7BDBw%5D%3C%7B%2C%40%3Ad%2BRQGp7xb") {
+            console.log("auth acompanhamento");
             return true;
         }
         else {
@@ -2743,7 +2752,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
                     _this.lists[0].cards.push(cardId);
                 }
             }
