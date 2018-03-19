@@ -10,6 +10,7 @@ module.exports = function(){
 	//Definindo a estrutura da minha colection cards no db
 	var cards = Schema({
 		cpf: String,
+		ordServ: String,
 		defeito: String,
 		marca: String,
 		data: Date,

@@ -98,7 +98,7 @@ export class OrcaDataService {
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
           data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes);
+           null, null, data[j].observacoes, data[j]._id);
           this.lists[0].cards.push(cardId);
         }        
       }
@@ -121,7 +121,7 @@ export class OrcaDataService {
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
           data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes);
+           null, null, data[j].observacoes, data[j].ordServ);
           this.lists[1].cards.push(cardId);
         }        
       }
@@ -145,7 +145,7 @@ export class OrcaDataService {
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
           data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes);
+           null, null, data[j].observacoes, data[j].ordServ);
           this.lists[2].cards.push(cardId);
         }        
       }
@@ -169,7 +169,7 @@ export class OrcaDataService {
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
           data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes);
+           null, null, data[j].observacoes, data[j].ordServ);
           this.lists[3].cards.push(cardId);
         }        
       }
@@ -193,7 +193,7 @@ export class OrcaDataService {
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
           data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes);
+           null, null, data[j].observacoes, data[j].ordServ);
           this.lists[4].cards.push(cardId);
         }        
       }
@@ -217,7 +217,7 @@ export class OrcaDataService {
           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
           data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes);
+           null, null, data[j].observacoes, data[j].ordServ);
           this.lists[5].cards.push(cardId);
         }        
       }
@@ -293,8 +293,6 @@ export class OrcaDataService {
     }
     return ret;
   }
-
-
 
 }
 

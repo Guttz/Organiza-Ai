@@ -1,5 +1,6 @@
 export class CardSchema {
 	estado: string;
+	ordServ: string;
 	cpf: string;
 	id: string;
 	bd_id: string;

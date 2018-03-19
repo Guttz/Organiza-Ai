@@ -24,7 +24,7 @@ export class ClienteAtenderComponent implements OnInit
   constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any) 
   {
-    this.reducedID = this.data.bd_id.substring(17, 24);
+    this.reducedID = this.data.ordServ.substring(17, 24);
   }
 
   onNoClick(): void {
@@ -61,7 +61,7 @@ export class AtendimentoComponent implements OnInit
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
 
   constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.reducedID = this.data.bd_id.substring(17, 24);
+    this.reducedID = this.data.ordServ.substring(17, 24);
   }
  
 
@@ -74,7 +74,7 @@ export class AtendimentoComponent implements OnInit
     var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
     <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
-    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.data.bd_id.substring(17, 24) + ' </span> <br> \
+    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.reducedID + ' </span> <br> \
     <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
     <span style="font-size: 12px;"> <strong> Cliente:</strong> '+ this.data.nome +'</span> <br>\
@@ -282,6 +282,7 @@ export class AcompanhamentoComponent implements OnInit
       {
         //Associando as propriedades para enviar o json certinho
         result.bd_id = card.bd_id;
+        card.ordServ = card.bd_id;
         card.observacoes = result.observacoes;
         card.defeito = result.defeito;
         card.marca =  result.marca;
@@ -509,8 +510,13 @@ export class AcompanhamentoComponent implements OnInit
   }
 
   clicked(event){
-  let target = event.target;
+    let target = event.target;
 
+    //If the clicked element is not a card, return and dont pop up anything
+    if(!Number.isInteger( parseInt(event.target.id))){
+      return;
+    }
+    
     //Loop trought the parent html element until get to the list it was dropped on
     while (target.className !== 'list') {
       target = target.parentNode;

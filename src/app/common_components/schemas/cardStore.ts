@@ -63,7 +63,7 @@ export class CardStore {
     newCard(estado: string, cpf: string, id: string, defeito: string, nome: string, telPrimario: string, data: Date, 
         imei: string, endereco: string, marca: string, modelo: string, telSecundario: string, email: string, 
         realizado: string, pecas: string, servico: string, maoObra: string, valorFinal: string, metPag: string, 
-        observacoes: string): string {
+        observacoes: string, ordServ: string): string {
         const card = new CardSchema();
         card.estado = estado;
         card.cpf = cpf;
@@ -87,9 +87,9 @@ export class CardStore {
         card.maoObra = maoObra;
         card.valorFinal = valorFinal;
         card.metPag = metPag;
-
         card.observacoes = observacoes;
 
+        card.ordServ = ordServ;
         return (this._addCard(card));
     }
     removeCard(cardId: number): boolean

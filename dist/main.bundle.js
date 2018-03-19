@@ -431,7 +431,8 @@ var CardComponent = (function () {
     function CardComponent() {
     }
     CardComponent.prototype.ngOnInit = function () {
-        this.reducedID = this.card.bd_id.substring(17, 24);
+        console.log(this.card);
+        this.reducedID = this.card.ordServ.substring(17, 24);
     };
     CardComponent.prototype.dragStart = function (ev) {
         ev.dataTransfer.setData('text', ev.target.id);
@@ -971,7 +972,7 @@ var CardStore = (function () {
         this.cards[card.id] = card;
         return card.id;
     };
-    CardStore.prototype.newCard = function (estado, cpf, id, defeito, nome, telPrimario, data, imei, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag, observacoes) {
+    CardStore.prototype.newCard = function (estado, cpf, id, defeito, nome, telPrimario, data, imei, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag, observacoes, ordServ) {
         var card = new __WEBPACK_IMPORTED_MODULE_0__cardSchema__["a" /* CardSchema */]();
         card.estado = estado;
         card.cpf = cpf;
@@ -995,6 +996,7 @@ var CardStore = (function () {
         card.valorFinal = valorFinal;
         card.metPag = metPag;
         card.observacoes = observacoes;
+        card.ordServ = ordServ;
         return (this._addCard(card));
     };
     CardStore.prototype.removeCard = function (cardId) {
@@ -1089,7 +1091,7 @@ var ClienteAtenderComponent = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.periodos = [{ value: 'Manhã' }, { value: 'Tarde' }];
-        this.reducedID = this.data.bd_id.substring(17, 24);
+        this.reducedID = this.data.ordServ.substring(17, 24);
     }
     ClienteAtenderComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
@@ -1126,7 +1128,7 @@ var AtendimentoComponent = (function () {
             { value: 'Dinheiro' },
         ];
         this.options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        this.reducedID = this.data.bd_id.substring(17, 24);
+        this.reducedID = this.data.ordServ.substring(17, 24);
     }
     AtendimentoComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
@@ -1135,7 +1137,7 @@ var AtendimentoComponent = (function () {
         var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
     <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
-    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>' + this.data.bd_id.substring(17, 24) + ' </span> <br> \
+    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>' + this.reducedID + ' </span> <br> \
     <span style="font-size: 12px;"><strong>Data:</strong> ' + this.data.data.toLocaleDateString("pt-BR", this.options) + '</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
     <span style="font-size: 12px;"> <strong> Cliente:</strong> ' + this.data.nome + '</span> <br>\
@@ -1300,6 +1302,7 @@ var AcompanhamentoComponent = (function () {
             if (result != null) {
                 //Associando as propriedades para enviar o json certinho
                 result.bd_id = card.bd_id;
+                card.ordServ = card.bd_id;
                 card.observacoes = result.observacoes;
                 card.defeito = result.defeito;
                 card.marca = result.marca;
@@ -1474,6 +1477,10 @@ var AcompanhamentoComponent = (function () {
     };
     AcompanhamentoComponent.prototype.clicked = function (event) {
         var target = event.target;
+        //If the clicked element is not a card, return and dont pop up anything
+        if (!Number.isInteger(parseInt(event.target.id))) {
+            return;
+        }
         //Loop trought the parent html element until get to the list it was dropped on
         while (target.className !== 'list') {
             target = target.parentNode;
@@ -1559,7 +1566,7 @@ var AcompanhamentoComponent = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\t\t<button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\r\n\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Peças usadas\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Mão de Obra\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\t\t<button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\r\n\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Mão de Obra/Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
 
 /***/ }),
 
@@ -2768,7 +2775,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j]._id);
                     _this.lists[0].cards.push(cardId);
                 }
             }
@@ -2784,7 +2791,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
                     _this.lists[1].cards.push(cardId);
                 }
             }
@@ -2800,7 +2807,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
                     _this.lists[2].cards.push(cardId);
                 }
             }
@@ -2816,7 +2823,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
                     _this.lists[3].cards.push(cardId);
                 }
             }
@@ -2832,7 +2839,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
                     _this.lists[4].cards.push(cardId);
                 }
             }
@@ -2848,7 +2855,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
                     _this.lists[5].cards.push(cardId);
                 }
             }
