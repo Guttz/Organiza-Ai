@@ -64,6 +64,21 @@ export class AtendimentoComponent implements OnInit
     this.reducedID = this.data.ordServ.substring(17, 24);
   }
  
+    sumTotalValue()
+  {
+    var value1, value2;
+    if(this.data.servico != null)
+      value1 = (this.data.servico).replace(",", ".");
+    else
+      value1 = 0;
+    if(this.data.pecas != null)
+      value2 = (this.data.pecas).replace(",", ".");
+    else
+      value2 = 0;
+
+    this.data.valorFinal = Number(value1) +Number(value2);
+  }
+
 
   onNoClick(): void 
   {

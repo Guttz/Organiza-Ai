@@ -34,18 +34,18 @@
 
               <div class="row">
            <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input [(ngModel)]="data.pecas" matInput ngDefaultControl placeholder="Valor peças">
+            <input [(ngModel)]="data.pecas" matInput ngDefaultControl placeholder="Valor peças" (blur)="this.sumTotalValue()">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [(ngModel)]="data.servico" matInput ngDefaultControl placeholder="Valor servico">
+            <input [(ngModel)]="data.servico" matInput ngDefaultControl placeholder="Valor servico" (blur)="this.sumTotalValue()">
           </mat-form-field> 
 
       </div> 
 
               <div class="row">
            <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input [(ngModel)]="data.maoObra" matInput ngDefaultControl placeholder="Mão de Obra/Técnico">
+            <input [(ngModel)]="data.maoObra" matInput ngDefaultControl placeholder="Técnico">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
