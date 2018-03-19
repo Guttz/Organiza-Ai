@@ -1209,7 +1209,7 @@ var AcompanhamentoComponent = (function () {
         //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
         this.url = "http://myas.com.br";
         //List names for the backend requests be directly to the right collection
-        this.listsNames = ["orca", "atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
+        this.listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
         if (window.location.href.match(/www/) != null) {
             console.log("das me: " + window.location.href);
             this.url = "http://www.myas.com.br";
@@ -1295,39 +1295,6 @@ var AcompanhamentoComponent = (function () {
             }
         });
     };
-    AcompanhamentoComponent.prototype.openDialogAtender = function (cardID) {
-        var _this = this;
-        //Get the card with the card id
-        var card = this.cardStore.getCard(cardID);
-        if (card == undefined) {
-            console.log("Problamas ao obter o card.");
-            return;
-        }
-        //Open the pop up with the card infos
-        var dialogRef = this.dialog.open(ClienteAtenderComponent, {
-            width: '44vw',
-            data: card
-        });
-        //After the dialog is closed thats the called function
-        dialogRef.afterClosed().subscribe(function (result) {
-            //In case the user pressed confirm
-            if (result != null) {
-                //Associando as propriedades para enviar o json certinho
-                result.bd_id = card.bd_id;
-                card.ordServ = card.bd_id;
-                card.observacoes = result.observacoes;
-                card.defeito = result.defeito;
-                card.marca = result.marca;
-                card.modelo = result.modelo;
-                card.data = result.data;
-                card.periodo = result.periodo;
-                //Atualizando o card na store com as novas informações dele
-                if (!_this.ordaDataService.addAndRemove('/api/add_atendimento', '/api/remove_orca', card)) {
-                    console.log("Ocorreu um erro na função addAndRemove!");
-                }
-            }
-        });
-    };
     AcompanhamentoComponent.prototype.openDialogFinalizado = function (cardID) {
         var _this = this;
         //Get the card with the card id
@@ -1355,10 +1322,11 @@ var AcompanhamentoComponent = (function () {
                 card.maoObra = result.maoObra;
                 card.valorFinal = result.valorFinal;
                 card.metPag = result.metPag;
+                card.observacoes = result.observacoes;
                 var commandRemove = '';
                 //Getting the current list of the card
                 var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5) {
+                if (currentStatus.listID == -1 || currentStatus.listID >= 4) {
                     console.log("Ocorreu um erro ao mover o cartão.");
                     return;
                 }
@@ -1395,10 +1363,11 @@ var AcompanhamentoComponent = (function () {
                 card.maoObra = result.maoObra;
                 card.valorFinal = result.valorFinal;
                 card.metPag = result.metPag;
+                card.observacoes = result.observacoes;
                 var commandRemove = '';
                 //Getting the current list of the card
                 var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5) {
+                if (currentStatus.listID == -1 || currentStatus.listID >= 4) {
                     console.log("Ocorreu um erro ao mover o cartão.");
                     return;
                 }
@@ -1435,10 +1404,12 @@ var AcompanhamentoComponent = (function () {
                 card.maoObra = result.maoObra;
                 card.valorFinal = result.valorFinal;
                 card.metPag = result.metPag;
+                card.observacoes = result.observacoes;
                 var commandRemove = '';
                 //Getting the current list of the card
                 var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5) {
+                console.log(currentStatus);
+                if (currentStatus.listID == -1 || currentStatus.listID >= 4) {
                     console.log("Ocorreu um erro ao mover o cartão.");
                     return;
                 }
@@ -1474,7 +1445,7 @@ var AcompanhamentoComponent = (function () {
                 var commandRemove = '';
                 //Getting the current list of the card
                 var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5) {
+                if (currentStatus.listID == -1 || currentStatus.listID >= 5) {
                     console.log("Ocorreu um erro ao mover o cartão.");
                     return;
                 }
@@ -1500,10 +1471,10 @@ var AcompanhamentoComponent = (function () {
         //The list ID, the one that the card is being clicked
         var listID = parseInt(target.id.substring(1, 2));
         //Checking if is the "finalizado" column so a pop up wont be oppened
-        if (listID == 5) {
+        if (listID >= 4) {
             return;
         }
-        if (listID == 0 || listID == 1) {
+        if (listID == 0) {
             this.clickOrcamento(event.target.id, listID);
         }
         else {
@@ -1529,32 +1500,26 @@ var AcompanhamentoComponent = (function () {
         if (oldList == newList) {
             return;
         }
-        //If the list is dropped from the first list to the second
-        if (oldList == 0 && newList == 1) {
-            this.openDialogAtender(cardID);
+        if (oldList == 4) {
+            return;
         }
         //If the list is dropped from the second list to the third
-        if (oldList == 1 && newList == 2) {
+        if (newList == 1) {
             console.log("zb");
             this.openDialogagPecas(cardID);
         }
         //If the list is dropped from the second list to the third
-        if (oldList == 1 && newList == 3) {
+        if (newList == 2) {
             console.log("zc");
             this.openDialogrtVisita(cardID);
         }
         //If the list is dropped from the second list to the third
-        if (oldList == 2 && newList == 3) {
-            console.log("zd");
-            this.openDialogrtVisita(cardID);
-        }
-        //If the list is dropped from the second list to the third
-        if ((oldList == 1 || oldList == 2 || oldList == 3) && newList == 4) {
+        if (newList == 3) {
             console.log("ze");
             this.openDialogPagamento(cardID);
         }
         //If the list is dropped from the second list to the third
-        if ((oldList == 1 || oldList == 2 || oldList == 3 || oldList == 4) && newList == 5) {
+        if (newList == 4) {
             console.log("zf");
             this.openDialogFinalizado(cardID);
         }
@@ -2112,7 +2077,7 @@ var FormDadosClienteComponent = (function () {
             myForm.value.telSecundario = _this.auxCliente.telSecundario;
             myForm.value.email = _this.auxCliente.email;
             myForm.value.endereco = _this.auxCliente.endereco;
-            _this.http.post(_this.url + '/api/add_orca', myForm.value)
+            _this.http.post(_this.url + '/api/add_atendimento', myForm.value)
                 .subscribe(function (res) {
                 console.log("sucessfull");
                 _this.update = false;
@@ -2699,8 +2664,7 @@ var LoginComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_cardStore__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardStore.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_of__ = __webpack_require__("../../../../rxjs/_esm5/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__ = __webpack_require__("../../../../rxjs/_esm5/observable/of.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2714,45 +2678,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var OrcaDataService = (function () {
     function OrcaDataService(http) {
-        var _this = this;
         this.http = http;
         this.url = "http://myas.com.br";
         //List names for the backend requests be directly to the right collection
-        this.listsNames = ["orcas", "atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
+        this.listsNames = ["atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
         //Initializing orca list
         var listsAux = [
             {
-                name: 'Visita Orçamento',
+                name: 'Em Análise',
                 cards: [],
                 id: "l0"
             },
             {
-                name: 'Visita técnico',
+                name: 'Aguardando Peças',
                 cards: [],
                 id: "l1"
             },
             {
-                name: 'Aguardando Peças',
+                name: 'Em conserto',
                 cards: [],
                 id: "l2"
             },
             {
-                name: 'Retorno Visita',
+                name: 'Pagamento',
                 cards: [],
                 id: "l3"
             },
             {
-                name: 'Pagamento',
-                cards: [],
-                id: "l4"
-            },
-            {
                 name: 'Clientes finalizados',
                 cards: [],
-                id: "l5"
+                id: "l4"
             }
         ];
         this.lists = listsAux;
@@ -2771,9 +2728,9 @@ var OrcaDataService = (function () {
         }
         this.requestOrcas();
         //Getting the new cards X miliseconds
-        __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["a" /* Observable */].interval(10000).subscribe(function (x) {
-            _this.requestOrcas();
-        });
+        /*    Observable.interval( 5000).subscribe(x => {
+              this.requestOrcas();
+            });*/
     }
     //Method to request orcas from db
     OrcaDataService.prototype.requestOrcas = function () {
@@ -2787,7 +2744,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j]._id);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
                     _this.lists[0].cards.push(cardId);
                 }
             }
@@ -2803,7 +2760,8 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
+                    //Adding to the right list
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
                     _this.lists[1].cards.push(cardId);
                 }
             }
@@ -2819,7 +2777,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
                     _this.lists[2].cards.push(cardId);
                 }
             }
@@ -2835,7 +2793,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
                     _this.lists[3].cards.push(cardId);
                 }
             }
@@ -2851,24 +2809,8 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
                     _this.lists[4].cards.push(cardId);
-                }
-            }
-        }, function (err) {
-            console.log("Error occured: c" + err.error.message);
-        });
-        this.http.get("/api/get_" + this.listsNames[5]).subscribe(function (data) {
-            console.log("-----------" + 5 + "----------");
-            console.log(_this.listsNames[5]);
-            _this.dataHolder = data;
-            console.log(_this.lists[5].cards);
-            for (var j = 0; j < _this.dataHolder.length; j++) {
-                var result = _this.cardStore.findCard(data[j]._id);
-                if (!result.exists) {
-                    //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].imei, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, null, null, data[j].observacoes, data[j].ordServ);
-                    _this.lists[5].cards.push(cardId);
                 }
             }
         }, function (err) {
@@ -2876,10 +2818,10 @@ var OrcaDataService = (function () {
         });
     };
     OrcaDataService.prototype.getOrcasList = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_of__["a" /* of */])(this.lists);
+        return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])(this.lists);
     };
     OrcaDataService.prototype.getCardStore = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_of__["a" /* of */])(this.cardStore);
+        return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])(this.cardStore);
     };
     /*Apply some command in one list
       @Params:

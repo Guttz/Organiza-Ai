@@ -151,7 +151,7 @@ export class AcompanhamentoComponent implements OnInit
   url = "http://myas.com.br"
   
   //List names for the backend requests be directly to the right collection
-  listsNames = ["orca", "atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
+  listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
    private ordaDataService: OrcaDataService) 
@@ -271,49 +271,6 @@ export class AcompanhamentoComponent implements OnInit
       }
     });
   }
-  
-  openDialogAtender(cardID): void 
-  {
-    //Get the card with the card id
-    var card = this.cardStore.getCard(cardID);
-    if(card == undefined)
-    {
-      console.log("Problamas ao obter o card.");
-      return;
-    }
-    //Open the pop up with the card infos
-    let dialogRef = this.dialog.open(ClienteAtenderComponent, 
-    {  
-      width: '44vw',
-      data: card
-    });
-
-   //After the dialog is closed thats the called function
-    dialogRef.afterClosed().subscribe(result => 
-    {
-      
-      //In case the user pressed confirm
-      if(result!=null)
-      {
-        //Associando as propriedades para enviar o json certinho
-        result.bd_id = card.bd_id;
-        card.ordServ = card.bd_id;
-        card.observacoes = result.observacoes;
-        card.defeito = result.defeito;
-        card.marca =  result.marca;
-        card.modelo = result.modelo;
-        card.data = result.data;
-        card.periodo = result.periodo;
-
-        //Atualizando o card na store com as novas informações dele
-        if(!this.ordaDataService.addAndRemove('/api/add_atendimento','/api/remove_orca', card ))
-        {     
-          console.log("Ocorreu um erro na função addAndRemove!");
-        }
-      }
-    });
-  }
-
 
   openDialogFinalizado(cardID): void 
   {
@@ -350,12 +307,13 @@ export class AcompanhamentoComponent implements OnInit
         card.maoObra = result.maoObra;
         card.valorFinal = result.valorFinal;
         card.metPag = result.metPag;
+        card.observacoes = result.observacoes;
 
         var commandRemove = '';
         //Getting the current list of the card
         var currentStatus = this.ordaDataService.whichList(card.id);
 
-        if(currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5)
+        if(currentStatus.listID == -1 ||currentStatus.listID >= 4)
         {
           console.log("Ocorreu um erro ao mover o cartão.");
           return;
@@ -401,12 +359,13 @@ export class AcompanhamentoComponent implements OnInit
         card.maoObra = result.maoObra;
         card.valorFinal = result.valorFinal;
         card.metPag = result.metPag;
+        card.observacoes = result.observacoes;
 
         var commandRemove = '';
         //Getting the current list of the card
         var currentStatus = this.ordaDataService.whichList(card.id);
 
-        if(currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5)
+        if(currentStatus.listID == -1 || currentStatus.listID >= 4)
         {
           console.log("Ocorreu um erro ao mover o cartão.");
           return;
@@ -453,13 +412,15 @@ export class AcompanhamentoComponent implements OnInit
         card.maoObra = result.maoObra;
         card.valorFinal = result.valorFinal;
         card.metPag = result.metPag;
-          
+        card.observacoes = result.observacoes;
 
         var commandRemove = '';
         //Getting the current list of the card
         var currentStatus = this.ordaDataService.whichList(card.id);
 
-        if(currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5)
+        console.log(currentStatus);
+
+        if(currentStatus.listID == -1 || currentStatus.listID >= 4)
         {
           console.log("Ocorreu um erro ao mover o cartão.");
           return;
@@ -507,7 +468,7 @@ export class AcompanhamentoComponent implements OnInit
         //Getting the current list of the card
         var currentStatus = this.ordaDataService.whichList(card.id);
 
-        if(currentStatus.listID == -1 || currentStatus.listID == 0 || currentStatus.listID >= 5)
+        if(currentStatus.listID == -1 || currentStatus.listID >= 5)
         {
           console.log("Ocorreu um erro ao mover o cartão.");
           return;
@@ -541,15 +502,16 @@ export class AcompanhamentoComponent implements OnInit
     var listID = parseInt(target.id.substring(1,2));
 
     //Checking if is the "finalizado" column so a pop up wont be oppened
-    if(listID == 5){
+    if(listID >= 4){
       return;
     }
-    if(listID == 0 || listID == 1){
+    if(listID == 0 ){
       this.clickOrcamento(event.target.id, listID);
     }
     else{
       this.clickVisited(event.target.id, listID);
     }
+
   }
 
   drop($event) {
@@ -579,37 +541,29 @@ export class AcompanhamentoComponent implements OnInit
       return;
     }
 
-    //If the list is dropped from the first list to the second
-    if(oldList == 0 && newList == 1){
-      this.openDialogAtender(cardID);
+    if(oldList == 4){
+      return;
     }
-
     //If the list is dropped from the second list to the third
-    if(oldList == 1 && newList == 2){
+    if(newList == 1){
       console.log("zb")
         this.openDialogagPecas(cardID);
     }
 
     //If the list is dropped from the second list to the third
-    if(oldList == 1 && newList == 3){
+    if(newList == 2){
       console.log("zc")
         this.openDialogrtVisita( cardID);
     }
 
-        //If the list is dropped from the second list to the third
-    if(oldList == 2 && newList == 3){
-      console.log("zd")
-        this.openDialogrtVisita( cardID);
-    }
-
     //If the list is dropped from the second list to the third
-    if( (oldList == 1 || oldList == 2 || oldList == 3) && newList == 4 ){
+    if(newList == 3 ){
       console.log("ze")
         this.openDialogPagamento( cardID);
     }
 
     //If the list is dropped from the second list to the third
-    if( (oldList == 1 || oldList == 2 || oldList == 3 || oldList == 4)  && newList == 5){
+    if(newList == 4){
       console.log("zf")
         this.openDialogFinalizado(cardID);
     }

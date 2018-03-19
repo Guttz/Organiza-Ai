@@ -13,41 +13,36 @@ export class OrcaDataService {
 	dataHolder: any;
 	url = "http://myas.com.br";
   //List names for the backend requests be directly to the right collection
-  listsNames = ["orcas", "atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
+  listsNames = ["atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
 
   constructor(private http: HttpClient) 
   { 
   	//Initializing orca list
   	const listsAux: ListSchema[] = [
       {
-        name: 'Visita Orçamento',
+        name: 'Em Análise',
         cards: [],
         id : "l0"
       },
       {
-        name: 'Visita técnico',
+        name: 'Aguardando Peças',
         cards: [],
         id : "l1"
       },
       {
-        name: 'Aguardando Peças',
+        name: 'Em conserto',
         cards: [],
         id : "l2"
       },
       {
-        name: 'Retorno Visita',
+        name: 'Pagamento',
         cards: [],
         id : "l3"
       },
       {
-        name: 'Pagamento',
-        cards: [],
-        id : "l4"
-      },
-      {
         name: 'Clientes finalizados',
         cards: [],
-        id : "l5"
+        id : "l4"
       }
     ];
 
@@ -72,9 +67,9 @@ export class OrcaDataService {
     this.requestOrcas(); 
 
     //Getting the new cards X miliseconds
-    Observable.interval( 10000).subscribe(x => {
+/*    Observable.interval( 5000).subscribe(x => {
       this.requestOrcas();
-    });
+    });*/
   } 
 
 
@@ -95,10 +90,13 @@ export class OrcaDataService {
         if(!result.exists)
         {
           //Adding to the right list
-          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
-           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes, data[j]._id);
+           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito,
+            data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, 
+            data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, 
+            data[j].observacoes, data[j].ordServ);
+          
+
           this.lists[0].cards.push(cardId);
         }        
       }
@@ -118,10 +116,12 @@ export class OrcaDataService {
         if(!result.exists)
         {
           //Adding to the right list
-          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
-           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes, data[j].ordServ);
+//Adding to the right list
+           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito,
+            data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, 
+            data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, 
+            data[j].observacoes, data[j].ordServ);
           this.lists[1].cards.push(cardId);
         }        
       }
@@ -142,10 +142,11 @@ export class OrcaDataService {
         if(!result.exists)
         {
           //Adding to the right list
-          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
-           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes, data[j].ordServ);
+           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito,
+            data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, 
+            data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, 
+            data[j].observacoes, data[j].ordServ);
           this.lists[2].cards.push(cardId);
         }        
       }
@@ -166,10 +167,11 @@ export class OrcaDataService {
         if(!result.exists)
         {
           //Adding to the right list
-          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
-           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes, data[j].ordServ);
+           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito,
+            data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, 
+            data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, 
+            data[j].observacoes, data[j].ordServ);
           this.lists[3].cards.push(cardId);
         }        
       }
@@ -190,10 +192,11 @@ export class OrcaDataService {
         if(!result.exists)
         {
           //Adding to the right list
-          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
-           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes, data[j].ordServ);
+           const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito,
+            data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
+            data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, 
+            data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, 
+            data[j].observacoes, data[j].ordServ);
           this.lists[4].cards.push(cardId);
         }        
       }
@@ -201,29 +204,6 @@ export class OrcaDataService {
       console.log("Error occured: c" + err.error.message);
     });
     
-    this.http.get("/api/get_" + this.listsNames[5]).subscribe(data => 
-    {
-      console.log("-----------" + 5 + "----------")
-      console.log( this.listsNames[5]);
-
-      this.dataHolder = data;
-      console.log(this.lists[5].cards);
-      for (var j = 0; j < this.dataHolder.length; j++) 
-      {
-        var result = this.cardStore.findCard(data[j]._id);
-        if(!result.exists)
-        {
-          //Adding to the right list
-          const cardId = this.cardStore.newCard("Orçamento",  data[j].cpf, data[j]._id, data[j].defeito, 
-          data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].imei, data[j].endereco, 
-           data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, null, null, null, null, 
-           null, null, data[j].observacoes, data[j].ordServ);
-          this.lists[5].cards.push(cardId);
-        }        
-      }
-    },err =>{
-      console.log("Error occured: c" + err.error.message);
-    });
   }
 
   getOrcasList(): Observable<ListSchema[]>

@@ -313,7 +313,7 @@ export class FormDadosClienteComponent implements OnInit {
           myForm.value.email = this.auxCliente.email;
           myForm.value.endereco = this.auxCliente.endereco;
            
-            this.http.post(this.url + '/api/add_orca', myForm.value)
+            this.http.post(this.url + '/api/add_atendimento', myForm.value)
               .subscribe(
                 res => {
                   console.log("sucessfull");

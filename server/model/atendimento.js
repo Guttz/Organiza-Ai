@@ -15,6 +15,7 @@ module.exports = function(ass){
 				marca: String,
 				data: Date,
 				modelo: String,
+				imei: String,
 				periodo: String,
 				nome: String,
 				telPrimario: String,
