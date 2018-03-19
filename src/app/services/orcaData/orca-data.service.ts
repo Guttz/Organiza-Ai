@@ -24,81 +24,7 @@ export class OrcaDataService {
 
     this.ioConnection = this.socketService.getChanges()
       .subscribe((message: string) => {
-        //console.log("Houve um alteração, atualizando cards.");
-        //console.log(message);
-        var messageJson = JSON.parse(message);
-
-        //Reloading the list with new cards
-        if(messageJson.listAdded == "/api/add_atendimentos")
-        {
-          this.requestOrca(0); 
-        }
-        else if(messageJson.listAdded == "/api/add_agPecas")
-        {
-          this.requestOrca(1); 
-        }
-        else if(messageJson.listAdded == "/api/add_rtVisita")
-        {
-          this.requestOrca(2);   
-        }
-        else if(messageJson.listAdded == "/api/add_pagamento")
-        {
-          this.requestOrca(3);    
-        }
-        else if(messageJson.listAdded == "/api/add_finalizados")
-        {
-          this.requestOrca(4);    
-        }
-        else
-        {
-          this.requestAllOrcas();
-        }
-
-        //Cleaning the list that lose cards
-        var listToReload = 0;
-
-        if(messageJson.listRemoved == "/api/remove_atendimentos")
-        {
-          listToReload = 0;
-          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-          }
-          this.requestOrca(listToReload);
-        }
-        else if(messageJson.listRemoved == "/api/remove_agPecas")
-        {
-          listToReload = 1;
-          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-          }
-          this.requestOrca(listToReload);
-        }
-        else if(messageJson.listRemoved == "/api/remove_rtVisita")
-        {
-          listToReload = 2;   
-          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-          }
-          this.requestOrca(listToReload);
-        }
-        else if(messageJson.listRemoved == "/api/remove_pagamento")
-        {
-          listToReload = 3;    
-          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-          }
-          this.requestOrca(listToReload);
-        }
-        else if(messageJson.listRemoved == "/api/remove_finalizados")
-        {
-          listToReload = 4;   
-          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-          }
-          this.requestOrca(listToReload); 
-        }
-
-        
+        this.reloadChanges(message);        
       });
   	
     //Initializing orca list
@@ -150,7 +76,83 @@ export class OrcaDataService {
     }
     this.requestAllOrcas();
   } 
+  reloadChanges(message: string)
+  {
+    //console.log("Houve um alteração, atualizando cards.");
+        //console.log(message);
+        var messageJson = JSON.parse(message);
 
+        //Reloading the list with new cards
+        if(messageJson.listAdded == "/api/add_atendimentos")
+        {
+          this.requestOrca(0); 
+        }
+        else if(messageJson.listAdded == "/api/add_agPecas")
+        {
+          this.requestOrca(1); 
+        }
+        else if(messageJson.listAdded == "/api/add_rtVisita")
+        {
+          this.requestOrca(2);   
+        }
+        else if(messageJson.listAdded == "/api/add_pagamento")
+        {
+          this.requestOrca(3);    
+        }
+        else if(messageJson.listAdded == "/api/add_finalizados")
+        {
+          this.requestOrca(4);    
+        }
+        else
+        {
+          if(messageJson.listAdded != "")
+            this.requestAllOrcas();
+        }
+
+        //Cleaning the list that lose cards
+        var listToReload = 0;
+
+        if(messageJson.listRemoved == "/api/remove_atendimentos")
+        {
+          listToReload = 0;
+          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+          }
+          this.requestOrca(listToReload);
+        }
+        else if(messageJson.listRemoved == "/api/remove_agPecas")
+        {
+          listToReload = 1;
+          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+          }
+          this.requestOrca(listToReload);
+        }
+        else if(messageJson.listRemoved == "/api/remove_rtVisita")
+        {
+          listToReload = 2;   
+          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+          }
+          this.requestOrca(listToReload);
+        }
+        else if(messageJson.listRemoved == "/api/remove_pagamento")
+        {
+          listToReload = 3;    
+          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+          }
+          this.requestOrca(listToReload);
+        }
+        else if(messageJson.listRemoved == "/api/remove_finalizados")
+        {
+          listToReload = 4;   
+          for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+            this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+          }
+          this.requestOrca(listToReload); 
+        }
+  }
 
 
   //Method to request orcas from db
@@ -222,10 +224,8 @@ export class OrcaDataService {
     this.deleteCard(listAux.listID, card.id);
 
     //Updating db and other clients
-    this.requestGet('{\n"listRemoved": "'+ commandRemove +'",\n"listAdded": "'+ commandAdd +
-                '",\n"cardId": "'+ card.id+'"\n}');
     if(this.addCardDB(commandAdd,card) && this.removeCardDB(commandRemove, card))
-    {
+    { 
       if(commandAdd == "/api/add_atendimentos")
       {
         this.requestOrca(0); 
@@ -249,21 +249,29 @@ export class OrcaDataService {
       else
       {
         this.requestAllOrcas();
-      }      
+      }   
+      this.requestGet('{\n"listRemoved": "'+ commandRemove+'",\n"listAdded": "'+ commandAdd +
+                '",\n"cardId": "'+ card.id+'"\n}');
     }
   }
 
-  addCardDB(commandAdd: string, card: any): boolean
+  addCardDB(commandAdd: string, card: any, recall = false): boolean
   {
     //Adding card to another part of db
     this.http.post(this.url + commandAdd, card ).subscribe(
-      res => {         
+      res => {       
+            if(recall)
+              this.requestGet('{\n"listRemoved": "",\n"listAdded": "'+ commandAdd +
+                '",\n"cardId": "'+ card.id+'"\n}');
             return true;
       },err => {
         console.log("Error occured: " + err.error.message);
         return false;
       }
     );
+    if(recall)
+      this.requestGet('{\n"listRemoved": "",\n"listAdded": "'+ commandAdd +
+                '",\n"cardId": "'+ card.id+'"\n}');
     return true;
   }
   

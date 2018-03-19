@@ -6,6 +6,9 @@ import { Orca} from './../../common_components/schemas/orca';
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
+import { OrcaDataService } from '../../services/orcaData/orca-data.service';
+import { Observable } from 'rxjs/Rx';
+
 // Importing CPF and CNPJ validators 
 var CPF = require("cpf_cnpj").CPF;
 var CNPJ = require("cpf_cnpj").CNPJ;
@@ -36,7 +39,7 @@ export class FormDadosClienteComponent implements OnInit {
   update: Boolean = false;
   auxCliente: any;
 
-  constructor(private http: HttpClient, public snackBar: MatSnackBar){
+  constructor(private http: HttpClient, public snackBar: MatSnackBar,private ordaDataService: OrcaDataService){
       if(window.location.href.match(/www/) != null){
         console.log("das me: " + window.location.href);
            this.url = "http://www.myas.com.br";
@@ -312,30 +315,13 @@ export class FormDadosClienteComponent implements OnInit {
           myForm.value.telSecundario = this.auxCliente.telSecundario;
           myForm.value.email = this.auxCliente.email;
           myForm.value.endereco = this.auxCliente.endereco;
-           
-            this.http.post(this.url + '/api/add_atendimento', myForm.value)
-              .subscribe(
-                res => {
-                  console.log("sucessfull");
-                    this.update = false;
-                    this.cpfOrcaFormControl.reset();
-                    this.form.reset();
-                    myForm.reset();
-                },
-                err => {
-                  let config = new MatSnackBarConfig();
-                  config.extraClasses = ['error-class'];
-                  config.duration = 3000;
-                  this.snackBar.open("Erro na criação do orçamento: " + err.error.message, "Fechar", config);
-                  console.log("Error occured: " + err.error.message);
-                }
-              );
-        },
-        err => {
-
-          console.log("Error occured: " + err.error.message);
-        }
-      );
+          
+          this.ordaDataService.addCardDB('/api/add_atendimento', myForm.value, true);
+        }),
+        err => 
+        {
+          console.log(err.error.message)
+        };
       let config = new MatSnackBarConfig();
       config.extraClasses = ['custom-class'];
       config.duration = 3000;

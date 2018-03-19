@@ -1832,6 +1832,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orcaData_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orcaData/orca-data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1845,13 +1846,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // Importing CPF and CNPJ validators 
 var CPF = __webpack_require__("../../../../cpf_cnpj/index.js").CPF;
 var CNPJ = __webpack_require__("../../../../cpf_cnpj/index.js").CNPJ;
 var FormDadosClienteComponent = (function () {
-    function FormDadosClienteComponent(http, snackBar) {
+    function FormDadosClienteComponent(http, snackBar, ordaDataService) {
         this.http = http;
         this.snackBar = snackBar;
+        this.ordaDataService = ordaDataService;
         //url = "http://localhost:3000";
         //url = "http://localhost";
         //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
@@ -2080,23 +2083,11 @@ var FormDadosClienteComponent = (function () {
             myForm.value.telSecundario = _this.auxCliente.telSecundario;
             myForm.value.email = _this.auxCliente.email;
             myForm.value.endereco = _this.auxCliente.endereco;
-            _this.http.post(_this.url + '/api/add_atendimento', myForm.value)
-                .subscribe(function (res) {
-                console.log("sucessfull");
-                _this.update = false;
-                _this.cpfOrcaFormControl.reset();
-                _this.form.reset();
-                myForm.reset();
-            }, function (err) {
-                var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
-                config.extraClasses = ['error-class'];
-                config.duration = 3000;
-                _this.snackBar.open("Erro na criação do orçamento: " + err.error.message, "Fechar", config);
-                console.log("Error occured: " + err.error.message);
-            });
-        }, function (err) {
-            console.log("Error occured: " + err.error.message);
-        });
+            _this.ordaDataService.addCardDB('/api/add_atendimento', myForm.value, true);
+        }),
+            function (err) {
+                console.log(err.error.message);
+            };
         var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
@@ -2144,7 +2135,7 @@ var FormDadosClienteComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBar */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["h" /* MatSnackBar */], __WEBPACK_IMPORTED_MODULE_4__services_orcaData_orca_data_service__["a" /* OrcaDataService */]])
     ], FormDadosClienteComponent);
     return FormDadosClienteComponent;
 }());
@@ -2694,65 +2685,7 @@ var OrcaDataService = (function () {
         socketService.initSocket();
         this.ioConnection = this.socketService.getChanges()
             .subscribe(function (message) {
-            //console.log("Houve um alteração, atualizando cards.");
-            //console.log(message);
-            var messageJson = JSON.parse(message);
-            //Reloading the list with new cards
-            if (messageJson.listAdded == "/api/add_atendimentos") {
-                _this.requestOrca(0);
-            }
-            else if (messageJson.listAdded == "/api/add_agPecas") {
-                _this.requestOrca(1);
-            }
-            else if (messageJson.listAdded == "/api/add_rtVisita") {
-                _this.requestOrca(2);
-            }
-            else if (messageJson.listAdded == "/api/add_pagamento") {
-                _this.requestOrca(3);
-            }
-            else if (messageJson.listAdded == "/api/add_finalizados") {
-                _this.requestOrca(4);
-            }
-            else {
-                _this.requestAllOrcas();
-            }
-            //Cleaning the list that lose cards
-            var listToReload = 0;
-            if (messageJson.listRemoved == "/api/remove_atendimentos") {
-                listToReload = 0;
-                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
-                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
-                }
-                _this.requestOrca(listToReload);
-            }
-            else if (messageJson.listRemoved == "/api/remove_agPecas") {
-                listToReload = 1;
-                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
-                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
-                }
-                _this.requestOrca(listToReload);
-            }
-            else if (messageJson.listRemoved == "/api/remove_rtVisita") {
-                listToReload = 2;
-                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
-                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
-                }
-                _this.requestOrca(listToReload);
-            }
-            else if (messageJson.listRemoved == "/api/remove_pagamento") {
-                listToReload = 3;
-                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
-                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
-                }
-                _this.requestOrca(listToReload);
-            }
-            else if (messageJson.listRemoved == "/api/remove_finalizados") {
-                listToReload = 4;
-                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
-                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
-                }
-                _this.requestOrca(listToReload);
-            }
+            _this.reloadChanges(message);
         });
         //Initializing orca list
         var listsAux = [
@@ -2798,6 +2731,68 @@ var OrcaDataService = (function () {
         }
         this.requestAllOrcas();
     }
+    OrcaDataService.prototype.reloadChanges = function (message) {
+        //console.log("Houve um alteração, atualizando cards.");
+        //console.log(message);
+        var messageJson = JSON.parse(message);
+        //Reloading the list with new cards
+        if (messageJson.listAdded == "/api/add_atendimentos") {
+            this.requestOrca(0);
+        }
+        else if (messageJson.listAdded == "/api/add_agPecas") {
+            this.requestOrca(1);
+        }
+        else if (messageJson.listAdded == "/api/add_rtVisita") {
+            this.requestOrca(2);
+        }
+        else if (messageJson.listAdded == "/api/add_pagamento") {
+            this.requestOrca(3);
+        }
+        else if (messageJson.listAdded == "/api/add_finalizados") {
+            this.requestOrca(4);
+        }
+        else {
+            if (messageJson.listAdded != "")
+                this.requestAllOrcas();
+        }
+        //Cleaning the list that lose cards
+        var listToReload = 0;
+        if (messageJson.listRemoved == "/api/remove_atendimentos") {
+            listToReload = 0;
+            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+            }
+            this.requestOrca(listToReload);
+        }
+        else if (messageJson.listRemoved == "/api/remove_agPecas") {
+            listToReload = 1;
+            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+            }
+            this.requestOrca(listToReload);
+        }
+        else if (messageJson.listRemoved == "/api/remove_rtVisita") {
+            listToReload = 2;
+            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+            }
+            this.requestOrca(listToReload);
+        }
+        else if (messageJson.listRemoved == "/api/remove_pagamento") {
+            listToReload = 3;
+            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+            }
+            this.requestOrca(listToReload);
+        }
+        else if (messageJson.listRemoved == "/api/remove_finalizados") {
+            listToReload = 4;
+            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
+                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
+            }
+            this.requestOrca(listToReload);
+        }
+    };
     //Method to request orcas from db
     OrcaDataService.prototype.requestOrca = function (i) {
         var _this = this;
@@ -2845,8 +2840,6 @@ var OrcaDataService = (function () {
         //Updating lists to frontEnd
         this.deleteCard(listAux.listID, card.id);
         //Updating db and other clients
-        this.requestGet('{\n"listRemoved": "' + commandRemove + '",\n"listAdded": "' + commandAdd +
-            '",\n"cardId": "' + card.id + '"\n}');
         if (this.addCardDB(commandAdd, card) && this.removeCardDB(commandRemove, card)) {
             if (commandAdd == "/api/add_atendimentos") {
                 this.requestOrca(0);
@@ -2866,16 +2859,26 @@ var OrcaDataService = (function () {
             else {
                 this.requestAllOrcas();
             }
+            this.requestGet('{\n"listRemoved": "' + commandRemove + '",\n"listAdded": "' + commandAdd +
+                '",\n"cardId": "' + card.id + '"\n}');
         }
     };
-    OrcaDataService.prototype.addCardDB = function (commandAdd, card) {
+    OrcaDataService.prototype.addCardDB = function (commandAdd, card, recall) {
+        var _this = this;
+        if (recall === void 0) { recall = false; }
         //Adding card to another part of db
         this.http.post(this.url + commandAdd, card).subscribe(function (res) {
+            if (recall)
+                _this.requestGet('{\n"listRemoved": "",\n"listAdded": "' + commandAdd +
+                    '",\n"cardId": "' + card.id + '"\n}');
             return true;
         }, function (err) {
             console.log("Error occured: " + err.error.message);
             return false;
         });
+        if (recall)
+            this.requestGet('{\n"listRemoved": "",\n"listAdded": "' + commandAdd +
+                '",\n"cardId": "' + card.id + '"\n}');
         return true;
     };
     OrcaDataService.prototype.removeCardDB = function (commandRemove, card) {
