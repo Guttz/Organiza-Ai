@@ -2744,7 +2744,7 @@ var OrcaDataService = (function () {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
+                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j]._id);
                     _this.lists[0].cards.push(cardId);
                 }
             }
@@ -2849,11 +2849,11 @@ var OrcaDataService = (function () {
                 console.log("Card movido com sucesso.");
                 return true;
             }, function (err) {
-                console.log("Error occured:aaa " + err.error.message);
+                console.log("Error occured: " + err.error.message);
                 return false;
             });
         }, function (err) {
-            console.log("Error occured: bbb" + err.error.message);
+            console.log("Error occured: " + err.error.message);
             return false;
         });
         return true;

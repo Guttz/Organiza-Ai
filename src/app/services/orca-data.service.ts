@@ -94,7 +94,7 @@ export class OrcaDataService {
             data[j].nome, data[j].telPrimario, new Date(data[j].data) , data[j].periodo, data[j].endereco, 
             data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, 
             data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, 
-            data[j].observacoes, data[j].ordServ);
+            data[j].observacoes, data[j]._id);
           
 
           this.lists[0].cards.push(cardId);
@@ -249,11 +249,11 @@ export class OrcaDataService {
 
             return true;
           },err => {
-            console.log("Error occured:aaa " + err.error.message);
+            console.log("Error occured: " + err.error.message);
             return false;
           });
       },err => {
-        console.log("Error occured: bbb" + err.error.message);
+        console.log("Error occured: " + err.error.message);
         return false;
       }
     );

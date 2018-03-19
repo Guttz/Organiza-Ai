@@ -273,7 +273,7 @@ router.post('/remove_atendimento', function(req, res, next){
     
   db.db(req.session.user.assistencia).collection("atendimentos").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
     if (err) throw err;
-    res.send("deleted");  
+    res.send(null);  
     db.close();
     });
   });
@@ -370,7 +370,7 @@ router.post('/remove_agPecas', function(req, res, next){
     
   db.db(req.session.user.assistencia).collection("agpecas").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
     if (err) throw err;
-    res.send("deleted");  
+    res.send(null);  
     db.close();
     });
   });
@@ -467,7 +467,7 @@ router.post('/remove_rtVisita', function(req, res, next){
     
   db.db(req.session.user.assistencia).collection("rtvisitas").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
     if (err) throw err;
-    res.send("deleted");  
+    res.send(null);  
     db.close();
     });
   });
@@ -564,7 +564,7 @@ router.post('/remove_pagamento', function(req, res, next){
     
   db.db(req.session.user.assistencia).collection("pagamentos").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
     if (err) throw err;
-    res.send("deleted");  
+    res.send(null);  
     db.close();
     });
   });
@@ -625,7 +625,7 @@ router.post('/add_finalizado', function(req, res, next){
           throw err;
         }
 
-        res.send("");
+        res.send(null);
       })
 
 });
