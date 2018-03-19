@@ -50,7 +50,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
-import { OrcaDataService } from './services/orca-data.service'
+import { OrcaDataService } from './services/orcaData/orca-data.service';
+import { SocketComunicator } from './services/socketComunicator/socketComunicator.service';
+
 
 @NgModule({
   declarations: [
@@ -108,7 +110,8 @@ import { OrcaDataService } from './services/orca-data.service'
     LoginComponent,
     CadastroComponent,
     AuthGuard,
-    OrcaDataService
+    OrcaDataService,
+    SocketComunicator
   ],
   bootstrap: [AppComponent],
   exports: []

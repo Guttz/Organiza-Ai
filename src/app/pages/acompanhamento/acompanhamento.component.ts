@@ -5,7 +5,7 @@ import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { OrcaDataService } from '../../services/orca-data.service';
+import { OrcaDataService } from '../../services/orcaData/orca-data.service';
 import { Observable } from 'rxjs/Rx';
 
 

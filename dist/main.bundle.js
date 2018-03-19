@@ -194,7 +194,8 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__ = __webpack_require__("../../../../../src/app/pages/cadastro/cadastro.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orca-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_orcaData_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orcaData/orca-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_socketComunicator_socketComunicator_service__ = __webpack_require__("../../../../../src/app/services/socketComunicator/socketComunicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -237,6 +238,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 /*Import de bibliotecas*/
 
 /*Import das Páginas*/
+
 
 
 
@@ -309,7 +311,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
                 __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__["a" /* AuthGuard */],
-                __WEBPACK_IMPORTED_MODULE_35__services_orca_data_service__["a" /* OrcaDataService */]
+                __WEBPACK_IMPORTED_MODULE_35__services_orcaData_orca_data_service__["a" /* OrcaDataService */],
+                __WEBPACK_IMPORTED_MODULE_36__services_socketComunicator_socketComunicator_service__["a" /* SocketComunicator */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
             exports: []
@@ -1069,7 +1072,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orca-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orcaData_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orcaData/orca-data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1531,7 +1534,7 @@ var AcompanhamentoComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/acompanhamento.component.scss")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MatDialog */],
-            __WEBPACK_IMPORTED_MODULE_3__services_orca_data_service__["a" /* OrcaDataService */]])
+            __WEBPACK_IMPORTED_MODULE_3__services_orcaData_orca_data_service__["a" /* OrcaDataService */]])
     ], AcompanhamentoComponent);
     return AcompanhamentoComponent;
 }());
@@ -2656,7 +2659,7 @@ var LoginComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/services/orca-data.service.ts":
+/***/ "../../../../../src/app/services/orcaData/orca-data.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2665,6 +2668,7 @@ var LoginComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_cardStore__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardStore.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__ = __webpack_require__("../../../../rxjs/_esm5/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__socketComunicator_socketComunicator_service__ = __webpack_require__("../../../../../src/app/services/socketComunicator/socketComunicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2678,12 +2682,78 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var OrcaDataService = (function () {
-    function OrcaDataService(http) {
+    function OrcaDataService(http, socketService) {
+        var _this = this;
         this.http = http;
+        this.socketService = socketService;
         this.url = "http://myas.com.br";
         //List names for the backend requests be directly to the right collection
         this.listsNames = ["atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
+        socketService.initSocket();
+        this.ioConnection = this.socketService.getChanges()
+            .subscribe(function (message) {
+            //console.log("Houve um alteração, atualizando cards.");
+            //console.log(message);
+            var messageJson = JSON.parse(message);
+            //Reloading the list with new cards
+            if (messageJson.listAdded == "/api/add_atendimentos") {
+                _this.requestOrca(0);
+            }
+            else if (messageJson.listAdded == "/api/add_agPecas") {
+                _this.requestOrca(1);
+            }
+            else if (messageJson.listAdded == "/api/add_rtVisita") {
+                _this.requestOrca(2);
+            }
+            else if (messageJson.listAdded == "/api/add_pagamento") {
+                _this.requestOrca(3);
+            }
+            else if (messageJson.listAdded == "/api/add_finalizados") {
+                _this.requestOrca(4);
+            }
+            else {
+                _this.requestAllOrcas();
+            }
+            //Cleaning the list that lose cards
+            var listToReload = 0;
+            if (messageJson.listRemoved == "/api/remove_atendimentos") {
+                listToReload = 0;
+                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
+                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
+                }
+                _this.requestOrca(listToReload);
+            }
+            else if (messageJson.listRemoved == "/api/remove_agPecas") {
+                listToReload = 1;
+                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
+                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
+                }
+                _this.requestOrca(listToReload);
+            }
+            else if (messageJson.listRemoved == "/api/remove_rtVisita") {
+                listToReload = 2;
+                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
+                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
+                }
+                _this.requestOrca(listToReload);
+            }
+            else if (messageJson.listRemoved == "/api/remove_pagamento") {
+                listToReload = 3;
+                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
+                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
+                }
+                _this.requestOrca(listToReload);
+            }
+            else if (messageJson.listRemoved == "/api/remove_finalizados") {
+                listToReload = 4;
+                for (var i = 0; i <= _this.lists[listToReload].cards.length - 1; i++) {
+                    _this.deleteCard(listToReload, Number(_this.lists[listToReload].cards[i]));
+                }
+                _this.requestOrca(listToReload);
+            }
+        });
         //Initializing orca list
         var listsAux = [
             {
@@ -2726,96 +2796,34 @@ var OrcaDataService = (function () {
                 this.url = "http://myas.com.br";
             }
         }
-        this.requestOrcas();
-        //Getting the new cards X miliseconds
-        /*    Observable.interval( 5000).subscribe(x => {
-              this.requestOrcas();
-            });*/
+        this.requestAllOrcas();
     }
     //Method to request orcas from db
-    OrcaDataService.prototype.requestOrcas = function () {
+    OrcaDataService.prototype.requestOrca = function (i) {
         var _this = this;
-        this.http.get("/api/get_" + this.listsNames[0]).subscribe(function (data) {
-            console.log("-----------" + 0 + "----------");
-            console.log(_this.listsNames[0]);
+        this.http.get("/api/get_" + this.listsNames[i]).subscribe(function (data) {
             _this.dataHolder = data;
-            console.log(_this.lists[0].cards);
             for (var j = 0; j < _this.dataHolder.length; j++) {
                 var result = _this.cardStore.findCard(data[j]._id);
                 if (!result.exists) {
                     //Adding to the right list
                     var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j]._id);
-                    _this.lists[0].cards.push(cardId);
+                    _this.lists[i].cards.push(cardId);
                 }
             }
         }, function (err) {
-            console.log("Error occured: c" + err.error.message);
+            console.log("Error occured: " + err.error.message);
         });
-        this.http.get("/api/get_" + this.listsNames[1]).subscribe(function (data) {
-            console.log("-----------" + 1 + "----------");
-            console.log(_this.listsNames[1]);
-            _this.dataHolder = data;
-            console.log(_this.lists[1].cards);
-            for (var j = 0; j < _this.dataHolder.length; j++) {
-                var result = _this.cardStore.findCard(data[j]._id);
-                if (!result.exists) {
-                    //Adding to the right list
-                    //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
-                    _this.lists[1].cards.push(cardId);
-                }
-            }
-        }, function (err) {
-            console.log("Error occured: c" + err.error.message);
-        });
-        this.http.get("/api/get_" + this.listsNames[2]).subscribe(function (data) {
-            console.log("-----------" + 2 + "----------");
-            console.log(_this.listsNames[2]);
-            _this.dataHolder = data;
-            console.log(_this.lists[2].cards);
-            for (var j = 0; j < _this.dataHolder.length; j++) {
-                var result = _this.cardStore.findCard(data[j]._id);
-                if (!result.exists) {
-                    //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
-                    _this.lists[2].cards.push(cardId);
-                }
-            }
-        }, function (err) {
-            console.log("Error occured: c" + err.error.message);
-        });
-        this.http.get("/api/get_" + this.listsNames[3]).subscribe(function (data) {
-            console.log("-----------" + 3 + "----------");
-            console.log(_this.listsNames[3]);
-            _this.dataHolder = data;
-            console.log(_this.lists[3].cards);
-            for (var j = 0; j < _this.dataHolder.length; j++) {
-                var result = _this.cardStore.findCard(data[j]._id);
-                if (!result.exists) {
-                    //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
-                    _this.lists[3].cards.push(cardId);
-                }
-            }
-        }, function (err) {
-            console.log("Error occured: c" + err.error.message);
-        });
-        this.http.get("/api/get_" + this.listsNames[4]).subscribe(function (data) {
-            console.log("-----------" + 4 + "----------");
-            console.log(_this.listsNames[4]);
-            _this.dataHolder = data;
-            console.log(_this.lists[4].cards);
-            for (var j = 0; j < _this.dataHolder.length; j++) {
-                var result = _this.cardStore.findCard(data[j]._id);
-                if (!result.exists) {
-                    //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j].ordServ);
-                    _this.lists[4].cards.push(cardId);
-                }
-            }
-        }, function (err) {
-            console.log("Error occured: c" + err.error.message);
-        });
+    };
+    OrcaDataService.prototype.requestAllOrcas = function () {
+        this.requestOrca(0);
+        this.requestOrca(1);
+        this.requestOrca(2);
+        this.requestOrca(3);
+        this.requestOrca(4);
+    };
+    OrcaDataService.prototype.requestGet = function (msg) {
+        this.socketService.sendChanges(msg);
     };
     OrcaDataService.prototype.getOrcasList = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])(this.lists);
@@ -2830,28 +2838,49 @@ var OrcaDataService = (function () {
       card: The that will be changed
     */
     OrcaDataService.prototype.addAndRemove = function (commandAdd, commandRemove, card) {
-        var _this = this;
         //Updating variable on service, to refresh all clients list
         this.cardStore.updateCard(card.id, card);
         //Obtaining the list id
         var listAux = this.whichList(card.id);
-        //Removing the card from lists
-        console.log("Removendo o card: " + card.id + " da lista " + listAux.listID);
-        // Find and remove item from an array
-        var i = this.lists[listAux.listID].cards.indexOf(card.id);
-        if (i != -1) {
-            this.lists[listAux.listID].cards.splice(i, 1);
+        //Updating lists to frontEnd
+        this.deleteCard(listAux.listID, card.id);
+        //Updating db and other clients
+        this.requestGet('{\n"listRemoved": "' + commandRemove + '",\n"listAdded": "' + commandAdd +
+            '",\n"cardId": "' + card.id + '"\n}');
+        if (this.addCardDB(commandAdd, card) && this.removeCardDB(commandRemove, card)) {
+            if (commandAdd == "/api/add_atendimentos") {
+                this.requestOrca(0);
+            }
+            else if (commandAdd == "/api/add_agPecas") {
+                this.requestOrca(1);
+            }
+            else if (commandAdd == "/api/add_rtVisita") {
+                this.requestOrca(2);
+            }
+            else if (commandAdd == "/api/add_pagamento") {
+                this.requestOrca(3);
+            }
+            else if (commandAdd == "/api/add_finalizados") {
+                this.requestOrca(4);
+            }
+            else {
+                this.requestAllOrcas();
+            }
         }
-        this.cardStore.removeCard(card.id);
-        //Updating db cards
+    };
+    OrcaDataService.prototype.addCardDB = function (commandAdd, card) {
+        //Adding card to another part of db
         this.http.post(this.url + commandAdd, card).subscribe(function (res) {
-            _this.http.post(_this.url + commandRemove, card).subscribe(function (res) {
-                console.log("Card movido com sucesso.");
-                return true;
-            }, function (err) {
-                console.log("Error occured: " + err.error.message);
-                return false;
-            });
+            return true;
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+            return false;
+        });
+        return true;
+    };
+    OrcaDataService.prototype.removeCardDB = function (commandRemove, card) {
+        this.http.post(this.url + commandRemove, card).subscribe(function (res) {
+            return true;
         }, function (err) {
             console.log("Error occured: " + err.error.message);
             return false;
@@ -2868,11 +2897,82 @@ var OrcaDataService = (function () {
         }
         return ret;
     };
+    OrcaDataService.prototype.deleteCard = function (listID, cardId) {
+        // Find and remove item from an array
+        var i = this.lists[listID].cards.indexOf(cardId.toString());
+        if (i != -1) {
+            this.lists[listID].cards.splice(i, 1);
+        }
+        this.cardStore.removeCard(cardId);
+    };
     OrcaDataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__socketComunicator_socketComunicator_service__["a" /* SocketComunicator */]])
     ], OrcaDataService);
     return OrcaDataService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/socketComunicator/socketComunicator.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketComunicator; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__("../../../../socket.io-client/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var PORT = 81;
+var SocketComunicator = (function () {
+    function SocketComunicator() {
+        this.url = "http://myas.com.br";
+    }
+    SocketComunicator.prototype.initSocket = function () {
+        if (window.location.href.match(/www/) != null) {
+            console.log("das me: " + window.location.href);
+            this.url = "http://www.myas.com.br";
+        }
+        else {
+            if (window.location.href.match(/local/) != null) {
+                this.url = "http://localhost";
+            }
+            else {
+                this.url = "http://myas.com.br";
+            }
+        }
+        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.url + ":" + PORT);
+    };
+    SocketComunicator.prototype.sendChanges = function (message) {
+        this.socket.emit('message', message);
+    };
+    SocketComunicator.prototype.getChanges = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.socket.on('message', function (data) { return observer.next(data); });
+        });
+    };
+    SocketComunicator.prototype.onEvent = function (event) {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.socket.on(event, function () { return observer.next(); });
+        });
+    };
+    SocketComunicator = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
+    ], SocketComunicator);
+    return SocketComunicator;
 }());
 
 
@@ -2922,6 +3022,13 @@ Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* pl
 
 module.exports = __webpack_require__("../../../../../src/main.ts");
 
+
+/***/ }),
+
+/***/ 1:
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 
