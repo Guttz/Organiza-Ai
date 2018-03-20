@@ -133,6 +133,7 @@ ELEMENT_DATA: Element[] = [
 }
 
 export interface Element {
+  ordServ: string;
   cpf: string;
   defeito: string;
   nome: string;

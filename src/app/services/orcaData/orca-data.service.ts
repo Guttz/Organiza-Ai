@@ -255,14 +255,14 @@ export class OrcaDataService
     return true;
   }
 
-    public removeCard(card: any, fromList: number):boolean
+    public removeCard(ordServ: any, fromList: number):boolean
   {
     //Adding card to another part of db
-    this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], card ).subscribe(
+    this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ ).subscribe(
       res => {
         card.fromList = fromList;
         this.iMadeTheChange = true;
-        
+
         this.requestGet(card);
           return true;
       },err => {

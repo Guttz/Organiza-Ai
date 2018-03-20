@@ -8,7 +8,7 @@
         [(ngModel)] = "searchIn[0]" 
         (keyup)="applyFilter($event.target.value)"
         (blur)="blured()"
-        placeholder="Filtrar CPF...">
+        placeholder="Filtrar OS/CPF...">
     </mat-form-field>
     
     <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
@@ -55,7 +55,7 @@
     <!-- Position Column -->
     <ng-container matColumnDef="cpf">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> CPF </mat-header-cell>
-      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.cpf}} </mat-cell>
+      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.ordServ}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
