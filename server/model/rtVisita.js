@@ -29,6 +29,6 @@ module.exports = function(ass){
 				valorFinal: String,
 				metPag: String,
 				observacoes: String
-			});
+			}, { collection: 'rtVisita' });
 	return db.model('rtVisita', atendimento);
 }

@@ -1,5 +1,7 @@
+import { Card } from '../../common_components/schemas/card';
+
 export class ListSchema {
-	id: string;
+	id: number;
     name: string;
-    cards: string[];
+    cards: Card[];
 }

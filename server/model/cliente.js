@@ -17,6 +17,6 @@ module.exports = function(ass){
 		email: String,
 		endereco: String,
 		observacoes: String		
-	});
+	},{ collection: 'cliente' });
 	return db.model('cliente', cliente);
 }

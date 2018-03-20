@@ -29,16 +29,16 @@ export class SocketComunicator {
         }
          
     }
-    this.socket = socketIo(this.url+ ":" +PORT);
+    this.socket = socketIo(this.url+ ":" + PORT);
   }
 
-  public sendChanges(message: string): void {
+  public sendChanges(message: any): void {
     this.socket.emit('message', message);
   }
 
-  public getChanges(): Observable<string> {
-    return new Observable<string>(observer => {
-      this.socket.on('message', (data: string) => observer.next(data));
+  public getChanges(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.socket.on('message', (data: any) => observer.next(data));
     });
   }
 

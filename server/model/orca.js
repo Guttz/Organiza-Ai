@@ -22,7 +22,7 @@ module.exports = function(ass){
 				email: String,
 				endereco: String,
 				observacoes: String
-			});
+			}, { collection: 'orca' });
 	return db.model('orca', orca);
 }
 

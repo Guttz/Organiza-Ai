@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import {FormControl, FormGroupDirective, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Submissions} from './submissions';
 import { Orca} from './../../common_components/schemas/orca';
@@ -288,12 +287,11 @@ export class FormDadosClienteComponent implements OnInit {
       this.form.reset();
   }
 
-  orcaForm(myForm:NgForm) {
-
-    console.log("value " + this.orca.cpf);
-
+  orcaForm(myForm:NgForm)
+  {
     //cheking if any required field is empty
-    if(myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID"){
+    if(myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID")
+    {
       let config = new MatSnackBarConfig();
       config.extraClasses = ['error-class'];
       config.duration = 3000;
@@ -302,30 +300,30 @@ export class FormDadosClienteComponent implements OnInit {
     }
 
     this.http.post(this.url + '/api/get_cli', {cpf: this.orca.cpf}).subscribe(
-        resCliente => {
-          this.auxCliente = resCliente;
+      resCliente => {
+        this.auxCliente = resCliente;
 
-          //Put the current date in the date field
-          myForm.value.data = new Date();
+        //Put the current date in the date field
+        myForm.value.data = new Date();
 
-          //Acrescentando os campos que compoem um orçamento
-          myForm.value.cpf = this.orca.cpf;
-          myForm.value.nome = this.auxCliente.nome;
-          myForm.value.telPrimario = this.auxCliente.telPrimario;
-          myForm.value.telSecundario = this.auxCliente.telSecundario;
-          myForm.value.email = this.auxCliente.email;
-          myForm.value.endereco = this.auxCliente.endereco;
+        //Acrescentando os campos que compoem um orçamento
+        myForm.value.cpf = this.orca.cpf;
+        myForm.value.nome = this.auxCliente.nome;
+        myForm.value.telPrimario = this.auxCliente.telPrimario;
+        myForm.value.telSecundario = this.auxCliente.telSecundario;
+        myForm.value.email = this.auxCliente.email;
+        myForm.value.endereco = this.auxCliente.endereco;
           
-          this.ordaDataService.addCardDB('/api/add_atendimento', myForm.value, true);
-        }),
-        err => 
-        {
-          console.log(err.error.message)
-        };
-      let config = new MatSnackBarConfig();
-      config.extraClasses = ['custom-class'];
-      config.duration = 3000;
-      this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
+        this.ordaDataService.addNewCard(myForm.value, 0);
+      }, err => 
+      {
+        console.log(err.error.message)
+      }
+    );
+    let config = new MatSnackBarConfig();
+    config.extraClasses = ['custom-class'];
+    config.duration = 3000;
+    this.snackBar.open("Orçamento criado com sucesso", "Fechar", config);
   }
 
   checkUser()
@@ -355,9 +353,10 @@ export class FormDadosClienteComponent implements OnInit {
       if(data != null )
       {
         delete data._id; 
-
+        
         //Setting the form values
-        this.form.setValue(data);
+        this.form.setValue( { cpf: data.cpf, nome: data.nome, telPrimario: data.telPrimario, telSecundario: data.telSecundario,
+                              email: data.email, endereco: data.endereco});
         this.orca.cpf = data.cpf;
         this.update = true;
       }

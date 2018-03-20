@@ -23,6 +23,6 @@ module.exports = function(ass){
 				email: String,
 				endereco: String,
 				observacoes: String
-			});
+			}, { collection: 'atendimento' });
 	return db.model('atendimento', atendimento);
 }

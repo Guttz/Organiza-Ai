@@ -61,9 +61,9 @@
                 placeholder="Método de pagamento"
                 ngDefaultControl
                 [(ngModel)]="data.metPag" 
-                name="periodo" >
+                name="metPag" >
                 <mat-option 
-                  *ngFor="let value of periodos" [value]="value.value" >
+                  *ngFor="let value of metPag" [value]="value.value" >
                   {{ value.value }}
                 </mat-option>
               </mat-select>

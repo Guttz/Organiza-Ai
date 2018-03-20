@@ -408,7 +408,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/card/card.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.id}}\">\r\n\r\n<div id=\"{{card.id}}\" >\r\n\t<span ><b id=\"{{card.id}}\" >   {{card.id}} {{reducedID}} - </b></span>\r\n\r\n\t<span id=\"{{card.id}}\">  <!-- {{card.id}} --> {{card.nome}}</span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.id}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.id}}\">\r\n\t<span id=\"{{card.id}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.id}}\" > <span id=\"{{card.id}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.id}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
+module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.ordServ}}\">\r\n\r\n<div id=\"{{card.ordServ}}\" >\r\n\t<span ><b id=\"{{card.ordServ}}\" > {{reducedID}} - </b></span>\r\n\r\n\t<span id=\"{{card.ordServ}}\">  <!-- {{card.ordServ}} --> {{card.nome}}</span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.ordServ}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.ordServ}}\">\r\n\t<span id=\"{{card.ordServ}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.ordServ}}\" > <span id=\"{{card.ordServ}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.imei}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.ordServ}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -418,7 +418,7 @@ module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStar
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__schemas_cardSchema__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardSchema.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__schemas_card__ = __webpack_require__("../../../../../src/app/common_components/schemas/card.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -434,15 +434,14 @@ var CardComponent = (function () {
     function CardComponent() {
     }
     CardComponent.prototype.ngOnInit = function () {
-        console.log(this.card);
-        this.reducedID = this.card.ordServ.substring(17, 24);
+        this.reducedID = this.card.getOrdServ().substring(17, 24);
     };
     CardComponent.prototype.dragStart = function (ev) {
         ev.dataTransfer.setData('text', ev.target.id);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__schemas_cardSchema__["a" /* CardSchema */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__schemas_card__["a" /* Card */])
     ], CardComponent.prototype, "card", void 0);
     CardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -480,7 +479,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/list/list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong>  <!-- {{list.id}} --> {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let cardId of list.cards\" [card]=\"cardStore.getCard(cardId)\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
+module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong>  <!-- {{list.id}} --> {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let currentCard of list.cards\" [card]=\"currentCard\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
 
 /***/ }),
 
@@ -491,7 +490,6 @@ module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__schemas_listSchema__ = __webpack_require__("../../../../../src/app/common_components/schemas/listSchema.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__schemas_cardStore__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardStore.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -501,7 +499,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 var ListComponent = (function () {
@@ -557,10 +554,6 @@ var ListComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__schemas_listSchema__["a" /* ListSchema */])
     ], ListComponent.prototype, "list", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__schemas_cardStore__["a" /* CardStore */])
-    ], ListComponent.prototype, "cardStore", void 0);
     ListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-list',
@@ -905,117 +898,134 @@ var MyInputTextComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/common_components/schemas/cardSchema.ts":
+/***/ "../../../../../src/app/common_components/schemas/card.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardSchema; });
-var CardSchema = (function () {
-    function CardSchema() {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Card; });
+var Card = (function () {
+    function Card() {
+        this.initialized = false;
     }
-    return CardSchema;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/common_components/schemas/cardStore.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardStore; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cardSchema__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardSchema.ts");
-
-//Classe usada para administrar os IDs de novos cartões e administra-los,
-//other parts of the code sólo interactúan con los números, te amo lucas <3
-var CardStore = (function () {
-    function CardStore() {
-        this.cards = {};
-        this.lastId = 0;
-    }
-    CardStore.prototype.getCard = function (cardId) {
-        return this.cards[parseInt(cardId)];
-    };
-    CardStore.prototype.findCard = function (bdId) {
-        for (var i = 0; i < this.lastId; i++) {
-            if (this.cards[i].bd_id == bdId) {
-                return { exists: true, id: this.cards[i].id };
-            }
+    //"Constructor"
+    Card.prototype.init = function (dataJson) {
+        //Checking primary key
+        if (dataJson.ordServ == undefined || dataJson.ordServ == "") {
+            console.log("Cartão não inicializado, é necessário enviar um valor de ordem de serviço.");
+            return false;
         }
-        return { exists: false, id: -1 };
+        this.ordServ = dataJson.ordServ;
+        this.cpf = dataJson.cpf;
+        this.defeito = dataJson.defeito;
+        this.nome = dataJson.nome;
+        this.telPrimario = dataJson.telPrimario;
+        this.data = new Date(dataJson.data);
+        this.dia = this.data.getDate();
+        this.mes = this.data.getMonth() + 1;
+        this.imei = dataJson.imei;
+        this.endereco = dataJson.endereco;
+        this.marca = dataJson.marca;
+        this.modelo = dataJson.modelo;
+        this.telSecundario = dataJson.telSecundario;
+        this.email = dataJson.email;
+        this.realizado = dataJson.realizado;
+        this.pecas = dataJson.pecas;
+        this.servico = dataJson.servico;
+        this.maoObra = dataJson.maoObra;
+        this.valorFinal = dataJson.valorFinal;
+        this.metPag = dataJson.metPag;
+        this.observacoes = dataJson.observacoes;
+        this.initialized = true;
+        return true;
     };
-    CardStore.prototype.updateCard = function (cardId, card) {
-        //console.log("update" + this.cards[parseInt(cardId)].defeito);
-        var cardID = parseInt(cardId);
-        this.cards[cardID].estado = card.estado;
-        this.cards[cardID].bd_id = card.bd_id;
-        this.cards[cardID].defeito = card.defeito;
-        this.cards[cardID].nome = card.nome;
-        this.cards[cardID].telPrimario = card.telPrimario;
-        this.cards[cardID].data = card.data;
-        this.cards[cardID].dia = card.data.getDate();
-        this.cards[cardID].mes = card.data.getMonth() + 1;
-        this.cards[cardID].imei = card.imei;
-        this.cards[cardID].endereco = card.endereco;
-        this.cards[cardID].marca = card.marca;
-        this.cards[cardID].modelo = card.modelo;
-        this.cards[cardID].telSecundario = card.telSecundario;
-        this.cards[cardID].email = card.email;
-        this.cards[cardID].realizado = card.realizado;
-        this.cards[cardID].pecas = card.pecas;
-        this.cards[cardID].servico = card.servico;
-        this.cards[cardID].maoObra = card.maoObra;
-        this.cards[cardID].valorFinal = card.valorFinal;
-        this.cards[cardID].metPag = card.metPag;
-        this.cards[cardID].observacoes = card.observacoes;
-    };
-    CardStore.prototype._addCard = function (card) {
-        card.id = String(this.lastId++);
-        this.cards[card.id] = card;
-        return card.id;
-    };
-    CardStore.prototype.newCard = function (estado, cpf, id, defeito, nome, telPrimario, data, imei, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag, observacoes, ordServ) {
-        var card = new __WEBPACK_IMPORTED_MODULE_0__cardSchema__["a" /* CardSchema */]();
-        card.estado = estado;
-        card.cpf = cpf;
-        card.bd_id = id;
-        card.defeito = defeito;
-        card.nome = nome;
-        card.telPrimario = telPrimario;
-        card.data = data;
-        card.dia = data.getDate();
-        card.mes = data.getMonth() + 1;
-        card.imei = imei;
-        card.endereco = endereco;
-        card.marca = marca;
-        card.modelo = modelo;
-        card.telSecundario = telSecundario;
-        card.email = email;
-        card.realizado = realizado;
-        card.pecas = pecas;
-        card.servico = servico;
-        card.maoObra = maoObra;
-        card.valorFinal = valorFinal;
-        card.metPag = metPag;
-        card.observacoes = observacoes;
-        card.ordServ = ordServ;
-        return (this._addCard(card));
-    };
-    CardStore.prototype.removeCard = function (cardId) {
-        for (var i = 0; i < this.lastId; i++) {
-            if (this.cards[i].id == cardId) {
-                for (var j = i; j < this.lastId - 1; j++) {
-                    this.cards[j] = this.cards[j + 1];
-                }
-                delete this.cards[this.lastId];
-                this.lastId--;
-                return true;
-            }
+    Card.prototype.updateCard = function (dataJson) {
+        if (!this.checkInitialized()) {
+            console.log("Não foi possivel obter a ordem de serviço pois o cartão não foi inicializado.");
+            return false;
         }
-        return false;
+        this.cpf = dataJson.cpf;
+        this.defeito = dataJson.defeito;
+        this.nome = dataJson.nome;
+        this.telPrimario = dataJson.telPrimario;
+        this.data = dataJson.data;
+        this.dia = dataJson.data.getDate();
+        this.mes = dataJson.data.getMonth() + 1;
+        this.imei = dataJson.imei;
+        this.endereco = dataJson.endereco;
+        this.marca = dataJson.marca;
+        this.modelo = dataJson.modelo;
+        this.telSecundario = dataJson.telSecundario;
+        this.email = dataJson.email;
+        this.realizado = dataJson.realizado;
+        this.pecas = dataJson.pecas;
+        this.servico = dataJson.servico;
+        this.maoObra = dataJson.maoObra;
+        this.valorFinal = dataJson.valorFinal;
+        this.metPag = dataJson.metPag;
+        this.observacoes = dataJson.observacoes;
+        return true;
     };
-    return CardStore;
+    Card.prototype.getOrdServ = function () {
+        if (this.initialized)
+            return this.ordServ;
+        else {
+            console.log("Não foi possivel obter a ordem de serviço pois o cartão não foi inicializado.");
+            return "";
+        }
+    };
+    Card.prototype.jsonBuilder = function (ordServ, cpf, defeito, nome, telPrimario, data, imei, endereco, marca, modelo, telSecundario, email, realizado, pecas, servico, maoObra, valorFinal, metPag, observacoes) {
+        if (ordServ === undefined || ordServ == "") {
+            console.log("Json não gerado, é necessário enviar um valor de ordem de serviço.");
+            return "";
+        }
+        var ret = "";
+        ret = "{\n" +
+            "ordServ : '" + ordServ + "',\n" +
+            "cpf : '" + cpf + "',\n" +
+            "defeito: '" + defeito + "',\n" +
+            "nome: '" + nome + "',\n" +
+            "telPrimario : '" + telPrimario + "',\n" +
+            "data : " + data + ",\n" +
+            "imei : " + imei + ",\n" +
+            "endereco : " + endereco + ",\n" +
+            "marca : " + marca + ",\n" +
+            "modelo : " + modelo + ",\n" +
+            "telSecundario : " + telSecundario + ",\n" +
+            "valorFinal : " + valorFinal + ",\n" +
+            "metPag : " + metPag + ",\n" +
+            "observacoes : " + observacoes + ",\n" +
+            "}";
+        return ret;
+    };
+    Card.prototype.getJson = function () {
+        var json = Object();
+        json.ordServ = this.ordServ;
+        json.cpf = this.cpf;
+        json.defeito = this.defeito;
+        json.nome = this.nome;
+        json.telPrimario = this.telPrimario;
+        json.data = this.data;
+        json.dia = this.dia;
+        json.mes = this.mes;
+        json.imei = this.imei;
+        json.endereco = this.endereco;
+        json.marca = this.marca;
+        json.modelo = this.modelo;
+        json.telSecundario = this.telSecundario;
+        json.email = this.email;
+        json.realizado = this.realizado;
+        json.pecas = this.pecas;
+        json.servico = this.servico;
+        json.maoObra = this.maoObra;
+        json.valorFinal = this.valorFinal;
+        json.metPag = this.metPag;
+        json.observacoes = this.observacoes;
+        return json;
+    };
+    Card.prototype.checkInitialized = function () {
+        return this.initialized;
+    };
+    return Card;
 }());
 
 
@@ -1040,7 +1050,7 @@ var ListSchema = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/acompanhamento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"padding-left: 5px;\">\r\n  <app-list (click)=\"clicked($event)\" (drop)=\"drop($event)\" *ngFor=\"let list of lists\" [list]=\"list\" [cardStore]=\"cardStore\"></app-list>\r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"padding-left: 5px;\">\r\n  <app-list (click)=\"clicked($event)\" (drop)=\"drop($event)\" *ngFor=\"let list of lists\" [list]=\"list\"></app-list>\r\n</div>"
 
 /***/ }),
 
@@ -1089,11 +1099,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
+/*----------------------------------ClienteAtenderComponent--------------------------------------*/
 var ClienteAtenderComponent = (function () {
     function ClienteAtenderComponent(dialogRef, data) {
         this.dialogRef = dialogRef;
         this.data = data;
-        this.periodos = [{ value: 'Manhã' }, { value: 'Tarde' }];
         this.reducedID = this.data.ordServ.substring(17, 24);
     }
     ClienteAtenderComponent.prototype.onNoClick = function () {
@@ -1101,13 +1111,6 @@ var ClienteAtenderComponent = (function () {
     };
     ClienteAtenderComponent.prototype.ngOnInit = function () {
     };
-    ClienteAtenderComponent.prototype.thermalPrintVisao = function () {
-        var w = window.open();
-        w.document.write("Pagina de visao do tecnicoaa <br> " + this.data.defeito);
-        w.print();
-        w.close();
-    };
-    ;
     ClienteAtenderComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-cliente-atender',
@@ -1120,17 +1123,19 @@ var ClienteAtenderComponent = (function () {
     return ClienteAtenderComponent;
 }());
 
+/*----------------------------------AtendimentoComponent-----------------------------------------*/
 var AtendimentoComponent = (function () {
     function AtendimentoComponent(dialogRef, data) {
         this.dialogRef = dialogRef;
         this.data = data;
-        this.periodos = [
+        this.metPag = [
             { value: 'Débito' },
             { value: 'Crédito' },
             { value: 'Cheque' },
             { value: 'Dinheiro' },
         ];
-        this.options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        this.options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
+            minute: '2-digit', second: '2-digit' };
         this.reducedID = this.data.ordServ.substring(17, 24);
     }
     AtendimentoComponent.prototype.sumTotalValue = function () {
@@ -1186,8 +1191,6 @@ var AtendimentoComponent = (function () {
         //w.print();    
     };
     ;
-    //<span> <strong> Observações/senha: </strong>'+ this.data.observacoes + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +'</span>\
-    //    <span style><strong>Observações/senha: </strong> '+ this.data.observacoes + '</span> <span style="float: right;"> __________________________ </span> </body> </html>';
     AtendimentoComponent.prototype.ngOnInit = function () {
     };
     AtendimentoComponent = __decorate([
@@ -1202,6 +1205,7 @@ var AtendimentoComponent = (function () {
     return AtendimentoComponent;
 }());
 
+/*----------------------------------AcompanhamentoComponent---------------------------------------*/
 var AcompanhamentoComponent = (function () {
     function AcompanhamentoComponent(http, dialog, ordaDataService) {
         var _this = this;
@@ -1213,253 +1217,15 @@ var AcompanhamentoComponent = (function () {
         this.url = "http://myas.com.br";
         //List names for the backend requests be directly to the right collection
         this.listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
-        if (window.location.href.match(/www/) != null) {
-            console.log("das me: " + window.location.href);
-            this.url = "http://www.myas.com.br";
-        }
-        else {
-            if (window.location.href.match(/local/) != null) {
-                this.url = "http://localhost";
-            }
-            else {
-                this.url = "http://myas.com.br";
-            }
-        }
+        //All the ids of lists that will not popup when clicked
+        this.listNoPopUp = [4];
+        //All the ids of lists that will no move with the dropFunction
+        this.listNoMove = [4];
+        var aux = this.listsNames.length;
+        this.listSize = aux;
         this.ordaDataService.getOrcasList().subscribe(function (lists) { return _this.lists = lists; });
-        this.ordaDataService.getCardStore().subscribe(function (cardStore) { return _this.cardStore = cardStore; });
     }
     AcompanhamentoComponent.prototype.ngOnInit = function () {
-    };
-    AcompanhamentoComponent.prototype.clickOrcamento = function (idCard, idList) {
-        var _this = this;
-        var card = this.cardStore.getCard(idCard);
-        console.log(card);
-        var dialogRef = this.dialog.open(ClienteAtenderComponent, {
-            width: '44vw',
-            data: card
-        });
-        dialogRef.afterClosed().subscribe(function (result) {
-            //console.log('The dialog was closed' + result.defeito );
-            //Dando ruim com alterações consecutivas
-            if (result != null) {
-                result.bd_id = card.bd_id;
-                card.defeito = result.defeito;
-                card.marca = result.marca;
-                card.modelo = result.modelo;
-                card.data = result.data;
-                card.periodo = result.periodo;
-                card.observacoes = result.observacoes;
-                _this.cardStore.updateCard(idCard, card);
-                var req = _this.http.post(_this.url + '/api/update_' + _this.listsNames[idList], result)
-                    .subscribe(function (res) {
-                    console.log("");
-                }, function (err) {
-                    console.log("Error occured: " + err.error.message);
-                });
-            }
-        });
-    };
-    AcompanhamentoComponent.prototype.clickVisited = function (idCard, idList) {
-        var _this = this;
-        //Get the card with the card id
-        var card = this.cardStore.getCard(idCard);
-        //Open the pop up with the card infos
-        var dialogRef = this.dialog.open(AtendimentoComponent, {
-            width: '44vw',
-            data: card
-        });
-        console.log("meu card:" + card.modelo);
-        //After the dialog is closed thats the called function
-        dialogRef.afterClosed().subscribe(function (result) {
-            //In case the user pressed confirm
-            if (result != null) {
-                //Remove the card from the old list and insert in the new while sorting by the date the cards in the new list
-                //Associando as propriedades para enviar o json certinho
-                result.bd_id = card.bd_id;
-                card.defeito = result.defeito;
-                card.marca = result.marca;
-                card.modelo = result.modelo;
-                card.realizado = result.realizado;
-                card.pecas = result.pecas;
-                card.servico = result.servico;
-                card.maoObra = result.maoObra;
-                card.valorFinal = result.valorFinal;
-                card.metPag = result.metPag;
-                card.observacoes = result.observacoes;
-                //Atualizando o card na store com as novas informações dele
-                _this.cardStore.updateCard(idCard, card);
-                //Send the req to the backend to update the orca
-                var req = _this.http.post(_this.url + '/api/update_' + _this.listsNames[idList], result)
-                    .subscribe(function (res) {
-                    console.log("");
-                }, function (err) {
-                    console.log("Error occured: " + err.error.message);
-                });
-            }
-        });
-    };
-    AcompanhamentoComponent.prototype.openDialogFinalizado = function (cardID) {
-        var _this = this;
-        //Get the card with the card id
-        var card = this.cardStore.getCard(cardID);
-        if (card == undefined) {
-            console.log("Problamas ao obter o card.");
-            return;
-        }
-        //Open the pop up with the card infos
-        var dialogRef = this.dialog.open(AtendimentoComponent, {
-            width: '44vw',
-            data: card
-        });
-        //After the dialog is closed thats the called function
-        dialogRef.afterClosed().subscribe(function (result) {
-            //In case the user pressed confirm
-            if (result != null) {
-                //Associando as propriedades para enviar o json certinho
-                card.defeito = result.defeito;
-                card.marca = result.marca;
-                card.modelo = result.modelo;
-                card.realizado = result.realizado;
-                card.pecas = result.pecas;
-                card.servico = result.servico;
-                card.maoObra = result.maoObra;
-                card.valorFinal = result.valorFinal;
-                card.metPag = result.metPag;
-                card.observacoes = result.observacoes;
-                var commandRemove = '';
-                //Getting the current list of the card
-                var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID >= 4) {
-                    console.log("Ocorreu um erro ao mover o cartão.");
-                    return;
-                }
-                else {
-                    commandRemove = '/api/remove_' + _this.listsNames[currentStatus.listID];
-                }
-                if (!_this.ordaDataService.addAndRemove('/api/add_finalizado', commandRemove, card)) {
-                    console.log("Ocorreu um erro na função addAndRemove.");
-                }
-            }
-        });
-    };
-    AcompanhamentoComponent.prototype.openDialogrtVisita = function (cardID) {
-        var _this = this;
-        //Get the card with the card id
-        var card = this.cardStore.getCard(cardID);
-        if (card == undefined) {
-            console.log("Problamas ao obter o card.");
-            return;
-        }
-        //Open the pop up with the card infos
-        var dialogRef = this.dialog.open(AtendimentoComponent, {
-            width: '44vw',
-            data: card
-        });
-        //After the dialog is closed thats the called function
-        dialogRef.afterClosed().subscribe(function (result) {
-            //In case the user pressed confirm
-            if (result != null) {
-                //Associando as propriedades para enviar o json certinho
-                card.realizado = result.realizado;
-                card.pecas = result.pecas;
-                card.servico = result.servico;
-                card.maoObra = result.maoObra;
-                card.valorFinal = result.valorFinal;
-                card.metPag = result.metPag;
-                card.observacoes = result.observacoes;
-                var commandRemove = '';
-                //Getting the current list of the card
-                var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID >= 4) {
-                    console.log("Ocorreu um erro ao mover o cartão.");
-                    return;
-                }
-                else {
-                    commandRemove = '/api/remove_' + _this.listsNames[currentStatus.listID];
-                }
-                if (!_this.ordaDataService.addAndRemove('/api/add_rtVisita', commandRemove, card)) {
-                    console.log("Ocorreu um erro na função addAndRemove.");
-                }
-            }
-        });
-    };
-    AcompanhamentoComponent.prototype.openDialogagPecas = function (cardID) {
-        var _this = this;
-        //Get the card with the card id
-        var card = this.cardStore.getCard(cardID);
-        if (card == undefined) {
-            console.log("Problamas ao obter o card.");
-            return;
-        }
-        //Open the pop up with the card infos
-        var dialogRef = this.dialog.open(AtendimentoComponent, {
-            width: '44vw',
-            data: card
-        });
-        //After the dialog is closed thats the called function
-        dialogRef.afterClosed().subscribe(function (result) {
-            //In case the user pressed confirm
-            if (result != null) {
-                //Associando as propriedades para enviar o json certinho
-                card.realizado = result.realizado;
-                card.pecas = result.pecas;
-                card.servico = result.servico;
-                card.maoObra = result.maoObra;
-                card.valorFinal = result.valorFinal;
-                card.metPag = result.metPag;
-                card.observacoes = result.observacoes;
-                var commandRemove = '';
-                //Getting the current list of the card
-                var currentStatus = _this.ordaDataService.whichList(card.id);
-                console.log(currentStatus);
-                if (currentStatus.listID == -1 || currentStatus.listID >= 4) {
-                    console.log("Ocorreu um erro ao mover o cartão.");
-                    return;
-                }
-                else {
-                    commandRemove = '/api/remove_' + _this.listsNames[currentStatus.listID];
-                }
-                if (!_this.ordaDataService.addAndRemove('/api/add_agPecas', commandRemove, card)) {
-                    console.log("Ocorreu um erro na função addAndRemove.");
-                }
-            }
-        });
-    };
-    AcompanhamentoComponent.prototype.openDialogPagamento = function (cardID) {
-        var _this = this;
-        //Get the card with the card id
-        var card = this.cardStore.getCard(cardID);
-        //Open the pop up with the card infos
-        var dialogRef = this.dialog.open(AtendimentoComponent, {
-            width: '44vw',
-            data: card
-        });
-        //After the dialog is closed thats the called function
-        dialogRef.afterClosed().subscribe(function (result) {
-            //In case the user pressed confirm
-            if (result != null) {
-                //Associando as propriedades para enviar o json certinho
-                card.realizado = result.realizado;
-                card.pecas = result.pecas;
-                card.servico = result.servico;
-                card.maoObra = result.maoObra;
-                card.valorFinal = result.valorFinal;
-                card.metPag = result.metPag;
-                var commandRemove = '';
-                //Getting the current list of the card
-                var currentStatus = _this.ordaDataService.whichList(card.id);
-                if (currentStatus.listID == -1 || currentStatus.listID >= 5) {
-                    console.log("Ocorreu um erro ao mover o cartão.");
-                    return;
-                }
-                else {
-                    commandRemove = '/api/remove_' + _this.listsNames[currentStatus.listID];
-                }
-                if (!_this.ordaDataService.addAndRemove('/api/add_pagamento', commandRemove, card)) {
-                    console.log("Ocorreu um erro na função addAndRemove.");
-                }
-            }
-        });
     };
     AcompanhamentoComponent.prototype.clicked = function (event) {
         var target = event.target;
@@ -1472,9 +1238,14 @@ var AcompanhamentoComponent = (function () {
             target = target.parentNode;
         }
         //The list ID, the one that the card is being clicked
-        var listID = parseInt(target.id.substring(1, 2));
+        var listID = target.id;
         //Checking if is the "finalizado" column so a pop up wont be oppened
-        if (listID >= 4) {
+        if (listID >= this.listSize - 1) {
+            console.log("Erro você clicou em uma coluna que não existe.");
+            return;
+        }
+        if (this.listNoPopUp.includes(listID)) {
+            console.log("Essa coluna não pode exibir popups.");
             return;
         }
         if (listID == 0) {
@@ -1493,39 +1264,121 @@ var AcompanhamentoComponent = (function () {
         while (target.className !== 'list') {
             target = target.parentNode;
         }
-        //Old list ID, the one it came from
-        var oldList = parseInt(cardNlist.substring(1, 2));
-        //New list ID, the one that the card is being dropped
-        var newList = parseInt(target.id.substring(1, 2));
+        //The one it came from
+        var fromList = parseInt(cardNlist.substring(0, 1));
+        //The one that the card is being dropped
+        var toList = target.id;
         //The card that is being dropped id from the cardStore
-        var cardID = cardNlist.substring(2, cardNlist.length);
+        var ordServ = cardNlist.substring(1, cardNlist.length);
         //If the list the card is being dropped is the same if came from just return and do nothing
-        if (oldList == newList) {
+        if (fromList == toList) {
+            console.log("Você tentou mover um card para propria coluna.");
             return;
         }
-        if (oldList == 4) {
+        if (this.listNoMove.includes(fromList)) {
+            console.log("Você esta tentando mover uma lista com movimento bloqueado.");
             return;
         }
-        //If the list is dropped from the second list to the third
-        if (newList == 1) {
-            console.log("zb");
-            this.openDialogagPecas(cardID);
+        this.moveCard(ordServ, fromList, toList);
+    };
+    AcompanhamentoComponent.prototype.getCard = function (ordServ, listID) {
+        var card = null;
+        //Searching the clicked card on the list
+        for (var i = 0; i < this.lists[listID].cards.length; i++) {
+            if (this.lists[listID].cards[i].getOrdServ() == ordServ) {
+                card = this.lists[listID].cards[i];
+                break;
+            }
         }
-        //If the list is dropped from the second list to the third
-        if (newList == 2) {
-            console.log("zc");
-            this.openDialogrtVisita(cardID);
+        if (card == null) {
+            console.log("Não foi possivel achar o cartão de ordServ " + ordServ + " na lista " + listID + ".");
+            return null;
         }
-        //If the list is dropped from the second list to the third
-        if (newList == 3) {
-            console.log("ze");
-            this.openDialogPagamento(cardID);
-        }
-        //If the list is dropped from the second list to the third
-        if (newList == 4) {
-            console.log("zf");
-            this.openDialogFinalizado(cardID);
-        }
+        return card;
+    };
+    AcompanhamentoComponent.prototype.clickOrcamento = function (ordServ, listID) {
+        var _this = this;
+        var card = this.getCard(ordServ, listID);
+        if (card == null)
+            return;
+        var dialogRef = this.dialog.open(ClienteAtenderComponent, {
+            width: '44vw',
+            data: card
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            //Result is a json of all form data
+            if (result != null) {
+                //Relating the result information with the card information
+                card.defeito = result.defeito;
+                card.marca = result.marca;
+                card.modelo = result.modelo;
+                card.data = result.data;
+                card.observacoes = result.observacoes;
+                card.updateCard(card.getJson());
+                //Sending this update to service
+                _this.ordaDataService.addAndRemove(card, listID, listID);
+            }
+        });
+    };
+    AcompanhamentoComponent.prototype.clickVisited = function (ordServ, listID) {
+        var _this = this;
+        var card = this.getCard(ordServ, listID);
+        if (card == null)
+            return;
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoComponent, {
+            width: '44vw',
+            data: card
+        });
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+            //In case the user pressed confirm
+            if (result != null) {
+                //Relating the result information with the card information
+                card.defeito = result.defeito;
+                card.marca = result.marca;
+                card.modelo = result.modelo;
+                card.realizado = result.realizado;
+                card.pecas = result.pecas;
+                card.servico = result.servico;
+                card.maoObra = result.maoObra;
+                card.valorFinal = result.valorFinal;
+                card.metPag = result.metPag;
+                card.observacoes = result.observacoes;
+                //Sending this update to service
+                _this.ordaDataService.addAndRemove(card, listID, listID);
+            }
+        });
+    };
+    AcompanhamentoComponent.prototype.moveCard = function (ordServ, fromList, toList) {
+        var _this = this;
+        var card = this.getCard(ordServ, fromList);
+        if (card == null)
+            return;
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoComponent, {
+            width: '44vw',
+            data: card
+        });
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+            //In case the user pressed confirm
+            if (result != null) {
+                //Relating the result information with the card information
+                card.defeito = result.defeito;
+                card.marca = result.marca;
+                card.modelo = result.modelo;
+                card.realizado = result.realizado;
+                card.pecas = result.pecas;
+                card.servico = result.servico;
+                card.maoObra = result.maoObra;
+                card.valorFinal = result.valorFinal;
+                card.metPag = result.metPag;
+                card.observacoes = result.observacoes;
+                //Sending this update to service
+                _this.ordaDataService.addAndRemove(card, fromList, toList);
+            }
+        });
     };
     AcompanhamentoComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1546,7 +1399,7 @@ var AcompanhamentoComponent = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\t\t<button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\r\n\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"periodo\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of periodos\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\t\t<button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\r\n\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"metPag\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of metPag\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
 
 /***/ }),
 
@@ -2063,7 +1916,6 @@ var FormDadosClienteComponent = (function () {
     };
     FormDadosClienteComponent.prototype.orcaForm = function (myForm) {
         var _this = this;
-        console.log("value " + this.orca.cpf);
         //cheking if any required field is empty
         if (myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID") {
             var config_3 = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
@@ -2083,11 +1935,10 @@ var FormDadosClienteComponent = (function () {
             myForm.value.telSecundario = _this.auxCliente.telSecundario;
             myForm.value.email = _this.auxCliente.email;
             myForm.value.endereco = _this.auxCliente.endereco;
-            _this.ordaDataService.addCardDB('/api/add_atendimento', myForm.value, true);
-        }),
-            function (err) {
-                console.log(err.error.message);
-            };
+            _this.ordaDataService.addNewCard(myForm.value, 0);
+        }, function (err) {
+            console.log(err.error.message);
+        });
         var config = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatSnackBarConfig */]();
         config.extraClasses = ['custom-class'];
         config.duration = 3000;
@@ -2114,7 +1965,8 @@ var FormDadosClienteComponent = (function () {
             if (data != null) {
                 delete data._id;
                 //Setting the form values
-                _this.form.setValue(data);
+                _this.form.setValue({ cpf: data.cpf, nome: data.nome, telPrimario: data.telPrimario, telSecundario: data.telSecundario,
+                    email: data.email, endereco: data.endereco });
                 _this.orca.cpf = data.cpf;
                 _this.update = true;
             }
@@ -2657,7 +2509,7 @@ var LoginComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrcaDataService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_cardStore__ = __webpack_require__("../../../../../src/app/common_components/schemas/cardStore.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__ = __webpack_require__("../../../../../src/app/common_components/schemas/card.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__ = __webpack_require__("../../../../rxjs/_esm5/observable/of.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__socketComunicator_socketComunicator_service__ = __webpack_require__("../../../../../src/app/services/socketComunicator/socketComunicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2681,44 +2533,60 @@ var OrcaDataService = (function () {
         this.socketService = socketService;
         this.url = "http://myas.com.br";
         //List names for the backend requests be directly to the right collection
-        this.listsNames = ["atendimentos", "agPecas", "rtVisita", "pagamento", "finalizados"];
+        this.listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
+        this.iMadeTheChange = false;
+        this.initialize();
         socketService.initSocket();
-        this.ioConnection = this.socketService.getChanges()
-            .subscribe(function (message) {
-            _this.reloadChanges(message);
+        //Setting what the service will do when recive and change signal from the socket
+        this.ioConnection = this.socketService.getChanges().subscribe(function (message) {
+            if (!_this.iMadeTheChange) {
+                console.log("Mensagem recebida");
+                console.log(message);
+                var msgJson = message;
+                var cardAux = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__["a" /* Card */]();
+                var fromList = msgJson.fromList;
+                var toList = msgJson.toList;
+                delete msgJson.fromList;
+                delete msgJson.toList;
+                cardAux.init(msgJson);
+                console.log(cardAux);
+                _this.moveCardFront(cardAux, fromList, toList);
+            }
+            else {
+                _this.iMadeTheChange = false;
+            }
         });
-        //Initializing orca list
+    }
+    OrcaDataService.prototype.initialize = function () {
         var listsAux = [
             {
                 name: 'Em Análise',
                 cards: [],
-                id: "l0"
+                id: 0
             },
             {
                 name: 'Aguardando Peças',
                 cards: [],
-                id: "l1"
+                id: 1
             },
             {
                 name: 'Em conserto',
                 cards: [],
-                id: "l2"
+                id: 2
             },
             {
                 name: 'Pagamento',
                 cards: [],
-                id: "l3"
+                id: 3
             },
             {
                 name: 'Clientes finalizados',
                 cards: [],
-                id: "l4"
+                id: 4
             }
         ];
         this.lists = listsAux;
-        this.cardStore = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_cardStore__["a" /* CardStore */]();
         if (window.location.href.match(/www/) != null) {
-            console.log("das me: " + window.location.href);
             this.url = "http://www.myas.com.br";
         }
         else {
@@ -2730,85 +2598,59 @@ var OrcaDataService = (function () {
             }
         }
         this.requestAllOrcas();
-    }
-    OrcaDataService.prototype.reloadChanges = function (message) {
-        //console.log("Houve um alteração, atualizando cards.");
-        //console.log(message);
-        var messageJson = JSON.parse(message);
-        //Reloading the list with new cards
-        if (messageJson.listAdded == "/api/add_atendimentos") {
-            this.requestOrca(0);
-        }
-        else if (messageJson.listAdded == "/api/add_agPecas") {
-            this.requestOrca(1);
-        }
-        else if (messageJson.listAdded == "/api/add_rtVisita") {
-            this.requestOrca(2);
-        }
-        else if (messageJson.listAdded == "/api/add_pagamento") {
-            this.requestOrca(3);
-        }
-        else if (messageJson.listAdded == "/api/add_finalizados") {
-            this.requestOrca(4);
-        }
-        else {
-            if (messageJson.listAdded != "")
-                this.requestAllOrcas();
-        }
-        //Cleaning the list that lose cards
-        var listToReload = 0;
-        if (messageJson.listRemoved == "/api/remove_atendimentos") {
-            listToReload = 0;
-            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-            }
-            this.requestOrca(listToReload);
-        }
-        else if (messageJson.listRemoved == "/api/remove_agPecas") {
-            listToReload = 1;
-            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-            }
-            this.requestOrca(listToReload);
-        }
-        else if (messageJson.listRemoved == "/api/remove_rtVisita") {
-            listToReload = 2;
-            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-            }
-            this.requestOrca(listToReload);
-        }
-        else if (messageJson.listRemoved == "/api/remove_pagamento") {
-            listToReload = 3;
-            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-            }
-            this.requestOrca(listToReload);
-        }
-        else if (messageJson.listRemoved == "/api/remove_finalizados") {
-            listToReload = 4;
-            for (var i = 0; i <= this.lists[listToReload].cards.length - 1; i++) {
-                this.deleteCard(listToReload, Number(this.lists[listToReload].cards[i]));
-            }
-            this.requestOrca(listToReload);
-        }
     };
-    //Method to request orcas from db
+    //Method to request data from db
     OrcaDataService.prototype.requestOrca = function (i) {
         var _this = this;
-        this.http.get("/api/get_" + this.listsNames[i]).subscribe(function (data) {
+        console.log(this.url + "/api/get_" + this.listsNames[i]);
+        this.http.get(this.url + "/api/get_" + this.listsNames[i]).subscribe(function (data) {
             _this.dataHolder = data;
             for (var j = 0; j < _this.dataHolder.length; j++) {
-                var result = _this.cardStore.findCard(data[j]._id);
-                if (!result.exists) {
-                    //Adding to the right list
-                    var cardId = _this.cardStore.newCard("Orçamento", data[j].cpf, data[j]._id, data[j].defeito, data[j].nome, data[j].telPrimario, new Date(data[j].data), data[j].periodo, data[j].endereco, data[j].marca, data[j].modelo, data[j].telSecundario, data[j].email, data[j].realizado, data[j].pecas, data[j].servico, data[j].maoObra, data[j].valorFinal, data[j].metPag, data[j].observacoes, data[j]._id);
-                    _this.lists[i].cards.push(cardId);
+                //Checking if this card is alerady on this list
+                var isAleredy = false;
+                for (var k = 0; k < _this.lists[i].cards.length; k++) {
+                    if (_this.lists[i].cards[k].getOrdServ() == _this.dataHolder[j]) {
+                        isAleredy = true;
+                        break;
+                    }
                 }
+                if (isAleredy)
+                    continue;
+                //Adding the new card
+                var card = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__["a" /* Card */]();
+                //this.dataHolder[j].ordServ = this.dataHolder[j]._id;
+                console.log(_this.dataHolder[j]);
+                card.init(_this.dataHolder[j]);
+                _this.lists[i].cards.push(card);
             }
         }, function (err) {
             console.log("Error occured: " + err.error.message);
         });
+    };
+    OrcaDataService.prototype.moveCardFront = function (card, fromList, toList) {
+        //Checking if is needed to remove some card
+        if (fromList == -1) {
+            //Inserting the card on the new list
+            this.lists[toList].cards.push(card);
+            return true;
+        }
+        else {
+            //Delete the card from list
+            var listSize = this.lists[fromList].cards.length;
+            var found = false;
+            for (var i = 0; i < listSize; i++) {
+                if (this.lists[fromList].cards[i].getOrdServ() == card.getOrdServ()) {
+                    this.lists[fromList].cards.splice(i, 1);
+                    found = true;
+                    break;
+                }
+                if (found)
+                    break;
+            }
+            //Inserting the card on the new list
+            this.lists[toList].cards.push(card);
+            return true;
+        }
     };
     OrcaDataService.prototype.requestAllOrcas = function () {
         this.requestOrca(0);
@@ -2823,66 +2665,52 @@ var OrcaDataService = (function () {
     OrcaDataService.prototype.getOrcasList = function () {
         return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])(this.lists);
     };
-    OrcaDataService.prototype.getCardStore = function () {
-        return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])(this.cardStore);
-    };
     /*Apply some command in one list
       @Params:
       commandAdd: Url of the command to add the card on new list(send to back end)
       commandRemove: Url of the command to remove the card on new list(send to back end)
       card: The that will be changed
     */
-    OrcaDataService.prototype.addAndRemove = function (commandAdd, commandRemove, card) {
-        //Updating variable on service, to refresh all clients list
-        this.cardStore.updateCard(card.id, card);
-        //Obtaining the list id
-        var listAux = this.whichList(card.id);
-        //Updating lists to frontEnd
-        this.deleteCard(listAux.listID, card.id);
+    OrcaDataService.prototype.addAndRemove = function (card, fromList, toList) {
+        if (card == undefined) {
+            console.log("O cartão enviado para função 'addAndRemove' não é valido.");
+            return false;
+        }
+        console.log("Movendo da lista: " + fromList + " Pra lista " + toList + " o card \n");
+        console.log(card);
+        this.moveCardFront(card, fromList, toList);
+        this.iMadeTheChange = true;
         //Updating db and other clients
-        if (this.addCardDB(commandAdd, card) && this.removeCardDB(commandRemove, card)) {
-            if (commandAdd == "/api/add_atendimentos") {
-                this.requestOrca(0);
+        var self = this;
+        this.moveCardDB(fromList, toList, card, function (err, res) {
+            if (err) {
+                console.log("Não foi possivel fazer alterações no banco de dados.");
+                console.log("Erro: " + err.error.message);
+                return;
             }
-            else if (commandAdd == "/api/add_agPecas") {
-                this.requestOrca(1);
-            }
-            else if (commandAdd == "/api/add_rtVisita") {
-                this.requestOrca(2);
-            }
-            else if (commandAdd == "/api/add_pagamento") {
-                this.requestOrca(3);
-            }
-            else if (commandAdd == "/api/add_finalizados") {
-                this.requestOrca(4);
-            }
-            else {
-                this.requestAllOrcas();
-            }
-            this.requestGet('{\n"listRemoved": "' + commandRemove + '",\n"listAdded": "' + commandAdd +
-                '",\n"cardId": "' + card.id + '"\n}');
-        }
+            var toSend = Object();
+            toSend = card;
+            toSend.toList = toList;
+            toSend.fromList = fromList;
+            self.requestGet(toSend);
+        });
     };
-    OrcaDataService.prototype.addCardDB = function (commandAdd, card, recall) {
+    OrcaDataService.prototype.addNewCard = function (card, toList) {
         var _this = this;
-        if (recall === void 0) { recall = false; }
         //Adding card to another part of db
-        this.http.post(this.url + commandAdd, card).subscribe(function (res) {
-            if (recall)
-                _this.requestGet('{\n"listRemoved": "",\n"listAdded": "' + commandAdd +
-                    '",\n"cardId": "' + card.id + '"\n}');
-            return true;
-        }, function (err) {
-            console.log("Error occured: " + err.error.message);
-            return false;
-        });
-        if (recall)
-            this.requestGet('{\n"listRemoved": "",\n"listAdded": "' + commandAdd +
-                '",\n"cardId": "' + card.id + '"\n}');
-        return true;
-    };
-    OrcaDataService.prototype.removeCardDB = function (commandRemove, card) {
-        this.http.post(this.url + commandRemove, card).subscribe(function (res) {
+        this.http.post(this.url + "/api/add_" + this.listsNames[toList], card).subscribe(function (res) {
+            var aux = Object();
+            aux = res;
+            aux.ordServ = aux._id;
+            var cardAux = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__["a" /* Card */];
+            cardAux.init(aux);
+            var toSend = Object();
+            toSend = cardAux.getJson();
+            toSend.toList = toList;
+            toSend.fromList = -1;
+            _this.requestOrca(0);
+            _this.iMadeTheChange = true;
+            _this.requestGet(toSend);
             return true;
         }, function (err) {
             console.log("Error occured: " + err.error.message);
@@ -2890,23 +2718,33 @@ var OrcaDataService = (function () {
         });
         return true;
     };
-    OrcaDataService.prototype.whichList = function (cardID) {
-        var ret = { listID: -1, listName: "error" };
-        for (var i = 0; i < this.lists.length; i++) {
-            if (this.lists[i].cards.includes(cardID.toString())) {
-                ret = { listID: i, listName: this.lists[i].name };
-                break;
-            }
-        }
-        return ret;
+    OrcaDataService.prototype.removeCard = function (card, fromList) {
+        var _this = this;
+        //Adding card to another part of db
+        this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], card).subscribe(function (res) {
+            card.fromList = fromList;
+            _this.iMadeTheChange = true;
+            _this.requestGet(card);
+            return true;
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+            return false;
+        });
+        return true;
     };
-    OrcaDataService.prototype.deleteCard = function (listID, cardId) {
-        // Find and remove item from an array
-        var i = this.lists[listID].cards.indexOf(cardId.toString());
-        if (i != -1) {
-            this.lists[listID].cards.splice(i, 1);
-        }
-        this.cardStore.removeCard(cardId);
+    OrcaDataService.prototype.moveCardDB = function (fromList, toList, card, callback) {
+        if (callback === void 0) { callback = null; }
+        //Moving the card on DB
+        var toSend = Object();
+        toSend = card.getJson();
+        toSend.toList = this.listsNames[toList];
+        toSend.fromList = this.listsNames[fromList];
+        this.http.post(this.url + "/api/add_and_remove", toSend).subscribe(function (data) {
+            callback(null, data);
+        }, function (err) {
+            callback(err, null);
+        });
+        return true;
     };
     OrcaDataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

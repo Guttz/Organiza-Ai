@@ -29,6 +29,6 @@ module.exports = function(ass){
 				valorFinal: String,
 				metPag: String,
 				observacoes: String
-			});
+			}, { collection: 'agPecas' });
 	return db.model('agPecas', atendimento);
 }

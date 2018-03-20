@@ -1,7 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { CardSchema } from '../schemas/cardSchema';
+import { Card } from '../schemas/card';
 import { ListSchema } from '../schemas/listSchema';
-import { CardStore } from '../schemas/cardStore';
+
 
 @Component({
   selector: 'app-list',
@@ -11,7 +11,6 @@ import { CardStore } from '../schemas/cardStore';
 export class ListComponent implements OnInit {
 
   @Input() list: ListSchema;
-  @Input() cardStore: CardStore;
 
   constructor() { 
    }

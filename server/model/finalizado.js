@@ -29,7 +29,7 @@ module.exports = function(ass){
 				valorFinal: String,
 				metPag: String,
 				observacoes: String
-			});
+			},{ collection: 'finalizado' });
 	return db.model('finalizado', finalizado);
 }
 

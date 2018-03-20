@@ -1,18 +1,18 @@
-<div class="card" draggable="true"  (dragstart)="dragStart($event)" id="{{card.id}}">
+<div class="card" draggable="true"  (dragstart)="dragStart($event)" id="{{card.ordServ}}">
 
-<div id="{{card.id}}" >
-	<span ><b id="{{card.id}}" >   {{card.id}} {{reducedID}} - </b></span>
+<div id="{{card.ordServ}}" >
+	<span ><b id="{{card.ordServ}}" > {{reducedID}} - </b></span>
 
-	<span id="{{card.id}}">  <!-- {{card.id}} --> {{card.nome}}</span>
+	<span id="{{card.ordServ}}">  <!-- {{card.ordServ}} --> {{card.nome}}</span>
 
-<!-- 	<span  class="my-card-des"><b id="{{card.id}}" >{{card.estado}}</b></span> -->
+<!-- 	<span  class="my-card-des"><b id="{{card.ordServ}}" >{{card.estado}}</b></span> -->
 </div>
 
-<div id="{{card.id}}">
-	<span id="{{card.id}}" >Tel.</span>
-	<span class="my-card-des" > <b id="{{card.id}}" > <span id="{{card.id}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.periodo}} </b></span>
+<div id="{{card.ordServ}}">
+	<span id="{{card.ordServ}}" >Tel.</span>
+	<span class="my-card-des" > <b id="{{card.ordServ}}" > <span id="{{card.ordServ}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.imei}} </b></span>
 </div>
 
-<span id="{{card.id}}" >{{card.endereco}}</span>
+<span id="{{card.ordServ}}" >{{card.endereco}}</span>
 
 </div>

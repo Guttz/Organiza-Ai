@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CardSchema } from '../schemas/cardSchema';
-import { CardStore } from '../schemas/cardStore';
+import { Card } from '../schemas/card';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +7,7 @@ import { CardStore } from '../schemas/cardStore';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  @Input() card: CardSchema;
+  @Input() card: Card;
   
   reducedID;
 
@@ -17,8 +16,7 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.card);
-    this.reducedID = this.card.ordServ.substring(17, 24);
+    this.reducedID = this.card.getOrdServ().substring(17, 24);
     
   }
 
