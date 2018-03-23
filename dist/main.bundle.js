@@ -1080,9 +1080,10 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return AtendimentoComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AcompanhamentoComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orcaData_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orcaData/orca-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_components_schemas_card__ = __webpack_require__("../../../../../src/app/common_components/schemas/card.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orcaData_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orcaData/orca-data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1095,6 +1096,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+
 
 
 
@@ -1117,17 +1119,18 @@ var ClienteAtenderComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.scss")]
         }),
-        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MAT_DIALOG_DATA */])),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MatDialogRef */], Object])
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatDialogRef */], Object])
     ], ClienteAtenderComponent);
     return ClienteAtenderComponent;
 }());
 
 /*----------------------------------AtendimentoComponent-----------------------------------------*/
 var AtendimentoComponent = (function () {
-    function AtendimentoComponent(dialogRef, data) {
+    function AtendimentoComponent(dialogRef, data, ordaDataService) {
         this.dialogRef = dialogRef;
         this.data = data;
+        this.ordaDataService = ordaDataService;
         this.metPag = [
             { value: 'Débito' },
             { value: 'Crédito' },
@@ -1153,7 +1156,40 @@ var AtendimentoComponent = (function () {
     AtendimentoComponent.prototype.onNoClick = function () {
         this.dialogRef.close();
     };
+    AtendimentoComponent.prototype.deleteCard = function () {
+        var card = new __WEBPACK_IMPORTED_MODULE_1__common_components_schemas_card__["a" /* Card */]();
+        card.init(this.data);
+        this.ordaDataService.removeCardDB(card, this.data.listID);
+        this.ordaDataService.removeCardFront(card, this.data.listID);
+        this.dialogRef.close();
+    };
     AtendimentoComponent.prototype.thermalPrintAguardando = function () {
+        if (this.reducedID == undefined)
+            this.reducedID = "";
+        if (this.data.data == undefined)
+            this.data.data = "";
+        if (this.data.nome == undefined)
+            this.data.nome = "";
+        if (this.data.telPrimario == undefined)
+            this.data.telPrimario = "";
+        if (this.data.email == undefined)
+            this.data.email = "";
+        if (this.data.marca == undefined)
+            this.data.marca = "";
+        if (this.data.imei == undefined)
+            this.data.imei = "";
+        if (this.data.observacoes == undefined)
+            this.data.observacoes = "";
+        if (this.data.defeito == undefined)
+            this.data.defeito = "";
+        if (this.data.realizado == undefined)
+            this.data.realizado = "";
+        if (this.data.pecas == undefined)
+            this.data.pecas = "";
+        if (this.data.servico == undefined)
+            this.data.servico = "";
+        if (this.data.maoObra == undefined)
+            this.data.maoObra = "";
         var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
     <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
@@ -1169,7 +1205,7 @@ var AtendimentoComponent = (function () {
     <span style="font-size: 12px;">_______________________________________<br>\
     <span><strong>Observações/Senha:</strong></span> <br> \
     <div style="width: 135px; display: inline-block;"> \
-    <span>' + this.data.observacoes + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + '\
+    <span>' + this.data.observacoes + "" + '\
     </div> \
     <div style="width: 90px; display: inline-block; background: green;">\
     <img style="display: inline-block;" src="assets/images/lockscreen.png">\
@@ -1199,8 +1235,8 @@ var AtendimentoComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.scss")]
         }),
-        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MAT_DIALOG_DATA */])),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MatDialogRef */], Object])
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatDialogRef */], Object, __WEBPACK_IMPORTED_MODULE_4__services_orcaData_orca_data_service__["a" /* OrcaDataService */]])
     ], AtendimentoComponent);
     return AtendimentoComponent;
 }());
@@ -1325,10 +1361,13 @@ var AcompanhamentoComponent = (function () {
         var card = this.getCard(ordServ, listID);
         if (card == null)
             return;
+        var aux = Object();
+        aux = card;
+        aux.listID = listID;
         //Open the pop up with the card infos
         var dialogRef = this.dialog.open(AtendimentoComponent, {
             width: '44vw',
-            data: card
+            data: aux
         });
         //After the dialog is closed thats the called function
         dialogRef.afterClosed().subscribe(function (result) {
@@ -1386,8 +1425,8 @@ var AcompanhamentoComponent = (function () {
             template: __webpack_require__("../../../../../src/app/pages/acompanhamento/acompanhamento.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/acompanhamento.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MatDialog */],
-            __WEBPACK_IMPORTED_MODULE_3__services_orcaData_orca_data_service__["a" /* OrcaDataService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatDialog */],
+            __WEBPACK_IMPORTED_MODULE_4__services_orcaData_orca_data_service__["a" /* OrcaDataService */]])
     ], AcompanhamentoComponent);
     return AcompanhamentoComponent;
 }());
@@ -1399,7 +1438,7 @@ var AcompanhamentoComponent = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n\t\t<button fxFlexOffset=\"24\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\r\n\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"metPag\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of metPag\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n    <button fxFlexOffset=\"12\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n      <mat-icon>print</mat-icon>\r\n    </button>\r\n\t\t<button fxFlexOffset=\"12\" mat-icon-button (click)=\"deleteCard()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"metPag\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of metPag\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
 
 /***/ }),
 
@@ -2636,20 +2675,20 @@ var OrcaDataService = (function () {
         }
         else {
             //Delete the card from list
-            var listSize = this.lists[fromList].cards.length;
-            var found = false;
-            for (var i = 0; i < listSize; i++) {
-                if (this.lists[fromList].cards[i].getOrdServ() == card.getOrdServ()) {
-                    this.lists[fromList].cards.splice(i, 1);
-                    found = true;
-                    break;
-                }
-                if (found)
-                    break;
-            }
+            this.removeCardFront(card, fromList);
             //Inserting the card on the new list
             this.lists[toList].cards.push(card);
             return true;
+        }
+    };
+    OrcaDataService.prototype.removeCardFront = function (card, fromList) {
+        //Delete the card from list
+        var listSize = this.lists[fromList].cards.length;
+        for (var i = 0; i < listSize; i++) {
+            if (this.lists[fromList].cards[i].getOrdServ() == card.getOrdServ()) {
+                this.lists[fromList].cards.splice(i, 1);
+                return;
+            }
         }
     };
     OrcaDataService.prototype.requestAllOrcas = function () {
@@ -2718,11 +2757,15 @@ var OrcaDataService = (function () {
         });
         return true;
     };
-    OrcaDataService.prototype.removeCard = function (ordServ, fromList) {
+    OrcaDataService.prototype.removeCardDB = function (card, fromList) {
         var _this = this;
-        //Adding card to another part of db
-        this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ).subscribe(function (res) {
-            card.fromList = fromList;
+        //Removing the card from the list
+        var aux = Object();
+        aux = card;
+        aux.fromList = fromList;
+        card.fromList = fromList;
+        console.log(aux);
+        this.http.post(this.url + "/api/remove_card", aux).subscribe(function (res) {
             _this.iMadeTheChange = true;
             _this.requestGet(card);
             return true;

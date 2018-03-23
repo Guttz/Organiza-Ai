@@ -57,7 +57,8 @@ export class AtendimentoComponent implements OnInit
              minute: '2-digit', second: '2-digit' };
 
   constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any) 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private ordaDataService: OrcaDataService) 
   {
     this.reducedID = this.data.ordServ.substring(17, 24);
   }
@@ -83,7 +84,42 @@ export class AtendimentoComponent implements OnInit
     this.dialogRef.close();    
   }
 
+  deleteCard(): void
+  {
+    var card = new Card();
+    card.init(this.data);
+    this.ordaDataService.removeCardDB(card, this.data.listID);
+    this.ordaDataService.removeCardFront(card, this.data.listID);
+    this.dialogRef.close();
+  }
+
   thermalPrintAguardando(): void{
+    if(this.reducedID == undefined)
+      this.reducedID = "";
+    if(this.data.data == undefined)
+      this.data.data = "";
+    if(this.data.nome == undefined)
+      this.data.nome = "";
+    if(this.data.telPrimario == undefined)
+      this.data.telPrimario = "";
+    if(this.data.email == undefined)
+      this.data.email = "";
+    if(this.data.marca == undefined)
+      this.data.marca = "";
+    if(this.data.imei == undefined)
+      this.data.imei = "";
+    if(this.data.observacoes == undefined)
+      this.data.observacoes = "";
+    if(this.data.defeito == undefined)
+      this.data.defeito = "";
+    if(this.data.realizado == undefined)
+      this.data.realizado = "";
+    if(this.data.pecas == undefined)
+      this.data.pecas = "";
+    if(this.data.servico == undefined)
+      this.data.servico = "";
+    if(this.data.maoObra == undefined)
+      this.data.maoObra = "";
     var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
     <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
@@ -99,7 +135,7 @@ export class AtendimentoComponent implements OnInit
     <span style="font-size: 12px;">_______________________________________<br>\
     <span><strong>Observações/Senha:</strong></span> <br> \
     <div style="width: 135px; display: inline-block;"> \
-    <span>'+ this.data.observacoes + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +'\
+    <span>'+ this.data.observacoes + "" +'\
     </div> \
     <div style="width: 90px; display: inline-block; background: green;">\
     <img style="display: inline-block;" src="assets/images/lockscreen.png">\
@@ -301,10 +337,13 @@ export class AcompanhamentoComponent implements OnInit
       if(card == null)
         return;
 
+    var aux = Object();
+    aux = card;
+    aux.listID = listID;
     //Open the pop up with the card infos
     let dialogRef = this.dialog.open(AtendimentoComponent, {
       width: '44vw',
-      data: card
+      data: aux
     });
 
     //After the dialog is closed thats the called function

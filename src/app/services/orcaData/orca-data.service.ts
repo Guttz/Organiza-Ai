@@ -139,7 +139,6 @@ export class OrcaDataService
 
   public moveCardFront(card: Card, fromList: number, toList: number):boolean
   {
-
     //Checking if is needed to remove some card
     if(fromList == -1)
     {
@@ -150,26 +149,26 @@ export class OrcaDataService
     else
     {
       //Delete the card from list
-      var listSize = this.lists[fromList].cards.length;
-      var found = false;
-      for (var i = 0; i < listSize; i++) 
-      {
-        if(this.lists[fromList].cards[i].getOrdServ() == card.getOrdServ())
-        {
-          this.lists[fromList].cards.splice(i,1);
-          found = true;
-          break;
-        }
-        if(found)
-          break;
-      }
+      this.removeCardFront(card, fromList);
+    
       //Inserting the card on the new list
       this.lists[toList].cards.push(card);
       return true;
+    }    
+  }
+
+  public removeCardFront(card: Card, fromList: number)
+  {
+    //Delete the card from list
+    var listSize = this.lists[fromList].cards.length;
+    for (var i = 0; i < listSize; i++) 
+    {
+      if(this.lists[fromList].cards[i].getOrdServ() == card.getOrdServ())
+      {
+        this.lists[fromList].cards.splice(i,1);
+        return;
+      }
     }
-
-
-    
   }
 
   public requestAllOrcas()
@@ -255,12 +254,16 @@ export class OrcaDataService
     return true;
   }
 
-    public removeCard(ordServ: any, fromList: number):boolean
+  public removeCardDB(card: any, fromList: number):boolean
   {
-    //Adding card to another part of db
-    this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ ).subscribe(
+    //Removing the card from the list
+    var aux = Object();
+    aux = card;
+    aux.fromList = fromList;
+    card.fromList = fromList;
+    console.log(aux);
+    this.http.post(this.url + "/api/remove_card", aux ).subscribe(
       res => {
-        card.fromList = fromList;
         this.iMadeTheChange = true;
 
         this.requestGet(card);

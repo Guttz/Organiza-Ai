@@ -15,13 +15,14 @@ var ObjectId = require('mongodb').ObjectID;
 //var CT = require('../libs/country-list');
 var AM = require('../libs/account-manager');
 //var EM = require('../libs/email-dispatcher');
+var listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
+
 
 function checkSession(req)
 {
   console.log(req.session.user)
   if(req.session.user === undefined)
   {
-    console.log("cai enssa poha");
     return false;
   }
   return true;
@@ -145,24 +146,6 @@ router.post('/add_orca', function(req, res, next){
 
 });
 
-router.post('/remove_orca', function(req, res, next){
-  if(!checkSession(req))
-  {
-    return;
-  }
-  MongoClient.connect(url, function(err, db) {
-  
-  if (err) throw err;
-  
-  console.log("my body" + req.body.cpf);
-    
-  db.db(req.session.user.assistencia).collection("orca").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
-    if (err) throw err;
-    res.send(null);  
-    db.close();
-    });
-  });
-});
 
 router.get('/get_orcas', (req, res) => { 
   if(!checkSession(req))
@@ -276,24 +259,6 @@ router.get('/get_atendimento', (req, res) => {
   });
 });
 
-router.post('/remove_atendimento', function(req, res, next){
-  if(!checkSession(req))
-  {
-    return;
-  }
-  MongoClient.connect(url, function(err, db) {
-  
-  if (err) throw err;
-  
-  console.log("my body" + req.body.cpf);
-    
-  db.db(req.session.user.assistencia).collection("atendimento").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
-    if (err) throw err;
-    res.send(null);  
-    db.close();
-    });
-  });
-});
 
 router.post('/update_atendimento', function(req, res, next){
   if(!checkSession(req))
@@ -373,21 +338,44 @@ router.get('/get_agPecas', (req, res) => {
   });
 });
 
-router.post('/remove_agPecas', function(req, res, next){
+router.post('/remove_card', function(req, res, next)
+{
+  console.log("Executando remove_card.");
+  
+
   if(!checkSession(req))
   {
+    console.log("Não existe sesssion valida.");
     return;
   }
-  MongoClient.connect(url, function(err, db) {
-  
-  if (err) throw err;
-  
-  console.log("my body" + req.body.cpf);
-    
-  db.db(req.session.user.assistencia).collection("agpeca").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
-    if (err) throw err;
-    res.send(null);  
-    db.close();
+  if(req.body.fromList < 0 || req.body.fromList >= 5)
+  {
+    console.log("A coluna que o card está sendo removido não existe.");
+    return;
+  }
+  //Preparing the variables
+  var listName = listsNames[req.body.fromList];
+  model = require('../model/' + listName)(req.session.user.assistencia);
+  var body = req.body;
+  body.status = false;
+
+  MongoClient.connect(url, function(err, db) 
+  {
+    if (err) 
+      throw err;
+    //Deleting the card on db
+    db.db(req.session.user.assistencia).collection(listName).deleteOne(
+    { 
+      //specifying with card will be removed
+      ordServ: req.body.ordServ
+    },function(err, obj){
+      if (err){
+        throw err; 
+      } 
+      console.log("Finalizando remove_card com sucesso.");
+      res.send(null);  
+      db.close();
+
     });
   });
 });
@@ -470,24 +458,6 @@ router.get('/get_rtVisita', (req, res) => {
   });
 });
 
-router.post('/remove_rtVisita', function(req, res, next){
-  if(!checkSession(req))
-  {
-    return;
-  }
-  MongoClient.connect(url, function(err, db) {
-  
-  if (err) throw err;
-  
-  console.log("my body" + req.body.cpf);
-    
-  db.db(req.session.user.assistencia).collection("rtvisita").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
-    if (err) throw err;
-    res.send(null);  
-    db.close();
-    });
-  });
-});
 
 router.post('/update_rtVisita', function(req, res, next){
   if(!checkSession(req))
@@ -613,24 +583,6 @@ router.get('/get_pagamento', (req, res) =>
   });
 });
 
-router.post('/remove_pagamento', function(req, res, next){
-  if(!checkSession(req))
-  {
-    return;
-  }
-  MongoClient.connect(url, function(err, db) {
-  
-  if (err) throw err;
-  
-  console.log("my body" + req.body.cpf);
-    
-  db.db(req.session.user.assistencia).collection("pagamento").deleteOne({ _id: (new ObjectId(req.body.bd_id))}, function(err, obj) {
-    if (err) throw err;
-    res.send(null);  
-    db.close();
-    });
-  });
-});
 
 router.post('/update_pagamento', function(req, res, next){
   if(!checkSession(req))
