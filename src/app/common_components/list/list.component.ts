@@ -1,7 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Card } from '../schemas/card';
 import { ListSchema } from '../schemas/listSchema';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list',
@@ -9,10 +9,24 @@ import { ListSchema } from '../schemas/listSchema';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-
+  url = "http://myas.com.br"
   @Input() list: ListSchema;
 
-  constructor() { 
+  constructor(private http: HttpClient) {
+    if(window.location.href.match(/www/) != null){
+      console.log("das me: " + window.location.href);
+         this.url = "http://www.myas.com.br";
+       }
+      else{
+        if(window.location.href.match(/local/) != null){
+           this.url = "http://localhost";
+         }
+         else{
+           this.url = "http://myas.com.br";
+         }
+         
+     }
+
    }
 
   ngOnInit() {
@@ -61,6 +75,17 @@ export class ListComponent implements OnInit {
 */
   }
 
+  changHeader(){
+   var toSend = Object();
+   toSend[this.list.id] = this.list.name;
+
+    this.http.post(this.url + "/api/set_list_headers", toSend).subscribe(data => 
+    {
+      console.log(data);
+    }, err =>{
+      console.log("Erro na mudança de cabeçalho: " + err);
+    });
+  }
 
   compare(a,b) {
       if (a.id < b.id)

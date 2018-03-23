@@ -195,7 +195,8 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_forgot_password_forgot_password_component__ = __webpack_require__("../../../../../src/app/pages/forgot-password/forgot-password.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__ = __webpack_require__("../../../../../src/app/common_components/_guard/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_orcaData_orca_data_service__ = __webpack_require__("../../../../../src/app/services/orcaData/orca-data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_socketComunicator_socketComunicator_service__ = __webpack_require__("../../../../../src/app/services/socketComunicator/socketComunicator.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_userSettings_userSettings_service__ = __webpack_require__("../../../../../src/app/services/userSettings/userSettings.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_socketComunicator_socketComunicator_service__ = __webpack_require__("../../../../../src/app/services/socketComunicator/socketComunicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -238,6 +239,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 /*Import de bibliotecas*/
 
 /*Import das Páginas*/
+
 
 
 
@@ -312,7 +314,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
                 __WEBPACK_IMPORTED_MODULE_34__common_components_guard_auth_guard__["a" /* AuthGuard */],
                 __WEBPACK_IMPORTED_MODULE_35__services_orcaData_orca_data_service__["a" /* OrcaDataService */],
-                __WEBPACK_IMPORTED_MODULE_36__services_socketComunicator_socketComunicator_service__["a" /* SocketComunicator */]
+                __WEBPACK_IMPORTED_MODULE_36__services_userSettings_userSettings_service__["a" /* UserSettingsService */],
+                __WEBPACK_IMPORTED_MODULE_37__services_socketComunicator_socketComunicator_service__["a" /* SocketComunicator */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
             exports: []
@@ -479,7 +482,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/list/list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n  <p class=\"list__title\"><strong>  <!-- {{list.id}} --> {{list.name}} </strong></p>\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let currentCard of list.cards\" [card]=\"currentCard\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
+module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"drop($event)\" id=\"{{list.id}}\">\r\n\t<div class=\"list_border\">\r\n\r\n<!--   <p  class=\"list__title\" ><strong contenteditable=\"true\" (blur)=\"changHeader()\">  {{list.name}} </strong></p> -->\r\n<!-- {{list.id}} --> \r\n  <input  style= \"background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 2.3vh; padding-bottom: 1.5vh; padding-top: 1.5vh;\" (blur)=\"changHeader()\" type=\"text\" [(ngModel)]=\"list.name\">\r\n\r\n  <div (dragover)=\"allowDrop($event)\" class=\"cards\">\r\n    <app-card (dragstart)=\"dragStart($event)\" (dragover)=\"allowDrop($event)\" *ngFor=\"let currentCard of list.cards\" [card]=\"currentCard\"></app-card>\r\n  </div>\r\n\r\n</div>\r\n</div>"
 
 /***/ }),
 
@@ -490,6 +493,7 @@ module.exports = "<div class=\"list\" (dragover)=\"allowDrop($event)\" (drop)=\"
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__schemas_listSchema__ = __webpack_require__("../../../../../src/app/common_components/schemas/listSchema.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -501,8 +505,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var ListComponent = (function () {
-    function ListComponent() {
+    function ListComponent(http) {
+        this.http = http;
+        this.url = "http://myas.com.br";
+        if (window.location.href.match(/www/) != null) {
+            console.log("das me: " + window.location.href);
+            this.url = "http://www.myas.com.br";
+        }
+        else {
+            if (window.location.href.match(/local/) != null) {
+                this.url = "http://localhost";
+            }
+            else {
+                this.url = "http://myas.com.br";
+            }
+        }
     }
     ListComponent.prototype.ngOnInit = function () {
         //const cardId = this.cardStore.newCard("Orçamento",  "data[i]._id", "data[i].defeito", "data[i].nome", "data[i].telPrimario", new Date("01/01/2000") , "data[i].periodo", "data[i].endereco", "data[i].marca", "data[i].modelo", "data[i].telSecundario", "data[i].email", null, null, null, null, null, null);
@@ -543,6 +562,15 @@ var ListComponent = (function () {
             window.alert( this.list.cards );
         */
     };
+    ListComponent.prototype.changHeader = function () {
+        var toSend = Object();
+        toSend[this.list.id] = this.list.name;
+        this.http.post(this.url + "/api/set_list_headers", toSend).subscribe(function (data) {
+            console.log(data);
+        }, function (err) {
+            console.log("Erro na mudança de cabeçalho: " + err);
+        });
+    };
     ListComponent.prototype.compare = function (a, b) {
         if (a.id < b.id)
             return -1;
@@ -560,7 +588,7 @@ var ListComponent = (function () {
             template: __webpack_require__("../../../../../src/app/common_components/list/list.component.html"),
             styles: [__webpack_require__("../../../../../src/app/common_components/list/list.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
     ], ListComponent);
     return ListComponent;
 }());
@@ -2560,27 +2588,27 @@ var OrcaDataService = (function () {
     OrcaDataService.prototype.initialize = function () {
         var listsAux = [
             {
-                name: 'Em Análise',
+                name: '',
                 cards: [],
                 id: 0
             },
             {
-                name: 'Aguardando Peças',
+                name: '',
                 cards: [],
                 id: 1
             },
             {
-                name: 'Em conserto',
+                name: '',
                 cards: [],
                 id: 2
             },
             {
-                name: 'Pagamento',
+                name: '',
                 cards: [],
                 id: 3
             },
             {
-                name: 'Clientes finalizados',
+                name: '',
                 cards: [],
                 id: 4
             }
@@ -2658,6 +2686,7 @@ var OrcaDataService = (function () {
         this.requestOrca(2);
         this.requestOrca(3);
         this.requestOrca(4);
+        this.getListHeaders();
     };
     OrcaDataService.prototype.requestGet = function (msg) {
         this.socketService.sendChanges(msg);
@@ -2719,12 +2748,12 @@ var OrcaDataService = (function () {
         return true;
     };
     OrcaDataService.prototype.removeCard = function (ordServ, fromList) {
-        var _this = this;
         //Adding card to another part of db
         this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ).subscribe(function (res) {
-            card.fromList = fromList;
-            _this.iMadeTheChange = true;
-            _this.requestGet(card);
+            /*        card.fromList = fromList;
+                    this.iMadeTheChange = true;
+            
+                    this.requestGet(card);*/
             return true;
         }, function (err) {
             console.log("Error occured: " + err.error.message);
@@ -2733,6 +2762,31 @@ var OrcaDataService = (function () {
         return true;
     };
     OrcaDataService.prototype.moveCardDB = function (fromList, toList, card, callback) {
+        if (callback === void 0) { callback = null; }
+        //Moving the card on DB
+        var toSend = Object();
+        toSend = card.getJson();
+        toSend.toList = this.listsNames[toList];
+        toSend.fromList = this.listsNames[fromList];
+        this.http.post(this.url + "/api/add_and_remove", toSend).subscribe(function (data) {
+            callback(null, data);
+        }, function (err) {
+            callback(err, null);
+        });
+        return true;
+    };
+    OrcaDataService.prototype.getListHeaders = function () {
+        var _this = this;
+        this.http.get(this.url + "/api/get_list_headers").subscribe(function (data) {
+            for (var i = 0; i < _this.lists.length; i++) {
+                _this.lists[i].name = data[i];
+            }
+            console.log(data);
+        }, function (err) {
+            console.log("Erro ao carregar título das listas: + " + err);
+        });
+    };
+    OrcaDataService.prototype.setListHeaders = function (fromList, toList, card, callback) {
         if (callback === void 0) { callback = null; }
         //Moving the card on DB
         var toSend = Object();
@@ -2814,6 +2868,261 @@ var SocketComunicator = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
     ], SocketComunicator);
     return SocketComunicator;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/userSettings/userSettings.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserSettingsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__ = __webpack_require__("../../../../../src/app/common_components/schemas/card.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__ = __webpack_require__("../../../../rxjs/_esm5/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__socketComunicator_socketComunicator_service__ = __webpack_require__("../../../../../src/app/services/socketComunicator/socketComunicator.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var UserSettingsService = (function () {
+    function UserSettingsService(http, socketService) {
+        var _this = this;
+        this.http = http;
+        this.socketService = socketService;
+        this.url = "http://myas.com.br";
+        //List names for the backend requests be directly to the right collection
+        this.listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
+        this.iMadeTheChange = false;
+        this.initialize();
+        socketService.initSocket();
+        //Setting what the service will do when recive and change signal from the socket
+        this.ioConnection = this.socketService.getChanges().subscribe(function (message) {
+            if (!_this.iMadeTheChange) {
+                console.log("Mensagem recebida");
+                console.log(message);
+                var msgJson = message;
+                var cardAux = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__["a" /* Card */]();
+                var fromList = msgJson.fromList;
+                var toList = msgJson.toList;
+                delete msgJson.fromList;
+                delete msgJson.toList;
+                cardAux.init(msgJson);
+                console.log(cardAux);
+                _this.moveCardFront(cardAux, fromList, toList);
+            }
+            else {
+                _this.iMadeTheChange = false;
+            }
+        });
+    }
+    UserSettingsService.prototype.initialize = function () {
+        var listsAux = [
+            {
+                name: 'Em Análise',
+                cards: [],
+                id: 0
+            },
+            {
+                name: 'Aguardando Peças',
+                cards: [],
+                id: 1
+            },
+            {
+                name: 'Em conserto',
+                cards: [],
+                id: 2
+            },
+            {
+                name: 'Pagamento',
+                cards: [],
+                id: 3
+            },
+            {
+                name: 'Clientes finalizados',
+                cards: [],
+                id: 4
+            }
+        ];
+        this.lists = listsAux;
+        if (window.location.href.match(/www/) != null) {
+            this.url = "http://www.myas.com.br";
+        }
+        else {
+            if (window.location.href.match(/local/) != null) {
+                this.url = "http://localhost";
+            }
+            else {
+                this.url = "http://myas.com.br";
+            }
+        }
+        this.requestAllOrcas();
+    };
+    //Method to request data from db
+    UserSettingsService.prototype.requestOrca = function (i) {
+        var _this = this;
+        console.log(this.url + "/api/get_" + this.listsNames[i]);
+        this.http.get(this.url + "/api/get_" + this.listsNames[i]).subscribe(function (data) {
+            _this.dataHolder = data;
+            for (var j = 0; j < _this.dataHolder.length; j++) {
+                //Checking if this card is alerady on this list
+                var isAleredy = false;
+                for (var k = 0; k < _this.lists[i].cards.length; k++) {
+                    if (_this.lists[i].cards[k].getOrdServ() == _this.dataHolder[j]) {
+                        isAleredy = true;
+                        break;
+                    }
+                }
+                if (isAleredy)
+                    continue;
+                //Adding the new card
+                var card = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__["a" /* Card */]();
+                //this.dataHolder[j].ordServ = this.dataHolder[j]._id;
+                console.log(_this.dataHolder[j]);
+                card.init(_this.dataHolder[j]);
+                _this.lists[i].cards.push(card);
+            }
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+        });
+    };
+    UserSettingsService.prototype.moveCardFront = function (card, fromList, toList) {
+        //Checking if is needed to remove some card
+        if (fromList == -1) {
+            //Inserting the card on the new list
+            this.lists[toList].cards.push(card);
+            return true;
+        }
+        else {
+            //Delete the card from list
+            var listSize = this.lists[fromList].cards.length;
+            var found = false;
+            for (var i = 0; i < listSize; i++) {
+                if (this.lists[fromList].cards[i].getOrdServ() == card.getOrdServ()) {
+                    this.lists[fromList].cards.splice(i, 1);
+                    found = true;
+                    break;
+                }
+                if (found)
+                    break;
+            }
+            //Inserting the card on the new list
+            this.lists[toList].cards.push(card);
+            return true;
+        }
+    };
+    UserSettingsService.prototype.requestAllOrcas = function () {
+        this.requestOrca(0);
+        this.requestOrca(1);
+        this.requestOrca(2);
+        this.requestOrca(3);
+        this.requestOrca(4);
+    };
+    UserSettingsService.prototype.requestGet = function (msg) {
+        this.socketService.sendChanges(msg);
+    };
+    UserSettingsService.prototype.getOrcasList = function () {
+        return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])(this.lists);
+    };
+    /*Apply some command in one list
+      @Params:
+      commandAdd: Url of the command to add the card on new list(send to back end)
+      commandRemove: Url of the command to remove the card on new list(send to back end)
+      card: The that will be changed
+    */
+    UserSettingsService.prototype.addAndRemove = function (card, fromList, toList) {
+        if (card == undefined) {
+            console.log("O cartão enviado para função 'addAndRemove' não é valido.");
+            return false;
+        }
+        console.log("Movendo da lista: " + fromList + " Pra lista " + toList + " o card \n");
+        console.log(card);
+        this.moveCardFront(card, fromList, toList);
+        this.iMadeTheChange = true;
+        //Updating db and other clients
+        var self = this;
+        this.moveCardDB(fromList, toList, card, function (err, res) {
+            if (err) {
+                console.log("Não foi possivel fazer alterações no banco de dados.");
+                console.log("Erro: " + err.error.message);
+                return;
+            }
+            var toSend = Object();
+            toSend = card;
+            toSend.toList = toList;
+            toSend.fromList = fromList;
+            self.requestGet(toSend);
+        });
+    };
+    UserSettingsService.prototype.addNewCard = function (card, toList) {
+        var _this = this;
+        //Adding card to another part of db
+        this.http.post(this.url + "/api/add_" + this.listsNames[toList], card).subscribe(function (res) {
+            var aux = Object();
+            aux = res;
+            aux.ordServ = aux._id;
+            var cardAux = new __WEBPACK_IMPORTED_MODULE_2__common_components_schemas_card__["a" /* Card */];
+            cardAux.init(aux);
+            var toSend = Object();
+            toSend = cardAux.getJson();
+            toSend.toList = toList;
+            toSend.fromList = -1;
+            _this.requestOrca(0);
+            _this.iMadeTheChange = true;
+            _this.requestGet(toSend);
+            return true;
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+            return false;
+        });
+        return true;
+    };
+    UserSettingsService.prototype.removeCard = function (ordServ, fromList) {
+        //Adding card to another part of db
+        this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ).subscribe(function (res) {
+            /*        card.fromList = fromList;
+                    this.iMadeTheChange = true;
+            
+                    this.requestGet(card);*/
+            return true;
+        }, function (err) {
+            console.log("Error occured: " + err.error.message);
+            return false;
+        });
+        return true;
+    };
+    UserSettingsService.prototype.moveCardDB = function (fromList, toList, card, callback) {
+        if (callback === void 0) { callback = null; }
+        //Moving the card on DB
+        var toSend = Object();
+        toSend = card.getJson();
+        toSend.toList = this.listsNames[toList];
+        toSend.fromList = this.listsNames[fromList];
+        this.http.post(this.url + "/api/add_and_remove", toSend).subscribe(function (data) {
+            callback(null, data);
+        }, function (err) {
+            callback(err, null);
+        });
+        return true;
+    };
+    UserSettingsService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__socketComunicator_socketComunicator_service__["a" /* SocketComunicator */]])
+    ], UserSettingsService);
+    return UserSettingsService;
 }());
 
 

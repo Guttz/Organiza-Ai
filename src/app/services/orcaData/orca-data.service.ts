@@ -54,27 +54,27 @@ export class OrcaDataService
   {
     const listsAux: ListSchema[] = [
       {
-        name: 'Em Análise',
+        name: '',
         cards: [],
         id : 0
       },
       {
-        name: 'Aguardando Peças',
+        name: '',
         cards: [],
         id : 1
       },
       {
-        name: 'Em conserto',
+        name: '',
         cards: [],
         id : 2
       },
       {
-        name: 'Pagamento',
+        name: '',
         cards: [],
         id : 3
       },
       {
-        name: 'Clientes finalizados',
+        name: '',
         cards: [],
         id : 4
       }
@@ -178,7 +178,8 @@ export class OrcaDataService
     this.requestOrca(1); 
     this.requestOrca(2); 
     this.requestOrca(3); 
-    this.requestOrca(4); 
+    this.requestOrca(4);
+    this.getListHeaders(); 
   }
 
   public requestGet(msg: string)
@@ -255,15 +256,15 @@ export class OrcaDataService
     return true;
   }
 
-    public removeCard(ordServ: any, fromList: number):boolean
+  public removeCard(ordServ: any, fromList: number):boolean
   {
     //Adding card to another part of db
     this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ ).subscribe(
       res => {
-        card.fromList = fromList;
+/*        card.fromList = fromList;
         this.iMadeTheChange = true;
 
-        this.requestGet(card);
+        this.requestGet(card);*/
           return true;
       },err => {
         console.log("Error occured: " + err.error.message);
@@ -291,4 +292,39 @@ export class OrcaDataService
     return true;
   }
   
+    private getListHeaders(): void
+  {
+    this.http.get(this.url + "/api/get_list_headers").subscribe(data => 
+    {
+
+      for(var i = 0; i < this.lists.length; i++){
+        this.lists[i].name = data[i];
+      }
+
+      console.log(data);
+    }, err =>{
+      console.log("Erro ao carregar título das listas: + " + err);
+    });
+  }
+
+    private setListHeaders(fromList: number, toList: number, card: Card, callback = null): boolean
+  {
+    //Moving the card on DB
+    var toSend = Object();
+    toSend = card.getJson();
+
+    toSend.toList = this.listsNames[toList];
+    toSend.fromList = this.listsNames[fromList];
+
+    this.http.post(this.url + "/api/add_and_remove", toSend).subscribe(data => 
+    {
+
+      callback(null, data);
+    }, err =>{
+      callback(err, null);
+    });
+    return true;
+  }
+
+
 }
