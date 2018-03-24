@@ -85,11 +85,15 @@ export class AtendimentoComponent implements OnInit
 
   deleteCard(): void
   {
-    var card = new Card();
-    card.init(this.data);
-    this.ordaDataService.removeCardDB(card, this.data.listID);
-    this.ordaDataService.removeCardFront(card, this.data.listID);
-    this.dialogRef.close();
+    if (confirm("Você realmente deseja deletar esse card?")) 
+    {
+      var card = new Card();
+      card.init(this.data);
+      this.ordaDataService.removeCardDB(card, this.data.listID);
+      this.ordaDataService.removeCardFront(card, this.data.listID);
+      this.dialogRef.close();
+    } 
+    
   }
 
   thermalPrintAguardando(): void{
