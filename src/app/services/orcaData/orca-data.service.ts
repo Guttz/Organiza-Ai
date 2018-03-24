@@ -54,27 +54,27 @@ export class OrcaDataService
   {
     const listsAux: ListSchema[] = [
       {
-        name: 'Em Análise',
+        name: '',
         cards: [],
         id : 0
       },
       {
-        name: 'Aguardando Peças',
+        name: '',
         cards: [],
         id : 1
       },
       {
-        name: 'Em conserto',
+        name: '',
         cards: [],
         id : 2
       },
       {
-        name: 'Pagamento',
+        name: '',
         cards: [],
         id : 3
       },
       {
-        name: 'Clientes finalizados',
+        name: '',
         cards: [],
         id : 4
       }
@@ -139,6 +139,7 @@ export class OrcaDataService
 
   public moveCardFront(card: Card, fromList: number, toList: number):boolean
   {
+
     //Checking if is needed to remove some card
     if(fromList == -1)
     {
@@ -169,6 +170,9 @@ export class OrcaDataService
         return;
       }
     }
+
+
+    
   }
 
   public requestAllOrcas()
@@ -177,7 +181,8 @@ export class OrcaDataService
     this.requestOrca(1); 
     this.requestOrca(2); 
     this.requestOrca(3); 
-    this.requestOrca(4); 
+    this.requestOrca(4);
+    this.getListHeaders(); 
   }
 
   public requestGet(msg: string)
@@ -264,9 +269,6 @@ export class OrcaDataService
     console.log(aux);
     this.http.post(this.url + "/api/remove_card", aux ).subscribe(
       res => {
-        this.iMadeTheChange = true;
-
-        this.requestGet(card);
           return true;
       },err => {
         console.log("Error occured: " + err.error.message);

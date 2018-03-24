@@ -5,9 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OrcaDataService } from '../../services/orcaData/orca-data.service';
+import { UserSettingsService } from '../../services/userSettings/userSettings.service';
 import { Observable } from 'rxjs/Rx';
-
-
 
 /*----------------------------------ClienteAtenderComponent--------------------------------------*/
 
@@ -403,6 +402,7 @@ export class AcompanhamentoComponent implements OnInit
       }
     });
   }
+
 }
 
 

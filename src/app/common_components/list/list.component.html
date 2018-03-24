@@ -1,7 +1,9 @@
 <div class="list" (dragover)="allowDrop($event)" (drop)="drop($event)" id="{{list.id}}">
 	<div class="list_border">
 
-  <p class="list__title"><strong>  <!-- {{list.id}} --> {{list.name}} </strong></p>
+<!--   <p  class="list__title" ><strong contenteditable="true" (blur)="changHeader()">  {{list.name}} </strong></p> -->
+<!-- {{list.id}} --> 
+  <input  style= "background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 2.3vh; padding-bottom: 1.5vh; padding-top: 1.5vh;" (blur)="changHeader()" type="text" [(ngModel)]="list.name">
 
   <div (dragover)="allowDrop($event)" class="cards">
     <app-card (dragstart)="dragStart($event)" (dragover)="allowDrop($event)" *ngFor="let currentCard of list.cards" [card]="currentCard"></app-card>

@@ -51,6 +51,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
 import { OrcaDataService } from './services/orcaData/orca-data.service';
+import { UserSettingsService } from './services/userSettings/userSettings.service';
 import { SocketComunicator } from './services/socketComunicator/socketComunicator.service';
 
 
@@ -111,6 +112,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
     CadastroComponent,
     AuthGuard,
     OrcaDataService,
+    UserSettingsService,
     SocketComunicator
   ],
   bootstrap: [AppComponent],
