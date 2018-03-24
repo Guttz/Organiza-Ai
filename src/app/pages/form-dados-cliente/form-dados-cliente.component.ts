@@ -291,7 +291,6 @@ export class FormDadosClienteComponent implements OnInit {
     this.http.post(this.url + '/api/get_cli', {cpf: this.orca.cpf}).subscribe(
       resCliente => {
         this.auxCliente = resCliente;
-        console.log("HEREEEEEEEEEE");
         //Put the current date in the date field
         myForm.value.data = new Date();
 

@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
+import { UserSettingsComponent } from './pages/userSettings/userSettings.component';
 
 const routes: Routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
       path: 'cadastro',
       component: CadastroComponent
+  },
+  {
+      path: 'configuracoes',
+      component: UserSettingsComponent
   },
   {
       path: 'esqueci-senha',

@@ -1,0 +1,67 @@
+<app-header-toolbar></app-header-toolbar>
+<div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
+  <form [formGroup]="form" >
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex="90">
+        <my-form-header label="Link online para logo"></my-form-header>
+
+        <div fxLayout="row">
+
+          <mat-form-field fxFlex>
+            <input matInput 
+            formControlName="Link"  
+            name="link" 
+            placeholder="Inserir link" >
+
+          </mat-form-field>
+
+      </div>
+
+      <my-form-header label="Termos da Ordem de Serviço"></my-form-header>
+
+        <div class="row">
+
+            <mat-form-field fxFlex>
+              <textarea matInput
+               matTextareaAutosize
+               matAutosizeMinRows="2"
+                placeholder="Escrever termos"
+              name="ostermos"
+              ></textarea>
+
+            </mat-form-field> 
+
+<!--             <my-input-text 
+              fxFlex="32" 
+              name ="periodo" 
+              [(ngModel)] ="orca.periodo" 
+              ngDefaultControl 
+              label="Período de disponibilidade" 
+              required> 
+            </my-input-text> -->
+
+          </div>
+
+
+
+
+      </div>
+    </div>
+
+  </form >
+        
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="90">
+
+      <div fxLayout="row" fxLayoutAlign="end center">
+
+        <my-button-orange
+          (click)="updateSettings()" 
+          fxFlexAlign="center" 
+          label="ATUALIZAR CONFIGURAÇÕES" 
+          style="margin-top: 12px;">
+        </my-button-orange>
+
+      </div> 
+    </div>
+  </div>

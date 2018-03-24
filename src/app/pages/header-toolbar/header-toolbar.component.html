@@ -16,7 +16,10 @@
 	 <img class="my-user"  src="assets/images/user-symbol.png" style="cursor: pointer;">
 	</button>
 <mat-menu #menu="matMenu">
-  <button (click)="logout()" mat-menu-item>
+  <button routerLink="/configuracoes" mat-menu-item>
+    <span >Configurações</span>
+  </button>
+    <button (click)="logout()" mat-menu-item>
     <span >Sair</span>
   </button>
 </mat-menu>

@@ -1,64 +1,75 @@
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel="stylesheet">
 
 <div class="column" class="popup"> 
-  <div class = "row">
-    <h1 mat-dialog-title fxFlex="70">Informações do Orçamento - {{reducedID}}</h1>
-    <button fxFlexOffset="19" mat-icon-button (click)="thermalPrintAguardando()">
+	<div class = "row">
+		<h1 mat-dialog-title fxFlex="70">Informações do Orçamento - {{reducedID}}</h1>
+<<<<<<< HEAD
+    <button fxFlexOffset="20" mat-icon-button (click)="thermalPrintAguardando()">
       <mat-icon>print</mat-icon>
     </button>
-  </div>
-        <div class="row">
-           <mat-form-field fxFlexOffset="0" fxFlex="100">
-            <input [(ngModel)]="data.defeito" [disabled]="true" matInput ngDefaultControl placeholder="Qual defeito apresentado?">
+		<button fxFlexOffset="0" mat-icon-button (click)="deleteCard()">
+			<mat-icon>delete</mat-icon>
+		</button>
+=======
+    <button fxFlexOffset="16" mat-icon-button (click)="deleteCard()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button fxFlexOffset="0" mat-icon-button (click)="thermalPrintAguardando()">
+      <mat-icon>print</mat-icon>
+    </button>
+>>>>>>> Front-end-changes
+	</div>
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="100">
+            <input [(ngModel)]="data.defeito" matInput ngDefaultControl placeholder="Qual defeito apresentado?">
           </mat-form-field> 
-        </div>
+      	</div>
 
-        <div class="row">
-           <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input [(ngModel)]="data.marca" [disabled]="true" matInput ngDefaultControl placeholder="Marca">
+      	<div class="row">
+      	   <mat-form-field fxFlexOffset="0" fxFlex="49">
+            <input [(ngModel)]="data.marca" matInput ngDefaultControl placeholder="Marca">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [(ngModel)]="data.modelo" [disabled]="true" matInput ngDefaultControl placeholder="Modelo">
+            <input [(ngModel)]="data.modelo" matInput ngDefaultControl placeholder="Modelo">
           </mat-form-field> 
 
-      </div> 
+	    </div> 
 
       <div class="row">
            <mat-form-field fxFlexOffset="0" fxFlex="100">
-            <input [(ngModel)]="data.realizado" [disabled]="true" matInput ngDefaultControl placeholder="O que foi realizado?">
+            <input [(ngModel)]="data.realizado" matInput ngDefaultControl placeholder="O que foi realizado?">
           </mat-form-field> 
       </div>
 
               <div class="row">
            <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input [(ngModel)]="data.pecas" [disabled]="true" matInput ngDefaultControl placeholder="Valor peças" (blur)="this.sumTotalValue()">
+            <input [(ngModel)]="data.pecas" matInput ngDefaultControl placeholder="Valor peças" (blur)="this.sumTotalValue()">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [(ngModel)]="data.servico" [disabled]="true" matInput ngDefaultControl placeholder="Valor servico" (blur)="this.sumTotalValue()">
+            <input [(ngModel)]="data.servico" matInput ngDefaultControl placeholder="Valor servico" (blur)="this.sumTotalValue()">
           </mat-form-field> 
 
       </div> 
 
               <div class="row">
            <mat-form-field fxFlexOffset="0" fxFlex="49">
-            <input [(ngModel)]="data.maoObra" [disabled]="true" matInput ngDefaultControl placeholder="Técnico">
+            <input [(ngModel)]="data.maoObra" matInput ngDefaultControl placeholder="Técnico">
           </mat-form-field> 
 
           <mat-form-field fxFlexOffset="2" fxFlex="49">
-            <input [(ngModel)]="data.valorFinal" [disabled]="true" matInput ngDefaultControl placeholder="Valor final serviço">
+            <input [(ngModel)]="data.valorFinal" matInput ngDefaultControl placeholder="Valor final serviço">
           </mat-form-field> 
 
       </div> 
 
-        <div class="row">
+      	<div class="row">
 
            <mat-form-field fxFlex>
               <mat-select 
                 placeholder="Método de pagamento"
                 ngDefaultControl
-                [disabled]="true"
                 [(ngModel)]="data.metPag" 
                 name="metPag" >
                 <mat-option 
@@ -73,12 +84,11 @@
           </mat-form-field>  -->
 
 
-      </div>
+	    </div>
 
             <div class="row">
                     <mat-form-field fxFlexOffset="2" fxFlex>
               <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Observacoes"
-              [disabled]="true"
               name="observacoes"
               ngDefaultControl
               [(ngModel)]="data.observacoes"></textarea>
@@ -90,8 +100,8 @@
 
 
       <div fxLayout="row" fxLayoutAlign="end center" >
-        <my-button-bw (click)="onNoClick()" label="CANCELAR" style="margin-top: 12px; margin-right: 5px;"  >
-        </my-button-bw>
+      	<my-button-bw (click)="onNoClick()" label="CANCELAR" style="margin-top: 12px; margin-right: 5px;"  >
+      	</my-button-bw>
 
 
         <button class="my-button" mat-button [mat-dialog-close]="data" cdkFocusInitial style="margin-top: 12px;">CONFIRMAR</button>

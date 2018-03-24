@@ -1,0 +1,30 @@
+<div class="card" draggable="true"  (dragstart)="dragStart($event)" id="{{card.ordServ}}">
+
+<div id="{{card.ordServ}}" >
+	<span ><b id="{{card.ordServ}}" > {{reducedID}} - </b></span>
+
+	<span id="{{card.ordServ}}">  <!-- {{card.ordServ}} --> {{card.nome}}</span>
+
+<!-- 	<span  class="my-card-des"><b id="{{card.ordServ}}" >{{card.estado}}</b></span> -->
+</div>
+
+<div id="{{card.ordServ}}">
+	<span id="{{card.ordServ}}" >Tel.</span>
+<<<<<<< HEAD
+	<span class="my-card-des" > 
+		<b id="{{card.ordServ}}" > 
+			<span id="{{card.ordServ}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}
+			</span> {{card.dia}}/{{card.mes}} 
+		</b>
+	</span>
+</div>
+
+<span id="{{card.ordServ}}" >{{card.modelo}} - {{card.imei}}</span>
+=======
+	<span class="my-card-des" > <b id="{{card.ordServ}}" > <span id="{{card.ordServ}}" style="color: rgb(51, 97, 134);">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}} </b></span>
+</div>
+
+<span id="{{card.ordServ}}" > {{card.marca}} {{card.modelo}} </span>
+>>>>>>> Front-end-changes
+
+</div>

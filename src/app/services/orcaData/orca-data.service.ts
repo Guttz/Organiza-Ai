@@ -109,27 +109,25 @@ export class OrcaDataService
       for (var j = 0; j < this.dataHolder.length; j++) 
       {
         //Checking if this card is alerady on this list
-        var isAleredy = false;
+        var isAlready = false;
         for (var k = 0; k < this.lists[i].cards.length; k++) {
-          if(this.lists[i].cards[k].getOrdServ() == this.dataHolder[j])
+          if(this.lists[i].cards[k].getOrdServ() == this.dataHolder[j].ordServ)
           {
-            isAleredy = true;
+            isAlready = true;
             break;
           }
         }
-        if(isAleredy)
-          continue;
+        if(!isAlready)
+        {
+          //Adding the new card
+          var card = new Card();
+          card.init(this.dataHolder[j]);
+
+          this.lists[i].cards.push(card);
+        }
 
 
-        //Adding the new card
-
-        var card = new Card();
-
-        //this.dataHolder[j].ordServ = this.dataHolder[j]._id;
-        console.log(this.dataHolder[j]);
-        card.init(this.dataHolder[j]);
-
-        this.lists[i].cards.push(card);
+        
       }        
     },err =>{
       console.log("Error occured: " + err.error.message);
@@ -248,6 +246,7 @@ export class OrcaDataService
         toSend = cardAux.getJson();
         toSend.toList = toList;
         toSend.fromList = -1;
+        console.log("Card novo adicionado.")
         this.requestOrca(0); 
         this.iMadeTheChange = true;
         this.requestGet(toSend);

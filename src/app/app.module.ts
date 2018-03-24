@@ -49,6 +49,7 @@ import { AtendimentoComponent } from './pages/acompanhamento/acompanhamento.comp
 import { AtendimentoFinalizadoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { UserSettingsComponent } from './pages/userSettings/userSettings.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AuthGuard } from './common_components/_guard/auth.guard';
 import { OrcaDataService } from './services/orcaData/orca-data.service';
@@ -76,6 +77,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
     HistoricPopupComponent,
     LoginComponent,
     CadastroComponent,
+    UserSettingsComponent,
     ForgotPasswordComponent
   ],
   imports: [
@@ -106,6 +108,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
   ClienteAtenderComponent,
   AtendimentoComponent,
   AtendimentoFinalizadoComponent,
+  UserSettingsComponent,
   LoginComponent,
   CadastroComponent,
   HistoricoComponent,
@@ -113,6 +116,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
   providers: [
     LoginComponent,
     CadastroComponent,
+    UserSettingsComponent,
     AuthGuard,
     OrcaDataService,
     UserSettingsService,
