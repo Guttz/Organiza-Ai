@@ -2786,9 +2786,7 @@ var OrcaDataService = (function () {
         });
         return true;
     };
-<<<<<<< HEAD
     OrcaDataService.prototype.removeCardDB = function (card, fromList) {
-        var _this = this;
         //Removing the card from the list
         var aux = Object();
         aux = card;
@@ -2796,35 +2794,10 @@ var OrcaDataService = (function () {
         card.fromList = fromList;
         console.log(aux);
         this.http.post(this.url + "/api/remove_card", aux).subscribe(function (res) {
-            _this.iMadeTheChange = true;
-            _this.requestGet(card);
-=======
-    OrcaDataService.prototype.removeCard = function (ordServ, fromList) {
-        //Adding card to another part of db
-        this.http.post(this.url + "/api/remove_" + this.listsNames[fromList], ordServ).subscribe(function (res) {
-            /*        card.fromList = fromList;
-                    this.iMadeTheChange = true;
-            
-                    this.requestGet(card);*/
->>>>>>> Editable-header
             return true;
         }, function (err) {
             console.log("Error occured: " + err.error.message);
             return false;
-        });
-        return true;
-    };
-    OrcaDataService.prototype.moveCardDB = function (fromList, toList, card, callback) {
-        if (callback === void 0) { callback = null; }
-        //Moving the card on DB
-        var toSend = Object();
-        toSend = card.getJson();
-        toSend.toList = this.listsNames[toList];
-        toSend.fromList = this.listsNames[fromList];
-        this.http.post(this.url + "/api/add_and_remove", toSend).subscribe(function (data) {
-            callback(null, data);
-        }, function (err) {
-            callback(err, null);
         });
         return true;
     };
@@ -2839,7 +2812,7 @@ var OrcaDataService = (function () {
             console.log("Erro ao carregar título das listas: + " + err);
         });
     };
-    OrcaDataService.prototype.setListHeaders = function (fromList, toList, card, callback) {
+    OrcaDataService.prototype.moveCardDB = function (fromList, toList, card, callback) {
         if (callback === void 0) { callback = null; }
         //Moving the card on DB
         var toSend = Object();

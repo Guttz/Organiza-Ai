@@ -277,6 +277,22 @@ export class OrcaDataService
     return true;
   }
 
+  private getListHeaders(): void
+  {
+    this.http.get(this.url + "/api/get_list_headers").subscribe(data => 
+    {
+
+      for(var i = 0; i < this.lists.length; i++){
+        this.lists[i].name = data[i];
+      }
+
+      console.log(data);
+    }, err =>{
+      console.log("Erro ao carregar título das listas: + " + err);
+    });
+  }
+
+
   private moveCardDB(fromList: number, toList: number, card: Card, callback = null): boolean
   {
     //Moving the card on DB
