@@ -142,6 +142,7 @@ router.get('/get_list_headers', (req, res) => {
   });
 });
 
+
 router.post('/set_list_headers', function(req, res, next){
   if(!checkSession(req))
   {
@@ -158,20 +159,11 @@ router.post('/set_list_headers', function(req, res, next){
     console.log(req.body);
     req.body.id = "listHeaders";
 
-/*        db.db(req.session.user.assistencia).collection('userSettings').insertOne(req.body, function(err, result){
-          if(err)
-          {
-            throw err;
-          }
-          else
-          {
-            console.log("Updated orca with success");
-            res.send(result);
-          }
-      });
-*/
     //Checking if the params has at least a valid cpf
-      db.db(req.session.user.assistencia).collection('userSettings').updateOne({ id: "listHeaders"}, {$set: req.body}, {upsert: true}, function(err, result){
+      db.db(req.session.user.assistencia).collection('userSettings').updateOne(
+      { 
+        id: "listHeaders"
+      }, {$set: req.body}, {upsert: true}, function(err, result){
         if(err)
         {
           throw err;
