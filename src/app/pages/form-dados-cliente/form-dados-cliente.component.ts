@@ -124,7 +124,7 @@ export class FormDadosClienteComponent implements OnInit {
   if(phone == null || phone == "")
     return null;
 
-  if ( phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.substring(9, 10) != "-" || phone.length != 14){ 
+  if ( phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.length < 12 || phone.length > 13){ 
       return {
         phoneInvalid: "Invalid phone"
       }
@@ -148,12 +148,6 @@ export class FormDadosClienteComponent implements OnInit {
       this.form.setValue(aux);
     }
 
-    if(this.form.value.telPrimario.length >= 10 && this.form.value.telPrimario.substring(9, 10) != "-" ){
-      var aux = this.form.value;
-      aux.telPrimario = this.form.value.telPrimario.substring(0,9) + "-" + this.form.value.telPrimario.substring(9)
-      this.form.setValue(aux);
-    }
-
   }
 
   typingPhoneTwo(){
@@ -167,12 +161,6 @@ export class FormDadosClienteComponent implements OnInit {
     if(this.form.value.telSecundario.length >= 4 && this.form.value.telSecundario.substring(3, 4) != ")" ){
       var aux = this.form.value;
       aux.telSecundario = this.form.value.telSecundario.substring(0,3) + ")" + this.form.value.telSecundario.substring(3)
-      this.form.setValue(aux);
-    }
-
-    if(this.form.value.telSecundario.length >= 10 && this.form.value.telSecundario.substring(9, 10) != "-" ){
-      var aux = this.form.value;
-      aux.telSecundario = this.form.value.telSecundario.substring(0,9) + "-" + this.form.value.telSecundario.substring(9)
       this.form.setValue(aux);
     }
 
@@ -289,6 +277,7 @@ export class FormDadosClienteComponent implements OnInit {
 
   orcaForm(myForm:NgForm)
   {
+
     //cheking if any required field is empty
     if(myForm.status == "INVALID" || this.cpfOrcaFormControl.status == "INVALID")
     {
@@ -302,7 +291,7 @@ export class FormDadosClienteComponent implements OnInit {
     this.http.post(this.url + '/api/get_cli', {cpf: this.orca.cpf}).subscribe(
       resCliente => {
         this.auxCliente = resCliente;
-
+        console.log("HEREEEEEEEEEE");
         //Put the current date in the date field
         myForm.value.data = new Date();
 

@@ -252,6 +252,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -270,8 +271,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_28__pages_header_toolbar_header_toolbar_component__["a" /* HeaderToolbarComponent */],
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["a" /* AcompanhamentoComponent */],
                 __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__["b" /* HistoricoComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["c" /* ClienteAtenderComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["d" /* ClienteAtenderComponent */],
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["b" /* AtendimentoComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["c" /* AtendimentoFinalizadoComponent */],
                 __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__["a" /* HistoricPopupComponent */],
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
@@ -302,8 +304,9 @@ var AppModule = (function () {
             ],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["a" /* AcompanhamentoComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["c" /* ClienteAtenderComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["d" /* ClienteAtenderComponent */],
                 __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["b" /* AtendimentoComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_acompanhamento_acompanhamento_component__["c" /* AtendimentoFinalizadoComponent */],
                 __WEBPACK_IMPORTED_MODULE_31__pages_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_32__pages_cadastro_cadastro_component__["a" /* CadastroComponent */],
                 __WEBPACK_IMPORTED_MODULE_30__pages_historico_historico_component__["b" /* HistoricoComponent */],
@@ -411,7 +414,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/common_components/card/card.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.ordServ}}\">\r\n\r\n<div id=\"{{card.ordServ}}\" >\r\n\t<span ><b id=\"{{card.ordServ}}\" > {{reducedID}} - </b></span>\r\n\r\n\t<span id=\"{{card.ordServ}}\">  <!-- {{card.ordServ}} --> {{card.nome}}</span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.ordServ}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.ordServ}}\">\r\n\t<span id=\"{{card.ordServ}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.ordServ}}\" > <span id=\"{{card.ordServ}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}}  | {{card.imei}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.ordServ}}\" >{{card.endereco}}</span>\r\n\r\n</div>"
+module.exports = "<div class=\"card\" draggable=\"true\"  (dragstart)=\"dragStart($event)\" id=\"{{card.ordServ}}\">\r\n\r\n<div id=\"{{card.ordServ}}\" >\r\n\t<span ><b id=\"{{card.ordServ}}\" > {{reducedID}} - </b></span>\r\n\r\n\t<span id=\"{{card.ordServ}}\">  <!-- {{card.ordServ}} --> {{card.nome}}</span>\r\n\r\n<!-- \t<span  class=\"my-card-des\"><b id=\"{{card.ordServ}}\" >{{card.estado}}</b></span> -->\r\n</div>\r\n\r\n<div id=\"{{card.ordServ}}\">\r\n\t<span id=\"{{card.ordServ}}\" >Tel.</span>\r\n\t<span class=\"my-card-des\" > <b id=\"{{card.ordServ}}\" > <span id=\"{{card.ordServ}}\" style=\"color: rgb(51, 97, 134);\">{{card.telPrimario}}</span> - {{card.dia}}/{{card.mes}} </b></span>\r\n</div>\r\n\r\n<span id=\"{{card.ordServ}}\" > {{card.marca}} {{card.modelo}} </span>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1104,8 +1107,9 @@ module.exports = module.exports.toString();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ClienteAtenderComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ClienteAtenderComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return AtendimentoComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return AtendimentoFinalizadoComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AcompanhamentoComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_components_schemas_card__ = __webpack_require__("../../../../../src/app/common_components/schemas/card.ts");
@@ -1269,6 +1273,122 @@ var AtendimentoComponent = (function () {
     return AtendimentoComponent;
 }());
 
+/*----------------------------------AtendimentoComponent-----------------------------------------*/
+var AtendimentoFinalizadoComponent = (function () {
+    function AtendimentoFinalizadoComponent(dialogRef, data, ordaDataService) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.ordaDataService = ordaDataService;
+        this.metPag = [
+            { value: 'Débito' },
+            { value: 'Crédito' },
+            { value: 'Cheque' },
+            { value: 'Dinheiro' },
+        ];
+        this.options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
+            minute: '2-digit', second: '2-digit' };
+        this.reducedID = this.data.ordServ.substring(17, 24);
+    }
+    AtendimentoFinalizadoComponent.prototype.sumTotalValue = function () {
+        var value1, value2;
+        if (this.data.servico != null)
+            value1 = (this.data.servico).replace(",", ".");
+        else
+            value1 = 0;
+        if (this.data.pecas != null)
+            value2 = (this.data.pecas).replace(",", ".");
+        else
+            value2 = 0;
+        this.data.valorFinal = Number(value1) + Number(value2);
+    };
+    AtendimentoFinalizadoComponent.prototype.onNoClick = function () {
+        this.dialogRef.close();
+    };
+    AtendimentoFinalizadoComponent.prototype.deleteCard = function () {
+        var card = new __WEBPACK_IMPORTED_MODULE_1__common_components_schemas_card__["a" /* Card */]();
+        card.init(this.data);
+        this.ordaDataService.removeCardDB(card, this.data.listID);
+        this.ordaDataService.removeCardFront(card, this.data.listID);
+        this.dialogRef.close();
+    };
+    AtendimentoFinalizadoComponent.prototype.thermalPrintAguardando = function () {
+        if (this.reducedID == undefined)
+            this.reducedID = "";
+        if (this.data.data == undefined)
+            this.data.data = "";
+        if (this.data.nome == undefined)
+            this.data.nome = "";
+        if (this.data.telPrimario == undefined)
+            this.data.telPrimario = "";
+        if (this.data.email == undefined)
+            this.data.email = "";
+        if (this.data.marca == undefined)
+            this.data.marca = "";
+        if (this.data.imei == undefined)
+            this.data.imei = "";
+        if (this.data.observacoes == undefined)
+            this.data.observacoes = "";
+        if (this.data.defeito == undefined)
+            this.data.defeito = "";
+        if (this.data.realizado == undefined)
+            this.data.realizado = "";
+        if (this.data.pecas == undefined)
+            this.data.pecas = "";
+        if (this.data.servico == undefined)
+            this.data.servico = "";
+        if (this.data.maoObra == undefined)
+            this.data.maoObra = "";
+        var document = '<html>\
+    <div style="width: 235px; word-wrap: break-word;">\
+    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
+    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>' + this.reducedID + ' </span> <br> \
+    <span style="font-size: 12px;"><strong>Data:</strong> ' + this.data.data.toLocaleDateString("pt-BR", this.options) + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Cliente:</strong> ' + this.data.nome + '</span> <br>\
+    <span><strong>Telefone:</strong> ' + this.data.telPrimario + '</span> <br> \
+    <span style="font-size: 12px;"> <strong> Email:</strong> ' + this.data.email + '</span> <br>\
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Marca/modelo:</strong> ' + this.data.marca + '</span> <span style="font-size: 12px;">' + this.data.modelo + '</span> <br>\
+    <span><strong>Imei:</strong> ' + this.data.imei + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Observações/Senha:</strong></span> <br> \
+    <div style="width: 135px; display: inline-block;"> \
+    <span>' + this.data.observacoes + "" + '\
+    </div> \
+    <div style="width: 90px; display: inline-block; background: green;">\
+    <img style="display: inline-block;" src="assets/images/lockscreen.png">\
+    </div> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Problema relatado:</strong> ' + this.data.defeito + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Serviços realizados:</strong> ' + this.data.realizado + '</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Valor peças:</strong> ' + this.data.pecas + '</span> <br> \
+    <span><strong>Valor servico:</strong> ' + this.data.servico + '</span> <br> \
+    <span><strong>Técnico Responsável:</strong> ' + this.data.maoObra + '</span> <br> <br> <br>\
+    <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
+    <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
+    </div> ';
+        console.log(this.data);
+        var w = window.open("");
+        w.document.write(document);
+        //w.print();    
+    };
+    ;
+    AtendimentoFinalizadoComponent.prototype.ngOnInit = function () {
+    };
+    AtendimentoFinalizadoComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'my-atendimento',
+            template: __webpack_require__("../../../../../src/app/pages/acompanhamento/finalizado/finalizado.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/pages/acompanhamento/finalizado/finalizado.component.scss")]
+        }),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatDialogRef */], Object, __WEBPACK_IMPORTED_MODULE_4__services_orcaData_orca_data_service__["a" /* OrcaDataService */]])
+    ], AtendimentoFinalizadoComponent);
+    return AtendimentoFinalizadoComponent;
+}());
+
 /*----------------------------------AcompanhamentoComponent---------------------------------------*/
 var AcompanhamentoComponent = (function () {
     function AcompanhamentoComponent(http, dialog, ordaDataService) {
@@ -1282,7 +1402,7 @@ var AcompanhamentoComponent = (function () {
         //List names for the backend requests be directly to the right collection
         this.listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
         //All the ids of lists that will not popup when clicked
-        this.listNoPopUp = [4];
+        this.listNoPopUp = [];
         //All the ids of lists that will no move with the dropFunction
         this.listNoMove = [4];
         var aux = this.listsNames.length;
@@ -1304,7 +1424,7 @@ var AcompanhamentoComponent = (function () {
         //The list ID, the one that the card is being clicked
         var listID = target.id;
         //Checking if is the "finalizado" column so a pop up wont be oppened
-        if (listID >= this.listSize - 1) {
+        if (listID >= this.listSize) {
             console.log("Erro você clicou em uma coluna que não existe.");
             return;
         }
@@ -1314,6 +1434,9 @@ var AcompanhamentoComponent = (function () {
         }
         if (listID == 0) {
             this.clickOrcamento(event.target.id, listID);
+        }
+        if (listID == 4) {
+            this.clickFinalizado(event.target.id, listID);
         }
         else {
             this.clickVisited(event.target.id, listID);
@@ -1417,6 +1540,19 @@ var AcompanhamentoComponent = (function () {
             }
         });
     };
+    AcompanhamentoComponent.prototype.clickFinalizado = function (ordServ, listID) {
+        var card = this.getCard(ordServ, listID);
+        if (card == null)
+            return;
+        //Open the pop up with the card infos
+        var dialogRef = this.dialog.open(AtendimentoFinalizadoComponent, {
+            width: '44vw',
+            data: card
+        });
+        //After the dialog is closed thats the called function
+        dialogRef.afterClosed().subscribe(function (result) {
+        });
+    };
     AcompanhamentoComponent.prototype.moveCard = function (ordServ, fromList, toList) {
         var _this = this;
         var card = this.getCard(ordServ, fromList);
@@ -1466,7 +1602,7 @@ var AcompanhamentoComponent = (function () {
 /***/ "../../../../../src/app/pages/acompanhamento/atendimento/atendimento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n    <button fxFlexOffset=\"12\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n      <mat-icon>print</mat-icon>\r\n    </button>\r\n\t\t<button fxFlexOffset=\"12\" mat-icon-button (click)=\"deleteCard()\">\r\n\t\t\t<mat-icon>print</mat-icon>\r\n\t\t</button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"metPag\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of metPag\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n\t<div class = \"row\">\r\n\t\t<h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n    <button fxFlexOffset=\"16\" mat-icon-button (click)=\"deleteCard()\">\r\n      <mat-icon>delete</mat-icon>\r\n    </button>\r\n    <button fxFlexOffset=\"0\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n      <mat-icon>print</mat-icon>\r\n    </button>\r\n\t</div>\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n      \t</div>\r\n\r\n      \t<div class=\"row\">\r\n      \t   <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n\t    </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      \t<div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"metPag\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of metPag\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n\t    </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n      \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
 
 /***/ }),
 
@@ -1496,6 +1632,31 @@ module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+
 /***/ }),
 
 /***/ "../../../../../src/app/pages/acompanhamento/cliente-atender/cliente-atender.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".my-button {\n  background: linear-gradient(-150deg, #FF8405 0%, #FF433F 100%);\n  box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);\n  border-radius: 3px;\n  font-size: 13px;\n  color: #FFFFFF;\n  width: 20vw;\n  padding-top: 0.2vw;\n  padding-bottom: 0.2vw; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/pages/acompanhamento/finalizado/finalizado.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel=\"stylesheet\">\r\n\r\n<div class=\"column\" class=\"popup\"> \r\n  <div class = \"row\">\r\n    <h1 mat-dialog-title fxFlex=\"70\">Informações do Orçamento - {{reducedID}}</h1>\r\n    <button fxFlexOffset=\"16\" mat-icon-button (click)=\"deleteCard()\">\r\n      <mat-icon>delete</mat-icon>\r\n    </button>\r\n    <button fxFlexOffset=\"0\" mat-icon-button (click)=\"thermalPrintAguardando()\">\r\n      <mat-icon>print</mat-icon>\r\n    </button>\r\n  </div>\r\n        <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.defeito\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Qual defeito apresentado?\">\r\n          </mat-form-field> \r\n        </div>\r\n\r\n        <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.marca\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Marca\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.modelo\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Modelo\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n      <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"100\">\r\n            <input [(ngModel)]=\"data.realizado\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"O que foi realizado?\">\r\n          </mat-form-field> \r\n      </div>\r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.pecas\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Valor peças\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.servico\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Valor servico\" (blur)=\"this.sumTotalValue()\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n              <div class=\"row\">\r\n           <mat-form-field fxFlexOffset=\"0\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.maoObra\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Técnico\">\r\n          </mat-form-field> \r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.valorFinal\" [disabled]=\"true\" matInput ngDefaultControl placeholder=\"Valor final serviço\">\r\n          </mat-form-field> \r\n\r\n      </div> \r\n\r\n        <div class=\"row\">\r\n\r\n           <mat-form-field fxFlex>\r\n              <mat-select \r\n                placeholder=\"Método de pagamento\"\r\n                ngDefaultControl\r\n                [disabled]=\"true\"\r\n                [(ngModel)]=\"data.metPag\" \r\n                name=\"metPag\" >\r\n                <mat-option \r\n                  *ngFor=\"let value of metPag\" [value]=\"value.value\" >\r\n                  {{ value.value }}\r\n                </mat-option>\r\n              </mat-select>\r\n            </mat-form-field> \r\n\r\n<!--           <mat-form-field fxFlexOffset=\"2\" fxFlex=\"49\">\r\n            <input [(ngModel)]=\"data.periodo\" matInput ngDefaultControl placeholder=\"Horário de disponibilidade\">\r\n          </mat-form-field>  -->\r\n\r\n\r\n      </div>\r\n\r\n            <div class=\"row\">\r\n                    <mat-form-field fxFlexOffset=\"2\" fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observacoes\"\r\n              [disabled]=\"true\"\r\n              name=\"observacoes\"\r\n              ngDefaultControl\r\n              [(ngModel)]=\"data.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n      </div>\r\n      \r\n\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n        <my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n        </my-button-bw>\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">CONFIRMAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/pages/acompanhamento/finalizado/finalizado.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1721,7 +1882,7 @@ var ForgotPasswordComponent = (function () {
 /***/ "../../../../../src/app/pages/form-dados-cliente/form-dados-cliente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form [formGroup]=\"form\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput  \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            formControlName=\"cpf\"\r\n            (blur)=\"checkUser()\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput\r\n            formControlName=\"nome\" \r\n            autocomplete='name'\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            formControlName=\"telPrimario\"\r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')\">\r\n              Telefone Primário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              formControlName=\"telSecundario\"  \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\"\r\n              [formControl]=\"telTwoFormControl\"\r\n              (keyup) = \"typingPhoneTwo()\">\r\n\r\n            <mat-error *ngIf=\"telTwoFormControl.hasError('phoneInvalid')\" >\r\n              Telefone Secundário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            formControlName=\"email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('emailInvalid')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput\r\n              formControlName=\"endereco\" \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\">\r\n\r\n          <mat-error>\r\n              Endereço é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n        \r\n      <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex=\"70\">\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n\r\n        <my-button-orange\r\n          (click)=\"userForm()\" \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\">\r\n        </my-button-orange>\r\n\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser()\" \r\n          >\r\n        </my-button-orange>\r\n      </div> \r\n    </div>\r\n  </div>\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              [formControl]=\"cpfOrcaFormControl\"\r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUserWForm(orcaCadForm)\"\r\n              >\r\n            \r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('cpfcnpjInvalid') && !cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Defeito é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Marca é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"imei\" \r\n              [(ngModel)]=\"orca.imei\" \r\n              ngDefaultControl \r\n              placeholder=\"Imei\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Imei é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"modelo\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Modelo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n            <mat-form-field fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observações\"\r\n              name=\"observacoes\"\r\n              [(ngModel)]=\"orca.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n      \r\n      <div class=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex = \"70\">\r\n\r\n           <div fxFlex=\"grow\"></div>\r\n           \r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm);\">\r\n                \r\n            </my-button-orange>\r\n        </div>\r\n      </div>\r\n\r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);\">\r\n  <form [formGroup]=\"form\" >\r\n    <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex=\"70\">\r\n        <my-form-header label=\"Cadastro Cliente\"></my-form-header>\r\n        <div fxLayout=\"row\" >\r\n          <mat-form-field fxFlex=\"32\">\r\n            <input matInput  \r\n            name=\"cpf\" \r\n            placeholder=\"CPF\" \r\n            formControlName=\"cpf\"\r\n            (blur)=\"checkUser()\" \r\n            [formControl]=\"cpfFormControl\">\r\n            \r\n            <mat-error *ngIf=\"cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfFormControl.hasError('cpfcnpjInvalid') && !cpfFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n          <mat-form-field fxFlexOffset=\"2\" fxFlex=\"70\">\r\n            <input matInput\r\n            formControlName=\"nome\" \r\n            autocomplete='name'\r\n            name=\"nome\" \r\n            placeholder=\"Nome completo do cliente\" \r\n            [formControl]=\"nomeFormControl\">\r\n          \r\n            <mat-error *ngIf=\"nomeFormControl.hasError('required')\">\r\n                Nome <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>  \r\n        </div>\r\n\r\n        <div fxLayout=\"row\">\r\n          <mat-form-field fxFlex>\r\n            <input matInput \r\n            formControlName=\"telPrimario\"\r\n            name=\"telefone\" \r\n            placeholder=\"Telefone primário\"  \r\n            [formControl]=\"telFormControl\"\r\n            (keyup) = \"typingPhone()\"\r\n             >\r\n            \r\n            <mat-error *ngIf=\"telFormControl.hasError('required')\">\r\n              Telefone Primário é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"telFormControl.hasError('phoneInvalid') &&  !telFormControl.hasError('required')\">\r\n              Telefone Primário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n        <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n              formControlName=\"telSecundario\"  \r\n              name=\"telSecundario\" \r\n              placeholder=\"Telefone secundário\"\r\n              [formControl]=\"telTwoFormControl\"\r\n              (keyup) = \"typingPhoneTwo()\">\r\n\r\n            <mat-error *ngIf=\"telTwoFormControl.hasError('phoneInvalid')\" >\r\n              Telefone Secundário <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n          <mat-form-field fxFlex fxFlexOffset=\"2\">\r\n            <input matInput \r\n            formControlName=\"email\"  \r\n            name=\"email\" \r\n            placeholder=\"Email\" \r\n            [formControl]=\"emailFormControl\">\r\n\r\n            <mat-error *ngIf=\"emailFormControl.hasError('emailInvalid')\">\r\n              Email <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n          </mat-form-field>\r\n\r\n      </div>\r\n\r\n      <div fxLayout=\"row\">\r\n\r\n        <mat-form-field fxFlex [hideRequiredMarker]=\"true\">\r\n            <input matInput\r\n              formControlName=\"endereco\" \r\n              name=\"endereco\" \r\n              placeholder=\"Endereço completo\">\r\n\r\n          <mat-error>\r\n              Endereço é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n        </mat-form-field>\r\n\r\n      </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n\r\n  </form >\r\n        \r\n      <div fxLayout=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex=\"70\">\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((!update)) >\r\n\r\n        <my-button-orange\r\n          (click)=\"userForm()\" \r\n          fxFlexAlign=\"center\" \r\n          label=\"CADASTRAR CLIENTE\" \r\n          style=\"margin-top: 12px;\">\r\n        </my-button-orange>\r\n\r\n      </div>\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" *ngIf=((update)) >\r\n        <my-button-orange \r\n          fxFlexAlign=\"center\" \r\n          label=\"ATUALIZAR CLIENTE\" \r\n          style=\"margin-top: 12px;\" \r\n          (click)=\"updateUser()\" \r\n          >\r\n        </my-button-orange>\r\n      </div> \r\n    </div>\r\n  </div>\r\n\r\n  <form #orcaCadForm=\"ngForm\" >\r\n    <div class=\"row\" fxLayoutAlign=\"center center\">\r\n      <div fxFlex = \"70\">\r\n        <my-form-header label=\"Informações do Orçamento\"></my-form-header>\r\n          <div class=\"row\" >\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              [formControl]=\"cpfOrcaFormControl\"\r\n              name=\"cpf\" \r\n              [(ngModel)]=\"orca.cpf\" \r\n              ngDefaultControl \r\n              placeholder=\"CPF do Cliente\"  \r\n              (blur)=\"checkUserWForm(orcaCadForm)\"\r\n              >\r\n            \r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            <mat-error *ngIf=\"cpfOrcaFormControl.hasError('cpfcnpjInvalid') && !cpfOrcaFormControl.hasError('required')\">\r\n                CPF/CNPJ <strong>inválido</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n<!--             <my-input-text fxFlex \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              fxFlexOffset=2 \r\n              label=\"Qual o defeito apresentado?\"\r\n              required> \r\n            </my-input-text> -->\r\n\r\n            <mat-form-field fxFlex fxFlexOffset=2 [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"defeito\" \r\n              [(ngModel)]=\"orca.defeito\" \r\n              ngDefaultControl \r\n              placeholder=\"Qual o defeito apresentado\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Defeito é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n          </div>\r\n\r\n          <div class=\"row\" >\r\n\r\n\r\n            <mat-form-field fxFlex=\"32\" [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"marca\" \r\n              [(ngModel)]=\"orca.marca\" \r\n              ngDefaultControl \r\n              placeholder=\"Marca\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Marca é <strong>obrigatória</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"imei\" \r\n              [(ngModel)]=\"orca.imei\" \r\n              ngDefaultControl \r\n              placeholder=\"Imei\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Imei é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n            <mat-form-field fxFlexOffset=\"2\" fxFlex [hideRequiredMarker]=\"true\">\r\n              <input matInput \r\n              name=\"modelo\" \r\n              [(ngModel)]=\"orca.modelo\" \r\n              ngDefaultControl \r\n              placeholder=\"Modelo\"  \r\n              required>\r\n\r\n            <mat-error>\r\n              Modelo é <strong>obrigatório</strong>\r\n            </mat-error>\r\n\r\n            </mat-form-field>\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"row\">\r\n\r\n            <mat-form-field fxFlex>\r\n              <textarea matInput matTextareaAutosize matAutosizeMinRows=\"1\" placeholder=\"Observações\"\r\n              name=\"observacoes\"\r\n              [(ngModel)]=\"orca.observacoes\"></textarea>\r\n\r\n            </mat-form-field> \r\n\r\n<!--             <my-input-text \r\n              fxFlex=\"32\" \r\n              name =\"periodo\" \r\n              [(ngModel)] =\"orca.periodo\" \r\n              ngDefaultControl \r\n              label=\"Período de disponibilidade\" \r\n              required> \r\n            </my-input-text> -->\r\n\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n  </form> \r\n      \r\n      <div class=\"row\" fxLayoutAlign=\"center center\">\r\n        <div fxFlex = \"70\">\r\n\r\n           <div fxFlex=\"grow\"></div>\r\n           \r\n            <my-button-orange \r\n              fxFlexAlign=\"center\" \r\n              label=\"CONTINUAR ORÇAMENTO\" \r\n              (click)=\"orcaForm(orcaCadForm);\">\r\n            </my-button-orange>\r\n            \r\n        </div>\r\n      </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1863,7 +2024,7 @@ var FormDadosClienteComponent = (function () {
         var phone = control.value;
         if (phone == null || phone == "")
             return null;
-        if (phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.substring(9, 10) != "-" || phone.length != 14) {
+        if (phone.substring(0, 1) != "(" || phone.substring(3, 4) != ")" || phone.length < 12 || phone.length > 13) {
             return {
                 phoneInvalid: "Invalid phone"
             };
@@ -1882,11 +2043,6 @@ var FormDadosClienteComponent = (function () {
             aux.telPrimario = this.form.value.telPrimario.substring(0, 3) + ")" + this.form.value.telPrimario.substring(3);
             this.form.setValue(aux);
         }
-        if (this.form.value.telPrimario.length >= 10 && this.form.value.telPrimario.substring(9, 10) != "-") {
-            var aux = this.form.value;
-            aux.telPrimario = this.form.value.telPrimario.substring(0, 9) + "-" + this.form.value.telPrimario.substring(9);
-            this.form.setValue(aux);
-        }
     };
     FormDadosClienteComponent.prototype.typingPhoneTwo = function () {
         //Inserting automatically parentesis and - in the phone
@@ -1898,11 +2054,6 @@ var FormDadosClienteComponent = (function () {
         if (this.form.value.telSecundario.length >= 4 && this.form.value.telSecundario.substring(3, 4) != ")") {
             var aux = this.form.value;
             aux.telSecundario = this.form.value.telSecundario.substring(0, 3) + ")" + this.form.value.telSecundario.substring(3);
-            this.form.setValue(aux);
-        }
-        if (this.form.value.telSecundario.length >= 10 && this.form.value.telSecundario.substring(9, 10) != "-") {
-            var aux = this.form.value;
-            aux.telSecundario = this.form.value.telSecundario.substring(0, 9) + "-" + this.form.value.telSecundario.substring(9);
             this.form.setValue(aux);
         }
     };
@@ -1993,6 +2144,7 @@ var FormDadosClienteComponent = (function () {
         }
         this.http.post(this.url + '/api/get_cli', { cpf: this.orca.cpf }).subscribe(function (resCliente) {
             _this.auxCliente = resCliente;
+            console.log("HEREEEEEEEEEE");
             //Put the current date in the date field
             myForm.value.data = new Date();
             //Acrescentando os campos que compoem um orçamento
@@ -2218,7 +2370,7 @@ var HeaderToolbarComponent = (function () {
 /***/ "../../../../../src/app/pages/historico/historico-popup.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\"> \r\n<h1 mat-dialog-title>Informações do atendimento</h1>\r\n    <div class=\"column\">\r\n      \t<div class=\"row\">\r\n          <label > <b> Cliente : </b> {{data.nome}}</label>\r\n\r\n          <label fxFlexOffset=\"4\"> <b> Email : </b> {{data.email}}</label>\r\n\r\n\r\n\t    </div>\r\n      \r\n              <div class=\"row div-labels\" >\r\n          <label> <b> CPF : </b> {{data.cpf}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Telefone 1 : </b> {{data.telPrimario}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Telefone 2 : </b> {{data.telSecundario}}</label>\r\n      </div>      \r\n\r\n        <div class=\"row div-labels\">\r\n          <label> <b> Defeito : </b> {{data.defeito}}</label>\r\n        </div>\r\n\r\n        <div class=\"row div-labels\">\r\n          <label> <b> Marca : </b> {{data.marca}}</label>\r\n\r\n          <label fxFlexOffset=\"8\" > <b> Modelo : </b> {{data.modelo}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Endereço : </b> {{data.endereco}}</label>\r\n      </div> \r\n\r\n        <div class=\"row div-labels\">\r\n          <label> <b> Data atendimento : </b> {{data.data}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Imei : </b> {{data.imei}}</label>\r\n\r\n      </div> \r\n              <div class=\"row div-labels\" style=\"border-bottom: 4vh; border-style: solid; border-color: white;\">\r\n          <label> <b> Observações : </b> {{data.observacoes}}</label>\r\n\r\n      </div> \r\n\r\n   </div>\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n<!--       \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw> -->\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">FECHAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n\r\n</div>"
+module.exports = "<div class=\"popup\"> \r\n<h2 mat-dialog-title>Informações do atendimento - {{data.ordServ}}</h2>\r\n    <div class=\"column\">\r\n      \t<div class=\"row\">\r\n          <label > <b> Cliente : </b> {{data.nome}}</label>\r\n          \r\n          <label fxFlexOffset=\"4\"> <b> Email : </b> {{data.email}}</label>\r\n\r\n\r\n\t    </div>\r\n      \r\n              <div class=\"row div-labels\" >\r\n          <label> <b> CPF : </b> {{data.cpf}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Telefone 1 : </b> {{data.telPrimario}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Telefone 2 : </b> {{data.telSecundario}}</label>\r\n      </div>      \r\n\r\n        <div class=\"row div-labels\">\r\n          <label> <b> Defeito : </b> {{data.defeito}}</label>\r\n        </div>\r\n\r\n        <div class=\"row div-labels\">\r\n          <label> <b> Marca : </b> {{data.marca}}</label>\r\n\r\n          <label fxFlexOffset=\"8\" > <b> Modelo : </b> {{data.modelo}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Endereço : </b> {{data.endereco}}</label>\r\n      </div> \r\n\r\n        <div class=\"row div-labels\">\r\n          <label> <b> Data atendimento : </b> {{data.data}}</label>\r\n\r\n          <label fxFlexOffset=\"4\" > <b> Imei : </b> {{data.imei}}</label>\r\n\r\n      </div> \r\n              <div class=\"row div-labels\" style=\"border-bottom: 4vh; border-style: solid; border-color: white;\">\r\n          <label> <b> Observações : </b> {{data.observacoes}}</label>\r\n\r\n      </div> \r\n\r\n   </div>\r\n\r\n\r\n      <div fxLayout=\"row\" fxLayoutAlign=\"end center\" >\r\n<!--       \t<my-button-bw (click)=\"onNoClick()\" label=\"CANCELAR\" style=\"margin-top: 12px; margin-right: 5px;\"  >\r\n      \t</my-button-bw> -->\r\n\r\n\r\n        <button class=\"my-button\" mat-button [mat-dialog-close]=\"data\" cdkFocusInitial style=\"margin-top: 12px;\">FECHAR</button>\r\n  \r\n<!--         <my-button-orange [mat-dialog-close]=\"data.animal\"\r\n          fxFlexAlign=\"center\" label=\"CONFIRMAR\" style=\"margin-top: 12px;\">\r\n        </my-button-orange>  -->\r\n      </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -2243,7 +2395,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/pages/historico/historico.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh; background: rgba(235,233,234, 0.3);\">\r\n<div class=\"example-container mat-elevation-z8\">\r\n  <div class=\"example-header row mat-elevation-z4\">\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlex=\"13\">\r\n      <input class=\"searchBoxesIn\" matInput\r\n        [(ngModel)] = \"searchIn[0]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar OS/CPF...\">\r\n    </mat-form-field>\r\n    \r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[1]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Cliente...\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[2]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Telefone..\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[3]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Status..\">\r\n    </mat-form-field>\r\n        \r\n  <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[4]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Faturamento..\">\r\n  </mat-form-field>\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"4\" fxFlex=\"13\">\r\n      <input matInput\r\n      [(ngModel)] = \"searchIn[5]\" \r\n      (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filtrar Preço...\">\r\n    </mat-form-field>\r\n  </div>\r\n\r\n  <mat-table #table [dataSource]=\"dataCurrent\">\r\n    \r\n    <!-- Position Column -->\r\n    <ng-container matColumnDef=\"cpf\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> CPF </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.ordServ}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Name Column -->\r\n    <ng-container matColumnDef=\"nome\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\" > Clientes </mat-header-cell>\r\n      <mat-cell  class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.nome}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Weight Column -->\r\n    <ng-container matColumnDef=\"telPrimario\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Telefone </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.telPrimario}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Symbol Column -->\r\n    <ng-container matColumnDef=\"status\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Status </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.status}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Faturamento column -->\r\n    <ng-container matColumnDef=\"data\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Faturamento </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.data}}  </mat-cell>\r\n    </ng-container>\r\n\r\n        <!-- Faturamento column -->\r\n    <ng-container matColumnDef=\"valorFinal\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Preço </mat-header-cell>\r\n      <mat-cell  class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.valorFinal }}  </mat-cell>\r\n    </ng-container>\r\n\r\n    <mat-header-row style=\"display: none\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\r\n    <!-- DÁ PRA FAZER COM O MATROW?-->\r\n    <mat-row  (click) = \"openDialogHistorico(i)\" style=\"cursor: pointer;\" *matRowDef=\"let row; columns: displayedColumns; let i = index\"></mat-row>\r\n  </mat-table>\r\n  \r\n    <mat-paginator #paginator\r\n                \r\n                 [pageSize]=\"10\"\r\n                 [pageSizeOptions]=\"[5, 10, 20]\"\r\n                 >\r\n  </mat-paginator>\r\n\r\n</div>\r\n</div>"
+module.exports = "<app-header-toolbar></app-header-toolbar>\r\n<div style=\"width: 100vw; height: 90vh; background: rgba(235,233,234, 0.3);\">\r\n<div class=\"example-container mat-elevation-z8\">\r\n  <div class=\"example-header row mat-elevation-z4\">\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlex=\"13\">\r\n      <input class=\"searchBoxesIn\" matInput\r\n        [(ngModel)] = \"searchIn[0]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Ordem de Serviço...\">\r\n    </mat-form-field>\r\n    \r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[1]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Cliente...\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[2]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Cliente..\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[3]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Telefone...\">\r\n    </mat-form-field>\r\n        \r\n  <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"3.5\" fxFlex=\"13\">\r\n      <input matInput\r\n        [(ngModel)] = \"searchIn[4]\" \r\n        (keyup)=\"applyFilter($event.target.value)\"\r\n        (blur)=\"blured()\"\r\n        placeholder=\"Filtrar Status...\">\r\n  </mat-form-field>\r\n\r\n    <mat-form-field class=\"searchBoxes\" fxFlexOffset=\"4\" fxFlex=\"13\">\r\n      <input matInput\r\n      [(ngModel)] = \"searchIn[5]\" \r\n      (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filtrar Data...\">\r\n    </mat-form-field>\r\n  </div>\r\n\r\n  <mat-table #table [dataSource]=\"dataCurrent\">\r\n      \r\n\r\n    <!-- Faturamento column -->\r\n    <ng-container matColumnDef=\"ordServ\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Ordem de Serviço </mat-header-cell>\r\n      <mat-cell  class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.ordServ.substring(17, 24)}}  </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Position Column -->\r\n    <ng-container matColumnDef=\"cpf\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> CPF </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.cpf}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Name Column -->\r\n    <ng-container matColumnDef=\"nome\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\" > Clientes </mat-header-cell>\r\n      <mat-cell  class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.nome}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Weight Column -->\r\n    <ng-container matColumnDef=\"telPrimario\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Telefone </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.telPrimario}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Symbol Column -->\r\n    <ng-container matColumnDef=\"status\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Status </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.status}} </mat-cell>\r\n    </ng-container>\r\n\r\n    <!-- Faturamento column -->\r\n    <ng-container matColumnDef=\"data\">\r\n      <mat-header-cell *matHeaderCellDef style=\"font-size: 14px; font-weight: 900; color: black;\"> Faturamento </mat-header-cell>\r\n      <mat-cell class=\"cells\" *matCellDef=\"let element; let i = index\"> {{element.data}}  </mat-cell>\r\n    </ng-container>\r\n\r\n    <mat-header-row style=\"display: none\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\r\n    <!-- DÁ PRA FAZER COM O MATROW?-->\r\n    <mat-row  (click) = \"openDialogHistorico(i)\" style=\"cursor: pointer;\" *matRowDef=\"let row; columns: displayedColumns; let i = index\"></mat-row>\r\n  </mat-table>\r\n  \r\n    <mat-paginator #paginator\r\n                \r\n                 [pageSize]=\"10\"\r\n                 [pageSizeOptions]=\"[5, 10, 20]\"\r\n                 >\r\n  </mat-paginator>\r\n\r\n</div>\r\n</div>"
 
 /***/ }),
 
@@ -2299,7 +2451,7 @@ var HistoricoComponent = (function () {
         //url = "http://localhost"
         this.url = "http://myas.com.br";
         this.ELEMENT_DATA = [];
-        this.displayedColumns = ['cpf', 'nome', 'telPrimario', 'status', 'data', 'valorFinal'];
+        this.displayedColumns = ['ordServ', 'cpf', 'nome', 'telPrimario', 'status', 'data'];
         this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](this.ELEMENT_DATA);
         this.dataCurrent = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatTableDataSource */](this.ELEMENT_DATA);
         if (window.location.href.match(/www/) != null) {
@@ -2369,7 +2521,7 @@ var HistoricoComponent = (function () {
     };
     HistoricoComponent.prototype.openDialogHistorico = function (index) {
         var dialogRef = this.dialog.open(HistoricPopupComponent, {
-            width: '49vw',
+            width: '60vw',
             data: this.dataCurrent.filteredData[index]
             //data: { cliente : this.dataCurrent.filteredData[0].cliente, cpf : this.dataCurrent.filteredData[0].cpf, defeito : this.dataCurrent.filteredData[0].defeito,  //name: this.name, animal: this.animal
             //}

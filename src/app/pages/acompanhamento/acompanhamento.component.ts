@@ -163,6 +163,135 @@ export class AtendimentoComponent implements OnInit
   }
 }
 
+/*----------------------------------AtendimentoComponent-----------------------------------------*/
+@Component({
+  selector: 'my-atendimento',
+  templateUrl: '/finalizado/finalizado.component.html',
+  styleUrls: ['/finalizado/finalizado.component.scss']
+})
+
+export class AtendimentoFinalizadoComponent implements OnInit 
+{
+  metPag = [
+    {value: 'Débito'},
+    {value: 'Crédito'},
+    {value: 'Cheque'},
+    {value: 'Dinheiro'},
+  ];
+
+  reducedID;
+  options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
+             minute: '2-digit', second: '2-digit' };
+
+  constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private ordaDataService: OrcaDataService) 
+  {
+    this.reducedID = this.data.ordServ.substring(17, 24);
+  }
+ 
+  sumTotalValue()
+  {
+    var value1, value2;
+    if(this.data.servico != null)
+      value1 = (this.data.servico).replace(",", ".");
+    else
+      value1 = 0;
+    if(this.data.pecas != null)
+      value2 = (this.data.pecas).replace(",", ".");
+    else
+      value2 = 0;
+
+    this.data.valorFinal = Number(value1) + Number(value2);
+  }
+
+
+  onNoClick(): void 
+  {
+    this.dialogRef.close();    
+  }
+
+  deleteCard(): void
+  {
+    var card = new Card();
+    card.init(this.data);
+    this.ordaDataService.removeCardDB(card, this.data.listID);
+    this.ordaDataService.removeCardFront(card, this.data.listID);
+    this.dialogRef.close();
+  }
+
+  thermalPrintAguardando(): void{
+    if(this.reducedID == undefined)
+      this.reducedID = "";
+    if(this.data.data == undefined)
+      this.data.data = "";
+    if(this.data.nome == undefined)
+      this.data.nome = "";
+    if(this.data.telPrimario == undefined)
+      this.data.telPrimario = "";
+    if(this.data.email == undefined)
+      this.data.email = "";
+    if(this.data.marca == undefined)
+      this.data.marca = "";
+    if(this.data.imei == undefined)
+      this.data.imei = "";
+    if(this.data.observacoes == undefined)
+      this.data.observacoes = "";
+    if(this.data.defeito == undefined)
+      this.data.defeito = "";
+    if(this.data.realizado == undefined)
+      this.data.realizado = "";
+    if(this.data.pecas == undefined)
+      this.data.pecas = "";
+    if(this.data.servico == undefined)
+      this.data.servico = "";
+    if(this.data.maoObra == undefined)
+      this.data.maoObra = "";
+    var document = '<html>\
+    <div style="width: 235px; word-wrap: break-word;">\
+    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
+    <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.reducedID + ' </span> <br> \
+    <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Cliente:</strong> '+ this.data.nome +'</span> <br>\
+    <span><strong>Telefone:</strong> '+ this.data.telPrimario +'</span> <br> \
+    <span style="font-size: 12px;"> <strong> Email:</strong> '+ this.data.email +'</span> <br>\
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span style="font-size: 12px;"> <strong> Marca/modelo:</strong> '+ this.data.marca +'</span> <span style="font-size: 12px;">'+ this.data.modelo +'</span> <br>\
+    <span><strong>Imei:</strong> '+ this.data.imei +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Observações/Senha:</strong></span> <br> \
+    <div style="width: 135px; display: inline-block;"> \
+    <span>'+ this.data.observacoes + "" +'\
+    </div> \
+    <div style="width: 90px; display: inline-block; background: green;">\
+    <img style="display: inline-block;" src="assets/images/lockscreen.png">\
+    </div> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Problema relatado:</strong> '+ this.data.defeito +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Serviços realizados:</strong> '+ this.data.realizado +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span><strong>Valor peças:</strong> '+ this.data.pecas +'</span> <br> \
+    <span><strong>Valor servico:</strong> '+ this.data.servico +'</span> <br> \
+    <span><strong>Técnico Responsável:</strong> '+ this.data.maoObra +'</span> <br> <br> <br>\
+    <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
+    <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
+    </div> '
+
+    console.log(this.data);     
+    var w = window.open("");
+    w.document.write(document);
+    //w.print();    
+  };
+
+ 
+  ngOnInit() 
+  {
+  }
+}
+
+
 
 /*----------------------------------AcompanhamentoComponent---------------------------------------*/
 @Component({
@@ -187,7 +316,7 @@ export class AcompanhamentoComponent implements OnInit
   listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
   listSize: number;
   //All the ids of lists that will not popup when clicked
-  listNoPopUp = [4];
+  listNoPopUp = [];
   //All the ids of lists that will no move with the dropFunction
   listNoMove = [4];
 
@@ -222,17 +351,22 @@ export class AcompanhamentoComponent implements OnInit
     var listID = target.id;
 
     //Checking if is the "finalizado" column so a pop up wont be oppened
-    if(listID >= this.listSize - 1){
+    if(listID >= this.listSize){
       console.log("Erro você clicou em uma coluna que não existe.")
       return;
     }
+
     if(this.listNoPopUp.includes(listID))
     {
       console.log("Essa coluna não pode exibir popups.");
       return;
     }
+
     if(listID == 0 ){
       this.clickOrcamento(event.target.id, listID);
+    }
+    if(listID == 4){
+      this.clickFinalizado(event.target.id, listID);
     }
     else{
       this.clickVisited(event.target.id, listID);
@@ -366,6 +500,24 @@ export class AcompanhamentoComponent implements OnInit
         //Sending this update to service
         this.ordaDataService.addAndRemove(card, listID, listID);
       }
+    });
+  }
+
+  clickFinalizado(ordServ: string, listID: number): void 
+  {
+    var card = this.getCard(ordServ, listID);
+      if(card == null)
+        return;
+
+    //Open the pop up with the card infos
+    let dialogRef = this.dialog.open(AtendimentoFinalizadoComponent, {
+      width: '44vw',
+      data: card
+    });
+
+    //After the dialog is closed thats the called function
+    dialogRef.afterClosed().subscribe(result => {
+      
     });
   }
 

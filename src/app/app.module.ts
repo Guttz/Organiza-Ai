@@ -46,6 +46,7 @@ import { HistoricoComponent } from './pages/historico/historico.component';
 import { HistoricPopupComponent } from './pages/historico/historico.component';
 import { ClienteAtenderComponent } from './pages/acompanhamento/acompanhamento.component';
 import { AtendimentoComponent } from './pages/acompanhamento/acompanhamento.component';
+import { AtendimentoFinalizadoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
@@ -71,6 +72,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
     HistoricoComponent,
     ClienteAtenderComponent,
     AtendimentoComponent,
+    AtendimentoFinalizadoComponent,
     HistoricPopupComponent,
     LoginComponent,
     CadastroComponent,
@@ -103,6 +105,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
   AcompanhamentoComponent,
   ClienteAtenderComponent,
   AtendimentoComponent,
+  AtendimentoFinalizadoComponent,
   LoginComponent,
   CadastroComponent,
   HistoricoComponent,

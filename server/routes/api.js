@@ -715,7 +715,7 @@ router.get('/get_finalizado', (req, res) => {
     if (err) {
       throw err;
     }
-    db.db(req.session.user.assistencia).collection('finalizado').find({}, {limit: 5}).toArray(function(err, result) {
+    db.db(req.session.user.assistencia).collection('finalizado').find({}, {limit: 5}).sort({_id:-1}).toArray(function(err, result) {
       if (err) {
         throw err;
       }
@@ -733,7 +733,7 @@ router.get('/get_all_finalizados', (req, res) => {
     if (err) {
       throw err;
     }
-    db.db(req.session.user.assistencia).collection('finalizado').find({}).toArray(function(err, result) {
+    db.db(req.session.user.assistencia).collection('finalizado').find({}).sort({_id:-1}).toArray(function(err, result) {
       if (err) {
         throw err;
       }
