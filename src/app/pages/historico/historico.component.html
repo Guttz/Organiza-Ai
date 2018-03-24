@@ -8,7 +8,7 @@
         [(ngModel)] = "searchIn[0]" 
         (keyup)="applyFilter($event.target.value)"
         (blur)="blured()"
-        placeholder="Filtrar OS/CPF...">
+        placeholder="Filtrar Ordem de Serviço...">
     </mat-form-field>
     
     <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
@@ -24,7 +24,7 @@
         [(ngModel)] = "searchIn[2]" 
         (keyup)="applyFilter($event.target.value)"
         (blur)="blured()"
-        placeholder="Filtrar Telefone..">
+        placeholder="Filtrar Cliente..">
     </mat-form-field>
 
     <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
@@ -32,7 +32,7 @@
         [(ngModel)] = "searchIn[3]" 
         (keyup)="applyFilter($event.target.value)"
         (blur)="blured()"
-        placeholder="Filtrar Status..">
+        placeholder="Filtrar Telefone...">
     </mat-form-field>
         
   <mat-form-field class="searchBoxes" fxFlexOffset="3.5" fxFlex="13">
@@ -40,22 +40,29 @@
         [(ngModel)] = "searchIn[4]" 
         (keyup)="applyFilter($event.target.value)"
         (blur)="blured()"
-        placeholder="Filtrar Faturamento..">
+        placeholder="Filtrar Status...">
   </mat-form-field>
 
     <mat-form-field class="searchBoxes" fxFlexOffset="4" fxFlex="13">
       <input matInput
       [(ngModel)] = "searchIn[5]" 
-      (keyup)="applyFilter($event.target.value)" placeholder="Filtrar Preço...">
+      (keyup)="applyFilter($event.target.value)" placeholder="Filtrar Data...">
     </mat-form-field>
   </div>
 
   <mat-table #table [dataSource]="dataCurrent">
-    
+      
+
+    <!-- Faturamento column -->
+    <ng-container matColumnDef="ordServ">
+      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Ordem de Serviço </mat-header-cell>
+      <mat-cell  class="cells" *matCellDef="let element; let i = index"> {{element.ordServ.substring(17, 24)}}  </mat-cell>
+    </ng-container>
+
     <!-- Position Column -->
     <ng-container matColumnDef="cpf">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> CPF </mat-header-cell>
-      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.ordServ}} </mat-cell>
+      <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.cpf}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
@@ -80,12 +87,6 @@
     <ng-container matColumnDef="data">
       <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Faturamento </mat-header-cell>
       <mat-cell class="cells" *matCellDef="let element; let i = index"> {{element.data}}  </mat-cell>
-    </ng-container>
-
-        <!-- Faturamento column -->
-    <ng-container matColumnDef="valorFinal">
-      <mat-header-cell *matHeaderCellDef style="font-size: 14px; font-weight: 900; color: black;"> Preço </mat-header-cell>
-      <mat-cell  class="cells" *matCellDef="let element; let i = index"> {{element.valorFinal }}  </mat-cell>
     </ng-container>
 
     <mat-header-row style="display: none" *matHeaderRowDef="displayedColumns"></mat-header-row>

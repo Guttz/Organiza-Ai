@@ -22,7 +22,7 @@ ELEMENT_DATA: Element[] = [
 
   auxData: any;
 
-  displayedColumns = ['cpf', 'nome', 'telPrimario', 'status', 'data', 'valorFinal'];
+  displayedColumns = ['ordServ', 'cpf', 'nome', 'telPrimario', 'status', 'data'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   dataCurrent = new MatTableDataSource(this.ELEMENT_DATA);
 
@@ -112,7 +112,7 @@ ELEMENT_DATA: Element[] = [
     openDialogHistorico(index): void {
 
     let dialogRef = this.dialog.open(HistoricPopupComponent, {
-      width: '49vw',
+      width: '60vw',
       data: this.dataCurrent.filteredData[index]
       //data: { cliente : this.dataCurrent.filteredData[0].cliente, cpf : this.dataCurrent.filteredData[0].cpf, defeito : this.dataCurrent.filteredData[0].defeito,  //name: this.name, animal: this.animal
        //}
