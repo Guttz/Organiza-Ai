@@ -22,6 +22,12 @@ module.exports = function(ass){
 				telSecundario: String,
 				email: String,
 				endereco: String,
+				realizado: String,
+				pecas: String,
+				servico: String,
+				maoObra: String,
+				valorFinal: String,
+				metPag: String,
 				observacoes: String
 			}, { collection: 'atendimento' });
 	return db.model('atendimento', atendimento);
