@@ -155,14 +155,62 @@ router.post('/set_list_headers', function(req, res, next){
       throw err;
     }
 
-    console.log("o body:");
-    console.log(req.body);
     req.body.id = "listHeaders";
 
     //Checking if the params has at least a valid cpf
       db.db(req.session.user.assistencia).collection('userSettings').updateOne(
       { 
         id: "listHeaders"
+      }, {$set: req.body}, {upsert: true}, function(err, result){
+        if(err)
+        {
+          throw err;
+        }
+        else
+        {
+          console.log("Updated orca with success");
+          res.send(result);
+        }
+      });
+  })
+});
+
+router.get('/get_configs', (req, res) => { 
+  if(!checkSession(req))
+  {
+    return;
+  }
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      throw err;
+    }
+    db.db(req.session.user.assistencia).collection('userSettings').findOne({id: "configs"}, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      console.log(result);
+      res.send(result);
+    });
+  });
+});
+
+router.post('/set_configs', function(req, res, next){
+  if(!checkSession(req))
+  {
+    return;
+  }
+  //console.log("Running update_cli Post.");
+  
+  MongoClient.connect(url, function(err, db){
+    if(err) {
+      throw err;
+    }
+    req.body.id = "configs";
+
+    //Checking if the params has at least a valid cpf
+      db.db(req.session.user.assistencia).collection('userSettings').updateOne(
+      { 
+        id: "configs"
       }, {$set: req.body}, {upsert: true}, function(err, result){
         if(err)
         {
@@ -396,7 +444,6 @@ router.post('/remove_card', function(req, res, next)
 {
   console.log("Executando remove_card.");
   
-
   if(!checkSession(req))
   {
     console.log("Não existe sesssion valida.");

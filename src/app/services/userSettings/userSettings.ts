@@ -10,14 +10,14 @@ import { SocketComunicator } from '../socketComunicator/socketComunicator.servic
 @Injectable()
 export class UserSettingsService 
 {
-	dataHolder: any;
+	configs: any;
 	url = "http://myas.com.br";
   ioConnection: any;
-
 
   constructor(private http: HttpClient, private socketService: SocketComunicator) 
   { 
     this.initialize();
+    this.getConfigsDB();
   } 
 
   public initialize()
@@ -45,8 +45,30 @@ export class UserSettingsService
   }
 
 
-  changeSettingsDB()
+  setConfigsDB(newConfigs: any)
   {
-
+      this.configs = newConfigs;
+      this.http.post(this.url + "/api/set_configs", newConfigs).subscribe(data => 
+      {
+        console.log(data);
+      }, err =>{
+        console.log("Erro na mudança de cabeçalho: " + err);
+      });
   }
+
+  getConfigsDB()
+  {
+      this.http.get(this.url + "/api/get_configs").subscribe(data => 
+      {
+        this.configs = data;
+      }, err =>{
+        console.log("Erro na mudança de cabeçalho: " + err);
+      });
+  }
+
+  public getConfigs(): Observable<any>
+  {
+    return of(this.configs);
+  }
+
 }
