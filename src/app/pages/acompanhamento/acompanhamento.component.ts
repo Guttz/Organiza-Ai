@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+\import { Component, OnInit, Inject } from '@angular/core';
 import { Card } from '../../common_components/schemas/card';
 import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
@@ -21,11 +21,14 @@ export class ClienteAtenderComponent implements OnInit
   reducedID;
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
              minute: '2-digit', second: '2-digit' };
+  config = {linkLogo: "", termosOS: ""};
   constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private ordaDataService: OrcaDataService) 
+    private ordaDataService: OrcaDataService,
+    private userSettingsService: UserSettingsService) 
   {
     this.reducedID = this.data.ordServ.substring(17, 24);
+    this.userSettingsService.getConfigs().subscribe(config => this.config = config);  
   }
 
   onNoClick(): void {
@@ -74,7 +77,10 @@ export class ClienteAtenderComponent implements OnInit
       this.data.maoObra = "";
     var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
-    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
+    \
+    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> \
+      <img style="display: inline-block; padding-left: 10px;" src="'+this.config.linkLogo+'"> <br>\
+    \
     <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.reducedID + ' </span> <br> \
     <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
@@ -93,7 +99,9 @@ export class ClienteAtenderComponent implements OnInit
     <img style="display: inline-block;" src="assets/images/lockscreen.png">\
     </div> \
     <span style="font-size: 12px;">_______________________________________<br>\
-    <span><strong>Defeito apresentado:</strong> '+ this.data.defeito +'</span> <br> <br> <br>\
+    <span><strong>Defeito apresentado:</strong> '+ this.data.defeito +'</span> <br>\
+    <span style="font-size: 12px;">_______________________________________<br>\
+    <span>'+ this.config.termosOS +'</span> <br> <br> <br>\
     <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
     <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> '
@@ -128,13 +136,16 @@ export class AtendimentoComponent implements OnInit
   reducedID;
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
              minute: '2-digit', second: '2-digit' };
-
-  constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, 
+  config = {linkLogo: "", termosOS: ""};
+  constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private ordaDataService: OrcaDataService) 
+    private ordaDataService: OrcaDataService,
+    private userSettingsService: UserSettingsService) 
   {
     this.reducedID = this.data.ordServ.substring(17, 24);
+    this.userSettingsService.getConfigs().subscribe(config => this.config = config);  
   }
+
  
   sumTotalValue()
   {
@@ -199,7 +210,10 @@ export class AtendimentoComponent implements OnInit
       this.data.maoObra = "";
     var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
-    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
+    \
+    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> \
+      <img style="display: inline-block; padding-left: 10px;" src="'+this.config.linkLogo+'"> <br>\
+    \
     <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.reducedID + ' </span> <br> \
     <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
@@ -224,7 +238,9 @@ export class AtendimentoComponent implements OnInit
     <span style="font-size: 12px;">_______________________________________<br>\
     <span><strong>Valor peças:</strong> '+ this.data.pecas +'</span> <br> \
     <span><strong>Valor servico:</strong> '+ this.data.servico +'</span> <br> \
-    <span><strong>Técnico Responsável:</strong> '+ this.data.maoObra +'</span> <br> <br> <br>\
+    <span><strong>Técnico Responsável:</strong> '+ this.data.maoObra +'</span> <br> \
+    <span style="font-size: 12px;">_______________________________________<br> <br>\
+    <span>'+ this.config.termosOS +'</span> <br> <br> <br>\
     <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
     <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> '
@@ -260,13 +276,16 @@ export class AtendimentoFinalizadoComponent implements OnInit
   reducedID;
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
              minute: '2-digit', second: '2-digit' };
-
-  constructor(public dialogRef: MatDialogRef<AtendimentoComponent>, 
+  config = {linkLogo: "", termosOS: ""};
+  constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private ordaDataService: OrcaDataService) 
+    private ordaDataService: OrcaDataService,
+    private userSettingsService: UserSettingsService) 
   {
     this.reducedID = this.data.ordServ.substring(17, 24);
+    this.userSettingsService.getConfigs().subscribe(config => this.config = config);  
   }
+
  
   sumTotalValue()
   {
@@ -327,7 +346,10 @@ export class AtendimentoFinalizadoComponent implements OnInit
       this.data.maoObra = "";
     var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
-    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> <img style="display: inline-block; padding-left: 10px;" src="assets/images/logo-nameOS.png"> <br>\
+    \
+    <body onload="window.print()"> <h4 style="display: inline-block" >Ordem de serviço</h4> \
+      <img style="display: inline-block; padding-left: 10px;" src="'+this.config.linkLogo+'"> <br>\
+    \
     <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.reducedID + ' </span> <br> \
     <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
@@ -352,7 +374,9 @@ export class AtendimentoFinalizadoComponent implements OnInit
     <span style="font-size: 12px;">_______________________________________<br>\
     <span><strong>Valor peças:</strong> '+ this.data.pecas +'</span> <br> \
     <span><strong>Valor servico:</strong> '+ this.data.servico +'</span> <br> \
-    <span><strong>Técnico Responsável:</strong> '+ this.data.maoObra +'</span> <br> <br> <br>\
+    <span><strong>Técnico Responsável:</strong> '+ this.data.maoObra +'</span> <br>\
+    <span style="font-size: 12px;">_______________________________________<br> <br>\
+    <span>'+ this.config.termosOS +'</span> <br> <br> <br>\
     <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
     <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> '

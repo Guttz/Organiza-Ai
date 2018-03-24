@@ -10,8 +10,8 @@
           <mat-form-field fxFlex>
             <input matInput  
             name="link" 
-            placeholder="Inserir link" >
-
+            placeholder="Inserir link" 
+            [(ngModel)] ="config.linkLogo" >
           </mat-form-field>
 
       </div>
@@ -26,7 +26,10 @@
                matAutosizeMinRows="2"
                 placeholder="Escrever termos"
               name="ostermos"
-              ></textarea>
+              
+              [(ngModel)] ="config.termosOS" 
+              >
+              </textarea>
 
             </mat-form-field> 
 

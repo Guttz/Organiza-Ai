@@ -10,52 +10,18 @@ import { SocketComunicator } from '../socketComunicator/socketComunicator.servic
 @Injectable()
 export class UserSettingsService 
 {
-  //Observable that will be used to print all data on screen
-	lists: ListSchema[];
-	dataHolder: any;
-	url = "http://myas.com.br";
+  config: any = { linkLogo : "", termosOS: ""};
+  url = "http://myas.com.br";
   ioConnection: any;
-  textOS = "";
-  imgLink = "";
-
 
   constructor(private http: HttpClient, private socketService: SocketComunicator) 
   { 
-   this.initialize();
-   this.getDataDB();
+    this.initialize();
+    this.getConfigsDB();
   } 
 
   public initialize()
   {
-    const listsAux: ListSchema[] = 
-    [
-      {
-        name: '',
-        cards: [],
-        id : 0
-      },
-      {
-        name: '',
-        cards: [],
-        id : 1
-      },
-      {
-        name: '',
-        cards: [],
-        id : 2
-      },
-      {
-        name: '',
-        cards: [],
-        id : 3
-      },
-      {
-        name: '',
-        cards: [],
-        id : 4
-      }
-    ];
-    this.lists = listsAux;
     if(window.location.href.match(/www/) != null)
     {
       this.url = "http://www.myas.com.br";
@@ -78,37 +44,41 @@ export class UserSettingsService
     this.socketService.sendChanges(msg);
   }
 
-  public getOrcasList(): Observable<ListSchema[]>
+
+  setConfigsDB(newConfigs: any)
   {
-  	return of(this.lists);
+      this.config = newConfigs;
+      this.http.post(this.url + "/api/set_configs", newConfigs).subscribe(data => 
+      {
+        console.log(data);
+      }, err =>{
+        console.log("Erro na mudança de cabeçalho: " + err);
+      });
   }
 
-  public getDataDB()
+  getConfigsDB()
   {
-    this.http.get(this.url + "/api/get_list_headers").subscribe(data => 
-    {
+      this.http.get(this.url + "/api/get_configs").subscribe(data => 
+      {
+        var aux = Object();
+        aux = data;
 
-      for(var i = 0; i < this.lists.length; i++){
-        this.lists[i].name = data[i];
-      }
-      this.textOS = data[this.lists.length];
-      this.imgLink = data[this.lists.length+1];
-
-      console.log(data);
-    }, err =>{
-      console.log("Erro ao carregar título das listas: + " + err);
-    });
+        if(data == null){
+          this.config = { linkLogo : "", termosOS: ""};
+        }
+        else{
+          this.config.linkLogo = aux.linkLogo;
+          this.config.termosOS = aux.termosOS;
+        }
+        console.log(this.config);
+      }, err =>{
+        console.log("Erro na mudança de cabeçalho: " + err);
+      });
   }
 
-  private setDataDB(headerJson: any)
+  public getConfigs(): Observable<any>
   {
-
-    this.http.post(this.url + "/api/set_list_headers", headerJson).subscribe(data => 
-    {
-      console.log(data);
-    }, err =>{
-      console.log("Erro na mudança de cabeçalho: " + err);
-    });
+    return of(this.config);
   }
 
 }

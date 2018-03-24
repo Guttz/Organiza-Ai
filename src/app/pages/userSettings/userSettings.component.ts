@@ -3,7 +3,7 @@ import {FormControl, FormGroupDirective, FormGroup, NgForm, Validators} from '@a
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
-import { OrcaDataService } from '../../services/orcaData/orca-data.service';
+import { UserSettingsService } from '../../services/userSettings/userSettings.service';
 import { Observable } from 'rxjs/Rx';
 
 
@@ -15,8 +15,10 @@ import { Observable } from 'rxjs/Rx';
 
 export class UserSettingsComponent implements OnInit {
   url = "http://myas.com.br"
+  config: any = { linkLogo : "", termosOS: ""};
 
-  constructor(private http: HttpClient, public snackBar: MatSnackBar,private ordaDataService: OrcaDataService){
+  constructor(private http: HttpClient, public snackBar: MatSnackBar,
+    private userSettingsService: UserSettingsService){
       if(window.location.href.match(/www/) != null){
         console.log("das me: " + window.location.href);
            this.url = "http://www.myas.com.br";
@@ -30,13 +32,18 @@ export class UserSettingsComponent implements OnInit {
            }
            
         }
+      this.userSettingsService.getConfigs().subscribe(config => this.config = config);  
    }
 
   ngOnInit() {
-  }
-
-  updateSettings(){
     
   }
 
+  updateSettings(settingsForm){
+    this.userSettingsService.setConfigsDB(this.config);
+
+  }
+
+
 }
+
