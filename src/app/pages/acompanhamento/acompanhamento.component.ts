@@ -22,7 +22,8 @@ export class ClienteAtenderComponent implements OnInit
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
              minute: '2-digit', second: '2-digit' };
   constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any) 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private ordaDataService: OrcaDataService) 
   {
     this.reducedID = this.data.ordServ.substring(17, 24);
   }
@@ -31,6 +32,19 @@ export class ClienteAtenderComponent implements OnInit
     this.dialogRef.close();
   }
 
+    deleteCard(): void
+  {
+    if (confirm("Você realmente deseja deletar esse card?")) 
+    {
+      var card = new Card();
+      card.init(this.data);
+      this.ordaDataService.removeCardDB(card, this.data.listID);
+      this.ordaDataService.removeCardFront(card, this.data.listID);
+      this.dialogRef.close();
+    } 
+    
+  }
+  
     thermalPrintAguardando(): void{
     if(this.reducedID == undefined)
       this.reducedID = "";
@@ -504,9 +518,13 @@ export class AcompanhamentoComponent implements OnInit
     if(card == null)
       return;
 
+      var aux = Object();
+      aux = card;
+      aux.listID = listID;
+
     let dialogRef = this.dialog.open(ClienteAtenderComponent, {
       width: '44vw',
-      data: card
+      data: aux
     });
 
     dialogRef.afterClosed().subscribe(result => {

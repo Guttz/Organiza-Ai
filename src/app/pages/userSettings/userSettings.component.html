@@ -1,6 +1,6 @@
 <app-header-toolbar></app-header-toolbar>
 <div style="width: 100vw; height: 90vh;   overflow: auto; background: rgba(235,233,234, 0.3);">
-  <form [formGroup]="form" >
+  <form #settingsForm="ngForm">
     <div fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex="90">
         <my-form-header label="Link online para logo"></my-form-header>
@@ -8,8 +8,7 @@
         <div fxLayout="row">
 
           <mat-form-field fxFlex>
-            <input matInput 
-            formControlName="Link"  
+            <input matInput  
             name="link" 
             placeholder="Inserir link" >
 
@@ -56,7 +55,7 @@
       <div fxLayout="row" fxLayoutAlign="end center">
 
         <my-button-orange
-          (click)="updateSettings()" 
+          (click)="updateSettings(settingsForm)" 
           fxFlexAlign="center" 
           label="ATUALIZAR CONFIGURAÇÕES" 
           style="margin-top: 12px;">
