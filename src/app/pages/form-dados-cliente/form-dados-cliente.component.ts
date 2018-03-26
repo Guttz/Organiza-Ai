@@ -90,6 +90,10 @@ export class FormDadosClienteComponent implements OnInit {
     this.phoneValidator
   ]);
 
+  CEPFormControl = new FormControl('', [
+    this.CEPValidator
+  ]);
+
 
     cpfValidator(control: FormControl) { 
   let cpforcnpj = control.value; 
@@ -133,6 +137,22 @@ export class FormDadosClienteComponent implements OnInit {
   return null; 
   }
 
+  CEPValidator(control: FormControl) { 
+  let cep = control.value; 
+  
+
+  if(cep.length == 8 || cep.length == 9 || cep.length == 0){
+    return null;
+  }
+  else{
+      return {
+        cepInvalid: "Invalid cep"
+      }
+  }
+ 
+  }
+
+
     typingPhone(){  
 
     //Inserting automatically parentesis and - in the phone
@@ -166,6 +186,30 @@ export class FormDadosClienteComponent implements OnInit {
 
   }
 
+  checkCEP(){
+    
+
+    if(this.form.value.cep.length == 9 || this.form.value.cep.length == 8 ){
+       this.http.get("https://viacep.com.br/ws/" + this.form.value.cep +"/json/")
+        .subscribe(
+          res => {
+            var aux = Object();
+            aux = res;
+
+            if(aux.erro == true){
+              return;
+            }
+
+           this.enderecoFormControl.setValue( aux.logradouro + ", " + aux.bairro + ", " + aux.localidade + "-" + aux.uf + " | Nº ");
+
+            console.log(res);
+          },
+          err => {
+          }
+        );
+     }
+
+  }
 
   //Declaring the form group to interact with the form
 
@@ -176,6 +220,7 @@ export class FormDadosClienteComponent implements OnInit {
     telSecundario: this.telTwoFormControl,
     email: this.emailFormControl,
     endereco: this.enderecoFormControl,
+    cep: this.CEPFormControl
   });
 
   userForm() {
@@ -189,6 +234,7 @@ export class FormDadosClienteComponent implements OnInit {
           this.emailFormControl.markAsTouched();
           this.telFormControl.markAsTouched();
           this.telTwoFormControl.markAsTouched();
+          this.CEPFormControl.markAsTouched();
           
           let config = new MatSnackBarConfig();
           config.extraClasses = ['error-class'];
@@ -322,7 +368,7 @@ export class FormDadosClienteComponent implements OnInit {
       {
         //Setting the form values
         this.form.setValue( { cpf: data.cpf, nome: data.nome, telPrimario: data.telPrimario, telSecundario: data.telSecundario,
-                              email: data.email, endereco: data.endereco});
+                              email: data.email, endereco: data.endereco, cep: ""});
         this.orca.cpf = data.cpf;
         this.update = true;
       }
@@ -344,7 +390,7 @@ export class FormDadosClienteComponent implements OnInit {
         
         //Setting the form values
         this.form.setValue( { cpf: data.cpf, nome: data.nome, telPrimario: data.telPrimario, telSecundario: data.telSecundario,
-                              email: data.email, endereco: data.endereco});
+                              email: data.email, endereco: data.endereco, cep: ""});
         this.orca.cpf = data.cpf;
         this.update = true;
       }

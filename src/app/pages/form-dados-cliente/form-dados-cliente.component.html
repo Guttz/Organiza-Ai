@@ -89,7 +89,21 @@
 
       <div fxLayout="row">
 
-        <mat-form-field fxFlex [hideRequiredMarker]="true">
+        <mat-form-field fxFlex="20" >
+            <input matInput
+             [formControl]="CEPFormControl"
+              formControlName="cep" 
+              name="cep" 
+              placeholder="CEP"
+              (keyup)="checkCEP()">
+
+            <mat-error *ngIf="CEPFormControl.hasError('cepInvalid')" >
+              CEP <strong>inválido</strong>
+            </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field fxFlexOffset="2" fxFlex [hideRequiredMarker]="true">
             <input matInput
               formControlName="endereco" 
               name="endereco" 
