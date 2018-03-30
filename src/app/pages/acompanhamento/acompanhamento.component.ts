@@ -244,8 +244,7 @@ export class AtendimentoComponent implements OnInit
     <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
     <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> '
-
-    console.log(this.data);     
+   
     var w = window.open("");
     w.document.write(document);
     //w.print();    
