@@ -54,6 +54,9 @@ app.use(session({
 	secret: 'faeb4453e5d14fe6f6d04637f78077c76c73d1b4',
 	proxy: true,
 	resave: true,
+  cookie : {
+        maxAge: 1000* 60 * 60 *24 * 365
+  },
 	saveUninitialized: true,
 	store: new MongoStore({ url: 'mongodb://localhost/my_assistence_db' })
 	})
