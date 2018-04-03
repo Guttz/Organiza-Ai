@@ -1,7 +1,7 @@
 export class Card {
 
 	//ordServ is a primary key of the card
-	private ordServ: string;
+	public ordServ: string;
 	cpf: string;
 	defeito: string;
 	nome: string;

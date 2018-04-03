@@ -120,8 +120,8 @@ export class ClienteAtenderComponent implements OnInit
 /*----------------------------------AtendimentoComponent-----------------------------------------*/
 @Component({
   selector: 'my-atendimento',
-  templateUrl: '/atendimento/atendimento.component.html',
-  styleUrls: ['/atendimento/atendimento.component.scss']
+  templateUrl: './atendimento/atendimento.component.html',
+  styleUrls: ['./atendimento/atendimento.component.scss']
 })
 
 export class AtendimentoComponent implements OnInit 
@@ -260,8 +260,8 @@ export class AtendimentoComponent implements OnInit
 /*----------------------------------AtendimentoComponent-----------------------------------------*/
 @Component({
   selector: 'my-atendimento',
-  templateUrl: '/finalizado/finalizado.component.html',
-  styleUrls: ['/finalizado/finalizado.component.scss']
+  templateUrl: './finalizado/finalizado.component.html',
+  styleUrls: ['./finalizado/finalizado.component.scss']
 })
 
 export class AtendimentoFinalizadoComponent implements OnInit 

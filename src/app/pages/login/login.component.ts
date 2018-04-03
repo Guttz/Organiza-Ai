@@ -13,8 +13,8 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 export class LoginComponent implements CanActivate {
 
 	//Username and password variables
-	private user: String;
-	private pass: String;
+	public user: String;
+	public pass: String;
   loadSpinner = false;
 
   //url = "http://localhost";

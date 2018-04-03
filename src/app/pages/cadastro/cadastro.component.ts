@@ -13,9 +13,9 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 export class CadastroComponent implements CanActivate {
 
 	//Username and password variables
-	private user: String;
-	private pass: String;
-  private assistencia: String;
+	public user: String;
+	public pass: String;
+  public assistencia: String;
   loadSpinner = false;
 
   //url = "http://localhost";
