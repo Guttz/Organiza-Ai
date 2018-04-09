@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			var url;
+			if(window.location.href.match(/www/) != null){
+		      console.log("das me: " + window.location.href);
+		      	url = "https://www.myas.com.br";
+		    }
+		    else{
+		        if(window.location.href.match(/local/) != null){
+		        	url = "https://localhost";
+		         }
+		         else{
+		        	url = "https://myas.com.br";
+		         }
+		         
+		     }
+		   
+		   window.location = url;
+		</script>
+
+	</head>
+</html>

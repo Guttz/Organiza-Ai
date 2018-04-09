@@ -11,7 +11,7 @@ import { SocketComunicator } from '../socketComunicator/socketComunicator.servic
 export class UserSettingsService 
 {
   config: any = { linkLogo : "", termosOS: ""};
-  url = "http://myas.com.br";
+  url = "https://myas.com.br";
   ioConnection: any;
 
   constructor(private http: HttpClient, private socketService: SocketComunicator) 
@@ -24,17 +24,17 @@ export class UserSettingsService
   {
     if(window.location.href.match(/www/) != null)
     {
-      this.url = "http://www.myas.com.br";
+      this.url = "https://www.myas.com.br";
     }
     else
     {
       if(window.location.href.match(/local/) != null)
       {
-        this.url = "http://localhost";
+        this.url = "https://localhost";
       }
       else
       {
-        this.url = "http://myas.com.br";
+        this.url = "https://myas.com.br";
       }   
     }
   }

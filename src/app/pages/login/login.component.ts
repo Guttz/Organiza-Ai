@@ -19,7 +19,7 @@ export class LoginComponent implements CanActivate {
 
   //url = "http://localhost";
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
-  url = "http://www.myas.com.br"
+  url = "https://www.myas.com.br"
   constructor(private http: HttpClient,  private router: Router, public snackBar: MatSnackBar) { 
       
 /*          if(window.location.href.match(/www/) !== null){
@@ -28,14 +28,14 @@ export class LoginComponent implements CanActivate {
 
     if(window.location.href.match(/www/) != null){
       console.log("das me: " + window.location.href);
-         this.url = "http://www.myas.com.br";
+         this.url = "https://www.myas.com.br";
        }
       else{
         if(window.location.href.match(/local/) != null){
-           this.url = "http://localhost";
+           this.url = "https://localhost";
          }
          else{
-           this.url = "http://myas.com.br";
+           this.url = "https://myas.com.br";
          }
          
        }

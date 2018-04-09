@@ -83,17 +83,17 @@ export class OrcaDataService
     this.lists = listsAux;
     if(window.location.href.match(/www/) != null)
     {
-      this.url = "http://www.myas.com.br";
+      this.url = "https://www.myas.com.br";
     }
     else
     {
       if(window.location.href.match(/local/) != null)
       {
-        this.url = "http://localhost";
+        this.url = "https://localhost";
       }
       else
       {
-        this.url = "http://myas.com.br";
+        this.url = "https://myas.com.br";
       }   
     }
     this.requestAllOrcas();

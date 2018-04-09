@@ -15,7 +15,7 @@ searchIn: Array<string> = ["", "", "", "", "", ""];
 
 //url = "http://localhost:3000"
 //url = "http://localhost"
-url = "http://myas.com.br"
+url = "https://myas.com.br"
 
 ELEMENT_DATA: Element[] = [
 ];
@@ -32,14 +32,14 @@ ELEMENT_DATA: Element[] = [
 
     if(window.location.href.match(/www/) != null){
       console.log("das me: " + window.location.href);
-         this.url = "http://www.myas.com.br";
+         this.url = "https://www.myas.com.br";
        }
       else{
         if(window.location.href.match(/local/) != null){
-           this.url = "http://localhost";
+           this.url = "https://localhost";
          }
          else{
-           this.url = "http://myas.com.br";
+           this.url = "https://myas.com.br";
          }
          
      }

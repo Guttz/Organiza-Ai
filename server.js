@@ -5,18 +5,28 @@ const http = require('http');
 const bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var fs = require('fs');
+var https = require('https');
+var privateKey  = fs.readFileSync('ssl/server.key', 'utf8');
+var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
 
 // Get our API routes
 const api = require('./server/routes/api');
 
 const app = express();
 
+const httpRedirector = express();
+
 // Add headers
 app.use(function (req, res, next) {
 
-    res.setHeader('Access-Control-Allow-Origin', "http://localhost");
+    res.setHeader('Access-Control-Allow-Origin', "https://localhost");
 
-      var allowedOrigins = ['http://myas.com.br', 'http://www.myas.com.br', 'http://http://localhost:3000', 'http://localhost', 'http://myas.com.br:3000' ];
+      var allowedOrigins = ['http://myas.com.br', 'http://www.myas.com.br', 'http://http://localhost:3000',
+       'http://localhost', 'http://myas.com.br:3000',
+       'https://myas.com.br', 'https://www.myas.com.br', 'https://https://localhost:3000',
+       'https://localhost', 'https://myas.com.br:3000' ];
       var origin = req.headers.origin;
       if(allowedOrigins.indexOf(origin) > -1){
            res.setHeader('Access-Control-Allow-Origin', origin);
@@ -65,32 +75,34 @@ app.use(session({
 // Set our api routes
 app.use('/api', api);
 
-
-/*app.get('/*', function(req, res, next) {
-  if (req.headers.host.match(/^www/) !== null ) {
-    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
-  } else {
-    next();     
-  }
-})*/
-
 // Catch all other routes and return the index file
 app.get('/*', (req, res) => {
 	  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+httpRedirector.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'redirectHTTP.html'));
+});
+
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || '80';
+const port = process.env.PORT || '443';
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-const server = http.createServer(app);
-
+const server = https.createServer(credentials,app);
 /**
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, () => console.log(`API running on localhost:${port}`));
+
+const portHttp = process.env.PORT || '80';
+httpRedirector.set('port', portHttp);
+
+const serverHttp = http.createServer(httpRedirector);
+
+
+serverHttp.listen(portHttp, () => console.log(`API running on localhost:${portHttp}`));

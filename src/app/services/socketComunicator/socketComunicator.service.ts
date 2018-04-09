@@ -9,7 +9,7 @@ const PORT = 81
 @Injectable()
 export class SocketComunicator {
 
-  url = "http://myas.com.br";
+  url = "https://myas.com.br";
 
   private socket;
 
@@ -17,15 +17,15 @@ export class SocketComunicator {
     if(window.location.href.match(/www/) != null)
     {
       console.log("das me: " + window.location.href);
-        this.url = "http://www.myas.com.br";
+        this.url = "https://www.myas.com.br";
     }
     else
     {
         if(window.location.href.match(/local/) != null){
-          this.url = "http://localhost";
+          this.url = "https://localhost";
         }
         else{
-          this.url = "http://myas.com.br";
+          this.url = "https://myas.com.br";
         }
          
     }
