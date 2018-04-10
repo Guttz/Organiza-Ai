@@ -61,6 +61,7 @@ ELEMENT_DATA: Element[] = [
       for (var i = 0; i < this.auxData.length; i++) {
           //var currentElement = {cpf: this.auxData[i].cpf, nome: this.auxData[i].nome, telPrimario: this.auxData[i].telPrimario, status: "Finalizado", faturamento: new Date(this.auxData[i].data).getDay() + "/"+ (new Date(this.auxData[i].data).getMonth()+1) + "/" + new Date(this.auxData[i].data).getFullYear(), preco: this.auxData[i].valorFinal };
           this.auxData[i].status = "Finalizado";
+          this.auxData[i].data = this.auxData[i].data.substring(8,10) + "/" + this.auxData[i].data.substring(5,7) + "/" + this.auxData[i].data.substring(0,4) ;
           this.ELEMENT_DATA.push(this.auxData[i]);
       }
 

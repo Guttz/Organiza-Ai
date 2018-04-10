@@ -754,7 +754,7 @@ router.get('/get_finalizado', (req, res) => {
     if (err) {
       throw err;
     }
-    db.db(req.session.user.assistencia).collection('finalizado').find({}, {limit: 5}).sort({_id:-1}).toArray(function(err, result) {
+    db.db(req.session.user.assistencia).collection('finalizado').find({}, {limit: 10}).sort({_id:-1}).toArray(function(err, result) {
       if (err) {
         throw err;
       }

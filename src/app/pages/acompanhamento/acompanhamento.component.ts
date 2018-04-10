@@ -136,7 +136,9 @@ export class AtendimentoComponent implements OnInit
   reducedID;
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
              minute: '2-digit', second: '2-digit' };
+
   config = {linkLogo: "", termosOS: ""};
+  
   constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ordaDataService: OrcaDataService,
@@ -244,8 +246,7 @@ export class AtendimentoComponent implements OnInit
     <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
     <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> '
-
-    console.log(this.data);     
+   
     var w = window.open("");
     w.document.write(document);
     //w.print();    
