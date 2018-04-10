@@ -1,3 +1,9 @@
+
+//RunnignPlace = 0, local
+//RunningPlace = 1, amazon
+const RunningPlace = "amazon";
+
+
 // Get dependencies
 const express = require('express');
 const path = require('path');
@@ -9,6 +15,13 @@ var fs = require('fs');
 var https = require('https');
 var privateKey  = fs.readFileSync('ssl/server.key', 'utf8');
 var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
+
+if(RunningPlace == "amazon")
+{
+  privateKey  = fs.readFileSync('/etc/letsencrypt/live/myas.com.br/privkey.pem', 'utf8');
+  certificate = fs.readFileSync('/etc/letsencrypt/live/myas.com.br/fullchain.pem', 'utf8');
+}
+
 var credentials = {key: privateKey, cert: certificate};
 
 // Get our API routes
