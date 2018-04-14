@@ -119,7 +119,7 @@ export class ListComponent implements OnInit, AfterViewInit {
 
     console.log("HEHEHE " + this.someInput.nativeElement.value);
     this.appearSearch = !this.appearSearch;
-    //this.filter = ""
+    this.filter = "";
 
     //Three diferent ways of trying to focus the filter element, there's on more
     //in the html where I call from the button click
