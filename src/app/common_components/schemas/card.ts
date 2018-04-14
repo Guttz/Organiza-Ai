@@ -22,6 +22,7 @@ export class Card {
 	valorFinal: string;
 	metPag: string;
 	observacoes: string;
+	alldata: string;
 
 	initialized = false;
 	//"Constructor"
@@ -56,6 +57,11 @@ export class Card {
 	    this.metPag = dataJson.metPag;
 	    this.observacoes = dataJson.observacoes;
 
+	    this.alldata = this.ordServ + this.cpf + this.defeito + this.nome + this.telPrimario + 
+	    this.dia + "/" + this.mes + this.imei + this.endereco + this.marca + this.modelo + 
+	    this.telSecundario + this.email + this.realizado + this.pecas + this.servico + this.maoObra +
+	    this.valorFinal + this.metPag + this.observacoes;
+
 	    this.initialized = true;
 	    return true;        
 	}
@@ -87,6 +93,11 @@ export class Card {
 	    this.valorFinal = dataJson.valorFinal;
 	    this.metPag = dataJson.metPag;
 	    this.observacoes = dataJson.observacoes;
+
+	    this.alldata = this.ordServ + this.cpf + this.defeito + this.nome + this.telPrimario + 
+	    this.dia + "/" + this.mes + this.imei + this.endereco + this.marca + this.modelo + 
+	    this.telSecundario + this.email + this.realizado + this.pecas + this.servico + this.maoObra +
+	    this.valorFinal + this.metPag + this.observacoes;
 
 	    return true;
 	}

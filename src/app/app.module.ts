@@ -22,6 +22,7 @@ import {MatSnackBarModule} from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 /*Import dos componentes simples*/
 import { MyInputTextComponent } from './common_components/my-input-text/my-input-text.component';
@@ -92,6 +93,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
     MatToolbarModule,
     DragDropModule,
     MatTableModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatDialogModule,
     MatSnackBarModule,

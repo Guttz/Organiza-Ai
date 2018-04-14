@@ -1,13 +1,33 @@
+<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel="stylesheet">
+
 <div class="list" (dragover)="allowDrop($event)" (drop)="drop($event)" id="{{list.id}}">
 	<div class="list_border">
 
-<!--   <p  class="list__title" ><strong contenteditable="true" (blur)="changHeader()">  {{list.name}} </strong></p> -->
-<!-- {{list.id}} --> 
-  <input  style= "background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 2.3vh; padding-bottom: 1.5vh; padding-top: 1.5vh;" (blur)="changHeader()" type="text" [(ngModel)]="list.name">
+	<div fxLayout="row">
+	  <input  fxFlex="grow" style= "background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 15px" (blur)="changHeader()" type="text" [(ngModel)]="list.name">
 
-  <div (dragover)="allowDrop($event)" class="cards">
-    <app-card (dragstart)="dragStart($event)" (dragover)="allowDrop($event)" *ngFor="let currentCard of list.cards" [card]="currentCard"></app-card>
-  </div>
 
-</div>
+
+	<button fxFlexOffset="0" mat-icon-button (click)="searchOnList()">
+      <mat-icon>search</mat-icon>
+    </button>
+
+
+	</div>
+	<div *ngIf="appearSearch" fxLayout="row">
+		<mat-form-field fxFlex="grow" style="padding-top: 0px; margin-top: 0px; border-width: 0px; color: blue;">
+	    <input matInput autofocus (keyup)="filtering()" (blur)="quitSearch()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
+
+	    <mat-placeholder style="font-size: 12px;">
+	    	Filtrar...
+	    </mat-placeholder>
+
+	  </mat-form-field>
+	</div>	
+
+	  <div (dragover)="allowDrop($event)" class="cards">
+	    <app-card (dragstart)="dragStart($event)" (dragover)="allowDrop($event)" *ngFor="let currentCard of list.cards" [card]="currentCard"></app-card>
+	  </div>
+
+	</div>
 </div>
