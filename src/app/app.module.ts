@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { ChildComponent } from './common_components/list/child.component';
 
 /*Angular material components*/
 import 'hammerjs';
@@ -61,6 +62,7 @@ import { SocketComunicator } from './services/socketComunicator/socketComunicato
 @NgModule({
   declarations: [
     AppComponent,
+    ChildComponent,
     MyInputTextComponent,
     MyButtonComponent,
     MyButtonBwComponent,

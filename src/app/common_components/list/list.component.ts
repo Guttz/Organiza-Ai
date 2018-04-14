@@ -1,30 +1,26 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener,  Input, OnInit } from '@angular/core';
 import { Card } from '../schemas/card';
 import { ListSchema } from '../schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
-import {AfterViewInit, Directive, ViewChild } from '@angular/core';
+import {AfterViewInit, Directive, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { ChildComponent } from './child.component';
 
-@Directive({selector: 'input'})
-export class input {
-  @Input() id: string;
-}
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
+@Directive({
+    selector: '[focus]'
+})
 export class ListComponent implements OnInit, AfterViewInit {
-    @ViewChild(input)
-  set pane(v: input) {
-    
-  }
 
   url = "http://myas.com.br"
   @Input() list: ListSchema;
   init: boolean = false;
     //Value inputed on the filter
-  filter: string;
+  filter: string = "";
   filteredList = [];
 
   //Variable to decide if the search box is going to show
@@ -32,7 +28,10 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   sourceList = [];
 
-  constructor(private http: HttpClient) {
+  @ViewChild(ChildComponent) child: ChildComponent;//ChildComponent is the child component class name
+  @ViewChild('someInput') someInput: any;
+
+  constructor(private http: HttpClient, private _el: ElementRef, private renderer: Renderer) {
     if(window.location.href.match(/www/) != null){
       console.log("das me: " + window.location.href);
          this.url = "http://www.myas.com.br";
@@ -50,7 +49,7 @@ export class ListComponent implements OnInit, AfterViewInit {
    }
 
   ngAfterViewInit() {
-
+     
   }
 
   ngOnInit() {
@@ -86,7 +85,6 @@ export class ListComponent implements OnInit, AfterViewInit {
     }
 
     this.filteredList = [];
-    console.log("List size:" + this.sourceList.length );
       for(var i = 0; i<this.sourceList.length; i++){
         this.filteredList.push(this.sourceList[i]);    
       }
@@ -96,21 +94,19 @@ export class ListComponent implements OnInit, AfterViewInit {
     //Variable to follow right index when removing multiple itens from array
     var found = 0;
 
-    console.log("filter value: "+ this.filter.toLowerCase());
+    if(this.filter!= "" || this.filter != undefined){
 
-    for(var i = 0; i < listLen; i++){
-      //console.log("all values: " + this.list.cards[i].alldata);
-      if(!(this.sourceList[i].alldata.includes(this.filter.toLowerCase()))){
-        //Exclui o elemento nessa posicao
-        console.log("entrei");
-        this.filteredList.splice(i - found, 1);
-        found = found + 1;
+      for(var i = 0; i < listLen; i++){
+        //console.log("all values: " + this.list.cards[i].alldata);
+        if(!(this.sourceList[i].alldata.includes(this.filter.toLowerCase()))){
+          //Exclui o elemento nessa posicao
+          console.log("entrei");
+          this.filteredList.splice(i - found, 1);
+          found = found + 1;
+        }
       }
     }
-
       this.list.cards = this.filteredList;
-
-        console.log("Lista aux:" + this.filteredList);
 
     //this.filteredList.cards = auxList;
     //var str = "Hello world, welcome to the universe.";
@@ -118,15 +114,23 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   }
 
+
   searchOnList(){
-    this.appearSearch = true;
-    
+
+    console.log("HEHEHE " + this.someInput.nativeElement.value);
+    this.appearSearch = !this.appearSearch;
+    //this.filter = ""
+
+    //Three diferent ways of trying to focus the filter element, there's on more
+    //in the html where I call from the button click
+   //this.someInput.nativeElement.focus();
+    //this.renderer.invokeElementMethod( this.someInput.nativeElement, 'focus');
+    this.renderer.invokeElementMethod(this._el.nativeElement, 'focus');
+    this.filtering();
+
   }
 
   quitSearch(){
-    this.filter = "";
-    this.filtering();
-    this.appearSearch = false;
   }
 
   changHeader(){

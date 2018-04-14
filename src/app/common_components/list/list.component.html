@@ -4,22 +4,21 @@
 	<div class="list_border">
 
 	<div fxLayout="row">
-	  <input  fxFlex="grow" style= "background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 15px" (blur)="changHeader()" type="text" [(ngModel)]="list.name">
+	  <input fxFlex="grow" style= "background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 15px" (blur)="changHeader()" type="text" [(ngModel)]="list.name">
 
 
-
-	<button fxFlexOffset="0" mat-icon-button (click)="searchOnList()">
-      <mat-icon>search</mat-icon>
-    </button>
-
+     <button fxFlexOffset="0" mat-icon-button (click)="searchOnList();someInput.focus()">
+      	<mat-icon>search</mat-icon>
+     </button>
 
 	</div>
-	<div *ngIf="appearSearch" fxLayout="row">
-		<mat-form-field fxFlex="grow" style="padding-top: 0px; margin-top: 0px; border-width: 0px; color: blue;">
-	    <input matInput autofocus (keyup)="filtering()" (blur)="quitSearch()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
 
-	    <mat-placeholder style="font-size: 12px;">
-	    	Filtrar...
+	<div [style.display]="appearSearch ? 'initial' : 'none'" fxLayout="row" >
+		<mat-form-field  fxFlexOffset="3" fxFlex="150" style="padding-top: 0px; margin-top: 0px; border-width: 0px;">
+	    <input fxFlex="grow" matInput #someInput autofocus  (keyup)="filtering()" (blur)="quitSearch()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
+
+	    <mat-placeholder fxFlex="grow" style="font-size: 12px;">
+	    	Filtrar Ordem de Serviço...
 	    </mat-placeholder>
 
 	  </mat-form-field>
