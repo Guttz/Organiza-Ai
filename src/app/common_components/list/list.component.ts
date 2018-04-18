@@ -24,7 +24,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   filteredList = [];
 
   //Variable to decide if the search box is going to show
-  appearSearch: boolean = false;
+  appearSearch: boolean = true;
 
   sourceList = [];
 

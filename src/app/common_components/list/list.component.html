@@ -1,28 +1,43 @@
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel="stylesheet">
 
 <div class="list" (dragover)="allowDrop($event)" (drop)="drop($event)" id="{{list.id}}">
-	<div class="list_border">
+	
+<!-- 	<div style="display: hidden;" fxLayout="row" [style.display]="appearSearch ? 'inherit' : 'hidden'">
+		<mat-form-field style="display: hidden;" [style.display]="appearSearch ? 'inherit' : 'hidden'" fxFlexOffset="3" style="padding-top: 0px; margin-top: 0px; border-width: 0px;">
+	    <input style="display: hidden;" [style.display]="appearSearch ? 'inherit' : 'hidden'" fxFlex="grow" #someInput matInput  (click)="searchOnList()" (keyup)="filtering()" (blur)="quitSearch()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
 
+	    <mat-placeholder style="display: hidden;" fxFlex="grow" style="font-size: 12px;">
+	    	Filtrar Coluna...
+	    </mat-placeholder>
+
+	  </mat-form-field>
+	</div> -->
+
+	<div class="list_border">
+	 
 	<div fxLayout="row">
 	  <input fxFlex="grow" style= "background:rgba(0,0,0,0); border:none; font-weight: bold; font-size: 15px" (blur)="changHeader()" type="text" [(ngModel)]="list.name">
 
 
-     <button fxFlexOffset="0" mat-icon-button (click)="searchOnList();someInput.focus()">
+<!--      <button fxFlexOffset="0" mat-icon-button (click)="searchOnList();someInput.focus()">
       	<mat-icon>search</mat-icon>
      </button>
-
+ -->
 	</div>
 
+
+
+<!-- 
 	<div [style.display]="appearSearch ? 'initial' : 'none'" fxLayout="row" >
 		<mat-form-field  fxFlexOffset="3" fxFlex="150" style="padding-top: 0px; margin-top: 0px; border-width: 0px;">
-	    <input fxFlex="grow" matInput #someInput autofocus  (keyup)="filtering()" (blur)="quitSearch()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
+	    <input fxFlex="grow" matInput  (keyup)="filtering()" (blur)="quitSearch()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
 
 	    <mat-placeholder fxFlex="grow" style="font-size: 12px;">
 	    	Filtrar Ordem de Serviço...
 	    </mat-placeholder>
 
 	  </mat-form-field>
-	</div>	
+	</div>	 -->
 
 	  <div (dragover)="allowDrop($event)" class="cards">
 	    <app-card (dragstart)="dragStart($event)" (dragover)="allowDrop($event)" *ngFor="let currentCard of list.cards" [card]="currentCard"></app-card>

@@ -258,6 +258,8 @@ export class AtendimentoComponent implements OnInit
   }
 }
 
+
+
 /*----------------------------------AtendimentoComponent-----------------------------------------*/
 @Component({
   selector: 'my-atendimento',
@@ -394,7 +396,9 @@ export class AtendimentoFinalizadoComponent implements OnInit
   }
 }
 
-
+export class listOfLists{
+  cards: Card[];
+}
 
 /*----------------------------------AcompanhamentoComponent---------------------------------------*/
 @Component({
@@ -415,6 +419,8 @@ export class AcompanhamentoComponent implements OnInit
   //url = "http://ec2-54-210-153-102.compute-1.amazonaws.com:80";
   url = "http://myas.com.br"
   
+
+
   //List names for the backend requests be directly to the right collection
   listsNames = ["atendimento", "agPecas", "rtVisita", "pagamento", "finalizado"];
   listSize: number;
@@ -422,6 +428,40 @@ export class AcompanhamentoComponent implements OnInit
   listNoPopUp = [];
   //All the ids of lists that will no move with the dropFunction
   listNoMove = [4];
+
+  //Filter variables
+  filter: string = "";
+
+  sourceLists: ListSchema[] = [
+      {
+        name: '1',
+        cards: [],
+        id : 0
+      },
+      {
+        name: '2',
+        cards: [],
+        id : 1
+      },
+      {
+        name: '3',
+        cards: [],
+        id : 2
+      },
+      {
+        name: '4',
+        cards: [],
+        id : 3
+      },
+      {
+        name: '5',
+        cards: [],
+        id : 4
+      }
+    ];
+
+  init: boolean = false;
+  auxCards: Card[];
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
    private ordaDataService: OrcaDataService) 
@@ -661,6 +701,69 @@ export class AcompanhamentoComponent implements OnInit
       }
     });
   }
+
+    filtering(){
+    if(!this.init){
+
+      this.init = true;
+
+      this.auxCards = [];
+
+      for(var i = 0; i < this.lists.length; i++){ 
+        for(var j = 0; j < this.lists[i].cards.length; j++){
+          this.sourceLists[i].cards.push(this.lists[i].cards[j]);    
+        }
+      }
+    }else{
+      
+      for(var i = 0; i < this.sourceLists.length; i++){
+          this.lists[i].cards = [];
+          for(var j = 0; j<this.sourceLists[i].cards.length; j++){
+          this.lists[i].cards.push(this.sourceLists[i].cards[j]);    
+          }
+      }
+    }
+
+    if(this.filter == ""){
+      return;
+    }
+
+    for(var i = 0; i < this.lists.length; i++)
+    {
+      console.log("Lists length " + this.lists.length);
+        //this.filteredList.cards = this.list.cards;
+        //Variable to follow right index when removing multiple itens from array
+        var found = 0;
+
+          //Variable to search trough all the cards, since this value will reduce as we remove cards 
+          var listLen = this.lists[i].cards.length;
+
+          for(var j = 0; j < listLen; j++){
+
+            //console.log("all values: " + this.list.cards[i].alldata);
+            console.log("Cards lists length" + this.lists[i].cards.length);
+            if(!(this.lists[i].cards[j - found].alldata.includes(this.filter.toLowerCase()))){
+              //Delete element at this position
+              console.log("deletei")
+              this.lists[i].cards.splice(j - found, 1);
+              found = found + 1;
+            }
+          }
+    }
+
+      //this.list.cards = this.filteredList;
+
+    //this.filteredList.cards = auxList;
+    //var str = "Hello world, welcome to the universe.";
+    //var n = str.includes("world");
+
+  }
+
+  clearFilter(){
+    this.filter = "";
+    this.filtering();
+  }
+
 
 }
 

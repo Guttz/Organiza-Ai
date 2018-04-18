@@ -1,4 +1,34 @@
-<app-header-toolbar></app-header-toolbar>
-<div style="padding-left: 5px;">
-  <app-list (click)="clicked($event)" (drop)="drop($event)" *ngFor="let list of lists" [list]="list"></app-list>
+<div fxLayout="column" style="padding: 0px;">
+
+		<app-header-toolbar></app-header-toolbar>
+
+
+		<div fxLayout="row" style="padding-left: 5px; padding-right: 0px;">
+
+
+			<mat-form-field fxFlex="100" fxFlexOffset="1" style="padding-top: 0px; margin-top: 0px; border-width: 0px;">
+		    <input #someInput matInput (keyup)="filtering()" [(ngModel)]="filter" style="padding-top: 0px; margin-top: 0px; border: 0px; background: transparent;" >
+
+		    <mat-placeholder style="font-size: 14px;">
+		    	Filtrar Ordens de Serviço...
+		    </mat-placeholder>
+
+		  </mat-form-field>
+
+		    <button style="margin-top: 1.5vh" mat-icon-button (click)="someInput.focus();">
+      			<mat-icon >search</mat-icon>
+     		</button>
+
+		    <button style="margin-top: 1.5vh" mat-icon-button (click)="clearFilter()">
+      			<mat-icon>close</mat-icon>
+     		</button>
+
+		</div>
+
+
+
+	<div fxLayout="row" style="padding-left: 5px;">
+	  <app-list (click)="clicked($event)" (drop)="drop($event)" *ngFor="let list of lists" [list]="list"></app-list>
+	</div>
+
 </div>
