@@ -740,13 +740,16 @@ export class AcompanhamentoComponent implements OnInit
 
           for(var j = 0; j < listLen; j++){
 
+            
             //console.log("all values: " + this.list.cards[i].alldata);
             console.log("Cards lists length" + this.lists[i].cards.length);
-            if(!(this.lists[i].cards[j - found].alldata.includes(this.filter.toLowerCase()))){
+            if(!(this.lists[i].cards[j - found].alldata.toLowerCase().includes(this.filter.toLowerCase()))){
               //Delete element at this position
               console.log("deletei")
               this.lists[i].cards.splice(j - found, 1);
               found = found + 1;
+            }else{
+              console.log("ALL DATA" + this.lists[i].cards[j - found].alldata);
             }
           }
     }
