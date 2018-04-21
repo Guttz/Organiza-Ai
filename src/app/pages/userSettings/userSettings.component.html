@@ -24,7 +24,7 @@
               <textarea matInput
                matTextareaAutosize
                matAutosizeMinRows="2"
-                placeholder="Escrever termos"
+                placeholder="Escrever termos da OS finalizada"
               name="ostermos"
               
               [(ngModel)] ="config.termosOS" 
@@ -33,16 +33,27 @@
 
             </mat-form-field> 
 
-<!--             <my-input-text 
-              fxFlex="32" 
-              name ="periodo" 
-              [(ngModel)] ="orca.periodo" 
-              ngDefaultControl 
-              label="Período de disponibilidade" 
-              required> 
-            </my-input-text> -->
-
           </div>
+
+      <my-form-header label="Termos da Ordem de Serviço finalizada"></my-form-header>
+
+        <div class="row">
+
+            <mat-form-field fxFlex>
+              <textarea matInput
+               matTextareaAutosize
+               matAutosizeMinRows="2"
+                placeholder="Escrever termos da OS finalizada"
+              name="ostermos"
+              
+              [(ngModel)] ="config.termosOS" 
+              >
+              </textarea>
+
+            </mat-form-field> 
+            
+          </div>
+
 
 
 

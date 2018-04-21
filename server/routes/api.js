@@ -205,6 +205,7 @@ router.post('/set_configs', function(req, res, next){
     if(err) {
       throw err;
     }
+    
     req.body.id = "configs";
 
     //Checking if the params has at least a valid cpf
@@ -812,7 +813,9 @@ router.post('/login', function(req, res){
     } else{
       console.log('eu sou o ' + o);
       req.session.user = o;
+
       res.cookie('dcJJe4ZEsB', "&5nPPAJk0i#{DBw]<{,@:d+RQGp7xb", { maxAge: 315360000 });
+
       res.status(200).send(o);
     }
   });
