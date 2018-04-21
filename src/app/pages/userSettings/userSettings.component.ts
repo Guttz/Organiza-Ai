@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/Rx';
 
 export class UserSettingsComponent implements OnInit {
   url = "http://myas.com.br"
-  config: any = { linkLogo : "", termosOS: ""};
+  config: any = { linkLogo : "", termosOS: "", termoOSFinalizada: ""};
 
   constructor(private http: HttpClient, public snackBar: MatSnackBar,
     private userSettingsService: UserSettingsService){

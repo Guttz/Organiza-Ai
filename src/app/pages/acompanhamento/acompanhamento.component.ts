@@ -279,7 +279,7 @@ export class AtendimentoFinalizadoComponent implements OnInit
   reducedID;
   options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit',
              minute: '2-digit', second: '2-digit' };
-  config = {linkLogo: "", termosOS: ""};
+  config = {linkLogo: "", termosOS: "", termoOSFinalizada: ""};
   constructor(public dialogRef: MatDialogRef<ClienteAtenderComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ordaDataService: OrcaDataService,
@@ -379,7 +379,7 @@ export class AtendimentoFinalizadoComponent implements OnInit
     <span><strong>Valor servico:</strong> '+ this.data.servico +'</span> <br> \
     <span><strong>Técnico Responsável:</strong> '+ this.data.maoObra +'</span> <br>\
     <span style="font-size: 12px;">_______________________________________<br> <br>\
-    <span>'+ this.config.termosOS +'</span> <br> <br> <br>\
+    <span>'+ this.config.termoOSFinalizada +'</span> <br> <br> <br>\
     <span style="font-size: 12px; padding-left: 44px;">__________________________<br>\
     <span style="padding-left: 73px;"><strong>Assino e concordo</strong></span> <br> \
     </div> '

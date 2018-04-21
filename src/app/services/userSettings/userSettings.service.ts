@@ -10,7 +10,7 @@ import { SocketComunicator } from '../socketComunicator/socketComunicator.servic
 @Injectable()
 export class UserSettingsService 
 {
-  config: any = { linkLogo : "", termosOS: "", termosFinalizado: ""};
+  config: any = { linkLogo : "", termosOS: "", termoOSFinalizada: ""};
   url = "https://myas.com.br";
   ioConnection: any;
 
@@ -69,7 +69,7 @@ export class UserSettingsService
         else{
           this.config.linkLogo = aux.linkLogo;
           this.config.termosOS = aux.termosOS;
-          this.config.termosFinalizado = aux.termosFinalizado;
+          this.config.termoOSFinalizada = aux.termoOSFinalizada;
         }
         console.log(this.config);
       }, err =>{
