@@ -1,7 +1,7 @@
 
 //RunnignPlace = 0, local
 //RunningPlace = 1, amazon
-const RunningPlace = "local";
+const RunningPlace = "amazon";
 
 
 // Get dependencies
