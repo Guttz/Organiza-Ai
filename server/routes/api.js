@@ -636,6 +636,8 @@ router.post('/add_and_remove', function(req, res, next)
   var body = req.body;
   body.status = false;
 
+    console.log("o body: ");
+    console.log(body);
     MongoClient.connect(url, function(err, db) 
     {
       if (err) throw err;

@@ -207,8 +207,6 @@ export class OrcaDataService
       return false;
     }
 
-    console.log("Movendo da lista: " + fromList + " Pra lista " + toList + " o card \n");
-    console.log(card);
     this.moveCardFront(card, fromList, toList);
     this.iMadeTheChange = true;
 
@@ -284,8 +282,6 @@ export class OrcaDataService
       for(var i = 0; i < this.lists.length; i++){
         this.lists[i].name = data[i];
       }
-
-      console.log(data);
     }, err =>{
       console.log("Erro ao carregar título das listas: + " + err);
     });

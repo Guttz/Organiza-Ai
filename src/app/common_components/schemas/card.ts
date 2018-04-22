@@ -22,6 +22,11 @@ export class Card {
 	valorFinal: string;
 	metPag: string;
 	observacoes: string;
+
+	//This have to change according to the number of columns
+	dataSaida: listDates[] = [ new listDates([]), new listDates([]),
+	new listDates([]), new listDates([]), new listDates([])];
+
 	alldata: string;
 
 	initialized = false;
@@ -56,6 +61,15 @@ export class Card {
 	    this.valorFinal = dataJson.valorFinal;
 	    this.metPag = dataJson.metPag;
 	    this.observacoes = dataJson.observacoes;
+
+	    //Backwards compatibility, checking if previous cards do not have this
+	    if(dataJson.dataSaida === undefined || dataJson.dataSaida[0] === undefined ){
+	    	this.dataSaida = [ new listDates([]), new listDates([]),
+				new listDates([]), new listDates([]), new listDates([])];
+	    }else{
+	    	this.dataSaida = dataJson.dataSaida;
+	    }
+	    
 
 	    this.alldata = this.ordServ + this.cpf + this.defeito + this.nome + this.telPrimario + 
 	    this.dia + "/" + this.mes + this.imei + this.endereco + this.marca + this.modelo + 
@@ -93,6 +107,7 @@ export class Card {
 	    this.valorFinal = dataJson.valorFinal;
 	    this.metPag = dataJson.metPag;
 	    this.observacoes = dataJson.observacoes;
+	    this.dataSaida = dataJson.dataSaida;
 
 	    this.alldata = this.ordServ + this.cpf + this.defeito + this.nome + this.telPrimario + 
 	    this.dia + "/" + this.mes + this.imei + this.endereco + this.marca + this.modelo + 
@@ -113,6 +128,7 @@ export class Card {
 		}
 	}
 
+	//FUNÇÃO DESATUALIZADA
 	public jsonBuilder(ordServ: string, cpf: string, defeito: string, nome: string, telPrimario: string,
 			data: Date, imei: string, endereco: string, marca: string, modelo: string, telSecundario: string, 
 			email: string, realizado: string, pecas: string, servico: string, maoObra: string, 
@@ -168,6 +184,7 @@ export class Card {
 		json.valorFinal = this.valorFinal;
 		json.metPag = this.metPag;
 		json.observacoes = this.observacoes;
+		json.dataSaida = this.dataSaida;
 		return json;
 	}
 
@@ -176,5 +193,15 @@ export class Card {
 	{
 		return this.initialized;
 	}
+
+}
+
+
+export class listDates{
+  data: Date[] = [];
+
+  constructor(data: Date[]){
+    this.data = data;
+  }
 
 }

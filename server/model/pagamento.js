@@ -28,7 +28,8 @@ module.exports = function(ass){
 				maoObra: String,
 				valorFinal: String,
 				metPag: String,
-				observacoes: String
+				observacoes: String,
+				dataSaida: [],
 			}, { collection: 'pagamento' });
 	return db.model('pagamento', atendimento);
 }

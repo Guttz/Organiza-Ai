@@ -44,7 +44,6 @@ export class UserSettingsService
     this.socketService.sendChanges(msg);
   }
 
-
   setConfigsDB(newConfigs: any)
   {
       this.config = newConfigs;
@@ -71,7 +70,6 @@ export class UserSettingsService
           this.config.termosOS = aux.termosOS;
           this.config.termoOSFinalizada = aux.termoOSFinalizada;
         }
-        console.log(this.config);
       }, err =>{
         console.log("Erro na mudança de cabeçalho: " + err);
       });

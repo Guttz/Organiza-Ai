@@ -4,6 +4,7 @@ import { Submissions} from './submissions';
 import { Orca} from './../../common_components/schemas/orca';
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import { listDates } from '../../common_components/schemas/card';
 
 import { OrcaDataService } from '../../services/orcaData/orca-data.service';
 import { Observable } from 'rxjs/Rx';
@@ -347,7 +348,20 @@ export class FormDadosClienteComponent implements OnInit {
         myForm.value.telSecundario = this.auxCliente.telSecundario;
         myForm.value.email = this.auxCliente.email;
         myForm.value.endereco = this.auxCliente.endereco;
-          
+
+
+        //This have to change according to the number of columns
+        var dataSaida = [ new listDates([]), new listDates([]),
+        new listDates([]), new listDates([]), new listDates([])];
+        
+        dataSaida[0].data.push(new Date());
+
+
+        //card.dataSaida[fromList].data.push(new Date());
+        myForm.value.dataSaida = dataSaida;
+        
+        myForm.value.teste = "teste";
+        
         this.ordaDataService.addNewCard(myForm.value, 0);
       }, err => 
       {

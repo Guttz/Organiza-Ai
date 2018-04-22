@@ -53,17 +53,10 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-      console.log("List size:" + this.list );
-/*      while(this.list){
-        
-      }*/
-      console.log("sai")
-
       for(var i = 0; i < this.list.cards.length; i++){
         this.filteredList.push(this.list.cards[i]);    
       }
 
-      console.log(this.filteredList);
   }
 
   allowDrop($event) {

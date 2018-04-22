@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Card } from '../../common_components/schemas/card';
+import { listDates } from '../../common_components/schemas/card';
 import { ListSchema } from '../../common_components/schemas/listSchema';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -324,7 +325,7 @@ export class AtendimentoFinalizadoComponent implements OnInit
     if(this.reducedID == undefined)
       this.reducedID = "";
     if(this.data.data == undefined)
-      this.data.data = "";
+      this.data.data = new Date();
     if(this.data.nome == undefined)
       this.data.nome = "";
     if(this.data.telPrimario == undefined)
@@ -347,6 +348,16 @@ export class AtendimentoFinalizadoComponent implements OnInit
       this.data.servico = "";
     if(this.data.maoObra == undefined)
       this.data.maoObra = "";
+
+    console.log("DATA SAIDAAAAAAA");
+    console.log(this.data.dataSaida);
+    if(this.data.dataSaida[4].data.length == 0){
+      //Initializing with invalid date
+      this.data.dataSaida[4].data.push(new Date());
+    }else{
+      this.data.dataSaida[4].data[0] = new Date(this.data.dataSaida[4].data[0]);
+    }
+
     var document = '<html>\
     <div style="width: 235px; word-wrap: break-word;">\
     \
@@ -354,7 +365,8 @@ export class AtendimentoFinalizadoComponent implements OnInit
       <img style="display: inline-block; padding-left: 10px;" src="'+this.config.linkLogo+'"> <br>\
     \
     <span style="font-size: 12px;"> <strong> N° Ordem: </strong>'+ this.reducedID + ' </span> <br> \
-    <span style="font-size: 12px;"><strong>Data:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
+    <span style="font-size: 12px;"><strong>Data de entrada:</strong> '+ this.data.data.toLocaleDateString("pt-BR", this.options) +'</span> <br> \
+    <span style="font-size: 12px;"><strong>Data de saída:</strong> '+ this.data.dataSaida[4].data[0].toLocaleDateString("pt-BR", this.options) +'</span> <br> \
     <span style="font-size: 12px;">_______________________________________<br>\
     <span style="font-size: 12px;"> <strong> Cliente:</strong> '+ this.data.nome +'</span> <br>\
     <span><strong>Telefone:</strong> '+ this.data.telPrimario +'</span> <br> \
@@ -679,6 +691,7 @@ export class AcompanhamentoComponent implements OnInit
       width: '44vw',
       data: card
     });
+
     //After the dialog is closed thats the called function
     dialogRef.afterClosed().subscribe(result => 
     {
@@ -696,6 +709,13 @@ export class AcompanhamentoComponent implements OnInit
         card.valorFinal = result.valorFinal;
         card.metPag = result.metPag;
         card.observacoes = result.observacoes;
+
+        //Inserting the date the card left the list
+        card.dataSaida[fromList].data.push(new Date());
+        
+        //Inserting the date the card entered the list
+        card.dataSaida[toList].data.push(new Date());
+        
         //Sending this update to service
         this.ordaDataService.addAndRemove(card, fromList, toList);
       }
@@ -768,6 +788,5 @@ export class AcompanhamentoComponent implements OnInit
   }
 
 
+
 }
-
-

@@ -1,4 +1,4 @@
-	var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 //Função chamada quando se da require nesse arquivo
 module.exports = function(ass){
@@ -28,7 +28,12 @@ module.exports = function(ass){
 				maoObra: String,
 				valorFinal: String,
 				metPag: String,
-				observacoes: String
+				observacoes: String,
+				//This have to change according to the number of columns
+        		dataSaida: [],
+
 			}, { collection: 'atendimento' });
 	return db.model('atendimento', atendimento);
 }
+
+

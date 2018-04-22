@@ -21,7 +21,8 @@ module.exports = function(ass){
 				telSecundario: String,
 				email: String,
 				endereco: String,
-				observacoes: String
+				observacoes: String,
+				dataSaida: [],
 			}, { collection: 'orca' });
 	return db.model('orca', orca);
 }
