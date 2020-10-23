@@ -1,3 +1,5 @@
+**This is a really old version** of this project, it was further developed in a private repository after the prove of concept avaliable here.
+
 # Controle
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
@@ -26,8 +28,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-<<<<<<< HEAD
-Teste2
-=======
-Teste1
->>>>>>> 204f6b7541dafa5caf97a5d86dfd12ec50be4f55
